@@ -27,11 +27,11 @@
 </h3>
 <ul>
 	<li>Lucía del Carmen Fuentes</li>
+	<li>Fran Gómez Aguilera</li>
 	<li>Lourdes Prieto Cordero</li>
 	<li>Arturo Pérez Sánchez</li>
-	<li>Pedro González</li>
-	<li>Fran Gómez Aguilera</li>
-	<li>Mikhael del Águila Sánchez</li>
+	
+	
 	
 </ul>
 <h4>
