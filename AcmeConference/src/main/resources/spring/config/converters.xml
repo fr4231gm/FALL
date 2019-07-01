@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * converters.xml
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd		
+	">
+
+	<util:list id="converters">
+		<!-- 
+			Add your own converters using entries of the following form: 
+			<bean class="converters.Class1ToClass2" /> 
+		-->
+		<!-- ACTOR -->
+		<bean class = "converters.ActorToStringConverter" />
+		<bean class = "converters.StringToActorConverter" />
+		
+		<!-- ADMINISTRATOR -->
+		<bean class = "converters.AdministratorToStringConverter" />
+		<bean class = "converters.StringToAdministratorConverter" />
+
+		<!-- APPLICATION -->
+		<bean class = "converters.ApplicationToStringConverter" />
+		<bean class = "converters.StringToApplicationConverter" />
+
+		<!-- ROOKIE -->
+		<bean class = "converters.RookieToStringConverter" />
+		<bean class = "converters.StringToRookieConverter" />
+		
+		<!-- CHARGE -->
+		<bean class="converters.ChargeToStringConverter" />
+		<bean class="converters.StringToChargeConverter" />
+		
+		<!-- COMPANY -->
+		<bean class = "converters.CompanyToStringConverter" />
+		<bean class = "converters.StringToCompanyConverter" />
+		
+		<!-- CURRICULA -->
+		<bean class = "converters.CurriculaToStringConverter" />
+		<bean class = "converters.StringToCurriculaConverter" />
+		
+		<!-- INVOICE -->
+		<bean class="converters.InvoiceToStringConverter" />
+		<bean class="converters.StringToInvoiceConverter" />
+		
+		<!-- POSITION -->
+		<bean class = "converters.PositionToStringConverter" />
+		<bean class = "converters.StringToPositionConverter" />
+		
+		<!-- PROBLEM -->
+		<bean class = "converters.ProblemToStringConverter" />
+		<bean class = "converters.StringToProblemConverter" />
+		
+		<!-- FINDER -->
+		<bean class = "converters.FinderToStringConverter" />
+		<bean class = "converters.StringToFinderConverter"/>
+		
+		<!-- CONFIGURATION -->
+		<bean class="converters.ConfigurationToStringConverter"/>
+		<bean class="converters.StringToConfigurationConverter"/>
+		
+		<!-- CREDIT CARD -->
+		<bean class = "converters.CreditCardToStringConverter" />
+		<bean class = "converters.StringToCreditCardConverter" />
+		
+		<!-- AUDIT -->
+		<bean class = "converters.AuditToStringConverter" />
+		<bean class = "converters.StringToAuditConverter" />
+		
+		<!-- AUDITOR -->
+		<bean class = "converters.AuditorToStringConverter" />
+		<bean class = "converters.StringToAuditorConverter" />
+		
+		<!-- ITEM -->
+		<bean class = "converters.ItemToStringConverter" />
+		<bean class = "converters.StringToItemConverter" />
+		
+		<!-- MESSAGE -->
+		<bean class = "converters.MessageToStringConverter" />
+		<bean class = "converters.StringToMessageConverter" />
+		
+		<!-- PROVIDER -->
+		<bean class = "converters.ProviderToStringConverter" />
+		<bean class = "converters.StringToProviderConverter" />
+		
+		<!-- SOCIAL PROFILE -->
+		<bean class = "converters.SocialProfileToStringConverter" />
+		<bean class = "converters.StringToSocialProfileConverter" />
+		
+		<!-- SPONSORSHIP -->
+		<bean class = "converters.SponsorshipToStringConverter" />
+		<bean class = "converters.StringToSponsorshipConverter" />
+		
+	</util:list>
+	
+</beans>
