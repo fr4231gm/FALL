@@ -1,0 +1,4 @@
+package converters;
+import org.springframework.beans.factory.annotation.Autowired;import org.springframework.core.convert.converter.Converter;import org.springframework.stereotype.Component;import org.springframework.transaction.annotation.Transactional;import org.springframework.util.StringUtils;import repositories.ReviewerRepository;import domain.Reviewer;
+@Component @Transactional public class StringToReviewerConverter implements Converter<String, Reviewer>{
+	@Autowired 	ReviewerRepository reviewerRepository; 	@Override 	public Reviewer convert(String textIn) { 		Reviewer res; 		int id; 		try {			if (StringUtils.isEmpty(textIn)){				res = null;			}else{				id = Integer.valueOf(textIn);				res = this.reviewerRepository.findOne(id);			}		}catch(final Throwable oops){			throw new IllegalArgumentException(oops);		}		return res;	}}
