@@ -1,0 +1,4 @@
+package converters;
+import org.springframework.beans.factory.annotation.Autowired;import org.springframework.core.convert.converter.Converter;import org.springframework.stereotype.Component;import org.springframework.transaction.annotation.Transactional;import org.springframework.util.StringUtils;import repositories.PanelRepository;import domain.Panel;
+@Component @Transactional public class StringToPanelConverter implements Converter<String, Panel>{
+	@Autowired 	PanelRepository panelRepository; 	@Override 	public Panel convert(String textIn) { 		Panel res; 		int id; 		try {			if (StringUtils.isEmpty(textIn)){				res = null;			}else{				id = Integer.valueOf(textIn);				res = this.panelRepository.findOne(id);			}		}catch(final Throwable oops){			throw new IllegalArgumentException(oops);		}		return res;	}}
