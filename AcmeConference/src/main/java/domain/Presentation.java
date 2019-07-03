@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 
 @Entity 
 @Access(AccessType.PROPERTY) 
-public class Presentation extends DomainEntity {
+public class Presentation extends Activity {
 
 	// Atributos
 	private String					camerareadypaper;
