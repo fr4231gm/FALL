@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity 
 @Access(AccessType.PROPERTY) 
-public class Panel extends DomainEntity {
+public class Panel extends Activity {
 
 	// Atributos
 

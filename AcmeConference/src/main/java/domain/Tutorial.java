@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 
 @Entity 
 @Access(AccessType.PROPERTY) 
-public class Tutorial extends DomainEntity {
+public class Tutorial extends Activity {
 
 	// Atributos
 	private Collection<Section>					section;
