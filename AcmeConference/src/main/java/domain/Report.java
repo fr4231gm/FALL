@@ -21,7 +21,7 @@ public class Report extends DomainEntity {
 	private String					comments;
 	private Boolean					notified;
 	private Reviewer					reviewer;
-	private Conference					conference;
+	private Submission				submission;
 
 
 	// Getters
@@ -65,8 +65,8 @@ public class Report extends DomainEntity {
 	}
 
 	@ManyToOne
-	public Conference getConference(){
-		return this.conference;
+	public Submission getSubmission(){
+		return this.submission;
 	}
 
 
@@ -100,8 +100,8 @@ public class Report extends DomainEntity {
 		this.reviewer = reviewer; 
 	}
 
-	public void setConference(final Conference conference){
-		this.conference = conference; 
+	public void setSubmission(final Submission submission){
+		this.submission = submission; 
 	}
 
 }
