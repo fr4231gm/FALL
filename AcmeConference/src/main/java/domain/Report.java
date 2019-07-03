@@ -20,7 +20,7 @@ public class Report extends DomainEntity {
 	private Double					readabilityscore;
 	private String					comments;
 	private Boolean					notified;
-	private Reviewer					reviewer;
+	private Reviewer				reviewer;
 	private Submission				submission;
 
 
@@ -64,7 +64,7 @@ public class Report extends DomainEntity {
 		return this.reviewer;
 	}
 
-	@ManyToOne
+	@OneToOne
 	public Submission getSubmission(){
 		return this.submission;
 	}
