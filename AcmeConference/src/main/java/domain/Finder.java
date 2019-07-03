@@ -15,9 +15,6 @@ public class Finder extends DomainEntity {
 
 	// Atributos
 	private String					keyword;
-	private String					acronym;
-	private String					venue;
-	private String					summary;
 	private Date					startdate;
 	private Date					enddate;
 	private Double					fee;
@@ -28,21 +25,6 @@ public class Finder extends DomainEntity {
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
 	public String getKeyword(){
 		return this.keyword;
-	}
-
-	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getAcronym(){
-		return this.acronym;
-	}
-
-	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getVenue(){
-		return this.venue;
-	}
-
-	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getSummary(){
-		return this.summary;
 	}
 
 	public Date getStartdate(){
@@ -68,18 +50,6 @@ public class Finder extends DomainEntity {
 	// Setters
 	public void setKeyword(final String keyword){
 		this.keyword = keyword; 
-	}
-
-	public void setAcronym(final String acronym){
-		this.acronym = acronym; 
-	}
-
-	public void setVenue(final String venue){
-		this.venue = venue; 
-	}
-
-	public void setSummary(final String summary){
-		this.summary = summary; 
 	}
 
 	public void setStartdate(final Date startdate){
