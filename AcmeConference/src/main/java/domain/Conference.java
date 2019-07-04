@@ -20,14 +20,14 @@ public class Conference extends DomainEntity {
 	private String					title;
 	private String					acronym;
 	private String					venue;
-	private Date					submissiondeadline;
-	private Date					notificationdeadline;
-	private Date					camerareadydeadline;
-	private Date					startdate;
-	private Date					enddate;
+	private Date					submissionDeadline;
+	private Date					notificationDeadline;
+	private Date					cameraReadyDeadline;
+	private Date					startDate;
+	private Date					endDate;
 	private String					summary;
 	private Double					fee;
-	private Boolean					isdraft;
+	private Boolean					isDraft;
 	private Administrator					administrator;
 	private Category					category;
 	private Collection<Comment>					comments;
@@ -53,28 +53,28 @@ public class Conference extends DomainEntity {
 	}
 
 	@NotNull
-	public Date getSubmissiondeadline(){
-		return this.submissiondeadline;
+	public Date getSubmissionDeadline(){
+		return this.submissionDeadline;
 	}
 
 	@NotNull
-	public Date getNotificationdeadline(){
-		return this.notificationdeadline;
+	public Date getNotificationDeadline(){
+		return this.notificationDeadline;
 	}
 
 	@NotNull
-	public Date getCamerareadydeadline(){
-		return this.camerareadydeadline;
+	public Date getCameraReadyDeadline(){
+		return this.cameraReadyDeadline;
 	}
 
 	@NotNull
-	public Date getStartdate(){
-		return this.startdate;
+	public Date getStartDate(){
+		return this.startDate;
 	}
 
 	@NotNull
-	public Date getEnddate(){
-		return this.enddate;
+	public Date getEndDate(){
+		return this.endDate;
 	}
 
 	@NotBlank
@@ -90,8 +90,8 @@ public class Conference extends DomainEntity {
 	}
 
 	@NotNull
-	public Boolean getIsdraft(){
-		return this.isdraft;
+	public Boolean getIsDraft(){
+		return this.isDraft;
 	}
 
 	@ManyToOne
@@ -124,24 +124,24 @@ public class Conference extends DomainEntity {
 		this.venue = venue; 
 	}
 
-	public void setSubmissiondeadline(final Date submissiondeadline){
-		this.submissiondeadline = submissiondeadline; 
+	public void setSubmissionDeadline(final Date submissionDeadline){
+		this.submissionDeadline = submissionDeadline; 
 	}
 
-	public void setNotificationdeadline(final Date notificationdeadline){
-		this.notificationdeadline = notificationdeadline; 
+	public void setNotificationDeadline(final Date notificationDeadline){
+		this.notificationDeadline = notificationDeadline; 
 	}
 
-	public void setCamerareadydeadline(final Date camerareadydeadline){
-		this.camerareadydeadline = camerareadydeadline; 
+	public void setCameraReadyDeadline(final Date cameraReadyDeadline){
+		this.cameraReadyDeadline = cameraReadyDeadline; 
 	}
 
-	public void setStartdate(final Date startdate){
-		this.startdate = startdate; 
+	public void setStartDate(final Date startDate){
+		this.startDate = startDate; 
 	}
 
-	public void setEnddate(final Date enddate){
-		this.enddate = enddate; 
+	public void setEndDate(final Date endDate){
+		this.endDate = endDate; 
 	}
 
 	public void setSummary(final String summary){
@@ -152,8 +152,8 @@ public class Conference extends DomainEntity {
 		this.fee = fee; 
 	}
 
-	public void setIsdraft(final Boolean isdraft){
-		this.isdraft = isdraft; 
+	public void setIsDraft(final Boolean isDraft){
+		this.isDraft = isDraft; 
 	}
 
 	public void setAdministrator(final Administrator administrator){

@@ -16,9 +16,9 @@ public class Report extends DomainEntity {
 
 	// Atributos
 	private String					decision;
-	private Double					originalityscore;
-	private Double					qualityscore;
-	private Double					readabilityscore;
+	private Double					originalityScore;
+	private Double					qualityScore;
+	private Double					readabilityScore;
 	private String					comments;
 	private Boolean					notified;
 	private Reviewer				reviewer;
@@ -34,20 +34,20 @@ public class Report extends DomainEntity {
 
 	@Range(min = 0, max = 10) 
 	@NotNull
-	public Double getOriginalityscore(){
-		return this.originalityscore;
+	public Double getOriginalityScore(){
+		return this.originalityScore;
 	}
 
 	@Range(min = 0, max = 10) 
 	@NotNull
-	public Double getQualityscore(){
-		return this.qualityscore;
+	public Double getQualityScore(){
+		return this.qualityScore;
 	}
 
 	@Range(min = 0, max = 10) 
 	@NotNull
-	public Double getReadabilityscore(){
-		return this.readabilityscore;
+	public Double getReadabilityScore(){
+		return this.readabilityScore;
 	}
 
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
@@ -77,16 +77,16 @@ public class Report extends DomainEntity {
 		this.decision = decision; 
 	}
 
-	public void setOriginalityscore(final Double originalityscore){
-		this.originalityscore = originalityscore; 
+	public void setOriginalityScore(final Double originalityScore){
+		this.originalityScore = originalityScore; 
 	}
 
-	public void setQualityscore(final Double qualityscore){
-		this.qualityscore = qualityscore; 
+	public void setQualityScore(final Double qualityScore){
+		this.qualityScore = qualityScore; 
 	}
 
-	public void setReadabilityscore(final Double readabilityscore){
-		this.readabilityscore = readabilityscore; 
+	public void setReadabilityScore(final Double readabilityScore){
+		this.readabilityScore = readabilityScore; 
 	}
 
 	public void setComments(final String comments){

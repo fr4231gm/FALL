@@ -14,25 +14,25 @@ import javax.persistence.Entity;
 public class Finder extends DomainEntity {
 
 	// Atributos
-	private String					keyword;
-	private Date					startdate;
-	private Date					enddate;
+	private String					keyWord;
+	private Date					startDate;
+	private Date					endDate;
 	private Double					fee;
 	private Collection<Conference>					conferences;
 
 
 	// Getters
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getKeyword(){
-		return this.keyword;
+	public String getKeyWord(){
+		return this.keyWord;
 	}
 
-	public Date getStartdate(){
-		return this.startdate;
+	public Date getStartDate(){
+		return this.startDate;
 	}
 
-	public Date getEnddate(){
-		return this.enddate;
+	public Date getendDate(){
+		return this.endDate;
 	}
 
 	@Range(min = 0, max = 1) 
@@ -48,16 +48,16 @@ public class Finder extends DomainEntity {
 
 
 	// Setters
-	public void setKeyword(final String keyword){
-		this.keyword = keyword; 
+	public void setKeyWord(final String keyWord){
+		this.keyWord = keyWord; 
 	}
 
-	public void setStartdate(final Date startdate){
-		this.startdate = startdate; 
+	public void setStartDate(final Date startDate){
+		this.startDate = startDate; 
 	}
 
-	public void setEnddate(final Date enddate){
-		this.enddate = enddate; 
+	public void setendDate(final Date endDate){
+		this.endDate = endDate; 
 	}
 
 	public void setFee(final Double fee){

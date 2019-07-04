@@ -11,21 +11,21 @@ import javax.persistence.Entity;
 public class Presentation extends Activity {
 
 	// Atributos
-	private String					camerareadypaper;
+	private String					cameraReadyPaper;
 
 
 	// Getters
 	@NotBlank
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getCamerareadypaper(){
-		return this.camerareadypaper;
+	public String getCameraReadyPaper(){
+		return this.cameraReadyPaper;
 	}
 
 
 
 	// Setters
-	public void setCamerareadypaper(final String camerareadypaper){
-		this.camerareadypaper = camerareadypaper; 
+	public void setCameraReadyPaper(final String cameraReadyPaper){
+		this.cameraReadyPaper = cameraReadyPaper; 
 	}
 
 }

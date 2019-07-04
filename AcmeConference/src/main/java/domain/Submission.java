@@ -19,7 +19,7 @@ public class Submission extends DomainEntity {
 	// Atributos
 	private String					ticker;
 	private Date					moment;
-	private String					camerareadypaper;
+	private String					cameraReadyPaper;
 	private String					status;
 	private Paper					paper;
 	private Conference					conference;
@@ -40,8 +40,8 @@ public class Submission extends DomainEntity {
 	}
 
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getCamerareadypaper(){
-		return this.camerareadypaper;
+	public String getCameraReadyPaper(){
+		return this.cameraReadyPaper;
 	}
 
 	@NotBlank
@@ -71,8 +71,8 @@ public class Submission extends DomainEntity {
 		this.moment = moment; 
 	}
 
-	public void setCamerareadypaper(final String camerareadypaper){
-		this.camerareadypaper = camerareadypaper; 
+	public void setCameraReadyPaper(final String cameraReadyPaper){
+		this.cameraReadyPaper = cameraReadyPaper; 
 	}
 
 	public void setStatus(final String status){

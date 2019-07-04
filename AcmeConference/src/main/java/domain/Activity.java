@@ -19,7 +19,7 @@ public class Activity extends DomainEntity {
 	// Atributos
 	private String					title;
 	private String					speaker;
-	private Date					startmoment;
+	private Date					startMoment;
 	private Integer					duration;
 	private String					room;
 	private String					summary;
@@ -42,8 +42,8 @@ public class Activity extends DomainEntity {
 	}
 
 	@NotNull
-	public Date getStartmoment(){
-		return this.startmoment;
+	public Date getStartMoment(){
+		return this.startMoment;
 	}
 
 	@Range(min = 0) 
@@ -89,8 +89,8 @@ public class Activity extends DomainEntity {
 		this.speaker = speaker; 
 	}
 
-	public void setStartmoment(final Date startmoment){
-		this.startmoment = startmoment; 
+	public void setStartMoment(final Date startMoment){
+		this.startMoment = startMoment; 
 	}
 
 	public void setDuration(final Integer duration){

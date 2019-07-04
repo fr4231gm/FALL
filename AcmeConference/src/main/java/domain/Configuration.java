@@ -1,33 +1,35 @@
 package domain;
 
-import org.hibernate.validator.constraints.URL;
-import org.hibernate.validator.constraints.SafeHtml;
-import org.hibernate.validator.constraints.NotBlank;
-import javax.persistence.Access; 
-import javax.persistence.AccessType; 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.URL;
 
 @Entity 
 @Access(AccessType.PROPERTY) 
 public class Configuration extends DomainEntity {
 
 	// Atributos
-	private String					systemname;
+	private String					systemName;
 	private String					make;
 	private String					language;
 	private String					banner;
-	private String					countrycode;
-	private String					welcomemessage;
+	private String					countryCode;
+	private String					welcomeMessage;
 	private String					topics;
-	private String					voidwords;
-	private String					buzzwords;
+	private String					voidWords;
+	private String					buzzWords;
 
 
 	// Getters
 	@NotBlank
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getSystemname(){
-		return this.systemname;
+	public String getsystemName(){
+		return this.systemName;
 	}
 
 	@NotBlank
@@ -50,14 +52,14 @@ public class Configuration extends DomainEntity {
 
 	@NotBlank
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getCountrycode(){
-		return this.countrycode;
+	public String getCountryCode(){
+		return this.countryCode;
 	}
 
 	@NotBlank
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getWelcomemessage(){
-		return this.welcomemessage;
+	public String getWelcomeMessage(){
+		return this.welcomeMessage;
 	}
 
 	@NotBlank
@@ -67,22 +69,22 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotBlank
-	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getVoidwords(){
-		return this.voidwords;
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+	@Column(length = 5000)
+	public String getVoidWords(){
+		return this.voidWords;
 	}
 
-	@NotBlank
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getBuzzwords(){
-		return this.buzzwords;
+	public String getBuzzWords(){
+		return this.buzzWords;
 	}
 
 
 
 	// Setters
-	public void setSystemname(final String systemname){
-		this.systemname = systemname; 
+	public void setsystemName(final String systemName){
+		this.systemName = systemName; 
 	}
 
 	public void setMake(final String make){
@@ -97,24 +99,24 @@ public class Configuration extends DomainEntity {
 		this.banner = banner; 
 	}
 
-	public void setCountrycode(final String countrycode){
-		this.countrycode = countrycode; 
+	public void setCountryCode(final String countryCode){
+		this.countryCode = countryCode; 
 	}
 
-	public void setWelcomemessage(final String welcomemessage){
-		this.welcomemessage = welcomemessage; 
+	public void setWelcomeMessage(final String welcomeMessage){
+		this.welcomeMessage = welcomeMessage; 
 	}
 
 	public void setTopics(final String topics){
 		this.topics = topics; 
 	}
 
-	public void setVoidwords(final String voidwords){
-		this.voidwords = voidwords; 
+	public void setVoidWords(final String voidWords){
+		this.voidWords = voidWords; 
 	}
 
-	public void setBuzzwords(final String buzzwords){
-		this.buzzwords = buzzwords; 
+	public void setBuzzWords(final String buzzWords){
+		this.buzzWords = buzzWords; 
 	}
 
 }

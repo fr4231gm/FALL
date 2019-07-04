@@ -14,7 +14,7 @@ public class Category extends DomainEntity {
 	// Atributos
 	private String					name;
 	private String					nombre;
-	private Category					parentcategory;
+	private Category					parentCategory;
 
 
 	// Getters
@@ -31,8 +31,8 @@ public class Category extends DomainEntity {
 	}
 
 	@ManyToOne
-	public Category getParentcategory(){
-		return this.parentcategory;
+	public Category getParentCategory(){
+		return this.parentCategory;
 	}
 
 
@@ -46,8 +46,8 @@ public class Category extends DomainEntity {
 		this.nombre = nombre; 
 	}
 
-	public void setParentcategory(final Category parentcategory){
-		this.parentcategory = parentcategory; 
+	public void setParentCategory(final Category parentCategory){
+		this.parentCategory = parentCategory; 
 	}
 
 }

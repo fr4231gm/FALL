@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.Access; 
 import javax.persistence.AccessType; 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity 
@@ -29,7 +30,8 @@ public class Section extends DomainEntity {
 		return this.summary;
 	}
 
-	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+	@Column(length = 5000)
 	public String getPictures(){
 		return this.pictures;
 	}
