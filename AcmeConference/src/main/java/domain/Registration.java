@@ -25,7 +25,7 @@ public class Registration extends DomainEntity {
 	}
 
 	@ManyToOne
-	public Conference getConfernece(){
+	public Conference getConference(){
 		return this.conference;
 	}
 
@@ -41,7 +41,7 @@ public class Registration extends DomainEntity {
 		this.creditcard = creditcard; 
 	}
 
-	public void setConfernece(final Conference conference){
+	public void setConference(final Conference conference){
 		this.conference = conference; 
 	}
 
