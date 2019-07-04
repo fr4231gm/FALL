@@ -13,7 +13,7 @@ public class Registration extends DomainEntity {
 
 	// Atributos
 	private CreditCard					creditcard;
-	private Conference					confernece;
+	private Conference					conference;
 	private Author					author;
 
 
@@ -26,7 +26,7 @@ public class Registration extends DomainEntity {
 
 	@ManyToOne
 	public Conference getConfernece(){
-		return this.confernece;
+		return this.conference;
 	}
 
 	@ManyToOne
@@ -41,8 +41,8 @@ public class Registration extends DomainEntity {
 		this.creditcard = creditcard; 
 	}
 
-	public void setConfernece(final Conference confernece){
-		this.confernece = confernece; 
+	public void setConfernece(final Conference conference){
+		this.conference = conference; 
 	}
 
 	public void setAuthor(final Author author){
