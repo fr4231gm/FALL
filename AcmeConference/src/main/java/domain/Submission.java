@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Access; 
 import javax.persistence.AccessType; 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity 
 @Access(AccessType.PROPERTY) 
@@ -22,6 +23,7 @@ public class Submission extends DomainEntity {
 	private String					status;
 	private Paper					paper;
 	private Conference					conference;
+	private Author					author;
 
 
 	// Getters
@@ -83,6 +85,15 @@ public class Submission extends DomainEntity {
 
 	public void setConference(final Conference conference){
 		this.conference = conference; 
+	}
+	
+	public void setAuthor(final Author author){
+		this.author = author; 
+	}
+	
+	@ManyToOne
+	public Author getAuthor(){
+		return this.author;
 	}
 
 }
