@@ -24,6 +24,7 @@
 		<value>/views/welcome/messages</value>
 		<value>/views/legal-terms/messages</value>
 		<value>/views/about-us/messages</value>
+		<value>/views/configuration/messages</value>
 		
 		
 	</util:list>

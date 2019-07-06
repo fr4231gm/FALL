@@ -21,6 +21,22 @@
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
+		<!-- ADMINISTRATOR -->
+		
+		<security:authorize access="hasRole('ADMINISTRATOR')">
+			<li><a class="fNiv parent"><spring:message
+						code="master.page.administrator" /></a>
+				<ul>
+					<li><a class="child" href="administrator/register.do"><spring:message
+								code="master.page.administrator.create.new.administrator" /></a></li>
+					<li><a class="child" href="dashboard/administrator/list.do"><spring:message
+								code="master.page.administrator.dashboard" /></a></li>
+					<li><a class="child" href="configuration/administrator/edit.do"><spring:message
+								code="master.page.administrator.configuration" /></a></li>
+
+					
+				</ul></li>
+		</security:authorize>
 		
 		
 		<!-- ******************** NOT AUTHENTICATED ******************** -->

@@ -28,6 +28,11 @@
 
 	<security:http auto-config="true" use-expressions="true">
 	
+		<!-- ADMINISTRATOR -->
+
+		
+		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMINISTRATOR')" /> 
+		
 		<!-- ************************ ALL ************************ -->
 		<security:intercept-url pattern="/" access="permitAll" /> 
 
