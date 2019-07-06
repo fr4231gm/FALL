@@ -1,16 +1,15 @@
 package domain;
 
-import javax.persistence.OneToMany;
+import java.util.Date;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
-import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.NotBlank;
-import java.util.Collection;
-import java.util.Date;
-import javax.persistence.Access; 
-import javax.persistence.AccessType; 
-import javax.persistence.Entity;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity 
 @Access(AccessType.PROPERTY) 
@@ -21,7 +20,6 @@ public class Comment extends DomainEntity {
 	private Date					moment;
 	private String					author;
 	private String					text;
-	private Collection<Comment>					comments;
 
 
 	// Getters
@@ -49,13 +47,6 @@ public class Comment extends DomainEntity {
 		return this.text;
 	}
 
-	@OneToMany
-	public Collection<Comment> getComments(){
-		return this.comments;
-	}
-
-
-
 	// Setters
 	public void setTitle(final String title){
 		this.title = title; 
@@ -72,9 +63,4 @@ public class Comment extends DomainEntity {
 	public void setText(final String text){
 		this.text = text; 
 	}
-
-	public void setComments(final Collection<Comment> comments){
-		this.comments = comments; 
-	}
-
 }

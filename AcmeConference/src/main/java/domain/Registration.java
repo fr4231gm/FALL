@@ -12,21 +12,21 @@ import javax.validation.constraints.NotNull;
 public class Registration extends DomainEntity {
 
 	// Atributos
-	private CreditCard					creditcard;
-	private Conference					confernece;
+	private CreditCard					creditCard;
+	private Conference					conference;
 	private Author					author;
 
 
 	// Getters
 	@Valid
 	@NotNull
-	public CreditCard getCreditcard(){
-		return this.creditcard;
+	public CreditCard getCreditCard(){
+		return this.creditCard;
 	}
 
 	@ManyToOne
-	public Conference getConfernece(){
-		return this.confernece;
+	public Conference getConference(){
+		return this.conference;
 	}
 
 	@ManyToOne
@@ -37,12 +37,12 @@ public class Registration extends DomainEntity {
 
 
 	// Setters
-	public void setCreditcard(final CreditCard creditcard){
-		this.creditcard = creditcard; 
+	public void setCreditCard(final CreditCard creditCard){
+		this.creditCard = creditCard; 
 	}
 
-	public void setConfernece(final Conference confernece){
-		this.confernece = confernece; 
+	public void setConference(final Conference conference){
+		this.conference = conference; 
 	}
 
 	public void setAuthor(final Author author){

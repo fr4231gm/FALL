@@ -43,11 +43,6 @@ public class UserAccount extends DomainEntity implements UserDetails {
 		this.authorities = new ArrayList<Authority>();
 	}
 
-
-	// Attributes -------------------------------------------------------------
-
-	private boolean enabled;
-
 	// UserDetails interface --------------------------------------------------
 
 	private String					username;
@@ -121,11 +116,10 @@ public class UserAccount extends DomainEntity implements UserDetails {
 		return true;
 	}
 	
+	@Transient
+	@Override
 	public boolean isEnabled() {
-		return this.enabled;
+		return true;
 	}
 
-	public void setEnabled(boolean isEnabled){
-		this.enabled = isEnabled;
-	}
 }

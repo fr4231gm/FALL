@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Access; 
 import javax.persistence.AccessType; 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity 
 @Access(AccessType.PROPERTY) 
@@ -18,10 +19,11 @@ public class Submission extends DomainEntity {
 	// Atributos
 	private String					ticker;
 	private Date					moment;
-	private String					camerareadypaper;
+	private String					cameraReadyPaper;
 	private String					status;
 	private Paper					paper;
 	private Conference					conference;
+	private Author					author;
 
 
 	// Getters
@@ -38,8 +40,8 @@ public class Submission extends DomainEntity {
 	}
 
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getCamerareadypaper(){
-		return this.camerareadypaper;
+	public String getCameraReadyPaper(){
+		return this.cameraReadyPaper;
 	}
 
 	@NotBlank
@@ -69,8 +71,8 @@ public class Submission extends DomainEntity {
 		this.moment = moment; 
 	}
 
-	public void setCamerareadypaper(final String camerareadypaper){
-		this.camerareadypaper = camerareadypaper; 
+	public void setCameraReadyPaper(final String cameraReadyPaper){
+		this.cameraReadyPaper = cameraReadyPaper; 
 	}
 
 	public void setStatus(final String status){
@@ -83,6 +85,15 @@ public class Submission extends DomainEntity {
 
 	public void setConference(final Conference conference){
 		this.conference = conference; 
+	}
+	
+	public void setAuthor(final Author author){
+		this.author = author; 
+	}
+	
+	@ManyToOne
+	public Author getAuthor(){
+		return this.author;
 	}
 
 }

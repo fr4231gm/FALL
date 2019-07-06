@@ -18,8 +18,8 @@ public class CreditCard {
 	// Atributos
 	private String	holder;
 	private String	number;
-	private Integer	expirationmonth;
-	private Integer	expirationyear;
+	private Integer	expirationMonth;
+	private Integer	expirationYear;
 	private String	make;
 	private Integer	cvv;
 
@@ -39,14 +39,14 @@ public class CreditCard {
 
 	@Range(min = 1, max = 12)
 	@NotNull
-	public Integer getExpirationmonth() {
-		return this.expirationmonth;
+	public Integer getexpirationMonth() {
+		return this.expirationMonth;
 	}
 
 	@Range(min = 1, max = 99)
 	@NotNull
-	public Integer getExpirationyear() {
-		return this.expirationyear;
+	public Integer getexpirationYear() {
+		return this.expirationYear;
 	}
 
 	@NotBlank
@@ -70,12 +70,12 @@ public class CreditCard {
 		this.number = number;
 	}
 
-	public void setExpirationmonth(final Integer expirationmonth) {
-		this.expirationmonth = expirationmonth;
+	public void setexpirationMonth(final Integer expirationMonth) {
+		this.expirationMonth = expirationMonth;
 	}
 
-	public void setExpirationyear(final Integer expirationyear) {
-		this.expirationyear = expirationyear;
+	public void setexpirationYear(final Integer expirationYear) {
+		this.expirationYear = expirationYear;
 	}
 
 	public void setMake(final String make) {
