@@ -14,7 +14,7 @@ public class Sponsorship extends DomainEntity {
 
 	// Atributos
 	private String					banner;
-	private String					targeturl;
+	private String					targetUrl;
 	private Sponsor					sponsor;
 
 
@@ -29,8 +29,8 @@ public class Sponsorship extends DomainEntity {
 	@NotBlank
 	@URL
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getTargeturl(){
-		return this.targeturl;
+	public String getTargetUrl(){
+		return this.targetUrl;
 	}
 
 	@ManyToOne
@@ -45,8 +45,8 @@ public class Sponsorship extends DomainEntity {
 		this.banner = banner; 
 	}
 
-	public void setTargeturl(final String targeturl){
-		this.targeturl = targeturl; 
+	public void setTargetUrl(final String targetUrl){
+		this.targetUrl = targetUrl; 
 	}
 
 	public void setSponsor(final Sponsor sponsor){

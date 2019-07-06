@@ -14,43 +14,25 @@ import javax.persistence.Entity;
 public class Finder extends DomainEntity {
 
 	// Atributos
-	private String					keyword;
-	private String					acronym;
-	private String					venue;
-	private String					summary;
-	private Date					startdate;
-	private Date					enddate;
+	private String					keyWord;
+	private Date					startDate;
+	private Date					endDate;
 	private Double					fee;
 	private Collection<Conference>					conferences;
 
 
 	// Getters
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getKeyword(){
-		return this.keyword;
+	public String getKeyWord(){
+		return this.keyWord;
 	}
 
-	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getAcronym(){
-		return this.acronym;
+	public Date getStartDate(){
+		return this.startDate;
 	}
 
-	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getVenue(){
-		return this.venue;
-	}
-
-	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getSummary(){
-		return this.summary;
-	}
-
-	public Date getStartdate(){
-		return this.startdate;
-	}
-
-	public Date getEnddate(){
-		return this.enddate;
+	public Date getendDate(){
+		return this.endDate;
 	}
 
 	@Range(min = 0, max = 1) 
@@ -66,28 +48,16 @@ public class Finder extends DomainEntity {
 
 
 	// Setters
-	public void setKeyword(final String keyword){
-		this.keyword = keyword; 
+	public void setKeyWord(final String keyWord){
+		this.keyWord = keyWord; 
 	}
 
-	public void setAcronym(final String acronym){
-		this.acronym = acronym; 
+	public void setStartDate(final Date startDate){
+		this.startDate = startDate; 
 	}
 
-	public void setVenue(final String venue){
-		this.venue = venue; 
-	}
-
-	public void setSummary(final String summary){
-		this.summary = summary; 
-	}
-
-	public void setStartdate(final Date startdate){
-		this.startdate = startdate; 
-	}
-
-	public void setEnddate(final Date enddate){
-		this.enddate = enddate; 
+	public void setendDate(final Date endDate){
+		this.endDate = endDate; 
 	}
 
 	public void setFee(final Double fee){

@@ -21,13 +21,13 @@ public class Actor extends DomainEntity {
 
 	// Atributos
 	private String		name;
-	private String		middlename;
+	private String		middleName;
 	private String		surname;
 	private String		photo;
 	private String		email;
 	private String		address;
 	private Double		score;
-	private String		phonenumber;
+	private String		phoneNumber;
 	private UserAccount	useraccount;
 
 
@@ -39,8 +39,8 @@ public class Actor extends DomainEntity {
 	}
 
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-	public String getMiddlename() {
-		return this.middlename;
+	public String getMiddleName() {
+		return this.middleName;
 	}
 
 	@NotBlank
@@ -71,8 +71,8 @@ public class Actor extends DomainEntity {
 	}
 
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-	public String getPhonenumber() {
-		return this.phonenumber;
+	public String getPhoneNumber() {
+		return this.phoneNumber;
 	}
 
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
@@ -86,8 +86,8 @@ public class Actor extends DomainEntity {
 		this.name = name;
 	}
 
-	public void setMiddlename(final String middlename) {
-		this.middlename = middlename;
+	public void setMiddleName(final String middleName) {
+		this.middleName = middleName;
 	}
 
 	public void setSurname(final String surname) {
@@ -110,8 +110,8 @@ public class Actor extends DomainEntity {
 		this.score = score;
 	}
 
-	public void setPhonenumber(final String phonenumber) {
-		this.phonenumber = phonenumber;
+	public void setPhoneNumber(final String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public void setUserAccount(final UserAccount useraccount) {
