@@ -39,13 +39,16 @@ public class ConfigurationAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Configuration configuration, final BindingResult binding) {
 		ModelAndView result;
+		final Configuration config2 = this.configurationService.findOtherConfiguration();
 
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(configuration);
 			result.addObject("bind", binding);
 		} else
 			try {
+				config2.setBanner(configuration.getBanner());
 				this.configurationService.save(configuration);
+				this.configurationService.save(config2);
 				result = new ModelAndView("redirect:/");
 
 			} catch (final Throwable oops) {

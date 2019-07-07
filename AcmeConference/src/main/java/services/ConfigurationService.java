@@ -83,4 +83,18 @@ public class ConfigurationService {
 
 	}
 
+	public Configuration findOtherConfiguration() {
+		Configuration res;
+		List<Configuration> configs;
+		final Locale locale = LocaleContextHolder.getLocale();
+		final String ls = locale.getLanguage();
+		configs = this.configurationRepository.findAll();
+		Assert.notNull(configs);
+		if (!configs.get(0).getLanguage().equals(ls))
+			res = configs.get(0);
+		else
+			res = configs.get(1);
+		return res;
+	}
+
 }
