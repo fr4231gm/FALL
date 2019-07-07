@@ -42,6 +42,7 @@
 		<!-- ******************** NOT AUTHENTICATED ******************** -->
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="conference/listRunningConferences.do"><spring:message code="master.page.listRunningConferences" /></a></li>
 			<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
 			</li>

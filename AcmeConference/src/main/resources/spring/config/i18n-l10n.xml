@@ -25,7 +25,7 @@
 		<value>/views/legal-terms/messages</value>
 		<value>/views/about-us/messages</value>
 		<value>/views/configuration/messages</value>
-		
+		<value>/views/conference/messages</value>
 		
 	</util:list>
 
