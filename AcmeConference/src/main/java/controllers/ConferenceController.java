@@ -34,6 +34,8 @@ public class ConferenceController extends AbstractController {
 
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/listRunningConferences.do");
+		result.addObject("general", true);
+		result.addObject("searchPoint", "conference/listSearchRunning.do");
 
 		return result;
 	}
@@ -53,6 +55,25 @@ public class ConferenceController extends AbstractController {
 		res.addObject("conference", c);
 
 		return res;
+	}
+
+	@RequestMapping(value = "/listSearchRunning", method = RequestMethod.GET, params = {
+		"keyword"
+	})
+	public ModelAndView listSearchRunning(@RequestParam final String keyword) {
+		ModelAndView result;
+		Collection<Conference> conferences;
+
+		conferences = this.conferenceService.searchConferenceAnonymousRunning(keyword);
+
+		result = new ModelAndView("conference/list");
+
+		result.addObject("conferences", conferences);
+		result.addObject("requestURI", "conference/listSearchRunning.do");
+		result.addObject("general", true);
+		result.addObject("searchPoint", "conference/listSearchRunning.do");
+
+		return result;
 	}
 
 }

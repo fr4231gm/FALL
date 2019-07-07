@@ -36,6 +36,7 @@
 		<!-- ************************ ALL ************************ -->
 		<security:intercept-url pattern="/" access="permitAll" /> 
 		<security:intercept-url pattern="/conference/listRunningConferences.do" access="permitAll" /> 
+		<security:intercept-url pattern="/conference/listSearchRunning.do" access="permitAll" /> 
 		<security:intercept-url pattern="/conference/display.do" access="permitAll" /> 
 		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
 		<security:intercept-url pattern="/images/**" access="permitAll" /> 

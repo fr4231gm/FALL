@@ -10,6 +10,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
+<jstl:if test="${general eq 'true'}">
+<form name="searchForm" action="${searchPoint}" method="get" >
+    <input type="text" name="keyword">  
+    <input type="submit" value="<spring:message code="conference.search"/>">
+</form>
+</jstl:if>
+
 <display:table name="conferences" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 	

@@ -36,6 +36,13 @@ public class ConferenceService {
 		return c;
 	}
 
+	public Collection<Conference> searchConferenceAnonymousRunning(final String keyword) {
+		Collection<Conference> res;
+		final Date actual = new Date(System.currentTimeMillis() - 1);
+		res = this.conferenceRepository.filterRunning(keyword, actual);
+		return res;
+	}
+
 	//Servicios externos
 
 }
