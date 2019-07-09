@@ -33,6 +33,10 @@
 		
 		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMINISTRATOR')" /> 
 		
+		<!-- ************************ AUTHOR ************************ -->
+		
+		<security:intercept-url pattern="/submission/author/list.do" access="hasRole('AUTHOR')" /> 
+		
 		<!-- ************************ ALL ************************ -->
 		<security:intercept-url pattern="/" access="permitAll" /> 
 		<security:intercept-url pattern="/conference/listRunningConferences.do" access="permitAll" /> 
