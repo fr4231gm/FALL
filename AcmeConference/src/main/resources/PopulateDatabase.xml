@@ -606,11 +606,11 @@
 		<property name="title" value="Bellsprout, ese gran desconocido" /> 
 		<property name="acronym" value="FFF" /> 
 		<property name="venue" value="Meseta anñil, Kanto" /> 
-		<property name="submissionDeadline" value="04/09/2019" /> 
-		<property name="notificationDeadline" value="05/09/2019" /> 
-		<property name="cameraReadyDeadline" value="06/09/2019" /> 
-		<property name="startDate" value="07/09/2019" /> 
-		<property name="endDate" value="08/09/2019" /> 
+		<property name="submissionDeadline" value="02/09/2019" /> 
+		<property name="notificationDeadline" value="03/09/2019" /> 
+		<property name="cameraReadyDeadline" value="04/09/2019" /> 
+		<property name="startDate" value="05/09/2019" /> 
+		<property name="endDate" value="06/09/2019" /> 
 		<property name="summary" value="Pikachu está sobrevalorado, adentremonos en el incrible mundo de los pokemon tipo planta… Por favor…" /> 
 		<property name="fee" value="0.95" /> 
 		<property name="isDraft" value="false" /> 
