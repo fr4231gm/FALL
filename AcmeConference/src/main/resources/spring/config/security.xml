@@ -35,7 +35,7 @@
 		
 		<!-- ************************ AUTHOR ************************ -->
 		
-		<security:intercept-url pattern="/submission/author/list.do" access="hasRole('AUTHOR')" /> 
+		<security:intercept-url pattern="/submission/author/**" access="hasRole('AUTHOR')" /> 
 		
 		<!-- ************************ ALL ************************ -->
 		<security:intercept-url pattern="/" access="permitAll" /> 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.SubmissionService;
@@ -36,6 +37,23 @@ public class SubmissionAuthorController extends AbstractController {
 		result.addObject("requestURI", "submission/author/list.do");
 
 		return result;
+	}
+
+	//Show
+	@RequestMapping(value = "/display", method = RequestMethod.GET, params = {
+		"submissionId"
+	})
+	public ModelAndView display(@RequestParam final int submissionId) {
+		ModelAndView res;
+
+		// Initialize variables
+		Submission s;
+		s = this.submissionService.findOne(submissionId);
+
+		res = new ModelAndView("submission/display");
+		res.addObject("submission", s);
+
+		return res;
 	}
 
 }

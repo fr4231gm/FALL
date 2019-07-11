@@ -32,4 +32,11 @@ public class SubmissionService {
 		return subs;
 	}
 
+	public Submission findOne(final int submissionId) {
+		Submission s;
+		s = this.submissionRepository.findOne(submissionId);
+		Assert.notNull(s);
+		return s;
+	}
+
 }

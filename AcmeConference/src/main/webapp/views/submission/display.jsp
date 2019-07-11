@@ -18,49 +18,44 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-	
-<acme:input code="conference.title" path="conference.title"
+<fieldset><legend><spring:message code="author.submission" /></legend>
+<acme:input code="submission.ticker" path="submission.ticker"
 	readonly="true" />
 	<br />
 
-<acme:input code="conference.acronym" path="conference.acronym"
+<acme:input code="submission.moment" path="submission.moment"
 	readonly="true" />
 	<br />
 	
-<acme:input code="conference.venue" path="conference.venue"
+<acme:input code="submission.cameraReadyPaper" path="submission.cameraReadyPaper"
 	readonly="true" />
 	<br />
 
-<acme:input code="conference.submissionDeadline" path="conference.submissionDeadline"
-	readonly="true" />
-	<br />
-	
-<acme:input code="conference.notificationDeadline" path="conference.notificationDeadline"
+<h3><spring:message code="submission.status"></spring:message>: </h3>
+<jstl:if test="${submission.status eq 'ACCEPTED' }"> <spring:message code="submission.accepted" /> </jstl:if><jstl:if test="${submission.status eq 'REJECTED'}"><spring:message code="submission.rejected"/></jstl:if><jstl:if test="${submission.status eq 'UNER-REVIEW' }"><spring:message code="submission.underreview" /></jstl:if>
+
+</fieldset>
+
+<fieldset><legend><spring:message code= "author.submission.paper"></spring:message></legend>
+
+
+<acme:input code="paper.title" path="submission.paper.title"
 	readonly="true"/>
 	<br />	
 
-<acme:input code="conference.cameraReadyDeadline" path="conference.cameraReadyDeadline"
+<acme:input code="paper.summary" path="submission.paper.summary"
 	readonly="true" />
 	<br />	
 
-<acme:input code="conference.startDate" path="conference.startDate"
+<acme:input code="paper.document" path="submission.paper.document"
 	readonly="true" />
 	<br />	
 	
 
-<acme:input code="conference.endDate" path="conference.endDate"
-	readonly="true" />
-	<br />	
 
 
-<acme:textarea code="conference.summary" path="conference.summary"
-	readonly="true" />
-	<br />	
-	
-	
-<acme:input code="conference.fee" path="conference.fee"
-	readonly="true" />
-	<br />	
+
+</fieldset>
 
 
 

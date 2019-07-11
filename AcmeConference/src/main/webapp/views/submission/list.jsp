@@ -20,8 +20,7 @@
 		<display:column property="moment" titleKey="submission.moment"
 		sortable="true"	format="{0, date, dd/MM/yyyy HH:mm}"/>
 		
-		<display:column property="status" titleKey="submission.status"
-		sortable="true" />
+		
 		
 			<display:column titleKey="submission.status" sortable="true">
 		<jstl:if test="${row.status eq 'UNDER-REVIEW'}">
@@ -34,6 +33,13 @@
 			<spring:message code="submission.rejected"/>
 		</jstl:if>
 	</display:column>
+	
+	<display:column>
+		<acme:link link="submission/author/display.do?submissionId=${row.id}" code = "submission.display"/>
+	</display:column>
+	
+	
+	
 
 </display:table>
 
