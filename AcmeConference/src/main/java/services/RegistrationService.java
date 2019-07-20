@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Author;
+import domain.CreditCard;
 import domain.Registration;
 
 import repositories.RegistrationRepository;
@@ -26,6 +27,9 @@ public class RegistrationService {
 
 	@Autowired
 	private ConferenceService conferenceService;
+	
+	//@Autowired
+	//private CreditCard creditCardService;
 
 	// Constructors ------------------------------------
 
@@ -40,10 +44,12 @@ public class RegistrationService {
 		Author principal;
 
 		principal = this.authorService.findByPrincipal();
+		//creditCard = this.creditCardService.findOne();
 		Assert.notNull(principal);
 
 		result = new Registration();
 		result.setAuthor(principal);
+		//result.setCreditCard(principal);
 		result.setConference(this.conferenceService.findOne(conferenceId));
 
 		Assert.notNull(result.getConference());
@@ -98,6 +104,15 @@ public class RegistrationService {
 
 		return result;
 
+	}
+	
+	public Collection<Registration> findRegistrationsByAuthorId(final int authorId){
+		
+		Collection<Registration> res;
+
+		res = this.registrationRepository.findRegistrationsByAuthorId(authorId);
+
+		return res;
 	}
 
 }
