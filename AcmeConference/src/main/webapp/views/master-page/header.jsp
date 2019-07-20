@@ -47,6 +47,8 @@
 				<ul>
 					<li><a class="child" href="registration/author/list.do"><spring:message
 								code="master.page.author.registration" /></a></li>
+					<li><a class="child" href="conference/author/list.do"><spring:message
+								code="master.page.author.conference" /></a></li>			
 
 				</ul></li>
 		</security:authorize>

@@ -40,7 +40,18 @@
 	</display:column>
 	
 	
+<security:authorize access="hasRole('AUTHOR')">
+		
+			
+	<display:column>
 	
+		<acme:link link="conference/author/register.do?conferenceId=${row.id}"
+				code="conference.registration" />
+
+	</display:column>
+
+
+</security:authorize>	
 
 	
 
