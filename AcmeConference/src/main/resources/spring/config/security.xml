@@ -72,6 +72,9 @@
 		
 		<!-- ************************* NONE ************************* -->
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
+		
+		<!-- *********************** ANONYMOUS *********************** -->
+		<security:intercept-url pattern="/sponsor/register.do" access="isAnonymous()" />
 
 		<security:form-login 
 			login-page="/security/login.do"

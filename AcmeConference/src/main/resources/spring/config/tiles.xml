@@ -27,6 +27,7 @@
 		<value>/views/configuration/tiles.xml</value>
 		<value>/views/conference/tiles.xml</value>
 		<value>/views/registration/tiles.xml</value>
+		<value>/views/sponsor/tiles.xml</value>
 		
 		
 	</util:list>

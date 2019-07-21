@@ -27,6 +27,7 @@
 		<value>/views/configuration/messages</value>
 		<value>/views/conference/messages</value>
 		<value>/views/registration/messages</value>
+		<value>/views/sponsor/messages</value>
 		
 	</util:list>
 
