@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.CreditCard;
 import domain.Sponsor;
+import forms.SponsorForm;
 
+import services.CreditCardService;
 import services.SponsorService;
 
 @Controller
@@ -17,6 +20,9 @@ public class SponsorController extends AbstractController {
 
 	@Autowired
 	private SponsorService sponsorService;
+	
+	@Autowired
+	private CreditCardService creditCardService;
 
 	// Constructor -------------------------------------
 
@@ -28,39 +34,42 @@ public class SponsorController extends AbstractController {
 	public ModelAndView register() {
 
 		ModelAndView res;
+		SponsorForm sponsorForm;
 
-		Sponsor sponsor = new Sponsor();
+		sponsorForm = new SponsorForm();
 
-		res = new ModelAndView("sponsor/register");
-		res.addObject("sponsor", sponsor);
+		res = new ModelAndView("sposnor/register");
+		res.addObject("sponsorForm", sponsorForm);
 
 		return res;
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final Sponsor sponsor,
+	public ModelAndView save(final SponsorForm sponsorForm,
 			final BindingResult binding) {
 
 		ModelAndView res;
+		Sponsor sponsor;
+		
+		
+		sponsor = this.sponsorService.reconstruct(sponsorForm, binding);
 
-		if (binding.hasErrors()) {
+		if (binding.hasErrors()){
 			res = new ModelAndView("sponsor/register");
-			
-		} else {
-			
+		}else
 			try {
-				
-					this.sponsorService.save(sponsor);
-					
+				if(sponsor.getId()!=0){
+				this.sponsorService.save(sponsor);
+				}else{
+				this.sponsorService.saveFirst(sponsorForm, binding);
+				}
 				res = new ModelAndView("redirect:../");
 				res.addObject("message", "actor.register.success");
-				
+				res.addObject("name", sponsor.getName());
 			} catch (final Throwable opps) {
-				
 				res = new ModelAndView("sponsor/register");
 				res.addObject("message", "actor.commit.error");
 			}
-		}
 		return res;
 	}
 
@@ -84,20 +93,24 @@ public class SponsorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	ModelAndView edit(final Sponsor sponsor, final BindingResult binding) {
+	ModelAndView save(final Sponsor sponsor, final BindingResult binding) {
 		ModelAndView result;
+		Sponsor toSave;
+
+		toSave = this.sponsorService.reconstruct(sponsor, binding);
 
 		if (binding.hasErrors())
 			result = new ModelAndView("sponsor/edit");
 		else
 			try {
-				this.sponsorService.save(sponsor);
+				this.sponsorService.save(toSave);
 				result = new ModelAndView("welcome/index");
 
+				result.addObject("name", toSave.getName());
 				result.addObject("exitCode", "actor.edit.success");
 
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(sponsor,
+				result = this.createEditModelAndView(toSave,
 						"actor.commit.error");
 			}
 
