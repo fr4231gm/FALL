@@ -42,10 +42,7 @@
 	<acme:input code="sponsor.surname" path="surname" placeholder="Escobar Romero"/>
 	<br />
 	
-	<acme:input code="sponsor.vatNumber" path="vatNumber" placeholder="ES29558874H"/>
-	<br />
-	
-	<acme:input code="sponsor.commercialName" path="commercialName" placeholder="MOVISTAR"/>
+	<acme:input code="sponsor.middleName" path="middleName" placeholder="Pablo"/>
 	<br />
 
 	<acme:input code="sponsor.photo" path="photo" placeholder="https://www.google.es"/>
@@ -68,12 +65,6 @@
 	<legend><spring:message code="company.creditCard" /></legend>
 	<acme:input code="company.holder" path="holder"/>
 	<br/>
-	<form:label path="make">
-        <spring:message code="rookie.make" />
-    </form:label>
-    <form:select path="make" >
-        <form:options items="${creditcardMakes}"   />
-    </form:select>
     <form:errors path="make" cssClass="error" />
 	<acme:input code="company.number" path="number"/>
 	<acme:input code="company.expirationMonth" path="expirationMonth"/>
