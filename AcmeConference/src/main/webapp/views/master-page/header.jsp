@@ -51,7 +51,9 @@
 		</security:authorize>
 		
 		<!-- ************************** ALL ************************ -->
-		
+		<security:authorize access="hasRole('ADMINISTRATOR')">
+			<li><a href="administrator/edit.do"><spring:message code="master.page.profile.edit.my.profile" /></a></li>
+		</security:authorize>
 		
 		<!-- ******************** AUTHENTICATED ******************** -->
 		<security:authorize access="isAuthenticated()">

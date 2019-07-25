@@ -32,6 +32,7 @@
 
 		
 		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/administrator/edit.do" access="hasRole('ADMINISTRATOR')" /> 
 		
 		<!-- ************************ ALL ************************ -->
 		<security:intercept-url pattern="/" access="permitAll" /> 
