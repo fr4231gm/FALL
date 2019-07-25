@@ -42,12 +42,11 @@ public class AdministratorService {
 
 	// Simple CRUDs methods ---------------------------------------------------
 
-	// Método para encontrar un administrador a traves de su ID
+	// Mï¿½todo para encontrar un administrador a traves de su ID
 	public Administrator findOne(final int administratorId) {
 		Administrator result;
 
 		result = this.administratorRepository.findOne(administratorId);
-		Assert.notNull(result);
 
 		return result;
 
@@ -58,7 +57,6 @@ public class AdministratorService {
 		Collection<Administrator> result;
 
 		result = this.administratorRepository.findAll();
-		Assert.notNull(result);
 
 		return result;
 	}
