@@ -56,6 +56,7 @@ public class Actor extends DomainEntity {
 	}
 
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+	@NotBlank
 	public String getEmail() {
 		return this.email;
 	}

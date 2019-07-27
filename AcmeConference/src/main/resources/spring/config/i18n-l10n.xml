@@ -26,7 +26,7 @@
 		<value>/views/about-us/messages</value>
 		<value>/views/configuration/messages</value>
 		<value>/views/conference/messages</value>
-		
+		<value>/views/administrator/messages</value>
 	</util:list>
 
 </beans>
