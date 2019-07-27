@@ -26,7 +26,7 @@
 		<value>/views/about-us/tiles.xml</value>
 		<value>/views/configuration/tiles.xml</value>
 		<value>/views/conference/tiles.xml</value>
-		
+		<value>/views/administrator/tiles.xml</value>
 		
 	</util:list>
 

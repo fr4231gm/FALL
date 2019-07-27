@@ -35,8 +35,12 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="score" />
+	<form:hidden path="userAccount" />
 	
 	<acme:input code="administrator.name" path="name" placeholder="Jose"/>
+	<br />
+	
+	<acme:input code="administrator.middleName" path="middleName" placeholder="Javier"/>
 	<br />
 
 	<acme:input code="administrator.surname" path="surname" placeholder="Gonzalez Gutierrez"/>

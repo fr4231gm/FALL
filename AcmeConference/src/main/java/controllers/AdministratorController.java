@@ -10,20 +10,22 @@
 
 package controllers;
 
-import javax.naming.spi.DirStateFactory.Result;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Administrator;
 import services.AdministratorService;
+import domain.Administrator;
 
 @Controller
 @RequestMapping("/administrator")
@@ -38,11 +40,11 @@ public class AdministratorController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit(@RequestParam int administratorId) {
+    public ModelAndView edit() {
         ModelAndView res;
         Administrator administrator;
 
-        administrator = this.administratorService.findOne(administratorId);
+        administrator = this.administratorService.findByPrincipal();
         Assert.notNull(administrator);
         res = this.createEditModelAndView(administrator);
         
@@ -56,6 +58,10 @@ public class AdministratorController extends AbstractController {
         
         if(binding.hasErrors()){
             res = this.createEditModelAndView(administrator);
+            for(ObjectError s: binding.getAllErrors()){
+            	System.out.println(s);
+            }
+            
         } else {
             try {
                 toSave = this.administratorService.save(administrator);
@@ -63,6 +69,7 @@ public class AdministratorController extends AbstractController {
 
                 res.addObject("name", toSave.getName());
                 res.addObject("exitCode", "actor.edit.success");
+                res.addObject("moment", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
             } catch (Throwable oops) {
                 res = this.createEditModelAndView(administrator, "administrator.commit.error");
             }
@@ -79,7 +86,7 @@ public class AdministratorController extends AbstractController {
     protected ModelAndView createEditModelAndView(final Administrator administrator, final String messagecode) {
         final ModelAndView result;
 
-        result = new ModelAndView();
+        result = new ModelAndView("administrator/edit");
 
         result.addObject("administrator", administrator);
         result.addObject("message", messagecode);
