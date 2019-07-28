@@ -15,7 +15,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import domain.CreditCard;
 import domain.Sponsor;
 import forms.SponsorForm;
 
@@ -40,8 +39,6 @@ public class SponsorService {
 	@Autowired
 	private UserAccountService userAccountService;
 	
-	@Autowired
-	private CreditCardService creditCardService;
 
 	@Autowired
 	private Validator validator;
@@ -100,8 +97,6 @@ public class SponsorService {
 
 	public Sponsor saveFirst(final SponsorForm form, BindingResult binding) {
 		Sponsor sponsor = this.reconstruct(form, binding);
-		CreditCard creditCard = this.creditCardService.reconstruct(form,
-				binding);
 
 		Sponsor res;
 		Assert.notNull(sponsor);
@@ -114,8 +109,6 @@ public class SponsorService {
 		}
 
 		res = this.sponsorRepository.save(sponsor);
-		sponsor.setCreditCard(creditCard);
-		this.creditCardService.save(creditCard);
 
 		return res;
 	}

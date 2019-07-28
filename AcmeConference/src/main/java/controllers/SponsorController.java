@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.CreditCard;
 import domain.Sponsor;
 import forms.SponsorForm;
 
-import services.CreditCardService;
 import services.SponsorService;
 
 @Controller
@@ -21,9 +19,6 @@ public class SponsorController extends AbstractController {
 	@Autowired
 	private SponsorService sponsorService;
 	
-	@Autowired
-	private CreditCardService creditCardService;
-
 	// Constructor -------------------------------------
 
 	public SponsorController() {

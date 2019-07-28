@@ -32,6 +32,15 @@
 			<display:column property="endDate" titleKey="conference.endDate"
 		sortable="true" format="{0, date, dd/MM/yyyy HH:mm}"/>
 		
+<security:authorize access="isAuthenticated()">
+		
+			
+	<display:column property="category.name" titleKey="conference.category"
+		sortable="true"/>
+
+
+</security:authorize>	
+		
 	<display:column>
 	
 		<acme:link link="conference/display.do?conferenceId=${row.id}"
