@@ -92,7 +92,6 @@ public class RegistrationService {
 
 		final Registration reg = this.registrationRepository
 				.findOne(registrationId);
-		Assert.notNull(reg);
 
 		return reg;
 	}
