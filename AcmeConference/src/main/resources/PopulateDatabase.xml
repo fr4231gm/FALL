@@ -14,7 +14,7 @@
 		<property name="photo" value="https://pbs.twimg.com/media/D7cVHntXkAUTcxN.jpg:large" /> 
 		<property name="email" value="admin@gmail.com" /> 
 		<property name="address" value="C/Animalista nº2" /> 
-		<property name="score" value="0" /> 
+
 		<property name="phoneNumber" value="662130568" /> 
 		<property name="userAccount" ref="userAccount1" /> 
 	</bean>
@@ -26,7 +26,7 @@
 		<property name="photo" value="https://www.infobae.com/new-resizer/Hm0KamgZ2KJmiIRrQZmYgkru4Yk=/750x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2016/09/28082346/CtY9h13WAAEsNfz.jpg" /> 
 		<property name="email" value="admin2@gmail.com" /> 
 		<property name="address" value="C/Animalista nº3" /> 
-		<property name="score" value="0" /> 
+	
 		<property name="phoneNumber" value="662130569" /> 
 		<property name="userAccount" ref="userAccount2" /> 
 	</bean>
@@ -38,7 +38,7 @@
 		<property name="photo" value="https://www.pronto.es/uploads/s1/19/03/63/5/556612-2018web_9_478x676.jpg" /> 
 		<property name="email" value="admin3@gmail.com" /> 
 		<property name="address" value="C/Animalista nº4" /> 
-		<property name="score" value="0" /> 
+	
 		<property name="phoneNumber" value="662130570" /> 
 		<property name="userAccount" ref="userAccount3" /> 
 	</bean>
@@ -50,7 +50,7 @@
 		<property name="photo" value="https://album.mediaset.es/cimg/1000001/2017/02/14/r1.jpg?w=480" /> 
 		<property name="email" value="admin4@gmail.com" /> 
 		<property name="address" value="C/Animalista nº5" /> 
-		<property name="score" value="0" /> 
+
 		<property name="phoneNumber" value="662130571" /> 
 		<property name="userAccount" ref="userAccount4" /> 
 	</bean>
@@ -62,7 +62,7 @@
 		<property name="photo" value="http://img.europapress.es/fotoweb/fotonoticia_20161127140624_800.jpg" /> 
 		<property name="email" value="admin4@gmail.com" /> 
 		<property name="address" value="C/Animalista nº6" /> 
-		<property name="score" value="0" /> 
+	
 		<property name="phoneNumber" value="662130572" /> 
 		<property name="userAccount" ref="userAccount5" /> 
 	</bean>
@@ -77,7 +77,7 @@
 		<property name="photo" value="https://assets.drdata.xyz/bf/media-photo_5851864f159f19277a97e7bf_320w.jpeg" /> 
 		<property name="email" value="pollo@gmail.com" /> 
 		<property name="address" value="C/Champions nº2" /> 
-		<property name="score" value="0" /> 
+
 		<property name="phoneNumber" value="662130575" /> 
 		<property name="userAccount" ref="userAccount6" /> 
 	</bean>
@@ -89,7 +89,7 @@
 		<property name="photo" value="https://i1.wp.com/www.sopitas.com/wp-content/uploads/2018/08/david-banda-madonna-futbol.png" /> 
 		<property name="email" value="reinona@gmail.com" /> 
 		<property name="address" value="C/Champions nº3" /> 
-		<property name="score" value="0" /> 
+	
 		<property name="phoneNumber" value="662130576" /> 
 		<property name="userAccount" ref="userAccount7" /> 
 	</bean>
@@ -101,7 +101,7 @@
 		<property name="photo" value="https://www.justbake.in/userfiles/ben10-cake.jpg" /> 
 		<property name="email" value="ben10@gmail.com" /> 
 		<property name="address" value="C/Champions nº4" /> 
-		<property name="score" value="0" /> 
+	
 		<property name="phoneNumber" value="662130577" /> 
 		<property name="userAccount" ref="userAccount8" /> 
 	</bean>
@@ -113,7 +113,7 @@
 		<property name="photo" value="https://media1.tenor.com/images/72ac5cfeda7d90964ee9008e310528ff/tenor.gif?itemid=5481122" /> 
 		<property name="email" value="fitforrivals@gmail.com" /> 
 		<property name="address" value="C/Champions nº5" /> 
-		<property name="score" value="0" /> 
+	
 		<property name="phoneNumber" value="662130578" /> 
 		<property name="userAccount" ref="userAccount9" /> 
 	</bean>
@@ -125,7 +125,7 @@
 		<property name="photo" value="https://www.diariodesevilla.es/2018/06/05/espana/Jose-Maria-Aznar_1251785630_85554259_667x375.jpg" /> 
 		<property name="email" value="pollo@gmail.com" /> 
 		<property name="address" value="C/Champions nº6" /> 
-		<property name="score" value="0" /> 
+	
 		<property name="phoneNumber" value="662130579" /> 
 		<property name="userAccount" ref="userAccount10" /> 
 	</bean>
@@ -585,7 +585,7 @@
 		<property name="title" value="Animales fantasticos" /> 
 		<property name="acronym" value="HP" /> 
 		<property name="venue" value="Pandora" /> 
-		<property name="submissionDeadline" value="04/08/2019" /> 
+		<property name="submissionDeadline" value="04/08/2020" /> 
 		<property name="notificationDeadline" value="05/08/2019" /> 
 		<property name="cameraReadyDeadline" value="06/08/2019" /> 
 		<property name="startDate" value="11/08/2019" /> 
@@ -1614,7 +1614,7 @@
 		<property name="photo" value="https://assets.drdata.xyz/bf/media-photo_5851864f159f19277a97e7bf_320w.jpeg" /> 
 		<property name="email" value="eminem@gmail.com" /> 
 		<property name="address" value="Avda reina mercedes nº2" /> 
-		<property name="score" value="0.05" /> 
+		
 		<property name="phoneNumber" value="662130575" /> 
 		<property name="userAccount" ref="userAccount11" /> 
 	</bean>
@@ -1632,7 +1632,7 @@
 		<property name="photo" value="https://i1.wp.com/www.sopitas.com/wp-content/uploads/2018/08/david-banda-madonna-futbol.png" /> 
 		<property name="email" value="manowar@gmail.com" /> 
 		<property name="address" value="Avda reina mercedes nº3" /> 
-		<property name="score" value="0.15" /> 
+	
 		<property name="phoneNumber" value="662130576" /> 
 		<property name="userAccount" ref="userAccount12" /> 
 	</bean>
@@ -1649,7 +1649,7 @@
 		<property name="photo" value="https://www.justbake.in/userfiles/ben10-cake.jpg" /> 
 		<property name="email" value="redhot@gmail.com" /> 
 		<property name="address" value="Avda reina mercedes nº4" /> 
-		<property name="score" value="0.25" /> 
+ 
 		<property name="phoneNumber" value="662130577" /> 
 		<property name="userAccount" ref="userAccount13" /> 
 	</bean>
@@ -1668,7 +1668,7 @@
 		<property name="photo" value="https://media1.tenor.com/images/72ac5cfeda7d90964ee9008e310528ff/tenor.gif?itemid=5481122" /> 
 		<property name="email" value="mana@gmail.com" /> 
 		<property name="address" value="Avda reina mercedes nº5" /> 
-		<property name="score" value="0.35" /> 
+	
 		<property name="phoneNumber" value="662130578" /> 
 		<property name="userAccount" ref="userAccount14" /> 
 	</bean>
@@ -1686,7 +1686,7 @@
 		<property name="photo" value="https://www.diariodesevilla.es/2018/06/05/espana/Jose-Maria-Aznar_1251785630_85554259_667x375.jpg" /> 
 		<property name="email" value="arroz@gmail.com" /> 
 		<property name="address" value="Avda reina mercedes nº6" /> 
-		<property name="score" value="0.45" /> 
+		
 		<property name="phoneNumber" value="662130579" /> 
 		<property name="userAccount" ref="userAccount15" /> 
 	</bean>
@@ -1753,7 +1753,7 @@
 		<property name="photo" value="https://iforo.3djuegos.com/files_foros/75/repre_75laf.jpg" /> 
 		<property name="email" value="alujandron@gmail.com" /> 
 		<property name="address" value="En algun lugar de la mancha" /> 
-		<property name="score" value="0.26" /> 
+	
 		<property name="phoneNumber" value="615789654" /> 
 		<property name="userAccount" ref="userAccount15" /> 
 	</bean>
@@ -1766,7 +1766,7 @@
 		<property name="photo" value="https://i.redd.it/23h6kjojn9mz.jpg" /> 
 		<property name="email" value="Nike@gmail.com" /> 
 		<property name="address" value="El congo" /> 
-		<property name="score" value="0.15" /> 
+	
 		<property name="phoneNumber" value="662130576" /> 
 		<property name="userAccount" ref="userAccount16" /> 
 	</bean>
@@ -1779,7 +1779,7 @@
 		<property name="photo" value="https://i.ytimg.com/vi/-1IBm7QvW1w/maxresdefault.jpg" /> 
 		<property name="email" value="DulceGavilán@gmail.com" /> 
 		<property name="address" value="Andorra" /> 
-		<property name="score" value="0.04" /> 
+	
 		<property name="phoneNumber" value="708471498" /> 
 		<property name="userAccount" ref="userAccount17" /> 
 	</bean>
@@ -1792,7 +1792,6 @@
 		<property name="photo" value="https://previews.123rf.com/images/patrimonio/patrimonio1502/patrimonio150200087/36414758-ilustraci%C3%B3n-de-un-herrero-herrero-con-el-martillo-golpeando-en-herradura-en-el-set-yunque-dentro-de-%C3%B3valo-.jpg" /> 
 		<property name="email" value="PHdepiscinas@gmail.com" /> 
 		<property name="address" value="Sede de la NASA" /> 
-		<property name="score" value="0.85" /> 
 		<property name="phoneNumber" value="754812420" /> 
 		<property name="userAccount" ref="userAccount18" /> 
 	</bean>
@@ -1805,7 +1804,7 @@
 		<property name="photo" value="https://i.ytimg.com/vi/fuXKSooaAx0/maxresdefault.jpg" /> 
 		<property name="email" value="vIKiTenGoUnvIRuS@gmail.com" /> 
 		<property name="address" value="Alcatraz" /> 
-		<property name="score" value="1" /> 
+	
 		<property name="phoneNumber" value="669923578" /> 
 		<property name="userAccount" ref="userAccount19" /> 
 	</bean>

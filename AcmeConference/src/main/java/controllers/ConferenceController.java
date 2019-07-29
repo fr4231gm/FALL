@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,11 +32,13 @@ public class ConferenceController extends AbstractController {
 		Assert.notNull(conferences);
 
 		result = new ModelAndView("conference/list");
+		final Date actual = new Date(System.currentTimeMillis() - 1);
 
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/listRunningConferences.do");
 		result.addObject("general", true);
 		result.addObject("searchPoint", "conference/listSearchRunning.do");
+		result.addObject("fechaActual", actual);
 
 		return result;
 	}
