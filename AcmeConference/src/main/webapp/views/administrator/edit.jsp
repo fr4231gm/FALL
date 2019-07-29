@@ -34,7 +34,6 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="score" />
 	<form:hidden path="userAccount" />
 	
 	<acme:input code="administrator.name" path="name" placeholder="Jose"/>
