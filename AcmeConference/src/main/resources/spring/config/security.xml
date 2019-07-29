@@ -55,6 +55,8 @@
 		<security:intercept-url pattern="/conference/listForthcomingConferences.do" access="permitAll" />
 		<security:intercept-url pattern="/conference/listPastConferences.do" access="permitAll" />
 		<security:intercept-url pattern="/conference/listSearchRunning.do" access="permitAll" /> 
+		<security:intercept-url pattern="/conference/listSearchForthcoming.do" access="permitAll" /> 
+		<security:intercept-url pattern="/conference/listSearchPast.do" access="permitAll" /> 
 		<security:intercept-url pattern="/conference/display.do" access="permitAll" /> 
 		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
 		<security:intercept-url pattern="/images/**" access="permitAll" /> 
