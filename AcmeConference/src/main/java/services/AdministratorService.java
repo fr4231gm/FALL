@@ -9,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.springframework.validation.Validator;
 
-import domain.Administrator;
 import repositories.AdministratorRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Administrator;
 
 @Service
 @Transactional
@@ -25,20 +24,7 @@ public class AdministratorService {
 	private AdministratorRepository	administratorRepository;
 
 	// Supporting services ----------------------------------------------------
-	@Autowired
-	private LoginService			loginService;
-
-	@Autowired
-	private ConfigurationService	configurationService;
-
-	@Autowired
-	private UserAccountService		userAccountService;
-
-	@Autowired
-	private Validator				validator;
-
-	@Autowired
-	private ActorService			actorService;
+	
 
 
 	// Simple CRUDs methods ---------------------------------------------------
@@ -121,8 +107,6 @@ public class AdministratorService {
 		principal = this.findByPrincipal();
 		Assert.notNull(principal);
 	}
-
-	// AdministratorForm methods ----------------------------------------------
 
 	public void flush() {
 
