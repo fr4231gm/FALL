@@ -29,6 +29,24 @@ public class ConferenceService {
 
 		return conferences;
 	}
+	
+	public Collection<Conference> findForthcomingConferences() {
+		Collection<Conference> conferences;
+		final Date actual = new Date(System.currentTimeMillis() - 1);
+		conferences = this.conferenceRepository.findForthcomingConferences(actual);
+		Assert.notNull(conferences);
+
+		return conferences;
+	}
+	
+	public Collection<Conference> findPastConferences() {
+		Collection<Conference> conferences;
+		final Date actual = new Date(System.currentTimeMillis() - 1);
+		conferences = this.conferenceRepository.findPastConferences(actual);
+		Assert.notNull(conferences);
+
+		return conferences;
+	}
 
 	public Conference findOne(final int conferenceId) {
 		final Conference c = this.conferenceRepository.findOne(conferenceId);

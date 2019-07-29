@@ -58,6 +58,9 @@
 		<!-- ******************** NOT AUTHENTICATED ******************** -->
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="conference/listRunningConferences.do"><spring:message code="master.page.listRunningConferences" /></a></li>
+			<li><a class="fNiv" href="conference/listForthcomingConferences.do"><spring:message code="master.page.listForthcomingConferences" /></a></li>
+			<li><a class="fNiv" href="conference/listPastConferences.do"><spring:message code="master.page.listPastConferences" /></a></li>
 			<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
 			</li>
@@ -76,7 +79,18 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					
+					<security:authorize access="hasRole('ADMINISTRATOR')">
+						<li><a href="administrator/edit.do"><spring:message code="master.page.profile.edit.my.profile" /></a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('AUTHOR')">
+						<li><a href="author/edit.do"><spring:message code="master.page.profile.edit.my.profile" /></a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('REVIEWER')">
+						<li><a href="reviewer/edit.do"><spring:message code="master.page.profile.edit.my.profile" /></a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('SPONSOR')">
+						<li><a href="sponsor/edit.do"><spring:message code="master.page.profile.edit.my.profile" /></a></li>
+					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
