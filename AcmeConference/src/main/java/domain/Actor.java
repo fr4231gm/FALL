@@ -1,4 +1,3 @@
-
 package domain;
 
 import javax.persistence.Access;
@@ -9,7 +8,6 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
@@ -20,16 +18,14 @@ import security.UserAccount;
 public class Actor extends DomainEntity {
 
 	// Atributos
-	private String		name;
-	private String		middleName;
-	private String		surname;
-	private String		photo;
-	private String		email;
-	private String		address;
-	private Double		score;
-	private String		phoneNumber;
-	private UserAccount	useraccount;
-
+	private String name;
+	private String middleName;
+	private String surname;
+	private String photo;
+	private String email;
+	private String address;
+	private String phoneNumber;
+	private UserAccount useraccount;
 
 	// Getters
 	@NotBlank
@@ -56,6 +52,7 @@ public class Actor extends DomainEntity {
 	}
 
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+	@NotBlank
 	public String getEmail() {
 		return this.email;
 	}
@@ -63,11 +60,6 @@ public class Actor extends DomainEntity {
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getAddress() {
 		return this.address;
-	}
-
-	@Range(min = 0, max = 1)
-	public Double getScore() {
-		return this.score;
 	}
 
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -104,10 +96,6 @@ public class Actor extends DomainEntity {
 
 	public void setAddress(final String address) {
 		this.address = address;
-	}
-
-	public void setScore(final Double score) {
-		this.score = score;
 	}
 
 	public void setPhoneNumber(final String phoneNumber) {

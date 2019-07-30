@@ -30,6 +30,24 @@ public class ConferenceService {
 		return conferences;
 	}
 
+	public Collection<Conference> findForthcomingConferences() {
+		Collection<Conference> conferences;
+		final Date actual = new Date(System.currentTimeMillis() - 1);
+		conferences = this.conferenceRepository.findForthcomingConferences(actual);
+		Assert.notNull(conferences);
+
+		return conferences;
+	}
+
+	public Collection<Conference> findPastConferences() {
+		Collection<Conference> conferences;
+		final Date actual = new Date(System.currentTimeMillis() - 1);
+		conferences = this.conferenceRepository.findPastConferences(actual);
+		Assert.notNull(conferences);
+
+		return conferences;
+	}
+
 	public Conference findOne(final int conferenceId) {
 		final Conference c = this.conferenceRepository.findOne(conferenceId);
 		Assert.notNull(c);
@@ -40,6 +58,20 @@ public class ConferenceService {
 		Collection<Conference> res;
 		final Date actual = new Date(System.currentTimeMillis() - 1);
 		res = this.conferenceRepository.filterRunning(keyword, actual);
+		return res;
+	}
+
+	public Collection<Conference> searchConferenceAnonymousForthcomming(final String keyword) {
+		Collection<Conference> res;
+		final Date actual = new Date(System.currentTimeMillis() - 1);
+		res = this.conferenceRepository.filterForthcomming(keyword, actual);
+		return res;
+	}
+
+	public Collection<Conference> searchConferenceAnonymousPast(final String keyword) {
+		Collection<Conference> res;
+		final Date actual = new Date(System.currentTimeMillis() - 1);
+		res = this.conferenceRepository.filterPast(keyword, actual);
 		return res;
 	}
 

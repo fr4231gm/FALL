@@ -6,9 +6,9 @@ import java.util.Collection;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.springframework.validation.Validator;
 
 import repositories.AdministratorRepository;
 import security.LoginService;
@@ -24,30 +24,41 @@ public class AdministratorService {
 	private AdministratorRepository	administratorRepository;
 
 	// Supporting services ----------------------------------------------------
-	@Autowired
-	private LoginService			loginService;
-
-	@Autowired
-	private ConfigurationService	configurationService;
-
-	@Autowired
-	private UserAccountService		userAccountService;
-
-	@Autowired
-	private Validator				validator;
-
-	@Autowired
-	private ActorService			actorService;
+	
 
 
 	// Simple CRUDs methods ---------------------------------------------------
 
-	// Método para encontrar un administrador a traves de su ID
+	public Administrator save(final Administrator admin) {
+		Administrator result, principal;
+		Assert.notNull(admin);
+
+		// Comprobamos que la persona logueda es un admin
+		// Solo un admin crea otros admin
+		principal = this.findByPrincipal();
+		Assert.notNull(principal);
+
+		// Si el administrador no esta en la base de datos (es una creacion, no
+		// una actualizacion)
+		// codificamos la contrasena de su cuenta de usuario
+		if (admin.getId() == 0) {
+			final Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
+
+			admin.getUserAccount()
+					.setPassword(passwordEncoder.encodePassword(admin.getUserAccount().getPassword(), null));
+		} else
+			Assert.isTrue(principal.getUserAccount() == admin.getUserAccount());
+		// Guardamos en la bbdd
+		result = this.administratorRepository.save(admin);
+
+		return result;
+	}
+
+	// Mï¿½todo para encontrar un administrador a traves de su ID
 	public Administrator findOne(final int administratorId) {
 		Administrator result;
 
 		result = this.administratorRepository.findOne(administratorId);
-		Assert.notNull(result);
 
 		return result;
 
@@ -58,7 +69,6 @@ public class AdministratorService {
 		Collection<Administrator> result;
 
 		result = this.administratorRepository.findAll();
-		Assert.notNull(result);
 
 		return result;
 	}
@@ -97,8 +107,6 @@ public class AdministratorService {
 		principal = this.findByPrincipal();
 		Assert.notNull(principal);
 	}
-
-	// AdministratorForm methods ----------------------------------------------
 
 	public void flush() {
 

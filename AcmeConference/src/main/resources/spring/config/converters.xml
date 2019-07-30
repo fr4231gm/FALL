@@ -23,6 +23,98 @@
 			<bean class="converters.Class1ToClass2" /> 
 		-->
 		
+		<!-- ACTIVITY -->
+		<bean class = "converters.ActivityToStringConverter" />
+		<bean class = "converters.StringToActivityConverter" />
+		
+		<!-- ACTOR -->
+		<bean class = "converters.ActorToStringConverter" />
+		<bean class = "converters.StringToActorConverter" />
+		
+		<!-- ADMINISTRATOR -->
+		<bean class = "converters.AdministratorToStringConverter" />
+		<bean class = "converters.StringToAdministratorConverter" />
+		
+		<!-- AUTHOR -->
+		<bean class = "converters.AuthorToStringConverter" />
+		<bean class = "converters.StringToAuthorConverter" />
+		
+		<!-- BASE -->
+		<bean class = "converters.BaseToStringConverter" />
+		<bean class = "converters.StringToBaseConverter" />
+		
+		<!-- CATEGORY -->
+		<bean class = "converters.CategoryToStringConverter" />
+		<bean class = "converters.StringToCategoryConverter" />
+		
+		<!-- COMMENT -->
+		<bean class = "converters.CommentToStringConverter" />
+		<bean class = "converters.StringToCommentConverter" />
+		
+		<!-- CONFERENCE -->
+		<bean class = "converters.ConferenceToStringConverter" />
+		<bean class = "converters.StringToConferenceConverter" />
+		
+		<!-- CONFIGURATION -->
+		<bean class = "converters.ConfigurationToStringConverter" />
+		<bean class = "converters.StringToConfigurationConverter" />
+		
+		<!-- FINDER -->
+		<bean class = "converters.FinderToStringConverter" />
+		<bean class = "converters.StringToFinderConverter" />
+		
+		<!-- MESSAGE -->
+		<bean class = "converters.MessageToStringConverter" />
+		<bean class = "converters.StringToMessageConverter" />
+		
+		<!-- PANEL -->
+		<bean class = "converters.PanelToStringConverter" />
+		<bean class = "converters.StringToPanelConverter" />
+		
+		<!-- PAPER -->
+		<bean class = "converters.PaperToStringConverter" />
+		<bean class = "converters.StringToPaperConverter" />
+		
+		<!-- PRESENTATION -->
+		<bean class = "converters.PresentationToStringConverter" />
+		<bean class = "converters.StringToPresentationConverter" />
+		
+		<!-- REGISTRATION -->
+		<bean class = "converters.RegistrationToStringConverter" />
+		<bean class = "converters.StringToRegistrationConverter" />
+		
+		<!-- REPORT -->
+		<bean class = "converters.ReportToStringConverter" />
+		<bean class = "converters.StringToReportConverter" />
+		
+		<!-- REVIEWER -->
+		<bean class = "converters.ReviewerToStringConverter" />
+		<bean class = "converters.StringToReviewerConverter" />
+		
+		<!-- SECTION -->
+		<bean class = "converters.SectionToStringConverter" />
+		<bean class = "converters.StringToSectionConverter" />
+		
+		<!-- SPONSORSHIP -->
+		<bean class = "converters.SponsorshipToStringConverter" />
+		<bean class = "converters.StringToSponsorshipConverter" />
+		
+		<!-- SPONSOR -->
+		<bean class = "converters.SponsorToStringConverter" />
+		<bean class = "converters.StringToSponsorConverter" />
+		
+		<!-- SUBMISSION -->
+		<bean class = "converters.SubmissionToStringConverter" />
+		<bean class = "converters.StringToSubmissionConverter" />
+		
+		<!-- TUTORIAL -->
+		<bean class = "converters.TutorialToStringConverter" />
+		<bean class = "converters.StringToTutorialConverter" />
+		
+		<!-- USER ACCOUNT -->
+		<bean class = "converters.UserAccountToStringConverter" />
+		<bean class = "converters.StringToUserAccountConverter" />
+		
 		
 	</util:list>
 	

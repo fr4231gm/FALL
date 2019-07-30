@@ -31,11 +31,13 @@ public class ActorService {
 	private AdministratorService	administratorService;
 
 	@Autowired
-	private ConfigurationService	configurationService;
-
-
-	//@Autowired
-	//private MessageService			messageService;
+	private AuthorService			authorService;
+	
+	@Autowired
+	private ReviewerService			reviewerService;
+	
+	@Autowired
+	private SponsorService			sponsorService;
 
 	// Simple CRUDs methods ---------------------------------------------------
 
@@ -44,10 +46,27 @@ public class ActorService {
 		Collection<Actor> result;
 
 		result = this.actorRepository.findAll();
-		Assert.notNull(result);
 
 		return result;
 
+	}
+
+	public Actor findOne(final int actorId) {
+		Actor result;
+
+		result = this.actorRepository.findOne(actorId);
+		if (result == null) {
+			result = this.authorService.findOne(actorId);
+			if (result == null) {
+				result = this.reviewerService.findOne(actorId);
+				if (result == null)
+					result = this.sponsorService.findOne(actorId);
+					if (result == null)
+						result = this.administratorService.findOne(actorId);
+			}
+		}
+		Assert.notNull(result);
+		return result;
 	}
 
 	// Other business methods ---------------------------
