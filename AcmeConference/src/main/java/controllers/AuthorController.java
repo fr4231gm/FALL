@@ -77,6 +77,48 @@ public class AuthorController extends AbstractController {
 
         return res;
     }
+    
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	ModelAndView register() {
+		ModelAndView result;
+		AuthorForm authorForm;
+
+		areas = this.areaService.findAll();
+
+		authorForm = new AuthorForm();
+		authorForm.setCheckTerms(false);
+
+		result = new ModelAndView("author/register");
+		result.addObject("AuthorForm", authorForm);
+		return result;
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
+	ModelAndView save(final AuthorForm AuthorForm, final BindingResult binding) {
+		//Initialize Variables
+		ModelAndView result;
+		Author author;
+
+		//Create the author object from the AuthorForm
+		author = this.authorService.reconstruct(AuthorForm, binding);
+
+		//If the form has errors prints it
+		if (binding.hasErrors()) {
+			result = new ModelAndView("author/register");
+		} else
+			//If the form does not have errors, try to save it
+			try {
+				this.authorService.save(author);
+				result = new ModelAndView("redirect:../");
+				result.addObject("message", "actor.register.success");
+				result.addObject("name", author.getName());
+			} catch (final Throwable oops) {
+				result = new ModelAndView("author/register");
+				result.addObject("AuthorForm", AuthorForm);
+				result.addObject("message", "actor.commit.error");
+			}
+		return result;
+	}
 
     protected ModelAndView createEditModelAndView(final Author author) {
         final ModelAndView result = this.createEditModelAndView(author, null);

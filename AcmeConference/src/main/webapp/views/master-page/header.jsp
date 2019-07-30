@@ -63,8 +63,15 @@
 			<li><a class="fNiv" href="conference/listForthcomingConferences.do"><spring:message code="master.page.listForthcomingConferences" /></a></li>
 			<li><a class="fNiv" href="conference/listPastConferences.do"><spring:message code="master.page.listPastConferences" /></a></li>
 			<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
+			
 			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
+			<ul>
+				<li>
+					<a href="author/register.do"><spring:message code="master.page.profile.edit.my.profile"/></a>
+				</li>
+			</ul>
 			</li>
+			
 		</security:authorize>
 		
 		<!-- ************************** ALL ************************ -->
