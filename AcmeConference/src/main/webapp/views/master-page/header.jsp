@@ -37,6 +37,7 @@
 				</ul></li>
 		</security:authorize>
 		
+		
 		<!-- ADMINISTRATOR -->
 		
 		<security:authorize access="hasRole('ADMINISTRATOR')">
@@ -54,6 +55,20 @@
 				</ul></li>
 		</security:authorize>
 		
+		<!-- AUTHOR -->
+		
+		<security:authorize access="hasRole('AUTHOR')">
+			<li><a class="fNiv parent"><spring:message
+						code="master.page.author" /></a>
+				<ul>
+					<li><a class="child" href="registration/author/list.do"><spring:message
+								code="master.page.author.registration" /></a></li>
+					<li><a class="child" href="conference/author/list.do"><spring:message
+								code="master.page.author.conference" /></a></li>			
+
+				</ul></li>
+		</security:authorize>
+		
 		
 		<!-- ******************** NOT AUTHENTICATED ******************** -->
 		<security:authorize access="isAnonymous()">
@@ -64,13 +79,19 @@
 			<li><a class="fNiv" href="conference/listPastConferences.do"><spring:message code="master.page.listPastConferences" /></a></li>
 			<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
 			
+			<li><a class="fNiv" href="conference/listPastConferences.do"><spring:message code="master.page.listPastConferences" /></a></li>			
 			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
 			<ul>
 				<li>
 					<a href="author/register.do"><spring:message code="master.page.profile.edit.my.profile"/></a>
 				</li>
 			</ul>
+				<ul>
+					<li><a href="sponsor/register.do"><spring:message code="master.page.register.as.sponsor" /></a></li>
+				</ul>
 			</li>
+			
+			<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
 			
 		</security:authorize>
 		

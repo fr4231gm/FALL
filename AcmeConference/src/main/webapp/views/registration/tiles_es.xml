@@ -16,9 +16,9 @@
       
 <tiles-definitions>
 
-	<definition name="sponsor/register" extends="master.page">
-		<put-attribute name="title" value="Registrar sponsor" />
-		<put-attribute name="body" value="/views/sponsor/register.jsp" />
+	<definition name="registration/list" extends="master.page">	
+		<put-attribute name="title" value="Registros" />
+		<put-attribute name="body" value="/views/registration/list.jsp" />
 	</definition>
 	
 </tiles-definitions>
