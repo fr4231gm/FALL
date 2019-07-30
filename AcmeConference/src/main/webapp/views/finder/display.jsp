@@ -1,0 +1,12 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%> <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%> <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%> <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%> <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> <%@taglib prefix="display" uri="http://displaytag.sf.net"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<acme:input 	code="finder.keyWord"	path="finder.keyWord"	readonly="true" />
+<acme:input 	code="finder.acronym"	path="finder.acronym"	readonly="true" />
+<acme:input 	code="finder.venue"	path="finder.venue"	readonly="true" />
+<acme:input 	code="finder.summary"	path="finder.summary"	readonly="true" />
+<jstl:choose>	<jstl:when test="${langCode eq 'en'}">		<fmt:formatDate			value="${finder.startDate}" 			pattern="{0, date, MM-dd-yy}" 			var="parsedStartdate" 		/>	</jstl:when>	<jstl:otherwise>		<fmt:formatDate			value="${finder.startDate}" 			pattern="{0, date, dd-MM-yy}" 			var="parsedStartdate" 		/>	</jstl:otherwise></jslt:choose>
+<form:label path="finder.startDate"> 	<spring:message code="finder.startDate"/></form:label><form:input code="finder.startDate" 	path="finder.startDate" 	value="${parsedStartdate}" 	readonly="true" /> <br>
+<jstl:choose>	<jstl:when test="${langCode eq 'en'}">		<fmt:formatDate			value="${finder.endDate}" 			pattern="{0, date, MM-dd-yy}" 			var="parsedEnddate" 		/>	</jstl:when>	<jstl:otherwise>		<fmt:formatDate			value="${finder.endDate}" 			pattern="{0, date, dd-MM-yy}" 			var="parsedEnddate" 		/>	</jstl:otherwise></jslt:choose>
+<form:label path="finder.endDate"> 	<spring:message code="finder.endDate"/></form:label><form:input code="finder.endDate" 	path="finder.endDate" 	value="${parsedEnddate}" 	readonly="true" /> <br>
+<acme:input 	code="finder.fee"	path="finder.fee"	readonly="true" />
+<acme:input 	code="finder.conferences"	path="finder.conferences"	readonly="true" />
+<acme:back 	code="master.go.back" />

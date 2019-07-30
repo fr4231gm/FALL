@@ -1,0 +1,8 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%> <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%> <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%> <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%> <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> <%@taglib prefix="display" uri="http://displaytag.sf.net"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<acme:input 	code="comment.title"	path="comment.title"	readonly="true" />
+<jstl:choose>	<jstl:when test="${langCode eq 'en'}">		<fmt:formatDate			value="${comment.moment}" 			pattern="{0, date, MM-dd-yy}" 			var="parsedMoment" 		/>	</jstl:when>	<jstl:otherwise>		<fmt:formatDate			value="${comment.moment}" 			pattern="{0, date, dd-MM-yy}" 			var="parsedMoment" 		/>	</jstl:otherwise></jslt:choose>
+<form:label path="comment.moment"> 	<spring:message code="comment.moment"/></form:label><form:input code="comment.moment" 	path="comment.moment" 	value="${parsedMoment}" 	readonly="true" /> <br>
+<acme:input 	code="comment.author"	path="comment.author"	readonly="true" />
+<acme:input 	code="comment.text"	path="comment.text"	readonly="true" />
+<acme:input 	code="comment.comments"	path="comment.comments"	readonly="true" />
+<acme:back 	code="master.go.back" />

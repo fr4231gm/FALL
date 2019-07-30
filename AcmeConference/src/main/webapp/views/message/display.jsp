@@ -1,0 +1,9 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%> <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%> <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%> <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%> <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> <%@taglib prefix="display" uri="http://displaytag.sf.net"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<jstl:choose>	<jstl:when test="${langCode eq 'en'}">		<fmt:formatDate			value="${message.moment}" 			pattern="{0, date, MM-dd-yy}" 			var="parsedMoment" 		/>	</jstl:when>	<jstl:otherwise>		<fmt:formatDate			value="${message.moment}" 			pattern="{0, date, dd-MM-yy}" 			var="parsedMoment" 		/>	</jstl:otherwise></jslt:choose>
+<form:label path="message.moment"> 	<spring:message code="message.moment"/></form:label><form:input code="message.moment" 	path="message.moment" 	value="${parsedMoment}" 	readonly="true" /> <br>
+<acme:input 	code="message.subject"	path="message.subject"	readonly="true" />
+<acme:input 	code="message.body"	path="message.body"	readonly="true" />
+<acme:input 	code="message.topic"	path="message.topic"	readonly="true" />
+<acme:link 	code="message.sender" 	link="Actor/display.do?ActorId=${messagesender.id}" />
+<acme:input 	code="message.recipients"	path="message.recipients"	readonly="true" />
+<acme:back 	code="master.go.back" />

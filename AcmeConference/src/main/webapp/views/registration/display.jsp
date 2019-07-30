@@ -1,0 +1,5 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%> <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%> <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%> <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%> <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> <%@taglib prefix="display" uri="http://displaytag.sf.net"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<acme:link 	code="registration.creditCard" 	link="CreditCard/display.do?CreditCardId=${registrationcreditCard.id}" />
+<acme:link 	code="registration.conference" 	link="Conference/display.do?ConferenceId=${registrationconference.id}" />
+<acme:link 	code="registration.Author" 	link="Author/display.do?AuthorId=${registrationAuthor.id}" />
+<acme:back 	code="master.go.back" />
