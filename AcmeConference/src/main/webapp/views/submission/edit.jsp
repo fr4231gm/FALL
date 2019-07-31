@@ -20,6 +20,7 @@
 	<form:hidden path="author" />
 	<form:hidden path="ticker"/>
 	<form:hidden path="moment"/>
+	<form:hidden path="status"/>
 	
 
 

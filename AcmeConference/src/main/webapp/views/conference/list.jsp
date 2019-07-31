@@ -10,6 +10,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+<fmt:formatDate value="${fechaActual}" pattern="dd/MM/yyyy HH:mm" var="formatedFechaActual" /> 
+
 <jstl:if test="${general eq 'true'}">
 	<form name="searchForm" action="${searchPoint}" method="get">
 		<input type="text" name="keyword"> <input type="submit"
@@ -41,10 +43,11 @@
 
 	<security:authorize access="hasRole('AUTHOR')">
 		<display:column>
-			<jstl:if test="${row.submissionDeadline >  fechaActual}">
+			
 				<acme:link link="submission/author/create.do?conferenceId=${row.id}"
 					code="submission.create" />
-			</jstl:if>
+					
+			
 
 		</display:column>
 	</security:authorize>
@@ -56,7 +59,7 @@
 
 
 </display:table>
-
+${formatedFechaActual }
 <br>
 
 <acme:back code="conference.goback" />

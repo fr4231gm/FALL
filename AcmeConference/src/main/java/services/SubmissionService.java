@@ -45,10 +45,10 @@ public class SubmissionService {
 		s.setAuthor(this.authorService.findByPrincipal());
 		s.setTicker(this.generateTicker(s));
 		s.setStatus("UNDER-REVIEW");
+		s.setMoment(new Date(System.currentTimeMillis() - 1));
 
 		return s;
 	}
-
 	private String generateTicker(final Submission s) {
 		String res = "";
 
