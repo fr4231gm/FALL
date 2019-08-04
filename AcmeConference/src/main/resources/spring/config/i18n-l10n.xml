@@ -30,6 +30,8 @@
 		<value>/views/reviewer/messages</value>
 		<value>/views/author/messages</value>
 		<value>/views/sponsor/messages</value>
+		<value>/views/submission/messages</value>
+		
 	</util:list>
 
 </beans>

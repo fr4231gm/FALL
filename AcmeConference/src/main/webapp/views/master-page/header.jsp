@@ -21,6 +21,22 @@
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
+		<!-- AUTHOR -->
+		
+
+		
+		<security:authorize access="hasRole('AUTHOR')">
+			<li><a class="fNiv parent"><spring:message
+						code="master.page.author" /></a>
+				<ul>
+					<li><a class="child" href="submission/author/list.do"><spring:message
+								code="master.page.author.submission" /></a></li>
+					
+
+					
+				</ul></li>
+		</security:authorize>
+		
 		<!-- ADMINISTRATOR -->
 		
 		<security:authorize access="hasRole('ADMINISTRATOR')">
@@ -42,7 +58,8 @@
 		<!-- ******************** NOT AUTHENTICATED ******************** -->
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
-			<li><a class="fNiv" href="conference/listRunningConferences.do"><spring:message code="master.page.listRunningConferences" /></a></li>
+		<li><a class="fNiv" href="conference/listRunningConferences.do"><spring:message code="master.page.listRunningConferences" /></a></li>
+		
 			<li><a class="fNiv" href="conference/listForthcomingConferences.do"><spring:message code="master.page.listForthcomingConferences" /></a></li>
 			<li><a class="fNiv" href="conference/listPastConferences.do"><spring:message code="master.page.listPastConferences" /></a></li>
 			<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
@@ -52,7 +69,7 @@
 		
 		<!-- ************************** ALL ************************ -->
 		
-		
+			
 		<!-- ******************** AUTHENTICATED ******************** -->
 		<security:authorize access="isAuthenticated()">
 			<li>
