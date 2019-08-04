@@ -62,6 +62,9 @@
 	<acme:input code="reviewer.address" path="address" placeholder="Calle Desengano,21"/>
 	<br />
 	
+	<acme:textarea code="reviewer.keywords" path="keywords" placeholder="Chemistry, physics, engineering..."/>
+	<br />
+	
 	<button type=submit name="save">
 		<spring:message code="reviewer.save" />
 	</button>
