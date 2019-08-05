@@ -22,8 +22,6 @@ public class SponsorController extends AbstractController {
 	@Autowired
 	private ConfigurationService configurationService;
 
-	// Constructor -------------------------------------
-
 	public SponsorController() {
 		super();
 	}
@@ -78,15 +76,20 @@ public class SponsorController extends AbstractController {
 
 		ModelAndView result;
 		Sponsor sponsor;
-
+		String[] makes;
+		
+		
+		makes = this.configurationService.findConfiguration().getMake().split(",");
 		sponsor = this.sponsorService.findOneTrimmedByPrincipal();
 
 		try {
 			result = new ModelAndView("sponsor/edit");
 			result.addObject("sponsor", sponsor);
+			result.addObject("makes", makes);
 
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(sponsor, "actor.commit.error");
+			result.addObject("makes", makes);
 		}
 
 		return result;
@@ -96,22 +99,28 @@ public class SponsorController extends AbstractController {
 	ModelAndView save(final Sponsor sponsor, final BindingResult binding) {
 		ModelAndView result;
 		Sponsor toSave;
-
+		String[] makes;
+		
+		makes = this.configurationService.findConfiguration().getMake().split(",");
 		toSave = this.sponsorService.reconstruct(sponsor, binding);
-
-		if (binding.hasErrors())
-			result = new ModelAndView("sponsor/edit");
-		else
-			try {
+		try {
+			if (!(sponsor.getEmail().matches("[A-Za-z_.]+[\\w]+[\\S]+@[a-zA-Z0-9.-]+|[\\w\\s]+[\\<][A-Za-z_.]+[\\w]+@[a-zA-Z0-9.-]+[\\>]")) && sponsor.getEmail().length() > 0)
+				binding.rejectValue("email", "actor.email.check");
+			if (binding.hasErrors()){
+				result = new ModelAndView("sponsor/edit");
+				result.addObject("makes", makes);
+		}
+			else{
 				this.sponsorService.save(toSave);
 				result = new ModelAndView("welcome/index");
 				result.addObject("name", toSave.getName());
 				result.addObject("exitCode", "actor.edit.success");
-			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(toSave,
-						"actor.commit.error");
-			}
-		return result;
+		}
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(toSave, "actor.commit.error");
+			result.addObject("makes", makes);
+		}
+	return result;
 	}
 
 	protected ModelAndView createEditModelAndView(final Sponsor sponsor) {

@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,11 +34,6 @@ public class AuthorController extends AbstractController {
     @Autowired
     private AuthorService authorService;
     
-    // Constructors -----------------------------------------------------------
-    public AuthorController() {
-        super();
-    }
-
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView edit() {
         ModelAndView res;
@@ -55,25 +49,23 @@ public class AuthorController extends AbstractController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params="save")
     public ModelAndView save(@Valid Author author, BindingResult binding) {
         ModelAndView res;
-        Author toSave;
-        
-        if(binding.hasErrors()){
-            res = this.createEditModelAndView(author);
-            for(ObjectError s: binding.getAllErrors()){
-            	System.out.println(s);
-            }
-            
-        } else {
-            try {
-                toSave = this.authorService.save(author);
-                res = new ModelAndView("welcome/index");
 
-                res.addObject("name", toSave.getName());
+        
+        try {
+			if (!(author.getEmail().matches("[A-Za-z_.]+[\\w]+[\\S]+@[a-zA-Z0-9.-]+|[\\w\\s]+[\\<][A-Za-z_.]+[\\w]+@[a-zA-Z0-9.-]+[\\>]")) && author.getEmail().length() > 0)
+				binding.rejectValue("email", "actor.email.check");
+	        if(binding.hasErrors()){
+	            res = this.createEditModelAndView(author);            
+	        } else {
+                Author saved = this.authorService.save(author);
+                res = new ModelAndView("welcome/index");
+                res.addObject("name", saved.getName());
                 res.addObject("exitCode", "actor.edit.success");
                 res.addObject("moment", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
-            } catch (Throwable oops) {
-                res = this.createEditModelAndView(author, "author.commit.error");
-            }
+	        	}
+       } catch (Throwable oops) {
+       		res = this.createEditModelAndView(author, "author.commit.error");
+ 
         }
 
         return res;
@@ -82,40 +74,40 @@ public class AuthorController extends AbstractController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	ModelAndView register() {
 		ModelAndView result;
-		ActorForm authorForm;
+		ActorForm actorForm;
 
-		authorForm = new ActorForm();
-		authorForm.setCheckTerms(false);
+		actorForm = new ActorForm();
+		actorForm.setCheckTerms(false);
 
 		result = new ModelAndView("author/register");
-		result.addObject("actorForm", authorForm);
+		result.addObject("actorForm", actorForm);
 		return result;
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	ModelAndView save(final ActorForm AuthorForm, final BindingResult binding) {
+	ModelAndView save(final ActorForm actorForm, final BindingResult binding) {
 		//Initialize Variables
 		ModelAndView result;
 		Author author;
 
-		//Create the author object from the AuthorForm
-		author = this.authorService.reconstruct(AuthorForm, binding);
-
-		//If the form has errors prints it
-		if (binding.hasErrors()) {
-			result = new ModelAndView("author/register");
-		} else
-			//If the form does not have errors, try to save it
-			try {
+		//Create the author object from the actorForm
+		author = this.authorService.reconstruct(actorForm, binding);
+		try {
+			//If the form has errors prints it
+			if (binding.hasErrors()) {
+				result = new ModelAndView("author/register");
+			} else {
+				//If the form does not have errors, try to save it
 				this.authorService.save(author);
 				result = new ModelAndView("redirect:../");
 				result.addObject("message", "actor.register.success");
 				result.addObject("name", author.getName());
-			} catch (final Throwable oops) {
-				result = new ModelAndView("author/register");
-				result.addObject("AuthorForm", AuthorForm);
-				result.addObject("message", "actor.commit.error");
 			}
+		} catch (final Throwable oops) {
+			result = new ModelAndView("author/register");
+			result.addObject("actorForm", actorForm);
+			result.addObject("message", "actor.commit.error");
+		}
 		return result;
 	}
 

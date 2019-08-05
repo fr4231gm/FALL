@@ -79,6 +79,9 @@
 					<li>
 						<li><a class="child" href="sponsor/register.do"><spring:message code="master.page.register.sponsor" /></a>
 					</li>
+					<li>
+						<a class="child" href="reviewer/register.do"><spring:message code="master.page.register.reviewer"/></a>
+					</li>
 				</ul>
 			</li>
 			

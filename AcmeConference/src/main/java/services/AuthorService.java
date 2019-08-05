@@ -67,15 +67,10 @@ public class AuthorService {
 		}
 		
 		public Author save(Author author){
-			Author result, principal;
+			Author result;
 			Assert.notNull(author);
 
-			// Comprobamos que la persona logueda es un admin
-			// Solo un admin crea otros admin
-			principal = this.findByPrincipal();
-			Assert.notNull(principal);
-
-			// Si el administrador no esta en la base de datos (es una creacion, no
+			// Si el author no esta en la base de datos (es una creacion, no
 			// una actualizacion)
 			// codificamos la contrasena de su cuenta de usuario
 			if (author.getId() == 0) {
@@ -83,8 +78,11 @@ public class AuthorService {
 
 				author.getUserAccount()
 						.setPassword(passwordEncoder.encodePassword(author.getUserAccount().getPassword(), null));
-			} else
+			} else {
+				Author principal = this.findByPrincipal();
+				Assert.notNull(principal);
 				Assert.isTrue(principal.getUserAccount() == author.getUserAccount());
+			}
 			// Guardamos en la bbdd
 			result = this.authorRepository.save(author);
 			
@@ -100,7 +98,7 @@ public class AuthorService {
 
 		}
 
-		// Devuelve todos los administradores de la bbdd
+		// Devuelve todos los autores de la bbdd
 		public Collection<Author> findAll() {
 			Collection<Author> result;
 
@@ -109,7 +107,7 @@ public class AuthorService {
 			return result;
 		}
 
-		// Metodo que devuelve el administrador logueado en el sistema
+		// Metodo que devuelve el author logueado en el sistema
 		public Author findByPrincipal() {
 			Author res;
 			UserAccount userAccount;
@@ -145,50 +143,53 @@ public class AuthorService {
 			Assert.notNull(principal);
 		}
 
-		public Author reconstruct(ActorForm authorForm, BindingResult binding) {
+		public Author reconstruct(final ActorForm actorForm, final BindingResult binding) {
+
 			// initialize variables
 			final Pattern patron = Pattern.compile("^([0-9]+)$");
-			final Matcher encaja = patron.matcher(authorForm.getPhoneNumber());
+			final Matcher encaja = patron.matcher(actorForm.getPhoneNumber());
 			Author author;
 
 			if (encaja.find())
-				authorForm.setPhoneNumber(configurationService.findConfiguration()
-						.getCountryCode() + authorForm.getPhoneNumber());
+				actorForm.setPhoneNumber(configurationService.findConfiguration()
+						.getCountryCode() + actorForm.getPhoneNumber());
 
 			// Creating a new Author
-			author = this.create(authorForm.getUsername(), authorForm.getPassword());
+			author = this.create(actorForm.getUsername(), actorForm.getPassword());
 
 			// Actor Atributes
-			author.setAddress(authorForm.getAddress());
-			author.setEmail(authorForm.getEmail());
-			author.setPhoto(authorForm.getPhoto());
-			author.setPhoneNumber(authorForm.getPhoneNumber());
-			author.setMiddleName(authorForm.getMiddleName());
-			author.setName(authorForm.getName());
-			author.setSurname(authorForm.getSurname());
+			author.setAddress(actorForm.getAddress());
+			author.setEmail(actorForm.getEmail());
+			author.setPhoto(actorForm.getPhoto());
+			author.setPhoneNumber(actorForm.getPhoneNumber());
+			author.setMiddleName(actorForm.getMiddleName());
+			author.setName(actorForm.getName());
+			author.setSurname(actorForm.getSurname());
 
 			// Validating the form
-			this.validator.validate(authorForm, binding);
+			this.validator.validate(actorForm, binding);
 
 			// Checking that the username is not taken
-			if (this.userAccountService.findByUsername(authorForm.getUsername()) != null)
+			if (this.userAccountService.findByUsername(actorForm.getUsername()) != null)
 				binding.rejectValue("username", "actor.username.taken");
 
 			// Checking that the passwords are the same
-			if (!authorForm.getPassword().equals(authorForm.getPasswordConfirmation()))
+			if (!actorForm.getPassword().equals(actorForm.getPasswordConfirmation()))
 				binding.rejectValue("passwordConfirmation", "actor.passwordMiss");
 
 			// Checking that the terms are accepted
-			if (!authorForm.getCheckTerms())
+			if (!actorForm.getCheckTerms())
 				binding.rejectValue("checkTerms", "actor.uncheck");
 
 			// Checking that the email match the pattern
-			if (!(authorForm.getEmail()
+			if (!(actorForm.getEmail()
 					.matches("[A-Za-z_.]+[\\w]+[\\S]+@[a-zA-Z0-9.-]+|[\\w\\s]+[\\<][A-Za-z_.]+[\\w]+@[a-zA-Z0-9.-]+[\\>]"))
-					&& authorForm.getEmail().length() > 0)
-				binding.rejectValue("email", "member.email.check");
+					&& actorForm.getEmail().length() > 0)
+				binding.rejectValue("email", "actor.email.check");
+
 
 			return author;
-		}
+		
+	}
 		
 }

@@ -45,9 +45,21 @@
 	<acme:input code="actor.address" path="address" placeholder="Calle Desengano,21"/>
 	
 	<fieldset>
-		<legend><spring:message code="creditCard" /></legend>
+		<div class="centrado">
+			<i class="fa fa-credit-card"></i>   
+			<spring:message code="creditCard" />
+			<br><br>
+		</div>
+		
 		<acme:input code="creditCard.holder" path="creditCard.holder"/>
-		<acme:input code="creditCard.make" path="creditCard.make"/>
+		<div class="form-group">
+			<form:label path="creditCard.make"> <spring:message code="creditCard.make" /> </form:label>
+	    	<form:select path="creditCard.make" >
+	        	<form:options items="${makes}" />
+	    	</form:select>
+			<form:errors path="creditCard.make" cssClass="error" />
+		</div>
+		<br>
 		<acme:input code="creditCard.number" path="creditCard.number"/>
 		<acme:input code="creditCard.expirationMonth" path="creditCard.expirationMonth"/>
 		<acme:input code="creditCard.expirationYear" path="creditCard.expirationYear"/>
