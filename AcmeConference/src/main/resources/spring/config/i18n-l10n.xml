@@ -31,7 +31,7 @@
 		<value>/views/author/messages</value>
 		<value>/views/sponsor/messages</value>
 		<value>/views/submission/messages</value>
-		
+		<value>/views/comment/messages</value>
 	</util:list>
 
 </beans>
