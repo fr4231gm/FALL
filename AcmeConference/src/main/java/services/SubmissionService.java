@@ -23,6 +23,9 @@ public class SubmissionService {
 	@Autowired
 	private AuthorService			authorService;
 
+	@Autowired
+	private ConferenceService		conferenceService;
+
 
 	public Collection<Submission> findByAuthor() {
 		final Author a = this.authorService.findByPrincipal();
@@ -40,12 +43,13 @@ public class SubmissionService {
 		return s;
 	}
 
-	public Submission create() {
+	public Submission create(final Integer conferenceId) {
 		final Submission s = new Submission();
 		s.setAuthor(this.authorService.findByPrincipal());
+		s.setConference(this.conferenceService.findOne(conferenceId));
 		s.setTicker(this.generateTicker(s));
 		s.setStatus("UNDER-REVIEW");
-		s.setMoment(new Date(System.currentTimeMillis() - 1));
+		s.setMoment(new Date(System.currentTimeMillis() + 1));
 
 		return s;
 	}
