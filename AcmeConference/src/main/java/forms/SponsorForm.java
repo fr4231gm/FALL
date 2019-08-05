@@ -1,25 +1,25 @@
 package forms;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import domain.CreditCard;
 
 public class SponsorForm extends ActorForm {
 
-	// Atributos --------------------------------------------------------------
-	private CreditCard creditCard;
+	// Atributos
+	private CreditCard	creditCard;
 
-	// Getters ----------------------------------------------------------------
-	@NotBlank
-	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+
+	// Getters
+	@Valid
+	@NotNull
 	public CreditCard getCreditCard() {
-		return creditCard;
+		return this.creditCard;
 	}
 
-	// Setters ----------------------------------------------------------------
+	// Setters
 	public void setCreditCard(final CreditCard creditCard) {
 		this.creditCard = creditCard;
 	}
-
 }

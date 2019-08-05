@@ -20,11 +20,11 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <jstl:set var="phoneConfirmationPrefix">
-<spring:message code="sponsor.phone.confirmation.prefix"/> 
+<spring:message code="actor.phone.confirmation.prefix"/> 
 </jstl:set>
 
 <jstl:set var="phoneConfirmationSuffix">
-<spring:message code="sponsor.phone.confirmation.suffix"/> 
+<spring:message code="actor.phone.confirmation.suffix"/> 
 </jstl:set>
 
 <form:form 
@@ -36,37 +36,26 @@
 	<form:hidden path="version" />
 	<form:hidden path="userAccount" />
 	
-	<acme:input code="sponsor.name" path="name" placeholder="Jose"/>
-	<br />
+	<acme:input code="actor.name" path="name" placeholder="Jose"/>
+	<acme:input code="actor.middleName" path="middleName" placeholder="Javier"/>
+	<acme:input code="actor.surname" path="surname" placeholder="Gonzalez Gutierrez"/>
+	<acme:input code="actor.photo" path="photo" placeholder="http://www.instagram.com/resekyt"/>
+	<acme:input code="actor.email" path="email" placeholder="miemilio@gmail.com"/>
+	<acme:input code="actor.phone.number" path="phoneNumber" placeholder="662130564" id="phoneId"/>
+	<acme:input code="actor.address" path="address" placeholder="Calle Desengano,21"/>
 	
-	<acme:input code="sponsor.middleName" path="middleName" placeholder="Javier"/>
-	<br />
-
-	<acme:input code="sponsor.surname" path="surname" placeholder="Gonzalez Gutierrez"/>
-	<br />
-
-	<acme:input code="sponsor.photo" path="photo" placeholder="http://www.instagram.com/resekyt"/>
-	<br />
-
-	<acme:input code="sponsor.email" path="email" placeholder="miemilio@gmail.com"/>
-	<br />
-		
-	<form:label path="phoneNumber">
-		<spring:message code="sponsor.phone.number" />&nbsp;
-	</form:label>
-	<form:input path="phoneNumber" id="phoneId" placeholder="612345678"/>
-	<form:errors cssClass="error" path="phoneNumber" />
-	<br />
-	<br />
+	<fieldset>
+		<legend><spring:message code="creditCard" /></legend>
+		<acme:input code="creditCard.holder" path="creditCard.holder"/>
+		<acme:input code="creditCard.make" path="creditCard.make"/>
+		<acme:input code="creditCard.number" path="creditCard.number"/>
+		<acme:input code="creditCard.expirationMonth" path="creditCard.expirationMonth"/>
+		<acme:input code="creditCard.expirationYear" path="creditCard.expirationYear"/>
+		<acme:input code="creditCard.CVV" path="creditCard.CVV"/>
+	</fieldset>
 	
-	<acme:input code="sponsor.address" path="address" placeholder="Calle Desengano,21"/>
-	<br />
-	
-	<button type=submit name="save">
-		<spring:message code="sponsor.save" />
-	</button>
-
-	<acme:cancel code="sponsor.cancel" url="/"/>
+	<acme:submit name="save" code="actor.save"/>
+	<acme:cancel code="actor.cancel" url="/"/>
 	
 	
 </form:form>	

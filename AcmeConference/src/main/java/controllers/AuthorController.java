@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AuthorService;
 import domain.Author;
+import forms.ActorForm;
 
 @Controller
 @RequestMapping("/author")
@@ -81,20 +82,18 @@ public class AuthorController extends AbstractController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	ModelAndView register() {
 		ModelAndView result;
-		AuthorForm authorForm;
+		ActorForm authorForm;
 
-		areas = this.areaService.findAll();
-
-		authorForm = new AuthorForm();
+		authorForm = new ActorForm();
 		authorForm.setCheckTerms(false);
 
 		result = new ModelAndView("author/register");
-		result.addObject("AuthorForm", authorForm);
+		result.addObject("actorForm", authorForm);
 		return result;
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	ModelAndView save(final AuthorForm AuthorForm, final BindingResult binding) {
+	ModelAndView save(final ActorForm AuthorForm, final BindingResult binding) {
 		//Initialize Variables
 		ModelAndView result;
 		Author author;
