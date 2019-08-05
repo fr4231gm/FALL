@@ -78,6 +78,7 @@ public class LoginService implements UserDetailsService {
 
 		return result;
 	}
+
 	/*
 	 * Metodo utilizado para actualizar una user account. Sera utilizado para el metodo changeBan de AdministratorService
 	 */

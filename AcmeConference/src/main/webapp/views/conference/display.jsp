@@ -63,7 +63,5 @@
 	<br />	
 
 
-<acme:link code="conference.create.comment" link="comment/createByConference.do?conferenceId=${conference.id}" />
-<br />	
-<br />	
+
 <acme:back code="conference.goback"/>

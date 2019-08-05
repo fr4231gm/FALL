@@ -38,13 +38,6 @@
 			code="conference.display" />
 
 	</display:column>
-	
-	<display:column>
-
-		<acme:link link="comment/listByConference.do?conferenceId=${row.id}"
-			code="conference.comments" />
-
-	</display:column>
 
 	<security:authorize access="hasRole('AUTHOR')">
 		<display:column>
