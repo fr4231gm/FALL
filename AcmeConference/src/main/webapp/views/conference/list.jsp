@@ -53,7 +53,7 @@
 		<display:column>
 		
 		
-			<jstl:if test="${actual.time lt row.submissionDeadline.time }">
+			<jstl:if test="${fechaActual.time lt row.submissionDeadline.time }">
 				<acme:link link="submission/author/create.do?conferenceId=${row.id}"
 					code="submission.create" />
 			</jstl:if>
@@ -71,7 +71,7 @@
 
 
 </display:table>
-${formatedFechaActual }
+
 <br>
 
 <acme:back code="conference.goback" />
