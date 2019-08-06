@@ -37,37 +37,18 @@
 	<form:hidden path="score" />
 	<form:hidden path="userAccount" />
 	
-	<acme:input code="author.name" path="name" placeholder="Jose"/>
-	<br />
-	
-	<acme:input code="author.middleName" path="middleName" placeholder="Javier"/>
-	<br />
+	<acme:input code="actor.name" path="name" placeholder="Company1"/>
+	<acme:input code="actor.surname" path="surname" placeholder="Escobar Romero"/>
+	<acme:input code="actor.middleName" path="middleName" placeholder="Pablo"/>
+	<acme:input code="actor.photo" path="photo" placeholder="https://www.google.es"/>
+	<acme:input code="actor.email" path="email" placeholder="placeholder@mail.com"/>
+	<acme:input code="actor.phone.number" path="phoneNumber" placeholder="662130564" id="phoneId"/>
+	<acme:input code="actor.address" path="address" placeholder="Avda Pi y Margall"/>
 
-	<acme:input code="author.surname" path="surname" placeholder="Gonzalez Gutierrez"/>
-	<br />
+	<br/>
 
-	<acme:input code="author.photo" path="photo" placeholder="http://www.instagram.com/resekyt"/>
-	<br />
-
-	<acme:input code="author.email" path="email" placeholder="miemilio@gmail.com"/>
-	<br />
-		
-	<form:label path="phoneNumber">
-		<spring:message code="author.phone.number" />&nbsp;
-	</form:label>
-	<form:input path="phoneNumber" id="phoneId" placeholder="612345678"/>
-	<form:errors cssClass="error" path="phoneNumber" />
-	<br />
-	<br />
-	
-	<acme:input code="author.address" path="address" placeholder="Calle Desengano,21"/>
-	<br />
-	
-	<button type=submit name="save">
-		<spring:message code="author.save" />
-	</button>
-
-	<acme:cancel code="author.cancel" url="/"/>
+	<acme:submit name="save" code="actor.save"/>
+	<acme:cancel code="actor.cancel" url="/"/>
 	
 	
 </form:form>	

@@ -22,9 +22,6 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<!-- AUTHOR -->
-		
-
-		
 		<security:authorize access="hasRole('AUTHOR')">
 			<li><a class="fNiv parent"><spring:message
 						code="master.page.author" /></a>
@@ -36,6 +33,7 @@
 					
 				</ul></li>
 		</security:authorize>
+		
 		
 		<!-- ADMINISTRATOR -->
 		
@@ -54,21 +52,58 @@
 				</ul></li>
 		</security:authorize>
 		
+		<!-- AUTHOR -->
+		
+		<security:authorize access="hasRole('AUTHOR')">
+			<li><a class="fNiv parent"><spring:message
+						code="master.page.author" /></a>
+				<ul>
+					<li><a class="child" href="registration/author/list.do"><spring:message
+								code="master.page.author.registration" /></a></li>
+					<li><a class="child" href="conference/author/list.do"><spring:message
+								code="master.page.author.conference" /></a></li>			
+
+				</ul></li>
+		</security:authorize>
+		
 		
 		<!-- ******************** NOT AUTHENTICATED ******************** -->
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		
-			<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
+				<ul>	
+					<li>
+						<a class="child" href="author/register.do"><spring:message code="master.page.register.author"/></a>
+					</li>
+					<li>
+						<li><a class="child" href="sponsor/register.do"><spring:message code="master.page.register.sponsor" /></a>
+					</li>
+					<li>
+						<a class="child" href="reviewer/register.do"><spring:message code="master.page.register.reviewer"/></a>
+					</li>
+				</ul>
 			</li>
+			
 		</security:authorize>
 		
 		<!-- ************************** ALL ************************ -->
-		<li><a class="fNiv" href="conference/listRunningConferences.do"><spring:message code="master.page.listRunningConferences" /></a></li>
-		
-			<li><a class="fNiv" href="conference/listForthcomingConferences.do"><spring:message code="master.page.listForthcomingConferences" /></a></li>
-			<li><a class="fNiv" href="conference/listPastConferences.do"><spring:message code="master.page.listPastConferences" /></a></li>
+		<li><a class="fNiv"><spring:message	code="master.page.conferences" /></a>
+			<ul>
+			<li>
+				<a class="child" href="conference/listForthcomingConferences.do"><spring:message code="master.page.listForthcomingConferences" /></a>
+			</li>
+			<li>
+				<a class="child" href="conference/listRunningConferences.do"><spring:message code="master.page.listRunningConferences" /></a>
+			</li>
+			<li>
+				<a class="child" href="conference/listPastConferences.do"><spring:message code="master.page.listPastConferences" /></a>
+			</li>
+			
+			</ul>
+			
+		</li>
+		<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
 			
 		<!-- ******************** AUTHENTICATED ******************** -->
 		<security:authorize access="isAuthenticated()">
