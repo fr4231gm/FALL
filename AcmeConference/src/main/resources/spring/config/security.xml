@@ -30,7 +30,6 @@
 	
 		<!-- ADMINISTRATOR -->
 
-		
 		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/administrator/edit.do" access="hasRole('ADMINISTRATOR')" /> 
 		
@@ -39,6 +38,19 @@
 		
 		<security:intercept-url pattern="/registration/author/list.do" access="hasRole('AUTHOR')" />
 		<security:intercept-url pattern="/conference/author/list.do" access="hasRole('AUTHOR')" />
+		<security:intercept-url pattern="/author/edit.do" access="hasRole('AUTHOR')" /> 
+		
+		<!-- REVIEWER -->
+
+		<security:intercept-url pattern="/reviewer/edit.do" access="hasRole('REVIEWER')" /> 
+		
+		<!-- SPONSOR -->
+
+		<security:intercept-url pattern="/sponsor/edit.do" access="hasRole('SPONSOR')" /> 
+		
+		<!-- ************************ AUTHOR ************************ -->
+		
+		<security:intercept-url pattern="/submission/author/**" access="hasRole('AUTHOR')" /> 
 		
 		<!-- ************************ ALL ************************ -->
 		<security:intercept-url pattern="/" access="permitAll" /> 
@@ -46,7 +58,10 @@
 		<security:intercept-url pattern="/conference/listForthcomingConferences.do" access="permitAll" />
 		<security:intercept-url pattern="/conference/listPastConferences.do" access="permitAll" />
 		<security:intercept-url pattern="/conference/listSearchRunning.do" access="permitAll" /> 
+		<security:intercept-url pattern="/conference/listSearchForthcoming.do" access="permitAll" /> 
+		<security:intercept-url pattern="/conference/listSearchPast.do" access="permitAll" /> 
 		<security:intercept-url pattern="/conference/display.do" access="permitAll" /> 
+		<security:intercept-url pattern="/comment/**" access="permitAll" /> 
 		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
 		<security:intercept-url pattern="/images/**" access="permitAll" /> 
 		<security:intercept-url pattern="/scripts/**" access="permitAll" /> 
@@ -68,15 +83,18 @@
 		<!-- *********************** AUTENTICATED *********************** -->
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
-		
-		
-		<!-- ************************* NONE ************************* -->
-		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
+		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" />
 		
 		<!-- *********************** ANONYMOUS *********************** -->
 		<security:intercept-url pattern="/sponsor/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/author/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/reviewer/register.do" access="isAnonymous()" />
+		
+		
 
+		<!-- ************************* NONE ************************* -->
+		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
+		
 		<security:form-login 
 			login-page="/security/login.do"
 			password-parameter="password" 

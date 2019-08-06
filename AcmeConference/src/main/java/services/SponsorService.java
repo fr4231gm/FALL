@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -8,6 +9,7 @@ import java.util.regex.Pattern;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,13 +17,13 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import domain.Sponsor;
-import forms.SponsorForm;
-
 import repositories.SponsorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.CreditCard;
+import domain.Sponsor;
+import forms.SponsorForm;
 
 @Service
 @Transactional
@@ -37,9 +39,8 @@ public class SponsorService {
 	private ConfigurationService configurationService;
 
 	@Autowired
-	private UserAccountService userAccountService;
+	private UserAccountService 	userAccountService;
 	
-
 	@Autowired
 	private Validator validator;
 
@@ -88,24 +89,6 @@ public class SponsorService {
 			Assert.notNull(principal);
 			Assert.isTrue(principal.getUserAccount() == sponsor
 					.getUserAccount());
-		}
-
-		res = this.sponsorRepository.save(sponsor);
-
-		return res;
-	}
-
-	public Sponsor saveFirst(final SponsorForm form, BindingResult binding) {
-		Sponsor sponsor = this.reconstruct(form, binding);
-
-		Sponsor res;
-		Assert.notNull(sponsor);
-
-		if (sponsor.getId() == 0) {
-			final Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
-			sponsor.getUserAccount().setPassword(
-					passwordEncoder.encodePassword(sponsor.getUserAccount()
-							.getPassword(), null));
 		}
 
 		res = this.sponsorRepository.save(sponsor);
@@ -187,51 +170,56 @@ public class SponsorService {
 		return result;
 	}
 
-	// Reconstruct: SponsorForm --> Sponsor
-	// Reconstruir un sponsor a partir de un sponsorForm para registrarlo
-	public Sponsor reconstruct(final SponsorForm sponsorForm,
-			final BindingResult binding) {
+	public Sponsor reconstruct(final SponsorForm sponsorForm, final BindingResult binding) {
 
-		final Pattern patron = Pattern.compile("^([0-9]+)$");
-		final Matcher encaja = patron.matcher(sponsorForm.getPhoneNumber());
+			// initialize variables
+			final Pattern patron = Pattern.compile("^([0-9]+)$");
+			final Matcher encaja = patron.matcher(sponsorForm.getPhoneNumber());
+			Sponsor sponsor;
 
-		if (encaja.find())
-			sponsorForm.setPhoneNumber(this.configurationService
-					.findConfiguration().getCountryCode()
-					+ sponsorForm.getPhoneNumber());
+			if (encaja.find())
+				sponsorForm.setPhoneNumber(configurationService.findConfiguration()
+						.getCountryCode() + sponsorForm.getPhoneNumber());
 
-		Sponsor sponsor;
+			// Creating a new Author
+			sponsor = this.create(sponsorForm.getUsername(), sponsorForm.getPassword());
 
-		sponsor = this.create(sponsorForm.getUsername(),
-				sponsorForm.getPassword());
+			// Actor Atributes
+			sponsor.setAddress(sponsorForm.getAddress());
+			sponsor.setEmail(sponsorForm.getEmail());
+			sponsor.setPhoto(sponsorForm.getPhoto());
+			sponsor.setPhoneNumber(sponsorForm.getPhoneNumber());
+			sponsor.setMiddleName(sponsorForm.getMiddleName());
+			sponsor.setName(sponsorForm.getName());
+			sponsor.setSurname(sponsorForm.getSurname());
+			sponsor.setCreditCard(sponsorForm.getCreditCard());
 
-		// Atributos de Actor
-		sponsor.setAddress(sponsorForm.getAddress());
-		sponsor.setEmail(sponsorForm.getEmail());
-		sponsor.setPhoto(sponsorForm.getPhoto());
-		sponsor.setPhoneNumber(sponsorForm.getPhoneNumber());
-		sponsor.setName(sponsorForm.getName());
-		sponsor.setSurname(sponsorForm.getSurname());
-		sponsor.setMiddleName(sponsorForm.getMiddleName());
+			// Validating the form
+			this.validator.validate(sponsorForm, binding);
 
-		sponsor.setCreditCard(sponsorForm.getCreditCard());
+			// Checking that the username is not taken
+			if (this.userAccountService.findByUsername(sponsorForm.getUsername()) != null)
+				binding.rejectValue("username", "actor.username.taken");
 
-		// Comprobar que no haya otro Actor con ese nombre de usuario
-		if (this.userAccountService.findByUsername(sponsorForm.getUsername()) != null)
-			binding.rejectValue("username", "actor.username.taken");
+			// Checking that the passwords are the same
+			if (!sponsorForm.getPassword().equals(sponsorForm.getPasswordConfirmation()))
+				binding.rejectValue("passwordConfirmation", "actor.passwordMiss");
 
-		// Comprobar que las contrasenias coinciden
-		if (!sponsorForm.getPassword().equals(
-				sponsorForm.getPasswordConfirmation()))
-			binding.rejectValue("passwordConfirmation", "actor.passwordMiss");
+			// Checking that the terms are accepted
+			if (!sponsorForm.getCheckTerms())
+				binding.rejectValue("checkTerms", "actor.uncheck");
 
-		// Comprobar que se cumple el patron de email
-		if (!(sponsorForm.getEmail()
-				.matches("[A-Za-z_.]+[\\w]+[\\S]+@[a-zA-Z0-9.-]+|[\\w\\s]+[\\<][A-Za-z_.]+[\\w]+@[a-zA-Z0-9.-]+[\\>]"))
-				&& sponsorForm.getEmail().length() > 0)
-			binding.rejectValue("email", "actor.email.check");
+			// Checking that the email match the pattern
+			if (!(sponsorForm.getEmail()
+					.matches("[A-Za-z_.]+[\\w]+[\\S]+@[a-zA-Z0-9.-]+|[\\w\\s]+[\\<][A-Za-z_.]+[\\w]+@[a-zA-Z0-9.-]+[\\>]"))
+					&& sponsorForm.getEmail().length() > 0)
+				binding.rejectValue("email", "actor.email.check");
+			
+			// Checking that the creditCard is a valid one
+			this.checkCreditCard(sponsor.getCreditCard(), binding);
 
-		return sponsor;
+			return sponsor;
+		
 	}
 
 	public Sponsor construct(final Sponsor sponsor) {
@@ -279,8 +267,42 @@ public class SponsorService {
 				.matches("[A-Za-z_.]+[\\w]+[\\S]+@[a-zA-Z0-9.-]+|[\\w\\s]+[\\<][A-Za-z_.]+[\\w]+@[a-zA-Z0-9.-]+[\\>]"))
 				&& sponsor.getEmail().length() > 0)
 			binding.rejectValue("email", "actor.email.check");
-
+		
 		return result;
 	}
+	
+	public void checkCreditCard(CreditCard creditCard, BindingResult binding){
+		try{
+		LocalDate date = new LocalDate();
+		Integer actualYear 	= date.getYearOfCentury();
+		Integer actualMonth = date.getMonthOfYear();
+		Integer ccYear      = creditCard.getExpirationYear();
+		Integer ccMonth     = creditCard.getExpirationMonth();
+        boolean numeric 	= creditCard.getNumber().matches("-?\\d+(\\.\\d+)?");
+        String[] makes 		= this.configurationService.findConfiguration().getMake().split(",");
+        
+        //Comprobamos el año
+		if (ccYear < actualYear){
+			binding.rejectValue("creditCard.expirationYear", "creditCard.expired");
+		}
+		 //Comprobamos el mes si el año coincide
+		else if(ccYear == actualYear && ccMonth < actualMonth){
+			binding.rejectValue("creditCard.expirationMonth", "creditCard.expired");
+		}
+		
+		//Comprobamos que el número de tarjeta es numérico
+		if(!numeric){
+			binding.rejectValue("creditCard.number", "creditCard.not.numeric");
+		}
+		
+		//Compobamos que la marca está en la lista de marcas
+		if(!Arrays.asList(makes).contains(creditCard.getMake())){
+			binding.rejectValue("creditCard.make", "creditCard.invalid.make");
+		}
 
+		} catch (Throwable oops){
+			binding.rejectValue("creditCard.holder", "creditCard.error");
+		}
+		
+	}
 }

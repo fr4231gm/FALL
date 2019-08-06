@@ -24,15 +24,40 @@
 
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
+<%@ attribute name="value" required="false" %>
 
+<jstl:if test="${value == null}">
+	<jstl:set var="value" value="false" />
+</jstl:if>
 
 
 <%-- Definition --%>
-
 <div>
-	<form:label path="${path}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:checkbox path = "${path}" />
-	<form:errors path="${path}" cssClass="error" />
-</div>
+ 	<form:label path="${path}"> <spring:message code="${code}" /> </form:label>	
+ 	 
+
+  	<div class="toggle">
+	<jstl:if test="${value == true}">
+		<input type="checkbox" class="check-checkbox" id="${path}" name="checkTerms" value="true" checked="checked">
+	</jstl:if>
+	<jstl:if test="${value == false}">
+		<input type="checkbox" class="check-checkbox" id="${path}" name="checkTerms" value="true">
+	</jstl:if>
+    <label class="check-label" for="${path}">
+    <jstl:if test="${true}">
+      <div class="background2"></div>
+	</jstl:if>
+      <span class="face">
+        <span class="face-container">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="mouth"></span>
+        </span>
+      </span>
+    </label>
+  </div>
+
+                    <form:errors path="${path}" cssClass="error" /> 
+        </div>
+
+

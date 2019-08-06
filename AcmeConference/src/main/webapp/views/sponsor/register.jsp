@@ -21,77 +21,67 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <jstl:set var="phoneConfirmationPrefix">
-<spring:message code="sponsor.phone.confirmation.prefix"/> 
+<spring:message code="actor.phone.confirmation.prefix"/> 
 </jstl:set>
 
 <jstl:set var="phoneConfirmationSuffix">
-<spring:message code="sponsor.phone.confirmation.suffix"/> 
+<spring:message code="actor.phone.confirmation.suffix"/> 
 </jstl:set>
 
 <form:form 
 	action="sponsor/register.do" 
-	modelAttribute="sponsor" 
+	modelAttribute="sponsorForm" 
 	onsubmit='return phoneValidation("${phoneConfirmationPrefix}", "${phoneConfirmationSuffix}")'>
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
-	<acme:input code="sponsor.name" path="name" placeholder="Company1"/>
-	<br />
-	
-	<acme:input code="sponsor.surname" path="surname" placeholder="Escobar Romero"/>
-	<br />
-	
-	<acme:input code="sponsor.middleName" path="middleName" placeholder="Pablo"/>
-	<br />
+	<acme:input code="actor.name" path="name" placeholder="Company1"/>
+	<acme:input code="actor.surname" path="surname" placeholder="Escobar Romero"/>
+	<acme:input code="actor.middleName" path="middleName" placeholder="Pablo"/>
+	<acme:input code="actor.photo" path="photo" placeholder="https://www.google.es"/>
+	<acme:input code="actor.email" path="email" placeholder="placeholder@mail.com"/>
+	<acme:input code="actor.phone.number" path="phoneNumber" placeholder="662130564" id="phoneId"/>
+	<acme:input code="actor.address" path="address" placeholder="Avda Pi y Margall"/>
 
-	<acme:input code="sponsor.photo" path="photo" placeholder="https://www.google.es"/>
-	<br />
-
-	<acme:input code="sponsor.email" path="email" placeholder="placeholder@mail.com"/>
-	<br />
-	
-	<form:label path="phoneNumber">
-		<spring:message code="sponsor.phone.number" />:&nbsp;
-	</form:label>
-	<form:input path="phoneNumber" id="phoneId" placeholder="662130564"/>
-	<form:errors cssClass="error" path="phoneNumber"/>
-	<br />
-	<br />
-	
-	<acme:input code="sponsor.address" path="address" placeholder="Avda Pi y Margall"/>
-	<br />
 	<fieldset>
-	<legend><spring:message code="company.creditCard" /></legend>
-	<acme:input code="company.holder" path="holder"/>
-	<br/>
-    <form:errors path="make" cssClass="error" />
-	<acme:input code="company.number" path="number"/>
-	<acme:input code="company.expirationMonth" path="expirationMonth"/>
-	<acme:input code="company.expirationYear" path="expirationYear"/>
-	<acme:input code="company.CVV" path="CVV"/>
+		<div class="centrado">
+			<i class="fa fa-credit-card"></i>   
+			<spring:message code="creditCard" />
+			<br><br>
+		</div>
+		
+		<acme:input code="creditCard.holder" path="creditCard.holder"/>
+		
+		<div class="form-group">
+		<form:label path="creditCard.make"> <spring:message code="creditCard.make" /> </form:label>
+    	<form:select path="creditCard.make" >
+        	<form:options items="${makes}" />
+    	</form:select>
+		<form:errors path="creditCard.make" cssClass="error" />
+		</div>
+		<br>
+		<acme:input code="creditCard.number" path="creditCard.number"/>
+		<acme:input code="creditCard.expirationMonth" path="creditCard.expirationMonth"/>
+		<acme:input code="creditCard.expirationYear" path="creditCard.expirationYear"/>
+		<acme:input code="creditCard.CVV" path="creditCard.CVV"/>
 	</fieldset>
+
 	<br/>
+	
 	<fieldset>
-  	<legend><spring:message code="company.useraccount" /></legend>
-  
-	<acme:input code="company.username" path="username" placeholder="User"/>
-	<br />
-
-	<acme:password code="company.password" path="password" />
-	<br />
-
-	<acme:password code="company.passwordConfirmation"
-		path="passwordConfirmation" />
-	<br />
-
+		<div class="centrado">
+		  	<i class="fa fa-user"></i> <spring:message code="actor.useraccount" />
+		  	<br><br>
+	  	</div>
+		<acme:input code="actor.username" path="username" placeholder="User"/>
+		<acme:password code="actor.password" path="password" />
+		<acme:password code="actor.passwordConfirmation" path="passwordConfirmation" />
+		<acme:checkbox code="actor.checkTerms" path="checkTerms" value="${sponsorForm.checkTerms}"/>
   	</fieldset>
-
-	<button type=submit name="save">
-		<spring:message code="sponsor.save" />
-	</button>
-
-	<acme:cancel code="sponsor.cancel" url="/"/>
+	  	<br><br>
+	<acme:submit name="save" code="actor.save"/>
+	<acme:cancel code="actor.cancel" url="/"/>
 	
 	
 </form:form>	

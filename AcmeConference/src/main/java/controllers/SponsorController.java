@@ -7,19 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ConfigurationService;
+import services.SponsorService;
 import domain.Sponsor;
 import forms.SponsorForm;
-
-import services.SponsorService;
 
 @Controller
 @RequestMapping("/sponsor")
 public class SponsorController extends AbstractController {
 
 	@Autowired
-	private SponsorService sponsorService;
+	private SponsorService 		sponsorService;
 	
-	// Constructor -------------------------------------
+	@Autowired
+	private ConfigurationService configurationService;
 
 	public SponsorController() {
 		super();
@@ -30,41 +31,43 @@ public class SponsorController extends AbstractController {
 
 		ModelAndView res;
 		SponsorForm sponsorForm;
-
+		String[] makes;
+		
+		makes = this.configurationService.findConfiguration().getMake().split(",");
 		sponsorForm = new SponsorForm();
 
-		res = new ModelAndView("sposnor/register");
+		res = new ModelAndView("sponsor/register");
 		res.addObject("sponsorForm", sponsorForm);
+		res.addObject("makes", makes);
 
 		return res;
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final SponsorForm sponsorForm,
-			final BindingResult binding) {
+	public ModelAndView save(final SponsorForm sponsorForm, final BindingResult binding) {
 
 		ModelAndView res;
 		Sponsor sponsor;
+		String[] makes;
 		
-		
-		sponsor = this.sponsorService.reconstruct(sponsorForm, binding);
+		makes = this.configurationService.findConfiguration().getMake().split(",");
 
-		if (binding.hasErrors()){
-			res = new ModelAndView("sponsor/register");
-		}else
-			try {
-				if(sponsor.getId()!=0){
-				this.sponsorService.save(sponsor);
-				}else{
-				this.sponsorService.saveFirst(sponsorForm, binding);
-				}
+		try {
+			sponsor = this.sponsorService.reconstruct(sponsorForm, binding);
+			if (binding.hasErrors()) {
+				res = new ModelAndView("sponsor/register");
+				res.addObject("makes", makes);
+			} else {
+				this.sponsorService.save(sponsor);		
 				res = new ModelAndView("redirect:../");
 				res.addObject("message", "actor.register.success");
 				res.addObject("name", sponsor.getName());
-			} catch (final Throwable opps) {
-				res = new ModelAndView("sponsor/register");
-				res.addObject("message", "actor.commit.error");
 			}
+		} catch (final Throwable opps) {
+			res = new ModelAndView("sponsor/register");
+			res.addObject("makes", makes);
+			res.addObject("message", "actor.commit.error");
+		}
 		return res;
 	}
 
@@ -73,15 +76,20 @@ public class SponsorController extends AbstractController {
 
 		ModelAndView result;
 		Sponsor sponsor;
-
+		String[] makes;
+		
+		
+		makes = this.configurationService.findConfiguration().getMake().split(",");
 		sponsor = this.sponsorService.findOneTrimmedByPrincipal();
 
 		try {
 			result = new ModelAndView("sponsor/edit");
 			result.addObject("sponsor", sponsor);
+			result.addObject("makes", makes);
 
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(sponsor, "actor.commit.error");
+			result.addObject("makes", makes);
 		}
 
 		return result;
@@ -91,25 +99,28 @@ public class SponsorController extends AbstractController {
 	ModelAndView save(final Sponsor sponsor, final BindingResult binding) {
 		ModelAndView result;
 		Sponsor toSave;
-
+		String[] makes;
+		
+		makes = this.configurationService.findConfiguration().getMake().split(",");
 		toSave = this.sponsorService.reconstruct(sponsor, binding);
-
-		if (binding.hasErrors())
-			result = new ModelAndView("sponsor/edit");
-		else
-			try {
+		try {
+			if (!(sponsor.getEmail().matches("[A-Za-z_.]+[\\w]+[\\S]+@[a-zA-Z0-9.-]+|[\\w\\s]+[\\<][A-Za-z_.]+[\\w]+@[a-zA-Z0-9.-]+[\\>]")) && sponsor.getEmail().length() > 0)
+				binding.rejectValue("email", "actor.email.check");
+			if (binding.hasErrors()){
+				result = new ModelAndView("sponsor/edit");
+				result.addObject("makes", makes);
+		}
+			else{
 				this.sponsorService.save(toSave);
 				result = new ModelAndView("welcome/index");
-
 				result.addObject("name", toSave.getName());
 				result.addObject("exitCode", "actor.edit.success");
-
-			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(toSave,
-						"actor.commit.error");
-			}
-
-		return result;
+		}
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(toSave, "actor.commit.error");
+			result.addObject("makes", makes);
+		}
+	return result;
 	}
 
 	protected ModelAndView createEditModelAndView(final Sponsor sponsor) {

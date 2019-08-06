@@ -1,4 +1,3 @@
-
 package services;
 
 import java.util.Collection;
@@ -23,19 +22,21 @@ public class ActorService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private ActorRepository			actorRepository;
+	private ActorRepository actorRepository;
 
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	private AdministratorService	administratorService;
+	private AdministratorService administratorService;
 
 	@Autowired
-	private ConfigurationService	configurationService;
+	private AuthorService authorService;
 
+	@Autowired
+	private ReviewerService reviewerService;
 
-	//@Autowired
-	//private MessageService			messageService;
+	@Autowired
+	private SponsorService sponsorService;
 
 	// Simple CRUDs methods ---------------------------------------------------
 
@@ -47,6 +48,24 @@ public class ActorService {
 
 		return result;
 
+	}
+
+	public Actor findOne(final int actorId) {
+		Actor result;
+
+		result = this.actorRepository.findOne(actorId);
+		if (result == null) {
+			result = this.authorService.findOne(actorId);
+			if (result == null) {
+				result = this.reviewerService.findOne(actorId);
+				if (result == null)
+					result = this.sponsorService.findOne(actorId);
+				if (result == null)
+					result = this.administratorService.findOne(actorId);
+			}
+		}
+		Assert.notNull(result);
+		return result;
 	}
 
 	// Other business methods ---------------------------
@@ -76,7 +95,8 @@ public class ActorService {
 		Assert.notNull(userAccount);
 		final Actor result;
 
-		result = this.actorRepository.findActorByUserAccountId(userAccount.getId());
+		result = this.actorRepository.findActorByUserAccountId(userAccount
+				.getId());
 
 		return result;
 
@@ -106,7 +126,8 @@ public class ActorService {
 	public void update(final Actor actor) {
 		this.actorRepository.save(actor);
 	}
-	//Borrar actor
+
+	// Borrar actor
 	public void delete(final Actor principal) {
 		Assert.notNull(principal);
 		this.actorRepository.delete(principal);
