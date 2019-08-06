@@ -45,19 +45,18 @@ public class SubmissionAuthorController extends AbstractController {
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(s);
-		else {
-			//			try {
+		else
+			try {
 
-			aux = this.submissionService.save(s);
-			res = new ModelAndView("redirect:display.do?applicationId=" + aux.getId());
-		}
+				aux = this.submissionService.save(s);
+				res = new ModelAndView("redirect:display.do?submissionId=" + aux.getId());
+			}
 
-		//			} catch (final Throwable oops) {
-		//				res = this.createEditModelAndView(s, "submission.commit.error");
-		//			}
+			catch (final Throwable oops) {
+				res = this.createEditModelAndView(s, "submission.commit.error");
+			}
 		return res;
 	}
-
 	//List
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {

@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
@@ -24,7 +26,6 @@ public class Submission extends DomainEntity {
 	// Atributos
 	private String		ticker;
 	private Date		moment;
-	private String		cameraReadyPaper;
 	private String		status;
 	private Paper		paper;
 	private Conference	conference;
@@ -45,20 +46,21 @@ public class Submission extends DomainEntity {
 		return this.moment;
 	}
 
-	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-	public String getCameraReadyPaper() {
-		return this.cameraReadyPaper;
-	}
-
 	@NotBlank
 	@Pattern(regexp = "^UNDER-REVIEW|REJECTED|ACCEPTED")
 	public String getStatus() {
 		return this.status;
 	}
 
-	@OneToOne
+	@Valid
+	@NotNull
 	public Paper getPaper() {
 		return this.paper;
+	}
+
+	// Setters
+	public void setPaper(final Paper p) {
+		this.paper = p;
 	}
 
 	@OneToOne
@@ -75,16 +77,8 @@ public class Submission extends DomainEntity {
 		this.moment = moment;
 	}
 
-	public void setCameraReadyPaper(final String cameraReadyPaper) {
-		this.cameraReadyPaper = cameraReadyPaper;
-	}
-
 	public void setStatus(final String status) {
 		this.status = status;
-	}
-
-	public void setPaper(final Paper paper) {
-		this.paper = paper;
 	}
 
 	public void setConference(final Conference conference) {
