@@ -1,5 +1,5 @@
 <%--
- * action-2.jsp
+ * action-1.jsp
  *
  * Copyright (C) 2019 Universidad de Sevilla
  * 
@@ -8,34 +8,33 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <jstl:set var="phoneConfirmationPrefix">
-<spring:message code="author.phone.confirmation.prefix"/> 
+<spring:message code="actor.phone.confirmation.prefix"/> 
 </jstl:set>
 
 <jstl:set var="phoneConfirmationSuffix">
-<spring:message code="author.phone.confirmation.suffix"/> 
+<spring:message code="actor.phone.confirmation.suffix"/> 
 </jstl:set>
 
 <form:form 
-	action="author/edit.do" 
-	modelAttribute="author" 
+	action="reviewer/register.do" 
+	modelAttribute="reviewerForm" 
 	onsubmit='return phoneValidation("${phoneConfirmationPrefix}", "${phoneConfirmationSuffix}")'>
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="score" />
-	<form:hidden path="userAccount" />
 	
 	<acme:input code="actor.name" path="name" placeholder="Company1"/>
 	<acme:input code="actor.surname" path="surname" placeholder="Escobar Romero"/>
@@ -44,9 +43,20 @@
 	<acme:input code="actor.email" path="email" placeholder="placeholder@mail.com"/>
 	<acme:input code="actor.phone.number" path="phoneNumber" placeholder="662130564" id="phoneId"/>
 	<acme:input code="actor.address" path="address" placeholder="Avda Pi y Margall"/>
-
+	<acme:textarea code="reviewer.keywords" path="keywords" placeholder="Chemistry, physics, engineering..."/>
 	<br/>
-
+	
+	<fieldset>
+		<div class="centrado">
+		  	<i class="fa fa-user"></i> <spring:message code="actor.useraccount" />
+		  	<br><br>
+	  	</div>
+		<acme:input code="actor.username" path="username" placeholder="User"/>
+		<acme:password code="actor.password" path="password" />
+		<acme:password code="actor.passwordConfirmation" path="passwordConfirmation" />
+		<acme:checkbox code="actor.checkTerms" path="checkTerms" value="${reviewerForm.checkTerms}"/>
+  	</fieldset>
+	  	<br><br>
 	<acme:submit name="save" code="actor.save"/>
 	<acme:cancel code="actor.cancel" url="/"/>
 	

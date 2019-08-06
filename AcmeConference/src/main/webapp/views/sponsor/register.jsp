@@ -1,5 +1,5 @@
 <%--
- * action-2.jsp
+ * action-1.jsp
  *
  * Copyright (C) 2019 Universidad de Sevilla
  * 
@@ -8,12 +8,13 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -28,22 +29,21 @@
 </jstl:set>
 
 <form:form 
-	action="sponsor/edit.do" 
-	modelAttribute="sponsor" 
+	action="sponsor/register.do" 
+	modelAttribute="sponsorForm" 
 	onsubmit='return phoneValidation("${phoneConfirmationPrefix}", "${phoneConfirmationSuffix}")'>
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="userAccount" />
 	
-	<acme:input code="actor.name" path="name" placeholder="Jose"/>
-	<acme:input code="actor.middleName" path="middleName" placeholder="Javier"/>
-	<acme:input code="actor.surname" path="surname" placeholder="Gonzalez Gutierrez"/>
-	<acme:input code="actor.photo" path="photo" placeholder="http://www.instagram.com/resekyt"/>
-	<acme:input code="actor.email" path="email" placeholder="miemilio@gmail.com"/>
+	<acme:input code="actor.name" path="name" placeholder="Company1"/>
+	<acme:input code="actor.surname" path="surname" placeholder="Escobar Romero"/>
+	<acme:input code="actor.middleName" path="middleName" placeholder="Pablo"/>
+	<acme:input code="actor.photo" path="photo" placeholder="https://www.google.es"/>
+	<acme:input code="actor.email" path="email" placeholder="placeholder@mail.com"/>
 	<acme:input code="actor.phone.number" path="phoneNumber" placeholder="662130564" id="phoneId"/>
-	<acme:input code="actor.address" path="address" placeholder="Calle Desengano,21"/>
-	
+	<acme:input code="actor.address" path="address" placeholder="Avda Pi y Margall"/>
+
 	<fieldset>
 		<div class="centrado">
 			<i class="fa fa-credit-card"></i>   
@@ -52,12 +52,13 @@
 		</div>
 		
 		<acme:input code="creditCard.holder" path="creditCard.holder"/>
+		
 		<div class="form-group">
-			<form:label path="creditCard.make"> <spring:message code="creditCard.make" /> </form:label>
-	    	<form:select path="creditCard.make" >
-	        	<form:options items="${makes}" />
-	    	</form:select>
-			<form:errors path="creditCard.make" cssClass="error" />
+		<form:label path="creditCard.make"> <spring:message code="creditCard.make" /> </form:label>
+    	<form:select path="creditCard.make" >
+        	<form:options items="${makes}" />
+    	</form:select>
+		<form:errors path="creditCard.make" cssClass="error" />
 		</div>
 		<br>
 		<acme:input code="creditCard.number" path="creditCard.number"/>
@@ -65,7 +66,20 @@
 		<acme:input code="creditCard.expirationYear" path="creditCard.expirationYear"/>
 		<acme:input code="creditCard.CVV" path="creditCard.CVV"/>
 	</fieldset>
+
+	<br/>
 	
+	<fieldset>
+		<div class="centrado">
+		  	<i class="fa fa-user"></i> <spring:message code="actor.useraccount" />
+		  	<br><br>
+	  	</div>
+		<acme:input code="actor.username" path="username" placeholder="User"/>
+		<acme:password code="actor.password" path="password" />
+		<acme:password code="actor.passwordConfirmation" path="passwordConfirmation" />
+		<acme:checkbox code="actor.checkTerms" path="checkTerms" value="${sponsorForm.checkTerms}"/>
+  	</fieldset>
+	  	<br><br>
 	<acme:submit name="save" code="actor.save"/>
 	<acme:cancel code="actor.cancel" url="/"/>
 	

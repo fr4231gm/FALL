@@ -548,8 +548,8 @@
 		<property name="submissionDeadline" value="04/06/2019" /> 
 		<property name="notificationDeadline" value="05/06/2019" /> 
 		<property name="cameraReadyDeadline" value="06/06/2019" /> 
-		<property name="startDate" value="07/06/2019" /> 
-		<property name="endDate" value="08/06/2019" /> 
+		<property name="startDate" value="12/06/2019" /> 
+		<property name="endDate" value="12/06/2019" /> 
 		<property name="summary" value="Alerta spoiler: No" /> 
 		<property name="fee" value="0.65" /> 
 		<property name="isDraft" value="false" /> 
@@ -609,13 +609,13 @@
 		<property name="submissionDeadline" value="02/09/2019" /> 
 		<property name="notificationDeadline" value="03/09/2019" /> 
 		<property name="cameraReadyDeadline" value="04/09/2019" /> 
-		<property name="startDate" value="05/09/2019" /> 
-		<property name="endDate" value="06/09/2019" /> 
+		<property name="startDate" value="10/05/2019" /> 
+		<property name="endDate" value="10/09/2019" /> 
 		<property name="summary" value="Pikachu está sobrevalorado, adentremonos en el incrible mundo de los pokemon tipo planta… Por favor…" /> 
 		<property name="fee" value="0.95" /> 
 		<property name="isDraft" value="false" /> 
 		<property name="Administrator" ref="administrator4" /> 
-		<property name="Category" ref="category18" /> 
+		<property name="Category" ref="category17" /> 
 		<property name="comments"> 
 				<list>
 					<ref bean="comment9" />
@@ -659,7 +659,7 @@
 		<property name="expirationMonth" value="1" /> 
 		<property name="expirationYear" value="20" /> 
 		<property name="make" value="AMEX" /> 
-		<property name="cvv" value="123" /> 
+		<property name="CVV" value="123" /> 
 	</bean>
 
 	<bean id="creditCard2" class="domain.CreditCard">
@@ -668,7 +668,7 @@
 		<property name="expirationMonth" value="1" /> 
 		<property name="expirationYear" value="20" /> 
 		<property name="make" value="VISA" /> 
-		<property name="cvv" value="456" /> 
+		<property name="CVV" value="456" /> 
 	</bean>
 
 	<bean id="creditCard3" class="domain.CreditCard">
@@ -677,7 +677,7 @@
 		<property name="expirationMonth" value="5" /> 
 		<property name="expirationYear" value="20" /> 
 		<property name="make" value="MCARD" /> 
-		<property name="cvv" value="789" /> 
+		<property name="CVV" value="789" /> 
 	</bean>
 
 	<bean id="creditCard4" class="domain.CreditCard">
@@ -686,7 +686,7 @@
 		<property name="expirationMonth" value="11" /> 
 		<property name="expirationYear" value="22" /> 
 		<property name="make" value="DINNERS" /> 
-		<property name="cvv" value="147" /> 
+		<property name="CVV" value="147" /> 
 	</bean>
 
 	<bean id="creditCard5" class="domain.CreditCard">
@@ -695,7 +695,7 @@
 		<property name="expirationMonth" value="2" /> 
 		<property name="expirationYear" value="20" /> 
 		<property name="make" value="VISA" /> 
-		<property name="cvv" value="258" /> 
+		<property name="CVV" value="258" /> 
 	</bean>
 
 	<bean id="creditCard6" class="domain.CreditCard">
@@ -704,7 +704,7 @@
 		<property name="expirationMonth" value="1" /> 
 		<property name="expirationYear" value="21" /> 
 		<property name="make" value="AMEX" /> 
-		<property name="cvv" value="369" /> 
+		<property name="CVV" value="369" /> 
 	</bean>
 
 	<bean id="creditCard7" class="domain.CreditCard">
@@ -713,7 +713,7 @@
 		<property name="expirationMonth" value="2" /> 
 		<property name="expirationYear" value="22" /> 
 		<property name="make" value="VISA" /> 
-		<property name="cvv" value="357" /> 
+		<property name="CVV" value="357" /> 
 	</bean>
 
 	<bean id="creditCard8" class="domain.CreditCard">
@@ -722,7 +722,7 @@
 		<property name="expirationMonth" value="1" /> 
 		<property name="expirationYear" value="24" /> 
 		<property name="make" value="MCARD" /> 
-		<property name="cvv" value="684" /> 
+		<property name="CVV" value="684" /> 
 	</bean>
 
 	<bean id="creditCard9" class="domain.CreditCard">
@@ -731,7 +731,7 @@
 		<property name="expirationMonth" value="1" /> 
 		<property name="expirationYear" value="20" /> 
 		<property name="make" value="DINNERS" /> 
-		<property name="cvv" value="264" /> 
+		<property name="CVV" value="264" /> 
 	</bean>
 
 	<bean id="creditCard10" class="domain.CreditCard">
@@ -740,7 +740,7 @@
 		<property name="expirationMonth" value="5" /> 
 		<property name="expirationYear" value="20" /> 
 		<property name="make" value="VISA" /> 
-		<property name="cvv" value="951" /> 
+		<property name="CVV" value="951" /> 
 	</bean>
 
 
