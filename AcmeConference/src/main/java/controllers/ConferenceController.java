@@ -37,6 +37,7 @@ public class ConferenceController extends AbstractController {
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/listRunningConferences.do");
 		result.addObject("general", true);
+		result.addObject("future", false);
 		result.addObject("searchPoint", "conference/listSearchRunning.do");
 		result.addObject("fechaActual", actual);
 
@@ -57,6 +58,7 @@ public class ConferenceController extends AbstractController {
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/listForthcomingConferences.do");
 		result.addObject("general", true);
+		result.addObject("future", true);
 		result.addObject("searchPoint", "conference/listSearchForthcoming.do");
 		result.addObject("fechaActual", actual);
 
@@ -77,6 +79,7 @@ public class ConferenceController extends AbstractController {
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/listPastConferences.do");
 		result.addObject("general", true);
+		result.addObject("future", false);
 		result.addObject("searchPoint", "conference/listSearchPast.do");
 		result.addObject("fechaActual", actual);
 
