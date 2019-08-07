@@ -27,12 +27,10 @@
 	readonly="true" />
 	<br />
 	
-<acme:input code="submission.cameraReadyPaper" path="submission.cameraReadyPaper"
-	readonly="true" />
-	<br />
+
 
 <h3><spring:message code="submission.status"></spring:message>: </h3>
-<jstl:if test="${submission.status eq 'ACCEPTED' }"> <spring:message code="submission.accepted" /> </jstl:if><jstl:if test="${submission.status eq 'REJECTED'}"><spring:message code="submission.rejected"/></jstl:if><jstl:if test="${submission.status eq 'UNER-REVIEW' }"><spring:message code="submission.underreview" /></jstl:if>
+<jstl:if test="${submission.status eq 'ACCEPTED' }"> <spring:message code="submission.accepted" /> </jstl:if><jstl:if test="${submission.status eq 'REJECTED'}"><spring:message code="submission.rejected"/></jstl:if><jstl:if test="${submission.status eq 'UNDER-REVIEW' }"><spring:message code="submission.underreview" /></jstl:if>
 
 </fieldset>
 
@@ -43,7 +41,7 @@
 	readonly="true"/>
 	<br />	
 
-<acme:input code="paper.summary" path="submission.paper.summary"
+<acme:textarea code="paper.summary" path="submission.paper.summary"
 	readonly="true" />
 	<br />	
 
