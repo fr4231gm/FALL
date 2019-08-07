@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import repositories.CommentRepository;
-import domain.Actor;
 import domain.Comment;
 
 @Service
@@ -22,8 +21,8 @@ public class CommentService {
 
 	// Supporting services ----------------------------------------------------
 
-	@Autowired
-	private ActorService actorService;
+	//@Autowired
+	//private ActorService actorService;
 
 	// @Autowired
 	// private ConferenceService conferenceService;
