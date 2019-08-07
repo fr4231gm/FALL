@@ -104,8 +104,6 @@ public class SponsorController extends AbstractController {
 		makes = this.configurationService.findConfiguration().getMake().split(",");
 		toSave = this.sponsorService.reconstruct(sponsor, binding);
 		try {
-			if (!(sponsor.getEmail().matches("[A-Za-z_.]+[\\w]+[\\S]+@[a-zA-Z0-9.-]+|[\\w\\s]+[\\<][A-Za-z_.]+[\\w]+@[a-zA-Z0-9.-]+[\\>]")) && sponsor.getEmail().length() > 0)
-				binding.rejectValue("email", "actor.email.check");
 			if (binding.hasErrors()){
 				result = new ModelAndView("sponsor/edit");
 				result.addObject("makes", makes);

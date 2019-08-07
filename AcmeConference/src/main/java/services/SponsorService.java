@@ -254,6 +254,7 @@ public class SponsorService {
 		result.setPhoneNumber(sponsor.getPhoneNumber());
 		result.setPhoto(sponsor.getPhoto());
 		result.setSurname(sponsor.getSurname());
+		result.setCreditCard(sponsor.getCreditCard());
 
 		result.setId(sponsor.getId());
 		result.setVersion(aux.getVersion());
@@ -267,6 +268,9 @@ public class SponsorService {
 				.matches("[A-Za-z_.]+[\\w]+[\\S]+@[a-zA-Z0-9.-]+|[\\w\\s]+[\\<][A-Za-z_.]+[\\w]+@[a-zA-Z0-9.-]+[\\>]"))
 				&& sponsor.getEmail().length() > 0)
 			binding.rejectValue("email", "actor.email.check");
+		
+		// Checking that the creditCard is a valid one
+		this.checkCreditCard(sponsor.getCreditCard(), binding);
 		
 		return result;
 	}
