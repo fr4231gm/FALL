@@ -23,14 +23,13 @@
 
 	<spring:message code="legalTerms.about-us" />
 
-<li>
 	<ul>
-		<spring:message code="legalTerms.acme" /> </br>
-		<spring:message code="legalTerms.address" /> </br>
-		<spring:message code="legalTerms.phone" /> </br>
-		<spring:message code="legalTerms.email" /> </br>
+		<li><spring:message code="legalTerms.acme" /> </li>
+		<li><spring:message code="legalTerms.address" /> </li>
+		<li><spring:message code="legalTerms.phone" /> </li>
+		<li><spring:message code="legalTerms.email" /> </li>
 	</ul>
-</li>
+
 
 <h2>
 	<spring:message code="legalTerms.title2" />

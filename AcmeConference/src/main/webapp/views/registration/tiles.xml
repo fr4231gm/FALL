@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles_es.xml
+ * tiles.xml
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -13,17 +13,17 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-      
+       
 <tiles-definitions>
 
-	<definition name="sponsor/register" extends="master.page">
-		<put-attribute name="title" value="Registrar sponsor" />
-		<put-attribute name="body" value="/views/sponsor/register.jsp" />
+	<definition name="registration/list" extends="master.page">	
+		<put-attribute name="title" value="Registrations" />
+		<put-attribute name="body" value="/views/registration/list.jsp" />
 	</definition>
 	
-	<definition name="sponsor/edit" extends="master.page">
-		<put-attribute name="title" value="Editar mi perfil" />
-		<put-attribute name="body" value="/views/sponsor/edit.jsp" />
+	<definition name="registration/register" extends="master.page">	
+		<put-attribute name="title" value="Create registration" />
+		<put-attribute name="body" value="/views/registration/register.jsp" />
 	</definition>
 	
 </tiles-definitions>

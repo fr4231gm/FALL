@@ -1,17 +1,25 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AuthorRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Author;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -21,19 +29,48 @@ public class AuthorService {
 
 		@Autowired
 		private AuthorRepository authorRepository;
+		
+		@Autowired
+		private Validator validator;
+
+		@Autowired
+		private ConfigurationService configurationService;
+		
+		@Autowired
+		private UserAccountService userAccountService;
 
 		// Simple CRUDs methods ---------------------------------------------------
+		public Author create(String username, String password) {
+			// Nueva author
+			final Author result = new Author();
+
+			// Creamos sus authorities para definir su rol en el sistema
+			final Authority authority = new Authority();
+			authority.setAuthority(Authority.AUTHOR);
+			final List<Authority> authorities = new ArrayList<Authority>();
+			authorities.add(authority);
+
+			// Creamos su cuenta de usuario y le establecemos sus authorities
+			final UserAccount ua = new UserAccount();
+			ua.setAuthorities(authorities);
+	
+
+			// El nombre de usuario es el que pasamos por parametro
+			ua.setUsername(username);
+			ua.setPassword(password);
+
+
+			// Finalmente le establecemos al author su cuenta de usuario
+			result.setUserAccount(ua);
+
+			return result;
+		}
 		
 		public Author save(Author author){
-			Author result, principal;
+			Author result;
 			Assert.notNull(author);
 
-			// Comprobamos que la persona logueda es un admin
-			// Solo un admin crea otros admin
-			principal = this.findByPrincipal();
-			Assert.notNull(principal);
-
-			// Si el administrador no esta en la base de datos (es una creacion, no
+			// Si el author no esta en la base de datos (es una creacion, no
 			// una actualizacion)
 			// codificamos la contrasena de su cuenta de usuario
 			if (author.getId() == 0) {
@@ -41,8 +78,11 @@ public class AuthorService {
 
 				author.getUserAccount()
 						.setPassword(passwordEncoder.encodePassword(author.getUserAccount().getPassword(), null));
-			} else
+			} else {
+				Author principal = this.findByPrincipal();
+				Assert.notNull(principal);
 				Assert.isTrue(principal.getUserAccount() == author.getUserAccount());
+			}
 			// Guardamos en la bbdd
 			result = this.authorRepository.save(author);
 			
@@ -58,7 +98,7 @@ public class AuthorService {
 
 		}
 
-		// Devuelve todos los administradores de la bbdd
+		// Devuelve todos los autores de la bbdd
 		public Collection<Author> findAll() {
 			Collection<Author> result;
 
@@ -67,7 +107,7 @@ public class AuthorService {
 			return result;
 		}
 
-		// Metodo que devuelve el administrador logueado en el sistema
+		// Metodo que devuelve el author logueado en el sistema
 		public Author findByPrincipal() {
 			Author res;
 			UserAccount userAccount;
@@ -102,4 +142,54 @@ public class AuthorService {
 			principal = this.findByPrincipal();
 			Assert.notNull(principal);
 		}
+
+		public Author reconstruct(final ActorForm actorForm, final BindingResult binding) {
+
+			// initialize variables
+			final Pattern patron = Pattern.compile("^([0-9]+)$");
+			final Matcher encaja = patron.matcher(actorForm.getPhoneNumber());
+			Author author;
+
+			if (encaja.find())
+				actorForm.setPhoneNumber(configurationService.findConfiguration()
+						.getCountryCode() + actorForm.getPhoneNumber());
+
+			// Creating a new Author
+			author = this.create(actorForm.getUsername(), actorForm.getPassword());
+
+			// Actor Atributes
+			author.setAddress(actorForm.getAddress());
+			author.setEmail(actorForm.getEmail());
+			author.setPhoto(actorForm.getPhoto());
+			author.setPhoneNumber(actorForm.getPhoneNumber());
+			author.setMiddleName(actorForm.getMiddleName());
+			author.setName(actorForm.getName());
+			author.setSurname(actorForm.getSurname());
+
+			// Validating the form
+			this.validator.validate(actorForm, binding);
+
+			// Checking that the username is not taken
+			if (this.userAccountService.findByUsername(actorForm.getUsername()) != null)
+				binding.rejectValue("username", "actor.username.taken");
+
+			// Checking that the passwords are the same
+			if (!actorForm.getPassword().equals(actorForm.getPasswordConfirmation()))
+				binding.rejectValue("passwordConfirmation", "actor.passwordMiss");
+
+			// Checking that the terms are accepted
+			if (!actorForm.getCheckTerms())
+				binding.rejectValue("checkTerms", "actor.uncheck");
+
+			// Checking that the email match the pattern
+			if (!(actorForm.getEmail()
+					.matches("[A-Za-z_.]+[\\w]+[\\S]+@[a-zA-Z0-9.-]+|[\\w\\s]+[\\<][A-Za-z_.]+[\\w]+@[a-zA-Z0-9.-]+[\\>]"))
+					&& actorForm.getEmail().length() > 0)
+				binding.rejectValue("email", "actor.email.check");
+
+
+			return author;
+		
+	}
+		
 }

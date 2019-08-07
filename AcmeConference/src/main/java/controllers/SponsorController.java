@@ -1,97 +1,141 @@
-/*
- * LegalTermsController.java
- * 
- * Copyright (C) 2019 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the
- * TDG Licence, a copy of which you may download from
- * http://www.tdg-seville.info/License.html
- */
-
 package controllers;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ConfigurationService;
 import services.SponsorService;
 import domain.Sponsor;
+import forms.SponsorForm;
 
 @Controller
 @RequestMapping("/sponsor")
 public class SponsorController extends AbstractController {
 
-    @Autowired
-    private SponsorService sponsorService;
-    
-    // Constructors -----------------------------------------------------------
-    public SponsorController() {
-        super();
-    }
+	@Autowired
+	private SponsorService 		sponsorService;
+	
+	@Autowired
+	private ConfigurationService configurationService;
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit() {
-        ModelAndView res;
-        Sponsor sponsor;
+	public SponsorController() {
+		super();
+	}
 
-        sponsor = this.sponsorService.findByPrincipal();
-        Assert.notNull(sponsor);
-        res = this.createEditModelAndView(sponsor);
-        
-        return res;
-    }
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView register() {
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, params="save")
-    public ModelAndView save(@Valid Sponsor sponsor, BindingResult binding) {
-        ModelAndView res;
-        Sponsor toSave;
-        
-        if(binding.hasErrors()){
-            res = this.createEditModelAndView(sponsor);
-            for(ObjectError s: binding.getAllErrors()){
-            	System.out.println(s);
-            }
-            
-        } else {
-            try {
-                //TODO: Falta creditCard
-            	//toSave = this.sponsorService.save(sponsor);
-                res = new ModelAndView("welcome/index");
+		ModelAndView res;
+		SponsorForm sponsorForm;
+		String[] makes;
+		
+		makes = this.configurationService.findConfiguration().getMake().split(",");
+		sponsorForm = new SponsorForm();
 
-                //res.addObject("name", toSave.getName());
-                res.addObject("exitCode", "actor.edit.success");
-                res.addObject("moment", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
-            } catch (Throwable oops) {
-                res = this.createEditModelAndView(sponsor, "sponsor.commit.error");
-            }
-        }
+		res = new ModelAndView("sponsor/register");
+		res.addObject("sponsorForm", sponsorForm);
+		res.addObject("makes", makes);
 
-        return res;
-    }
+		return res;
+	}
 
-    protected ModelAndView createEditModelAndView(final Sponsor sponsor) {
-        final ModelAndView result = this.createEditModelAndView(sponsor, null);
-        return result;
-    }
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(final SponsorForm sponsorForm, final BindingResult binding) {
 
-    protected ModelAndView createEditModelAndView(final Sponsor sponsor, final String messagecode) {
-        final ModelAndView result;
+		ModelAndView res;
+		Sponsor sponsor;
+		String[] makes;
+		
+		makes = this.configurationService.findConfiguration().getMake().split(",");
 
-        result = new ModelAndView("sponsor/edit");
+		try {
+			sponsor = this.sponsorService.reconstruct(sponsorForm, binding);
+			if (binding.hasErrors()) {
+				res = new ModelAndView("sponsor/register");
+				res.addObject("makes", makes);
+			} else {
+				this.sponsorService.save(sponsor);		
+				res = new ModelAndView("redirect:../");
+				res.addObject("message", "actor.register.success");
+				res.addObject("name", sponsor.getName());
+			}
+		} catch (final Throwable opps) {
+			res = new ModelAndView("sponsor/register");
+			res.addObject("makes", makes);
+			res.addObject("message", "actor.commit.error");
+		}
+		return res;
+	}
 
-        result.addObject("sponsor", sponsor);
-        result.addObject("message", messagecode);
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit() {
 
-        return result;
-    }
+		ModelAndView result;
+		Sponsor sponsor;
+		String[] makes;
+		
+		
+		makes = this.configurationService.findConfiguration().getMake().split(",");
+		sponsor = this.sponsorService.findOneTrimmedByPrincipal();
+
+		try {
+			result = new ModelAndView("sponsor/edit");
+			result.addObject("sponsor", sponsor);
+			result.addObject("makes", makes);
+
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(sponsor, "actor.commit.error");
+			result.addObject("makes", makes);
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	ModelAndView save(final Sponsor sponsor, final BindingResult binding) {
+		ModelAndView result;
+		Sponsor toSave;
+		String[] makes;
+		
+		makes = this.configurationService.findConfiguration().getMake().split(",");
+		toSave = this.sponsorService.reconstruct(sponsor, binding);
+		try {
+			if (binding.hasErrors()){
+				result = new ModelAndView("sponsor/edit");
+				result.addObject("makes", makes);
+		}
+			else{
+				this.sponsorService.save(toSave);
+				result = new ModelAndView("welcome/index");
+				result.addObject("name", toSave.getName());
+				result.addObject("exitCode", "actor.edit.success");
+		}
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(toSave, "actor.commit.error");
+			result.addObject("makes", makes);
+		}
+	return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Sponsor sponsor) {
+		final ModelAndView result = this.createEditModelAndView(sponsor, null);
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Sponsor sponsor,
+			final String messagecode) {
+		final ModelAndView result;
+
+		result = new ModelAndView();
+
+		result.addObject("sponsor", sponsor);
+		result.addObject("message", messagecode);
+
+		return result;
+	}
+
 }
