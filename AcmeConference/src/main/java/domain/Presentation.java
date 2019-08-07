@@ -21,8 +21,6 @@ public class Presentation extends Activity {
 		return this.cameraReadyPaper;
 	}
 
-
-
 	// Setters
 	public void setCameraReadyPaper(final String cameraReadyPaper){
 		this.cameraReadyPaper = cameraReadyPaper; 

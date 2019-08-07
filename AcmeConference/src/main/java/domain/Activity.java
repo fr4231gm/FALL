@@ -18,7 +18,7 @@ public class Activity extends DomainEntity {
 
 	// Atributos
 	private String					title;
-	private String					speaker;
+	private String					speakers;
 	private Date					startMoment;
 	private Integer					duration;
 	private String					room;
@@ -37,8 +37,8 @@ public class Activity extends DomainEntity {
 
 	@NotBlank
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getSpeaker(){
-		return this.speaker;
+	public String getSpeakers(){
+		return this.speakers;
 	}
 
 	@NotNull
@@ -85,8 +85,8 @@ public class Activity extends DomainEntity {
 		this.title = title; 
 	}
 
-	public void setSpeaker(final String speaker){
-		this.speaker = speaker; 
+	public void setSpeakers(final String speakers){
+		this.speakers = speakers; 
 	}
 
 	public void setStartMoment(final Date startMoment){
