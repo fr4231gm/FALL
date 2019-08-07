@@ -548,7 +548,7 @@
 		<property name="submissionDeadline" value="04/06/2019" /> 
 		<property name="notificationDeadline" value="05/06/2019" /> 
 		<property name="cameraReadyDeadline" value="06/06/2019" /> 
-		<property name="startDate" value="12/06/2019" /> 
+		<property name="startDate" value="12/05/2019" /> 
 		<property name="endDate" value="12/06/2019" /> 
 		<property name="summary" value="Alerta spoiler: No" /> 
 		<property name="fee" value="0.65" /> 
@@ -609,8 +609,8 @@
 		<property name="submissionDeadline" value="02/09/2019" /> 
 		<property name="notificationDeadline" value="03/09/2019" /> 
 		<property name="cameraReadyDeadline" value="04/09/2019" /> 
-		<property name="startDate" value="10/05/2019" /> 
-		<property name="endDate" value="10/09/2019" /> 
+		<property name="startDate" value="08/06/2019" /> 
+		<property name="endDate" value="10/01/2019" /> 
 		<property name="summary" value="Pikachu está sobrevalorado, adentremonos en el incrible mundo de los pokemon tipo planta… Por favor…" /> 
 		<property name="fee" value="0.95" /> 
 		<property name="isDraft" value="false" /> 
