@@ -31,6 +31,15 @@
 
 	<display:column property="endDate" titleKey="conference.endDate"
 		sortable="true" format="{0, date, dd/MM/yyyy HH:mm}" />
+		
+<security:authorize access="isAuthenticated()">
+		
+			
+	<display:column property="category.name" titleKey="conference.category"
+		sortable="true"/>
+
+
+</security:authorize>		
 
 	<display:column>
 
@@ -38,6 +47,23 @@
 			code="conference.display" />
 
 	</display:column>
+	
+<jstl:if test="${future eq 'true'}">
+	<security:authorize access="hasRole('AUTHOR')">
+		
+			
+	<display:column>
+	
+		<acme:link link="registration/author/register.do?conferenceId=${row.id}"
+				code="conference.registration" />
+
+	</display:column>
+
+
+	</security:authorize>
+</jstl:if>
+	
+
 	
 	<display:column>
 
