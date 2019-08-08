@@ -53,12 +53,14 @@ public class ConferenceController extends AbstractController {
 		Assert.notNull(conferences);
 
 		result = new ModelAndView("conference/list");
+		final Date actual = new Date(System.currentTimeMillis() - 1);
 
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/listForthcomingConferences.do");
 		result.addObject("general", true);
 		result.addObject("future", true);
 		result.addObject("searchPoint", "conference/listSearchForthcoming.do");
+		result.addObject("fechaActual", actual);
 
 		return result;
 	}
@@ -72,12 +74,14 @@ public class ConferenceController extends AbstractController {
 		Assert.notNull(conferences);
 
 		result = new ModelAndView("conference/list");
+		final Date actual = new Date(System.currentTimeMillis() - 1);
 
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/listPastConferences.do");
 		result.addObject("general", true);
 		result.addObject("future", false);
 		result.addObject("searchPoint", "conference/listSearchPast.do");
+		result.addObject("fechaActual", actual);
 
 		return result;
 	}
@@ -114,6 +118,8 @@ public class ConferenceController extends AbstractController {
 		result.addObject("requestURI", "conference/listSearchPast.do");
 		result.addObject("general", true);
 		result.addObject("searchPoint", "conference/listSearchPast.do");
+		final Date actual = new Date(System.currentTimeMillis() - 1);
+		result.addObject("fechaActual", actual);
 
 		return result;
 	}
@@ -133,6 +139,8 @@ public class ConferenceController extends AbstractController {
 		result.addObject("requestURI", "conference/listSearchForthcoming.do");
 		result.addObject("general", true);
 		result.addObject("searchPoint", "conference/listSearchForthcoming.do");
+		final Date actual = new Date(System.currentTimeMillis() - 1);
+		result.addObject("fechaActual", actual);
 
 		return result;
 	}
@@ -152,6 +160,8 @@ public class ConferenceController extends AbstractController {
 		result.addObject("requestURI", "conference/listSearchRunning.do");
 		result.addObject("general", true);
 		result.addObject("searchPoint", "conference/listSearchRunning.do");
+		final Date actual = new Date(System.currentTimeMillis() - 1);
+		result.addObject("fechaActual", actual);
 
 		return result;
 	}

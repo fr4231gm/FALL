@@ -2,6 +2,7 @@
 package controllers.author;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -28,9 +29,9 @@ public class SubmissionAuthorController extends AbstractController {
 
 	// Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam final int conferenceId) {
 		ModelAndView res;
-		final Submission sub = this.submissionService.create();
+		final Submission sub = this.submissionService.create(conferenceId);
 
 		res = this.createEditModelAndView(sub);
 
@@ -48,14 +49,14 @@ public class SubmissionAuthorController extends AbstractController {
 			try {
 
 				aux = this.submissionService.save(s);
-				res = new ModelAndView("redirect:display.do?applicationId=" + aux.getId());
+				res = new ModelAndView("redirect:display.do?submissionId=" + aux.getId());
+			}
 
-			} catch (final Throwable oops) {
+			catch (final Throwable oops) {
 				res = this.createEditModelAndView(s, "submission.commit.error");
 			}
 		return res;
 	}
-
 	//List
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -66,6 +67,7 @@ public class SubmissionAuthorController extends AbstractController {
 
 		result = new ModelAndView("submission/list");
 
+		result.addObject("actual", new Date(System.currentTimeMillis()));
 		result.addObject("submissions", subs);
 		result.addObject("requestURI", "submission/author/list.do");
 

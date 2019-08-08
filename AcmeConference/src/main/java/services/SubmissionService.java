@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.SubmissionRepository;
 import domain.Author;
+import domain.Paper;
 import domain.Submission;
 
 @Service
@@ -22,6 +23,9 @@ public class SubmissionService {
 
 	@Autowired
 	private AuthorService			authorService;
+
+	@Autowired
+	private ConferenceService		conferenceService;
 
 
 	public Collection<Submission> findByAuthor() {
@@ -40,15 +44,19 @@ public class SubmissionService {
 		return s;
 	}
 
-	public Submission create() {
+	public Submission create(final Integer conferenceId) {
 		final Submission s = new Submission();
 		s.setAuthor(this.authorService.findByPrincipal());
+		s.setConference(this.conferenceService.findOne(conferenceId));
 		s.setTicker(this.generateTicker(s));
 		s.setStatus("UNDER-REVIEW");
+		s.setMoment(new Date(System.currentTimeMillis() + 1));
+		final Paper p = new Paper();
+		p.setCameraReadyPaper(false);
+		s.setPaper(p);
 
 		return s;
 	}
-
 	private String generateTicker(final Submission s) {
 		String res = "";
 
