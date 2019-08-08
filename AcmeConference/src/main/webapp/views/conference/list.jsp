@@ -51,21 +51,6 @@
 
 	</display:column>
 	
-<jstl:if test="${future eq 'true'}">
-	<security:authorize access="hasRole('AUTHOR')">
-		
-			
-	<display:column>
-	
-		<acme:link link="registration/author/register.do?conferenceId=${row.id}"
-				code="conference.registration" />
-
-	</display:column>
-
-
-	</security:authorize>
-</jstl:if>
-	
 
 	
 	<display:column>
@@ -91,7 +76,12 @@
 	</security:authorize>
 
 
+	<display:column>
 
+		<acme:link link="activity/list.do?conferenceId=${row.id}"
+			code="conference.activities" />
+
+	</display:column>
 
 
 

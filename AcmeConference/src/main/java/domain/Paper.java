@@ -4,16 +4,14 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
-@Entity
 @Access(AccessType.PROPERTY)
 @Embeddable
-public class Paper extends DomainEntity {
+public class Paper {
 
 	// Atributos
 	private String	title;

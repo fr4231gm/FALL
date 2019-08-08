@@ -56,8 +56,7 @@ public class CommentController extends AbstractController {
 			res = this.createEditModelAndView(comment);
 		} else {
 			try {
-				conference.getComments().add(comment);
-				this.conferenceService.update(conference);
+				//this.conferenceService.addCommentToConference(conference, comment);
 				this.commentService.save(comment);
 				res = new ModelAndView("welcome/index");
 

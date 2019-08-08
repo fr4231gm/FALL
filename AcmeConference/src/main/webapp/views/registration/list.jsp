@@ -21,21 +21,17 @@
 		
 	<display:column>
 	
-		<acme:link link="conference/display.do?conferenceId=${row.conference.id}"
-				code="registration.conference.display" />
+		<acme:link link="registration/author/display.do?registrationId=${row.id}"
+				code="registration.display" />
 				
 		
 	</display:column>
 	
-	
 	<display:column>
 	
-		<acme:link link="creditCard/display.do?creditCardId=${row.id}"
-				code="registration.creditCard.display" />		
-	
+		<acme:link link="conference/display.do?conferenceId=${row.conference.id}"
+				code="registration.conference.display" />
 	
 	</display:column>
-
-	
 
 </display:table>
