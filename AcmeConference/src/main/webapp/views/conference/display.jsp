@@ -62,6 +62,21 @@
 	readonly="true" />
 	<br />	
 
+<br />	
+<br />		
+	
+<jstl:if test="${future eq 'true'}">	
+	<security:authorize access="hasRole('AUTHOR')">	
+		
+	
+			<acme:link link="registration/author/register.do?conferenceId=${conference.id}"
+				code="conference.registration" />
+	
+	</security:authorize>
+</jstl:if>
+
+<br />	
+<br />	
 
 <acme:link code="conference.create.comment" link="comment/createByConference.do?conferenceId=${conference.id}" />
 <br />	
