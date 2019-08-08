@@ -95,3 +95,12 @@ legend {
     background-color: #999;
   border-radius: 15px;
 }
+
+.partido{
+	display: inline-block;
+	width: 49%;
+}
+
+.partido input{
+	float: right;
+}

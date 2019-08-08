@@ -995,12 +995,8 @@
 		<property name="body" value="¿Cuál es el hermano mayor de Pinocho? Pinueve." /> 
 		<property name="topic" value="INQUIRY" /> 
 		<property name="sender" ref="author1" /> 
-		<property name="recipients"> 
-				<list>
-					<ref bean="administrator1" />
-					<ref bean="administrator2" />
-				</list>
-			</property>
+		<property name="recipient" ref="administrator1" />
+					
 	</bean>
 
 	<bean id="message2" class="domain.Message">
@@ -1009,11 +1005,7 @@
 		<property name="body" value="¿Cómo se dice suegra en ruso? Kela Rrifen." /> 
 		<property name="topic" value="REGISTRATION" /> 
 		<property name="sender" ref="author2" /> 
-		<property name="recipients"> 
-				<list>
-					<ref bean="author1" />
-				</list>
-			</property>
+		<property name="recipient" ref="author1" />
 	</bean>
 
 	<bean id="message3" class="domain.Message">
@@ -1022,11 +1014,7 @@
 		<property name="body" value="Había una piña colada y la sacaron de la fila." /> 
 		<property name="topic" value="TOPICS" /> 
 		<property name="sender" ref="author3" /> 
-		<property name="recipients"> 
-				<list>
-					<ref bean="author2" />
-				</list>
-			</property>
+		<property name="recipient" ref="author2" />
 	</bean>
 
 	<bean id="message4" class="domain.Message">
@@ -1035,11 +1023,7 @@
 		<property name="body" value="¡Que viva mi suegra, pero bien lejos!" /> 
 		<property name="topic" value="REBUTTAL" /> 
 		<property name="sender" ref="author4" /> 
-		<property name="recipients"> 
-				<list>
-					<ref bean="author3" />
-				</list>
-			</property>
+		<property name="recipient" ref="author3" />
 	</bean>
 
 	<bean id="message5" class="domain.Message">
@@ -1048,11 +1032,7 @@
 		<property name="body" value="Hola, ¿está Agustín? No estoy incomodín." /> 
 		<property name="topic" value="OTHER" /> 
 		<property name="sender" ref="author5" /> 
-		<property name="recipients"> 
-				<list>
-					<ref bean="author4" />
-				</list>
-			</property>
+		<property name="recipient" ref="author4" />
 	</bean>
 
 	<bean id="message6" class="domain.Message">
@@ -1061,11 +1041,7 @@
 		<property name="body" value="¡No cabe duda! Y duda se tuvo que bajar." /> 
 		<property name="topic" value="CONSULTA" /> 
 		<property name="sender" ref="author1" /> 
-		<property name="recipients"> 
-				<list>
-					<ref bean="administrator1" />
-				</list>
-			</property>
+		<property name="recipient" ref="administrator1" />
 	</bean>
 
 	<bean id="message7" class="domain.Message">
@@ -1074,11 +1050,7 @@
 		<property name="body" value="Capitán: ¡Todos a bordo! Y Bordo se murió aplastado." /> 
 		<property name="topic" value="REFUTACIÓN" /> 
 		<property name="sender" ref="author2" /> 
-		<property name="recipients"> 
-				<list>
-					<ref bean="sponsor1" />
-				</list>
-			</property>
+		<property name="recipient" ref="sponsor1" />
 	</bean>
 
 	<bean id="message8" class="domain.Message">
@@ -1087,11 +1059,7 @@
 		<property name="body" value="Hola Caperucita Verde...!!! Hola lobo daltónico...!!!" /> 
 		<property name="topic" value="REGISTRO" /> 
 		<property name="sender" ref="author3" /> 
-		<property name="recipients"> 
-				<list>
-					<ref bean="sponsor2" />
-				</list>
-			</property>
+		<property name="recipient" ref="sponsor2" />
 	</bean>
 
 	<bean id="message9" class="domain.Message">
@@ -1100,11 +1068,7 @@
 		<property name="body" value="Busco perro y suegra perdidos. Se recompensará por el perro." /> 
 		<property name="topic" value="TEMAS" /> 
 		<property name="sender" ref="author4" /> 
-		<property name="recipients"> 
-				<list>
-					<ref bean="sponsor3" />
-				</list>
-			</property>
+		<property name="recipient" ref="sponsor3" />
 	</bean>
 
 	<bean id="message10" class="domain.Message">
@@ -1113,11 +1077,7 @@
 		<property name="body" value="¿Qué animal hace pipi por la boca? El correcaminos." /> 
 		<property name="topic" value=" OTROS" /> 
 		<property name="sender" ref="author5" /> 
-		<property name="recipients"> 
-				<list>
-					<ref bean="sponsor4" />
-				</list>
-			</property>
+		<property name="recipient" ref="sponsor4" />
 	</bean>
 
 	<bean id="message11" class="domain.Message">
@@ -1126,18 +1086,9 @@
 		<property name="body" value="Cómo estornuda un leñador? ¡Achaaaa!" /> 
 		<property name="topic" value=" OTROS" /> 
 		<property name="sender" ref="administrator1" /> 
-		<property name="recipients"> 
-				<list>
-					<ref bean="reviewer1" />
-					<ref bean="reviewer2" />
-					<ref bean="reviewer3" />
-					<ref bean="reviewer4" />
-					<ref bean="reviewer5" />
-				</list>
-			</property>
+		<property name="recipient" ref="reviewer1" />
 	</bean>
-
-
+	
 
 	<!-- Panel-->
 	<bean id="panel1" class="domain.Panel">

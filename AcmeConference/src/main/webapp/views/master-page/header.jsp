@@ -114,6 +114,7 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="message/list.do"><spring:message code="master.page.messages" /></a></li>
 					<security:authorize access="hasRole('ADMINISTRATOR')">
 						<li><a href="administrator/edit.do"><spring:message code="master.page.profile.edit.my.profile" /></a></li>
 					</security:authorize>

@@ -1,15 +1,15 @@
 package domain;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import org.hibernate.validator.constraints.SafeHtml;
-import org.hibernate.validator.constraints.NotBlank;
-import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Access; 
-import javax.persistence.AccessType; 
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Past;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity 
 @Access(AccessType.PROPERTY) 
@@ -21,7 +21,7 @@ public class Message extends DomainEntity {
 	private String					body;
 	private String					topic;
 	private Actor					sender;
-	private Collection<Actor>					recipients;
+	private Actor					recipient;
 
 
 	// Getters
@@ -53,12 +53,10 @@ public class Message extends DomainEntity {
 		return this.sender;
 	}
 
-	@ManyToMany
-	public Collection<Actor> getRecipients(){
-		return this.recipients;
+	@ManyToOne
+	public Actor getRecipient(){
+		return this.recipient;
 	}
-
-
 
 	// Setters
 	public void setMoment(final Date moment){
@@ -81,8 +79,8 @@ public class Message extends DomainEntity {
 		this.sender = sender; 
 	}
 
-	public void setRecipients(final Collection<Actor> recipients){
-		this.recipients = recipients; 
+	public void setRecipient(final Actor recipient){
+		this.recipient = recipient; 
 	}
 
 }
