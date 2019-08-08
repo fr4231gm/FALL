@@ -1142,7 +1142,7 @@
 	<!-- Panel-->
 	<bean id="panel1" class="domain.Panel">
 		<property name="title" value="Panel de abejas" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/15/2019" /> 
 		<property name="duration" value="120" /> 
 		<property name="room" value="A011" /> 
@@ -1159,7 +1159,7 @@
 
 	<bean id="panel2" class="domain.Panel">
 		<property name="title" value="Panel de administracion" /> 
-		<property name="speaker" value="Diego" /> 
+		<property name="speakers" value="Diego" /> 
 		<property name="startMoment" value="07/16/2019" /> 
 		<property name="duration" value="60" /> 
 		<property name="room" value="A012" /> 
@@ -1175,7 +1175,7 @@
 
 	<bean id="panel3" class="domain.Panel">
 		<property name="title" value="Panel de madera" /> 
-		<property name="speaker" value="Benito" /> 
+		<property name="speakers" value="Benito" /> 
 		<property name="startMoment" value="07/17/2019" /> 
 		<property name="duration" value="90" /> 
 		<property name="room" value="A013" /> 
@@ -1190,7 +1190,7 @@
 
 	<bean id="panel4" class="domain.Panel">
 		<property name="title" value="panel de consumo" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/18/2019" /> 
 		<property name="duration" value="120" /> 
 		<property name="room" value="A014" /> 
@@ -1206,7 +1206,7 @@
 
 	<bean id="panel5" class="domain.Panel">
 		<property name="title" value="panel de metraquilato" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/19/2019" /> 
 		<property name="duration" value="105" /> 
 		<property name="room" value="A015" /> 
@@ -1222,7 +1222,7 @@
 
 	<bean id="panel6" class="domain.Panel">
 		<property name="title" value="panel de hojaldre" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/20/2019" /> 
 		<property name="duration" value="108" /> 
 		<property name="room" value="A016" /> 
@@ -1237,7 +1237,7 @@
 
 	<bean id="panel7" class="domain.Panel">
 		<property name="title" value="panel 7" /> 
-		<property name="speaker" value="Diego" /> 
+		<property name="speakers" value="Diego" /> 
 		<property name="startMoment" value="07/21/2019" /> 
 		<property name="duration" value="111" /> 
 		<property name="room" value="A017" /> 
@@ -1252,7 +1252,7 @@
 
 	<bean id="panel8" class="domain.Panel">
 		<property name="title" value="pan pan panel" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/22/2019" /> 
 		<property name="duration" value="114" /> 
 		<property name="room" value="A018" /> 
@@ -1267,7 +1267,7 @@
 
 	<bean id="panel9" class="domain.Panel">
 		<property name="title" value="this is the last panel" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/23/2019" /> 
 		<property name="duration" value="117" /> 
 		<property name="room" value="A019" /> 
@@ -1349,7 +1349,7 @@
 	<bean id="presentation1" class="domain.Presentation">
 		<property name="cameraReadyPaper" value="No tenemos nada, improvisa" /> 
 		<property name="title" value="Presentacion IISSI" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/15/2019" /> 
 		<property name="duration" value="120" /> 
 		<property name="room" value="A011" /> 
@@ -1368,7 +1368,7 @@
 	<bean id="presentation2" class="domain.Presentation">
 		<property name="cameraReadyPaper" value="el inicio efectivo es un bailecito" /> 
 		<property name="title" value="Presentacion ASR" /> 
-		<property name="speaker" value="Diego" /> 
+		<property name="speakers" value="Diego" /> 
 		<property name="startMoment" value="07/16/2019" /> 
 		<property name="duration" value="60" /> 
 		<property name="room" value="A012" /> 
@@ -1384,7 +1384,7 @@
 	<bean id="presentation3" class="domain.Presentation">
 		<property name="cameraReadyPaper" value="si estás nervioso imaginatelos desnudos" /> 
 		<property name="title" value="Presentacion DP" /> 
-		<property name="speaker" value="Benito" /> 
+		<property name="speakers" value="Benito" /> 
 		<property name="startMoment" value="07/17/2019" /> 
 		<property name="duration" value="90" /> 
 		<property name="room" value="A013" /> 
@@ -1401,7 +1401,7 @@
 	<bean id="presentation4" class="domain.Presentation">
 		<property name="cameraReadyPaper" value="vale a ver, tu sonrie" /> 
 		<property name="title" value="Presentacion EC" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/18/2019" /> 
 		<property name="duration" value="120" /> 
 		<property name="room" value="A014" /> 
@@ -1417,7 +1417,7 @@
 	<bean id="presentation5" class="domain.Presentation">
 		<property name="cameraReadyPaper" value="vas a hablar de ecuaciones, ve tranquilo" /> 
 		<property name="title" value="Presentacion MSN" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/19/2019" /> 
 		<property name="duration" value="105" /> 
 		<property name="room" value="A015" /> 
@@ -1433,7 +1433,7 @@
 	<bean id="presentation6" class="domain.Presentation">
 		<property name="cameraReadyPaper" value="a lo loco y sin frenos" /> 
 		<property name="title" value="Presentacion PRACTICAS" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/20/2019" /> 
 		<property name="duration" value="108" /> 
 		<property name="room" value="A016" /> 
@@ -1449,7 +1449,7 @@
 	<bean id="presentation7" class="domain.Presentation">
 		<property name="cameraReadyPaper" value="no se me ocurre ningun camera ready de estos" /> 
 		<property name="title" value="Presentacion ASC" /> 
-		<property name="speaker" value="Diego" /> 
+		<property name="speakers" value="Diego" /> 
 		<property name="startMoment" value="07/21/2019" /> 
 		<property name="duration" value="111" /> 
 		<property name="room" value="A017" /> 
@@ -1465,7 +1465,7 @@
 	<bean id="presentation8" class="domain.Presentation">
 		<property name="cameraReadyPaper" value="¿alguien sabe que es un boolean? ¿si? ¿no? Ahí está la respuesta" /> 
 		<property name="title" value="Presentacion FP" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/22/2019" /> 
 		<property name="duration" value="114" /> 
 		<property name="room" value="A018" /> 
@@ -1481,7 +1481,7 @@
 	<bean id="presentation9" class="domain.Presentation">
 		<property name="cameraReadyPaper" value="no hagas chistes de booleans" /> 
 		<property name="title" value="Presentacion ISPP" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/23/2019" /> 
 		<property name="duration" value="117" /> 
 		<property name="room" value="A019" /> 
@@ -1985,7 +1985,7 @@
 				</list>
 			</property>
 		<property name="title" value="Tutorial de hacer tutoriales" /> 
-		<property name="speaker" value="Jhon lenon" /> 
+		<property name="speakers" value="Jhon lenon" /> 
 		<property name="startMoment" value="05/01/2019" /> 
 		<property name="duration" value="50" /> 
 		<property name="room" value="A3.10" /> 
@@ -2010,7 +2010,7 @@
 				</list>
 			</property>
 		<property name="title" value="Guia básica de cohetes" /> 
-		<property name="speaker" value="Elvis " /> 
+		<property name="speakers" value="Elvis " /> 
 		<property name="startMoment" value="05/02/2019" /> 
 		<property name="duration" value="90" /> 
 		<property name="room" value="F1.10" /> 
@@ -2032,7 +2032,7 @@
 				</list>
 			</property>
 		<property name="title" value="English for dummies" /> 
-		<property name="speaker" value="Tamudo" /> 
+		<property name="speakers" value="Tamudo" /> 
 		<property name="startMoment" value="05/03/2019" /> 
 		<property name="duration" value="60" /> 
 		<property name="room" value="D4.20" /> 
