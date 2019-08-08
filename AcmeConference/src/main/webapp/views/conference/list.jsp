@@ -91,7 +91,12 @@
 	</security:authorize>
 
 
+	<display:column>
 
+		<acme:link link="activity/list.do?conferenceId=${row.id}"
+			code="conference.activities" />
+
+	</display:column>
 
 
 

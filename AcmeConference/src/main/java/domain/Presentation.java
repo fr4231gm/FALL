@@ -1,7 +1,5 @@
 package domain;
 
-import org.hibernate.validator.constraints.SafeHtml;
-import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
@@ -15,9 +13,7 @@ public class Presentation extends Activity {
 	private Paper paper;
 
 	// Getters
-	@NotBlank
 	@Valid
-	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public Paper getPaper() {
 		return this.paper;
 	}
