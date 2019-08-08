@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AuthorService;
+import services.ConfigurationService;
 import services.RegistrationService;
 
 import controllers.AbstractController;
@@ -29,6 +30,9 @@ public class RegistrationAuthorController extends AbstractController {
 
 	@Autowired
 	private AuthorService authorService;
+
+	@Autowired
+	private ConfigurationService configurationService;
 
 	// Constructors -----------------------------------------------------------
 	public RegistrationAuthorController() {
@@ -58,9 +62,15 @@ public class RegistrationAuthorController extends AbstractController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int conferenceId) {
 		ModelAndView res;
-		final Registration registration = this.registrationService.create(conferenceId);
+		final Registration registration = this.registrationService
+				.create(conferenceId);
+		String[] makes;
+
+		makes = this.configurationService.findConfiguration().getMake()
+				.split(",");
 
 		res = this.createEditModelAndView(registration);
+		res.addObject("makes", makes);
 
 		return res;
 	}
@@ -69,19 +79,44 @@ public class RegistrationAuthorController extends AbstractController {
 	public ModelAndView save(@Valid final Registration reg,
 			final BindingResult binding) {
 		ModelAndView res;
-		Registration aux;
+		String[] makes;
+		Registration r;
 
-		if (binding.hasErrors())
-			res = this.createEditModelAndView(reg);
-		else
-			try {
+		makes = this.configurationService.findConfiguration().getMake()
+				.split(",");
 
-				aux = this.registrationService.save(reg);
+		try {
+
+			registrationService.checkCreditCard(reg.getCreditCard(), binding);
+
+			if (binding.hasErrors()) {
+				res = this.createEditModelAndView(reg);
+				res.addObject("makes", makes);
+			} else {
+				r = this.registrationService.save(reg);
 				res = new ModelAndView("redirect:/conference/author/list.do");
-
-			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(reg, "registration.commit.error");
+				res.addObject("makes", makes);
 			}
+
+		} catch (final Throwable oops) {
+			res = this.createEditModelAndView(reg, "registration.commit.error");
+			res.addObject("makes", makes);
+		}
+		return res;
+	}
+
+	// Show
+	@RequestMapping(value = "/display", method = RequestMethod.GET, params = { "registrationId" })
+	public ModelAndView display(@RequestParam final int registrationId) {
+		ModelAndView res;
+
+		// Initialize variables
+		Registration r;
+		r = this.registrationService.findOne(registrationId);
+
+		res = new ModelAndView("registration/display");
+		res.addObject("registration", r);
+
 		return res;
 	}
 
