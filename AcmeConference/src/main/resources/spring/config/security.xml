@@ -56,6 +56,7 @@
 		
 		<!-- ************************ ALL ************************ -->
 		<security:intercept-url pattern="/" access="permitAll" /> 
+		<security:intercept-url pattern="/activity/**" access="permitAll" />
 		<security:intercept-url pattern="/conference/listRunningConferences.do" access="permitAll" /> 
 		<security:intercept-url pattern="/conference/listForthcomingConferences.do" access="permitAll" />
 		<security:intercept-url pattern="/conference/listPastConferences.do" access="permitAll" />

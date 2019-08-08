@@ -47,4 +47,8 @@ public class PanelService {
 	public Collection<Panel> findPanelsByConferenceId(int conferenceId){
 		return this.panelRepository.findPanelsByConferenceId(conferenceId);
 	}
+	
+	public void delete(Panel panel){
+		this.panelRepository.delete(panel);
+	}
 }

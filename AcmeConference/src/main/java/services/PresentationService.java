@@ -47,4 +47,8 @@ public class PresentationService {
 	public Collection<Presentation> findPresentationsByConferenceId(int conferenceId){
 		return this.presentationRepository.findPresentationsByConferenceId(conferenceId);
 	}
+	
+	public void delete(Presentation presentation){
+		this.presentationRepository.delete(presentation);
+	}
 }

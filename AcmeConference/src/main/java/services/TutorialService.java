@@ -47,4 +47,8 @@ public class TutorialService {
 	public Collection<Tutorial> findTutorialsByConferenceId(int conferenceId){
 		return this.tutorialRepository.findTutorialsByConferenceId(conferenceId);
 	}
+	
+	public void delete(Tutorial tutorial){
+		this.tutorialRepository.delete(tutorial);
+	}
 }
