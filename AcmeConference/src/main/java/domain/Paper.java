@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.URL;
 @Entity
 @Access(AccessType.PROPERTY)
 @Embeddable
-public class Paper extends DomainEntity {
+public class Paper {
 
 	// Atributos
 	private String	title;

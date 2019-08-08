@@ -14,41 +14,64 @@
 <display:table name="tutorials" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
-	<display:column property="title" titleKey="activity.title"
+	<display:column property="titleActivity" titleKey="activity.title"
 		sortable="true" />
+
 	<display:column property="speakers" titleKey="activity.speakers"
 		sortable="true" />
-	<display:column property="text" titleKey="activity.text"
+
+	<display:column property="room" titleKey="activity.room"
+		sortable="true" />
+
+	<display:column property="summaryActivity" titleKey="activity.summary"
+		sortable="true" />
+
+	<display:column property="attachments" titleKey="activity.attachments"
 		sortable="true" />
 
 </display:table>
 
 <h2>Panels</h2>
-<display:table name="tutorials" id="row" requestURI="${requestURI}"
+<display:table name="panels" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
-	<display:column property="author" titleKey="activity.author"
+	<display:column property="titleActivity" titleKey="activity.title"
 		sortable="true" />
 
-	<display:column property="title" titleKey="activity.title"
+	<display:column property="speakers" titleKey="activity.speakers"
 		sortable="true" />
 
-	<display:column property="text" titleKey="activity.text"
+	<display:column property="room" titleKey="activity.room"
+		sortable="true" />
+
+	<display:column property="summaryActivity" titleKey="activity.summary"
+		sortable="true" />
+
+	<display:column property="attachments" titleKey="activity.attachments"
 		sortable="true" />
 
 </display:table>
 
 <h2>Presentations</h2>
-<display:table name="tutorials" id="row" requestURI="${requestURI}"
+<display:table name="presentations" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
-	<display:column property="author" titleKey="activity.author"
+	<display:column property="titleActivity" titleKey="activity.title"
 		sortable="true" />
 
-	<display:column property="title" titleKey="activity.title"
+	<display:column property="speakers" titleKey="activity.speakers"
 		sortable="true" />
 
-	<display:column property="text" titleKey="activity.text"
+	<display:column property="room" titleKey="activity.room"
+		sortable="true" />
+
+	<display:column property="summaryActivity" titleKey="activity.summary"
+		sortable="true" />
+
+	<display:column property="attachments" titleKey="activity.attachments"
+		sortable="true" />
+
+	<display:column property="paper.title" titleKey="activity.paper"
 		sortable="true" />
 
 </display:table>

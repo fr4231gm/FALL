@@ -1347,7 +1347,7 @@
 
 	<!-- Presentation-->
 	<bean id="presentation1" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="No tenemos nada, improvisa" /> 
+		<property name="paper" ref="paper1" /> 
 		<property name="title" value="Presentacion IISSI" /> 
 		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/15/2019" /> 
@@ -1366,7 +1366,7 @@
 	</bean>
 
 	<bean id="presentation2" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="el inicio efectivo es un bailecito" /> 
+		<property name="paper" ref="paper2" />
 		<property name="title" value="Presentacion ASR" /> 
 		<property name="speakers" value="Diego" /> 
 		<property name="startMoment" value="07/16/2019" /> 
@@ -1382,7 +1382,7 @@
 	</bean>
 
 	<bean id="presentation3" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="si estás nervioso imaginatelos desnudos" /> 
+		<property name="paper" ref="paper3" />
 		<property name="title" value="Presentacion DP" /> 
 		<property name="speakers" value="Benito" /> 
 		<property name="startMoment" value="07/17/2019" /> 
@@ -1399,7 +1399,7 @@
 	</bean>
 
 	<bean id="presentation4" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="vale a ver, tu sonrie" /> 
+		<property name="paper" ref="paper4" />
 		<property name="title" value="Presentacion EC" /> 
 		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/18/2019" /> 
@@ -1415,7 +1415,7 @@
 	</bean>
 
 	<bean id="presentation5" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="vas a hablar de ecuaciones, ve tranquilo" /> 
+		<property name="paper" ref="paper5" />
 		<property name="title" value="Presentacion MSN" /> 
 		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/19/2019" /> 
@@ -1431,7 +1431,7 @@
 	</bean>
 
 	<bean id="presentation6" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="a lo loco y sin frenos" /> 
+		<property name="paper" ref="paper6" />
 		<property name="title" value="Presentacion PRACTICAS" /> 
 		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/20/2019" /> 
@@ -1447,7 +1447,7 @@
 	</bean>
 
 	<bean id="presentation7" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="no se me ocurre ningun camera ready de estos" /> 
+		<property name="paper" ref="paper7" />
 		<property name="title" value="Presentacion ASC" /> 
 		<property name="speakers" value="Diego" /> 
 		<property name="startMoment" value="07/21/2019" /> 
@@ -1463,7 +1463,7 @@
 	</bean>
 
 	<bean id="presentation8" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="¿alguien sabe que es un boolean? ¿si? ¿no? Ahí está la respuesta" /> 
+		<property name="paper" ref="paper8" /> 
 		<property name="title" value="Presentacion FP" /> 
 		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/22/2019" /> 
@@ -1479,7 +1479,7 @@
 	</bean>
 
 	<bean id="presentation9" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="no hagas chistes de booleans" /> 
+		<property name="paper" ref="paper9" />
 		<property name="title" value="Presentacion ISPP" /> 
 		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/23/2019" /> 

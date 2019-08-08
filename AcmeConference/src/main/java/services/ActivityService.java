@@ -19,9 +19,6 @@ public class ActivityService {
 	private ActivityRepository activityRepository;
 
 	// Supporting services ----------------------------------------------------
-	
-	@Autowired
-	private AdministratorService administratorService;
 
 	// Constructors ------------------------------------
 
