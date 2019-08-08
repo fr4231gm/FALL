@@ -38,6 +38,10 @@
 		<acme:link link="submission/author/display.do?submissionId=${row.id}" code = "submission.display"/>
 	</display:column>
 	
+		<display:column>
+		<acme:link link="submission/author/edit.do?submissionId=${row.id}" code = "submission.edit"/>
+	</display:column>
+	
 	
 	
 

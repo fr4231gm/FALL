@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AuthorService;
 import services.SubmissionService;
 import controllers.AbstractController;
+import domain.Author;
 import domain.Submission;
 
 @Controller
@@ -25,6 +27,9 @@ public class SubmissionAuthorController extends AbstractController {
 	//Services
 	@Autowired
 	private SubmissionService	submissionService;
+
+	@Autowired
+	private AuthorService		authorService;
 
 
 	// Create
@@ -54,6 +59,52 @@ public class SubmissionAuthorController extends AbstractController {
 
 			catch (final Throwable oops) {
 				res = this.createEditModelAndView(s, "submission.commit.error");
+			}
+		return res;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int submissionId) {
+		ModelAndView res;
+		final Submission s;
+		Author principal;
+		s = this.submissionService.findOne(submissionId);
+		principal = this.authorService.findByPrincipal();
+
+		if (s.getAuthor().getId() != principal.getId())
+			res = new ModelAndView("security/hacking");
+		else
+			try {
+
+				res = new ModelAndView("submission/edit");
+				res.addObject("submission", s);
+
+			} catch (final Throwable oops) {
+
+				res = new ModelAndView("submission/edit");
+				res.addObject("submission", s);
+				res.addObject("message", "submission.commit.error");
+			}
+		return res;
+	}
+
+	//Save edit
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save2(@Valid final Submission submission, final BindingResult binding) {
+		ModelAndView res;
+		Submission aux;
+
+		if (binding.hasErrors()) {
+			res = new ModelAndView("phase/edit");
+			res.addObject("submission", submission);
+		} else
+			try {
+
+				aux = this.submissionService.save(submission);
+				res = new ModelAndView("redirect:list.do");
+
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(submission, "submission.commit.error");
 			}
 		return res;
 	}
