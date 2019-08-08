@@ -43,7 +43,7 @@
 				<ul>
 					<li><a class="child" href="administrator/register.do"><spring:message
 								code="master.page.administrator.create.new.administrator" /></a></li>
-					<li><a class="child" href="dashboard/administrator/list.do"><spring:message
+					<li><a class="child" href="administrator/dashboard.do"><spring:message
 								code="master.page.administrator.dashboard" /></a></li>
 					<li><a class="child" href="configuration/administrator/edit.do"><spring:message
 								code="master.page.administrator.configuration" /></a></li>

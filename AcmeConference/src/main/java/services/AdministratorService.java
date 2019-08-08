@@ -109,8 +109,35 @@ public class AdministratorService {
 	}
 
 	public void flush() {
-
 		this.administratorRepository.flush();
+	}
+	
+	public Double[] SubmissionsPerConference(){
+		return this.administratorRepository.SubmissionsPerConference();
+	}
+	
+	public Double[] RegistrationsPerConference(){
+		return this.administratorRepository.RegistrationsPerConference();
+	}
+	
+	public Double[] ConferencesFeesStats(){
+		return this.administratorRepository.ConferencesFeesStats();
+	}
+	
+	public Double[] ConferencesDaysStats(){
+		return this.administratorRepository.ConferencesDaysStats();
+	}
+	
+	public Double[] ConferencesPerCategory(){
+		return this.administratorRepository.ConferencesPerCategory();
+	}
+	
+	public Double[] CommentsPerConference(){
+		return this.administratorRepository.CommentsPerConference();
+	}
+	
+	public Double[] CommentsPerActivity(){
+		return this.administratorRepository.CommentsPerActivity();
 	}
 
 }

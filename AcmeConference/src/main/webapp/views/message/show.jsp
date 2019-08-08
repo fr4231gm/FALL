@@ -12,14 +12,14 @@
 	<jstl:when test="${langCode eq 'en'}">
 		<fmt:formatDate
 			value="${m.moment}" 
- 			pattern="MM-dd-yyyy HH:mm"
+ 			pattern="MM-dd-yyyy HH"
  			var="parsedMoment" 
   		/> 	
   	</jstl:when> 
 	<jstl:otherwise> 
 		<fmt:formatDate 
  			value="${m.moment}" 
-  			pattern="dd-MM-yyyy HH:mm" 
+  			pattern="dd-MM-yyyy HH" 
   			var="parsedMoment" 
   		/> 
  	</jstl:otherwise> 
@@ -69,9 +69,10 @@
 	<acme:input code="actor.phone.number" path="m.sender.phoneNumber" readonly="true"/>
 	<acme:input code="actor.address" path="m.sender.address" readonly="true"/>
 	</div>
-	<div class="partido">
+	<div class="partido" style="    text-align: center;
+    vertical-align: top;">
 		<jstl:if test="${not empty m.sender.photo}">
-			<img
+			<img style="width: 350px; height: 320px;"
 		 		src = "${m.sender.photo}"
 		  		alt="picture not found"
 		 	/>
@@ -80,3 +81,4 @@
 </fieldset>	
 
 <acme:cancel code="actor.cancel" url="/"/>
+<acme:link link="message/delete.do?id=${m.id}" code="message.delete" />
