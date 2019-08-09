@@ -100,8 +100,7 @@ public class ConferenceController extends AbstractController {
 	public ModelAndView displayAnonymous(@RequestParam final int conferenceId) {
 		ModelAndView res;
 		Boolean future = false;
-		Boolean haveR = true;
-		Author principal = authorService.findByPrincipal();
+		Boolean haveR = false;
 		Collection<Registration> registerConference = registrationService.findRegistrationsByConferenceId(conferenceId);
 
 		// Initialize variables
@@ -112,17 +111,31 @@ public class ConferenceController extends AbstractController {
 			future = true;
 		}
 		
-		for(Registration r: registerConference){
-			if(r.getAuthor().equals(principal)){
-				haveR = true;
-			}
-		}	
-
+		try{
+		
+			Author principal = authorService.findByPrincipal();
+			
+				for(Registration r: registerConference){
+					if(r.getAuthor().equals(principal)){
+						haveR = true;
+					}
+				}
+				
 		res = new ModelAndView("conference/display");
 		res.addObject("conference", c);
 		res.addObject("future", future);
 		res.addObject("haveR", haveR);
-
+		
+			if(haveR == true){
+				res.addObject("message", "registration.commit.error");
+			}
+		}catch (final Throwable oops){
+			
+			res = new ModelAndView("conference/display");
+			res.addObject("conference", c);
+			res.addObject("future", future);
+			res.addObject("haveR", haveR);
+		}
 
 		return res;
 	}

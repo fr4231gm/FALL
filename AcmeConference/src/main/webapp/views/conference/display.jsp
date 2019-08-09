@@ -65,14 +65,16 @@
 <br />	
 <br />		
 	
-<jstl:if test="${future eq 'true'}">	
-	<security:authorize access="hasRole('AUTHOR')">	
+<jstl:if test="${future eq 'true'}">
+	<jstl:if test="${haveR eq 'false'}">
+		<security:authorize access="hasRole('AUTHOR')">	
 		
 	
 			<acme:link link="registration/author/register.do?conferenceId=${conference.id}"
 				code="conference.registration" />
 	
-	</security:authorize>
+		</security:authorize>
+	</jstl:if>
 </jstl:if>
 
 <br />	
