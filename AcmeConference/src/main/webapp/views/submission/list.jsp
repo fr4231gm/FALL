@@ -57,6 +57,10 @@
 		<acme:link link="submission/display.do?submissionId=${row.id}"
 				code="submission.assign" />
 	</display:column>
+	
+	<display:column>
+		<acme:link link="reviewer/display.do?submissionId=${row.id}" code = "submission.reviewer"/>
+	</display:column>
 
 </security:authorize>		
 
