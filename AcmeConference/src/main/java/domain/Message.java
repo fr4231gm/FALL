@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -22,6 +23,7 @@ public class Message extends DomainEntity {
 	private String					topic;
 	private Actor					sender;
 	private Actor					recipient;
+	private boolean 				isCopy;
 
 
 	// Getters
@@ -57,6 +59,11 @@ public class Message extends DomainEntity {
 	public Actor getRecipient(){
 		return this.recipient;
 	}
+	
+	@NotNull
+	public boolean GetIsCopy() {
+		return isCopy;
+	}
 
 	// Setters
 	public void setMoment(final Date moment){
@@ -81,6 +88,10 @@ public class Message extends DomainEntity {
 
 	public void setRecipient(final Actor recipient){
 		this.recipient = recipient; 
+	}
+
+	public void setIsCopy(boolean isCopy) {
+		this.isCopy = isCopy;
 	}
 
 }

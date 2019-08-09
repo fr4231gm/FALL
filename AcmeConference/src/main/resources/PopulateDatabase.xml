@@ -994,16 +994,17 @@
 		<property name="subject" value="Pinocho" /> 
 		<property name="body" value="¿Cuál es el hermano mayor de Pinocho? Pinueve." /> 
 		<property name="topic" value="INQUIRY" /> 
+		<property name="isCopy" value="false" />
 		<property name="sender" ref="author1" /> 
-		<property name="recipient" ref="administrator1" />
-					
+		<property name="recipient" ref="administrator1" />					
 	</bean>
 
 	<bean id="message2" class="domain.Message">
 		<property name="moment" value="04/02/2019" /> 
 		<property name="subject" value="Suegra" /> 
 		<property name="body" value="¿Cómo se dice suegra en ruso? Kela Rrifen." /> 
-		<property name="topic" value="REGISTRATION" /> 
+		<property name="topic" value="REGISTRATION" />
+		<property name="isCopy" value="false" />
 		<property name="sender" ref="author2" /> 
 		<property name="recipient" ref="author1" />
 	</bean>
@@ -1013,6 +1014,7 @@
 		<property name="subject" value="Piña" /> 
 		<property name="body" value="Había una piña colada y la sacaron de la fila." /> 
 		<property name="topic" value="TOPICS" /> 
+		<property name="isCopy" value="false" />
 		<property name="sender" ref="author3" /> 
 		<property name="recipient" ref="author2" />
 	</bean>
@@ -1022,6 +1024,7 @@
 		<property name="subject" value="Otro de suegra" /> 
 		<property name="body" value="¡Que viva mi suegra, pero bien lejos!" /> 
 		<property name="topic" value="REBUTTAL" /> 
+		<property name="isCopy" value="false" />
 		<property name="sender" ref="author4" /> 
 		<property name="recipient" ref="author3" />
 	</bean>
@@ -1031,6 +1034,7 @@
 		<property name="subject" value="Que gusto" /> 
 		<property name="body" value="Hola, ¿está Agustín? No estoy incomodín." /> 
 		<property name="topic" value="OTHER" /> 
+		<property name="isCopy" value="false" />
 		<property name="sender" ref="author5" /> 
 		<property name="recipient" ref="author4" />
 	</bean>
@@ -1040,6 +1044,7 @@
 		<property name="subject" value="Duda esta gorda" /> 
 		<property name="body" value="¡No cabe duda! Y duda se tuvo que bajar." /> 
 		<property name="topic" value="CONSULTA" /> 
+		<property name="isCopy" value="true" />
 		<property name="sender" ref="author1" /> 
 		<property name="recipient" ref="administrator1" />
 	</bean>
@@ -1049,6 +1054,7 @@
 		<property name="subject" value="Al abordaje" /> 
 		<property name="body" value="Capitán: ¡Todos a bordo! Y Bordo se murió aplastado." /> 
 		<property name="topic" value="REFUTACIÓN" /> 
+		<property name="isCopy" value="true" />
 		<property name="sender" ref="author2" /> 
 		<property name="recipient" ref="sponsor1" />
 	</bean>
@@ -1058,6 +1064,7 @@
 		<property name="subject" value="Lo peor es que es verdad" /> 
 		<property name="body" value="Hola Caperucita Verde...!!! Hola lobo daltónico...!!!" /> 
 		<property name="topic" value="REGISTRO" /> 
+		<property name="isCopy" value="true" />
 		<property name="sender" ref="author3" /> 
 		<property name="recipient" ref="sponsor2" />
 	</bean>
@@ -1067,6 +1074,7 @@
 		<property name="subject" value="Esto está lleno de suegras" /> 
 		<property name="body" value="Busco perro y suegra perdidos. Se recompensará por el perro." /> 
 		<property name="topic" value="TEMAS" /> 
+		<property name="isCopy" value="true" />
 		<property name="sender" ref="author4" /> 
 		<property name="recipient" ref="sponsor3" />
 	</bean>
@@ -1075,7 +1083,8 @@
 		<property name="moment" value="04/02/2019" /> 
 		<property name="subject" value="Chistaco" /> 
 		<property name="body" value="¿Qué animal hace pipi por la boca? El correcaminos." /> 
-		<property name="topic" value=" OTROS" /> 
+		<property name="topic" value=" OTROS" />
+		<property name="isCopy" value="true" /> 
 		<property name="sender" ref="author5" /> 
 		<property name="recipient" ref="sponsor4" />
 	</bean>
@@ -1085,6 +1094,7 @@
 		<property name="subject" value="Mensaje importante" /> 
 		<property name="body" value="Cómo estornuda un leñador? ¡Achaaaa!" /> 
 		<property name="topic" value=" OTROS" /> 
+		<property name="isCopy" value="true" />
 		<property name="sender" ref="administrator1" /> 
 		<property name="recipient" ref="reviewer1" />
 	</bean>
