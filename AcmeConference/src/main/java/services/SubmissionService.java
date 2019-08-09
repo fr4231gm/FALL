@@ -36,6 +36,15 @@ public class SubmissionService {
 
 		return subs;
 	}
+	
+	public Collection<Submission> findAll() {
+		Collection<Submission> result;
+
+		result = this.submissionRepository.findAll();
+
+		return result;
+
+	}
 
 	public Submission findOne(final int submissionId) {
 		Submission s;

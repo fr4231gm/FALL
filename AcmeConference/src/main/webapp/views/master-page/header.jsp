@@ -34,6 +34,8 @@
 								code="master.page.administrator.dashboard" /></a></li>
 					<li><a class="child" href="configuration/administrator/edit.do"><spring:message
 								code="master.page.administrator.configuration" /></a></li>
+					<li><a class="child" href="submission/administrator/list.do"><spring:message
+								code="master.page.author.submission" /></a></li>			
 
 					
 				</ul></li>
