@@ -20,12 +20,20 @@
 	<form:hidden path="author" />
 	<form:hidden path="ticker"/>
 	<form:hidden path="moment"/>
-	
+	<form:hidden path="status"/>
+	<form:hidden path="conference"/>
+	<jstl:if test="${submission.id ==0 }">
+	<form:hidden path="paper.cameraReadyPaper"/>
+</jstl:if>		
 
-
-	<acme:textarea code="submission.cameraReadyPaper" path="cameraReadyPaper" placeholder="Esto es un papel que es muy listo y vive en una cámara"/>
 	
 	
+	<acme:input code="submission.paper.title" path="paper.title"/>
+	<acme:textarea code="submission.paper.summary" path="paper.summary"/>
+	<acme:input code="submission.paper.documet" path="paper.document"/>
+	<jstl:if test="${submission.id != 0 }">
+	<acme:checkbox code="submission.paper.cameraReadyPaper" path="paper.cameraReadyPaper"/>
+	</jstl:if>
 	<acme:submit name="save" code="submission.save" />
 	<acme:cancel url="${cancelURI}" code="submission.cancel" />
 

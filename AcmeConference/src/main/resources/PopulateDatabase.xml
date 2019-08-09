@@ -548,7 +548,7 @@
 		<property name="submissionDeadline" value="04/06/2019" /> 
 		<property name="notificationDeadline" value="05/06/2019" /> 
 		<property name="cameraReadyDeadline" value="06/06/2019" /> 
-		<property name="startDate" value="12/06/2019" /> 
+		<property name="startDate" value="12/05/2019" /> 
 		<property name="endDate" value="12/06/2019" /> 
 		<property name="summary" value="Alerta spoiler: No" /> 
 		<property name="fee" value="0.65" /> 
@@ -609,8 +609,8 @@
 		<property name="submissionDeadline" value="02/09/2019" /> 
 		<property name="notificationDeadline" value="03/09/2019" /> 
 		<property name="cameraReadyDeadline" value="04/09/2019" /> 
-		<property name="startDate" value="10/05/2019" /> 
-		<property name="endDate" value="10/09/2019" /> 
+		<property name="startDate" value="08/06/2019" /> 
+		<property name="endDate" value="10/01/2019" /> 
 		<property name="summary" value="Pikachu está sobrevalorado, adentremonos en el incrible mundo de los pokemon tipo planta… Por favor…" /> 
 		<property name="fee" value="0.95" /> 
 		<property name="isDraft" value="false" /> 
@@ -1103,7 +1103,7 @@
 	<!-- Panel-->
 	<bean id="panel1" class="domain.Panel">
 		<property name="title" value="Panel de abejas" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/15/2019" /> 
 		<property name="duration" value="120" /> 
 		<property name="room" value="A011" /> 
@@ -1120,7 +1120,7 @@
 
 	<bean id="panel2" class="domain.Panel">
 		<property name="title" value="Panel de administracion" /> 
-		<property name="speaker" value="Diego" /> 
+		<property name="speakers" value="Diego" /> 
 		<property name="startMoment" value="07/16/2019" /> 
 		<property name="duration" value="60" /> 
 		<property name="room" value="A012" /> 
@@ -1136,7 +1136,7 @@
 
 	<bean id="panel3" class="domain.Panel">
 		<property name="title" value="Panel de madera" /> 
-		<property name="speaker" value="Benito" /> 
+		<property name="speakers" value="Benito" /> 
 		<property name="startMoment" value="07/17/2019" /> 
 		<property name="duration" value="90" /> 
 		<property name="room" value="A013" /> 
@@ -1151,7 +1151,7 @@
 
 	<bean id="panel4" class="domain.Panel">
 		<property name="title" value="panel de consumo" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/18/2019" /> 
 		<property name="duration" value="120" /> 
 		<property name="room" value="A014" /> 
@@ -1167,7 +1167,7 @@
 
 	<bean id="panel5" class="domain.Panel">
 		<property name="title" value="panel de metraquilato" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/19/2019" /> 
 		<property name="duration" value="105" /> 
 		<property name="room" value="A015" /> 
@@ -1183,7 +1183,7 @@
 
 	<bean id="panel6" class="domain.Panel">
 		<property name="title" value="panel de hojaldre" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/20/2019" /> 
 		<property name="duration" value="108" /> 
 		<property name="room" value="A016" /> 
@@ -1198,7 +1198,7 @@
 
 	<bean id="panel7" class="domain.Panel">
 		<property name="title" value="panel 7" /> 
-		<property name="speaker" value="Diego" /> 
+		<property name="speakers" value="Diego" /> 
 		<property name="startMoment" value="07/21/2019" /> 
 		<property name="duration" value="111" /> 
 		<property name="room" value="A017" /> 
@@ -1213,7 +1213,7 @@
 
 	<bean id="panel8" class="domain.Panel">
 		<property name="title" value="pan pan panel" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/22/2019" /> 
 		<property name="duration" value="114" /> 
 		<property name="room" value="A018" /> 
@@ -1228,7 +1228,7 @@
 
 	<bean id="panel9" class="domain.Panel">
 		<property name="title" value="this is the last panel" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/23/2019" /> 
 		<property name="duration" value="117" /> 
 		<property name="room" value="A019" /> 
@@ -1308,9 +1308,9 @@
 
 	<!-- Presentation-->
 	<bean id="presentation1" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="No tenemos nada, improvisa" /> 
+		<property name="paper" ref="paper1" /> 
 		<property name="title" value="Presentacion IISSI" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/15/2019" /> 
 		<property name="duration" value="120" /> 
 		<property name="room" value="A011" /> 
@@ -1327,9 +1327,9 @@
 	</bean>
 
 	<bean id="presentation2" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="el inicio efectivo es un bailecito" /> 
+		<property name="paper" ref="paper2" />
 		<property name="title" value="Presentacion ASR" /> 
-		<property name="speaker" value="Diego" /> 
+		<property name="speakers" value="Diego" /> 
 		<property name="startMoment" value="07/16/2019" /> 
 		<property name="duration" value="60" /> 
 		<property name="room" value="A012" /> 
@@ -1343,9 +1343,9 @@
 	</bean>
 
 	<bean id="presentation3" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="si estás nervioso imaginatelos desnudos" /> 
+		<property name="paper" ref="paper3" />
 		<property name="title" value="Presentacion DP" /> 
-		<property name="speaker" value="Benito" /> 
+		<property name="speakers" value="Benito" /> 
 		<property name="startMoment" value="07/17/2019" /> 
 		<property name="duration" value="90" /> 
 		<property name="room" value="A013" /> 
@@ -1360,9 +1360,9 @@
 	</bean>
 
 	<bean id="presentation4" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="vale a ver, tu sonrie" /> 
+		<property name="paper" ref="paper4" />
 		<property name="title" value="Presentacion EC" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/18/2019" /> 
 		<property name="duration" value="120" /> 
 		<property name="room" value="A014" /> 
@@ -1376,9 +1376,9 @@
 	</bean>
 
 	<bean id="presentation5" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="vas a hablar de ecuaciones, ve tranquilo" /> 
+		<property name="paper" ref="paper5" />
 		<property name="title" value="Presentacion MSN" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/19/2019" /> 
 		<property name="duration" value="105" /> 
 		<property name="room" value="A015" /> 
@@ -1392,9 +1392,9 @@
 	</bean>
 
 	<bean id="presentation6" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="a lo loco y sin frenos" /> 
+		<property name="paper" ref="paper6" />
 		<property name="title" value="Presentacion PRACTICAS" /> 
-		<property name="speaker" value="Lionel" /> 
+		<property name="speakers" value="Lionel" /> 
 		<property name="startMoment" value="07/20/2019" /> 
 		<property name="duration" value="108" /> 
 		<property name="room" value="A016" /> 
@@ -1408,9 +1408,9 @@
 	</bean>
 
 	<bean id="presentation7" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="no se me ocurre ningun camera ready de estos" /> 
+		<property name="paper" ref="paper7" />
 		<property name="title" value="Presentacion ASC" /> 
-		<property name="speaker" value="Diego" /> 
+		<property name="speakers" value="Diego" /> 
 		<property name="startMoment" value="07/21/2019" /> 
 		<property name="duration" value="111" /> 
 		<property name="room" value="A017" /> 
@@ -1424,9 +1424,9 @@
 	</bean>
 
 	<bean id="presentation8" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="¿alguien sabe que es un boolean? ¿si? ¿no? Ahí está la respuesta" /> 
+		<property name="paper" ref="paper8" /> 
 		<property name="title" value="Presentacion FP" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/22/2019" /> 
 		<property name="duration" value="114" /> 
 		<property name="room" value="A018" /> 
@@ -1440,9 +1440,9 @@
 	</bean>
 
 	<bean id="presentation9" class="domain.Presentation">
-		<property name="cameraReadyPaper" value="no hagas chistes de booleans" /> 
+		<property name="paper" ref="paper9" />
 		<property name="title" value="Presentacion ISPP" /> 
-		<property name="speaker" value="Renee" /> 
+		<property name="speakers" value="Renee" /> 
 		<property name="startMoment" value="07/23/2019" /> 
 		<property name="duration" value="117" /> 
 		<property name="room" value="A019" /> 
@@ -1845,7 +1845,7 @@
 	<bean id="submission1" class="domain.Submission">
 		<property name="ticker" value="LMJ-1234" /> 
 		<property name="moment" value="03/01/2019" /> 
-		<property name="cameraReadyPaper" value="Are you ready for freddy?" /> 
+		
 		<property name="status" value="REJECTED" /> 
 		<property name="paper" ref="paper1" /> 
 		<property name="Conference" ref="conference6" /> 
@@ -1855,7 +1855,7 @@
 	<bean id="submission2" class="domain.Submission">
 		<property name="ticker" value="DAM-7532" /> 
 		<property name="moment" value="03/02/2019" /> 
-		<property name="cameraReadyPaper" value="Ready steady, GO!" /> 
+	
 		<property name="status" value="UNDER-REVIEW" /> 
 		<property name="paper" ref="paper2" /> 
 		<property name="Conference" ref="conference2" /> 
@@ -1865,7 +1865,6 @@
 	<bean id="submission3" class="domain.Submission">
 		<property name="ticker" value="DAM-8523" /> 
 		<property name="moment" value="03/03/2019" /> 
-		<property name="cameraReadyPaper" value="I'm a Banaaaaaana" /> 
 		<property name="status" value="UNDER-REVIEW" /> 
 		<property name="paper" ref="paper3" /> 
 		<property name="Conference" ref="conference1" /> 
@@ -1875,7 +1874,6 @@
 	<bean id="submission4" class="domain.Submission">
 		<property name="ticker" value="RXP-7456" /> 
 		<property name="moment" value="03/04/2019" /> 
-		<property name="cameraReadyPaper" value="Atun con pan que buenos que están" /> 
 		<property name="status" value="UNDER-REVIEW" /> 
 		<property name="paper" ref="paper4" /> 
 		<property name="Conference" ref="conference4" /> 
@@ -1885,7 +1883,6 @@
 	<bean id="submission5" class="domain.Submission">
 		<property name="ticker" value="JMA-1235" /> 
 		<property name="moment" value="03/05/2019" /> 
-		<property name="cameraReadyPaper" value="Desde que te perdi la luz se ha puesto muy mojada, mirada triste está nublada y en mis ojos de llover" /> 
 		<property name="status" value="ACCEPTED" /> 
 		<property name="paper" ref="paper5" /> 
 		<property name="Conference" ref="conference5" /> 
@@ -1895,7 +1892,6 @@
 	<bean id="submission6" class="domain.Submission">
 		<property name="ticker" value="DAM-7319" /> 
 		<property name="moment" value="03/06/2019" /> 
-		<property name="cameraReadyPaper" value="Solo ya sin ti me tienes como un perro herido, estoy solo como arena sin su mar" /> 
 		<property name="status" value="REJECTED" /> 
 		<property name="paper" ref="paper6" /> 
 		<property name="Conference" ref="conference6" /> 
@@ -1905,7 +1901,6 @@
 	<bean id="submission7" class="domain.Submission">
 		<property name="ticker" value="RXP-0258" /> 
 		<property name="moment" value="03/07/2019" /> 
-		<property name="cameraReadyPaper" value="quien detendre la lluvia en mi, ohhh nono se me ha inundado el corazon, quien detendrá la lluvia en mi" /> 
 		<property name="status" value="ACCEPTED" /> 
 		<property name="paper" ref="paper7" /> 
 		<property name="Conference" ref="conference1" /> 
@@ -1915,7 +1910,6 @@
 	<bean id="submission8" class="domain.Submission">
 		<property name="ticker" value="JMA-9614" /> 
 		<property name="moment" value="03/08/2019" /> 
-		<property name="cameraReadyPaper" value="Ohhhhh mi amor, sigue lloviendo, sigue lloviendo el corazón" /> 
 		<property name="status" value="UNDER-REVIEW" /> 
 		<property name="paper" ref="paper8" /> 
 		<property name="Conference" ref="conference1" /> 
@@ -1925,7 +1919,6 @@
 	<bean id="submission9" class="domain.Submission">
 		<property name="ticker" value="RXP-0134" /> 
 		<property name="moment" value="03/09/2019" /> 
-		<property name="cameraReadyPaper" value="Malinterpretas mi deseo de no sentir como un relfejo de que no me importa, pero te aseguro que la verdad, es precisamente lo contrario" /> 
 		<property name="status" value="UNDER-REVIEW" /> 
 		<property name="paper" ref="paper9" /> 
 		<property name="Conference" ref="conference9" /> 
@@ -1935,7 +1928,6 @@
 	<bean id="submission10" class="domain.Submission">
 		<property name="ticker" value="JMA-7610" /> 
 		<property name="moment" value="03/10/2019" /> 
-		<property name="cameraReadyPaper" value="I´m a barbie girl, in a barbie wooooorld, life in plastic, its fantastic" /> 
 		<property name="status" value="ACCEPTED" /> 
 		<property name="paper" ref="paper10" /> 
 		<property name="Conference" ref="conference9" /> 
@@ -1954,7 +1946,7 @@
 				</list>
 			</property>
 		<property name="title" value="Tutorial de hacer tutoriales" /> 
-		<property name="speaker" value="Jhon lenon" /> 
+		<property name="speakers" value="Jhon lenon" /> 
 		<property name="startMoment" value="05/01/2019" /> 
 		<property name="duration" value="50" /> 
 		<property name="room" value="A3.10" /> 
@@ -1979,7 +1971,7 @@
 				</list>
 			</property>
 		<property name="title" value="Guia básica de cohetes" /> 
-		<property name="speaker" value="Elvis " /> 
+		<property name="speakers" value="Elvis " /> 
 		<property name="startMoment" value="05/02/2019" /> 
 		<property name="duration" value="90" /> 
 		<property name="room" value="F1.10" /> 
@@ -2001,7 +1993,7 @@
 				</list>
 			</property>
 		<property name="title" value="English for dummies" /> 
-		<property name="speaker" value="Tamudo" /> 
+		<property name="speakers" value="Tamudo" /> 
 		<property name="startMoment" value="05/03/2019" /> 
 		<property name="duration" value="60" /> 
 		<property name="room" value="D4.20" /> 

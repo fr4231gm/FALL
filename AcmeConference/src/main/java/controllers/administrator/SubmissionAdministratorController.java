@@ -1,5 +1,4 @@
-
-package controllers.author;
+package controllers.administrator;
 
 import java.util.Collection;
 import java.util.Date;
@@ -15,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.SubmissionService;
+
 import controllers.AbstractController;
 import domain.Submission;
 
 @Controller
-@RequestMapping("/submission/author")
-public class SubmissionAuthorController extends AbstractController {
+@RequestMapping("/submission/administrator")
+public class SubmissionAdministratorController extends AbstractController {
 
-	//Services
+	// Services
 	@Autowired
-	private SubmissionService	submissionService;
-
+	private SubmissionService submissionService;
 
 	// Create
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/assign", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int conferenceId) {
 		ModelAndView res;
 		final Submission sub = this.submissionService.create(conferenceId);
@@ -38,8 +37,9 @@ public class SubmissionAuthorController extends AbstractController {
 		return res;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Submission s, final BindingResult binding) {
+	@RequestMapping(value = "/assign", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Submission s,
+			final BindingResult binding) {
 		ModelAndView res;
 		Submission aux;
 
@@ -49,7 +49,8 @@ public class SubmissionAuthorController extends AbstractController {
 			try {
 
 				aux = this.submissionService.save(s);
-				res = new ModelAndView("redirect:display.do?submissionId=" + aux.getId());
+				res = new ModelAndView("redirect:display.do?submissionId="
+						+ aux.getId());
 			}
 
 			catch (final Throwable oops) {
@@ -57,27 +58,26 @@ public class SubmissionAuthorController extends AbstractController {
 			}
 		return res;
 	}
-	//List
+
+	// List
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Submission> subs;
 
-		subs = this.submissionService.findByAuthor();
+		subs = this.submissionService.findAll();
 
 		result = new ModelAndView("submission/list");
 
 		result.addObject("actual", new Date(System.currentTimeMillis()));
 		result.addObject("submissions", subs);
-		result.addObject("requestURI", "submission/author/list.do");
+		result.addObject("requestURI", "submission/administrator/list.do");
 
 		return result;
 	}
 
-	//Show
-	@RequestMapping(value = "/display", method = RequestMethod.GET, params = {
-		"submissionId"
-	})
+	// Show
+	@RequestMapping(value = "/display", method = RequestMethod.GET, params = { "submissionId" })
 	public ModelAndView display(@RequestParam final int submissionId) {
 		ModelAndView res;
 
@@ -98,7 +98,8 @@ public class SubmissionAuthorController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Submission s, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final Submission s,
+			final String messageCode) {
 		ModelAndView result;
 
 		result = new ModelAndView("submission/edit");
@@ -107,5 +108,4 @@ public class SubmissionAuthorController extends AbstractController {
 
 		return result;
 	}
-
 }

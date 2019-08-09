@@ -39,7 +39,16 @@ public class ActivityService {
 		result = this.activityRepository.findAll();
 
 		return result;
+	}
 
+	// Other business methods
+
+	public Collection<Activity> findActivitiesByConferenceId(int conferenceId) {
+		Collection<Activity> res;
+
+		res = this.activityRepository.findActivitiesByConferenceId(conferenceId);
+
+		return res;
 	}
 
 }

@@ -21,19 +21,6 @@
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
-		<!-- AUTHOR -->
-		<security:authorize access="hasRole('AUTHOR')">
-			<li><a class="fNiv parent"><spring:message
-						code="master.page.author" /></a>
-				<ul>
-					<li><a class="child" href="submission/author/list.do"><spring:message
-								code="master.page.author.submission" /></a></li>
-					
-
-					
-				</ul></li>
-		</security:authorize>
-		
 		
 		<!-- ADMINISTRATOR -->
 		
@@ -47,6 +34,8 @@
 								code="master.page.administrator.dashboard" /></a></li>
 					<li><a class="child" href="configuration/administrator/edit.do"><spring:message
 								code="master.page.administrator.configuration" /></a></li>
+					<li><a class="child" href="submission/administrator/list.do"><spring:message
+								code="master.page.author.submission" /></a></li>			
 
 					
 				</ul></li>
@@ -60,9 +49,9 @@
 				<ul>
 					<li><a class="child" href="registration/author/list.do"><spring:message
 								code="master.page.author.registration" /></a></li>
-					<li><a class="child" href="conference/author/list.do"><spring:message
-								code="master.page.author.conference" /></a></li>			
-
+					<li><a class="child" href="submission/author/list.do"><spring:message
+								code="master.page.author.submission" /></a></li>			
+					
 				</ul></li>
 		</security:authorize>
 		
