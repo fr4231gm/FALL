@@ -54,8 +54,12 @@
 	</display:column>
 
 	<display:column>
-		<acme:link link="submission/display.do?submissionId=${row.id}"
+		<acme:link link="submission/administrator/assign.do?submissionId=${row.id}"
 				code="submission.assign" />
+	</display:column>
+	
+	<display:column>
+		<acme:link link="reviewer/list.do?submissionId=${row.id}" code = "submission.reviewer"/>
 	</display:column>
 
 </security:authorize>		
@@ -64,4 +68,4 @@
 
 <br>
 
-<acme:back code="conference.goback" />
+<acme:back code="submission.goback" />
