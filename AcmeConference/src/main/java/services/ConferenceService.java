@@ -101,14 +101,15 @@ public class ConferenceService {
 	
 	public Collection<Reviewer> getCompatibleReviewers(Conference conference) {
 		List<Reviewer> res;
-		String text = conference.getTitle() + conference.getSummary();
+		String text = conference.getTitle() + " " + conference.getSummary();
+		
 		try {
 			final DatabaseUtil databaseUtil = new DatabaseUtil();
 			databaseUtil.initialise();
 			final FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(databaseUtil.getEntityManager());
 			databaseUtil.getEntityManager().getTransaction().begin();
 			fullTextEntityManager.createIndexer().startAndWait();
-			res = this.keywordSearch(text, fullTextEntityManager);
+			res = this.reviewersKeywordsSearch(text, fullTextEntityManager);
 			res =  res.subList(0, Math.min(res.size(), 3));
 		} catch (final Throwable oops) {
 			res = new ArrayList<Reviewer>();
@@ -119,7 +120,7 @@ public class ConferenceService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Reviewer> keywordSearch(final String keywordSearch, final FullTextEntityManager fullTextEntityManager) {
+	public List<Reviewer> reviewersKeywordsSearch(final String keywordSearch, final FullTextEntityManager fullTextEntityManager) {
 		List<Reviewer> result;
 		
 		final QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Reviewer.class).get();
