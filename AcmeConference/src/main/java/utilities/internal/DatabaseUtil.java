@@ -77,6 +77,9 @@ public class DatabaseUtil {
 	public String getDatabaseDialectName() {
 		return this.databaseDialectName;
 	}
+	public EntityManager getEntityManager() {
+		return this.entityManager;
+	}
 
 	// Business methods -------------------------------------------------------
 

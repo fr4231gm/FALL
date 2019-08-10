@@ -28,9 +28,9 @@ public class Conference extends DomainEntity {
 	private String					summary;
 	private Double					fee;
 	private Boolean					isDraft;
-	private Administrator					administrator;
-	private Category					category;
-	private Collection<Comment>					comments;
+	private Administrator			administrator;
+	private Category				category;
+	private Collection<Comment>		comments;
 
 
 	// Getters
