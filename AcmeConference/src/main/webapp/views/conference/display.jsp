@@ -80,7 +80,14 @@
 <br />	
 <br />	
 
+
+<acme:link link="message/broadcast-authors-submitted.do?conferenceId=${conference.id}" code="master.page.broadcast.submitted" />
+<br />	
+<acme:link link="message/broadcast-authors-registered.do?conferenceId=${conference.id}"  code="master.page.broadcast.registered" />
+<br />	
 <acme:link code="conference.create.comment" link="comment/createByConference.do?conferenceId=${conference.id}" />
+
+
 <br />	
 <br />	
 <acme:back code="conference.goback"/>

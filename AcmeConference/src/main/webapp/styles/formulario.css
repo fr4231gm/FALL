@@ -18,6 +18,13 @@ label + select {
     width: 30%;
     margin: 0 1% 0 4%;
     border: 1px solid;
+    padding-left: 10px;
+}
+
+label + textarea {
+    width: 30%;
+    margin: 0 1% 0 4%;
+    border: 1px solid;
     height: 20px;
     padding-left: 10px;
 }

@@ -35,7 +35,11 @@
 		<security:intercept-url pattern="/administrator/edit.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/submission/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/submission/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
-		<security:intercept-url pattern="/submission/administrator/assign.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/submission/administrator/assign.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/message/broadcast-everyone.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/message/broadcast-authors-submitted.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/message/broadcast-authors-registered.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/message/broadcast-everyone-and-admins.do" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- AUTHOR -->
 		
@@ -84,7 +88,10 @@
 		
 		
 		<!-- *********************** AUTENTICATED *********************** -->
-		<security:intercept-url pattern="/message/**" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/message/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/message/delete.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/message/create.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/message/show.do" access="isAuthenticated()" /> 
 		
 		<!-- *********************** ANONYMOUS *********************** -->
 		<security:intercept-url pattern="/sponsor/register.do" access="isAnonymous()" />

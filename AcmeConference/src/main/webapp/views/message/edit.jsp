@@ -17,35 +17,21 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
-
-
-	<spring:message code="message.subject" />:&nbsp;
-	<form:input path="subject" value="${m.subject}" placeholder="Title"/>
-	<form:errors cssClass="error" path="subject" />
-
-
-	<b> <spring:message code="message.body" />:&nbsp;
-	</b>
-	<form:textarea path="body" value="${m.body}" rows="5" placeholder="the reason of this message is..." />
-	<form:errors cssClass="error" path="body" />
-
-	<b> <spring:message code="message.recipients" />:&nbsp;
-	</b>
-	<form:select multiple="true" id="recipients" path="recipients">
-		<form:options items="${recipients}" itemLabel="name" itemValue="id" />
-	</form:select>
-	<form:errors cssClass="error" path="recipients" />
-
-	<b> <spring:message code="message.topic" />:&nbsp;
-	</b>
-	<form:input path="topic" value="${m.topic}" placeholder="Information" />
-	<form:errors cssClass="error" path="topic" />
-
+	<acme:input code="message.subject" path="subject" placeholder="Hello moto" />
+	<acme:textarea code="message.body" path="body"  placeholder="the reason of this message is..." />
+	<acme:select itemLabel="name" items="${recipients}" code="message.recipients" path="recipients"  multiple="true" id="recipients" />
+	
+	<div class="form-group">
+		<form:label path="topic"> <spring:message code="message.topic" /> </form:label>
+    	<form:select path="topic" >
+        	<form:options items="${topics}" />
+    	</form:select>
+		<form:errors path="topic" cssClass="error" />
+	</div>
+	<br>
 
 	<acme:cancel code="message.cancel" url="/message/list.do"/>
 	<acme:submit name="save" code="message.save" />
-
-
 
 </form:form>
 

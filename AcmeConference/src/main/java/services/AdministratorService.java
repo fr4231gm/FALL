@@ -23,12 +23,6 @@ public class AdministratorService {
 	@Autowired
 	private AdministratorRepository	administratorRepository;
 
-	// Supporting services ----------------------------------------------------
-	
-
-
-	// Simple CRUDs methods ---------------------------------------------------
-
 	public Administrator save(final Administrator admin) {
 		Administrator result, principal;
 		Assert.notNull(admin);
@@ -88,8 +82,7 @@ public class AdministratorService {
 	}
 
 	// Metodo que devuelve un administrador a traves del ID de su cuenta de
-	// usuario
-	// Servira para el metodo findByPrincipal()
+	// usuario Servira para el metodo findByPrincipal()
 	public Administrator findAdministratorByUserAccountId(final int userAccountId) {
 		Assert.isTrue(userAccountId != 0);
 

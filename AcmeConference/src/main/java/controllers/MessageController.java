@@ -91,13 +91,12 @@ public class MessageController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/broadcast", method = RequestMethod.GET)
-	public ModelAndView broadcast() {
+	@RequestMapping(value = "/broadcast-everyone-and-admins", method = RequestMethod.GET)
+	public ModelAndView broadcast1() {
 		ModelAndView result;
 		MessageForm m;
 		m = new MessageForm();
 		m.setRecipients(this.actorService.findAll());
-		m.setTopic("SYSTEM");
 		final Administrator principal = this.administratorService
 				.findByPrincipal();
 		Assert.notNull(principal);
@@ -105,7 +104,7 @@ public class MessageController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/broadcast", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/broadcast-everyone-and-admins", method = RequestMethod.POST, params = "save")
 	public ModelAndView broadcast2(
 			@Valid @ModelAttribute("m") final MessageForm me,
 			final BindingResult binding) {
@@ -120,7 +119,96 @@ public class MessageController extends AbstractController {
 			} catch (final Throwable oops) {
 				result = new ModelAndView("redirect:/message/list.do");
 			}
+		return result;
+	}
+	
+	@RequestMapping(value = "/broadcast-everyone", method = RequestMethod.GET)
+	public ModelAndView broadcast3() {
+		ModelAndView result;
+		MessageForm m;
+		m = new MessageForm();
+		m.setRecipients(this.actorService.findAllButAdmins());
+		final Administrator principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
+		result = this.createEditModelAndView(m);
+		return result;
+	}
 
+	@RequestMapping(value = "/broadcast-everyone", method = RequestMethod.POST, params = "save")
+	public ModelAndView broadcast4(
+			@Valid @ModelAttribute("m") final MessageForm me,
+			final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors()) {
+			result = this.createEditModelAndView(me);
+			result.addObject("bind", binding);
+		} else
+			try {
+				this.messageService.save(me);
+				result = new ModelAndView("redirect:/message/list.do");
+			} catch (final Throwable oops) {
+				result = new ModelAndView("redirect:/message/list.do");
+			}
+		return result;
+	}
+
+	@RequestMapping(value = "/broadcast-authors-registered", method = RequestMethod.GET)
+	public ModelAndView broadcast5(@RequestParam int conferenceId) {
+		ModelAndView result;
+		MessageForm m;
+		m = new MessageForm();
+		m.setRecipients(this.actorService.findAuthorsRegisteredByConferenceId(conferenceId));
+		final Administrator principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
+		result = this.createEditModelAndView(m);
+		return result;
+	}
+
+	@RequestMapping(value = "/broadcast-authors-registered", method = RequestMethod.POST, params = "save")
+	public ModelAndView broadcast6(
+			@Valid @ModelAttribute("m") final MessageForm me,
+			final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors()) {
+			result = this.createEditModelAndView(me);
+			result.addObject("bind", binding);
+		} else
+			try {
+				this.messageService.save(me);
+				result = new ModelAndView("redirect:/message/list.do");
+			} catch (final Throwable oops) {
+				result = new ModelAndView("redirect:/message/list.do");
+			}
+		return result;
+	}
+	
+	@RequestMapping(value = "/broadcast-authors-submitted", method = RequestMethod.GET)
+	public ModelAndView broadcast7(@RequestParam int conferenceId) {
+		ModelAndView result;
+		MessageForm m;
+		m = new MessageForm();
+		m.setRecipients(this.actorService.findAuthorsSubmittedByConferenceId(conferenceId));
+		final Administrator principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
+		result = this.createEditModelAndView(m);
+		return result;
+	}
+
+	@RequestMapping(value = "/broadcast-authors-submitted", method = RequestMethod.POST, params = "save")
+	public ModelAndView broadcast8(
+			@Valid @ModelAttribute("m") final MessageForm me,
+			final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors()) {
+			result = this.createEditModelAndView(me);
+			result.addObject("bind", binding);
+		} else
+			try {
+				this.messageService.save(me);
+				result = new ModelAndView("redirect:/message/list.do");
+			} catch (final Throwable oops) {
+				result = new ModelAndView("redirect:/message/list.do");
+			}
 		return result;
 	}
 
@@ -128,12 +216,12 @@ public class MessageController extends AbstractController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView remove(@RequestParam final int id) {
 		ModelAndView result;
-		try {
+//		try {
 			this.messageService.delete(this.messageService.findOne(id));
 			result = new ModelAndView("redirect:/message/list.do");
-		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/message/list.do");
-		}
+//		} catch (final Throwable oops) {
+//			result = new ModelAndView("redirect:/message/list.do");
+//		}
 		return result;
 	}
 
@@ -144,7 +232,7 @@ public class MessageController extends AbstractController {
 		Actor principal = this.actorService.findByPrincipal();
 		Collection<Message> sent;
 		Collection<Message> received;
-		sent = this.messageService.findSended(principal.getId());
+		sent = this.messageService.findSent(principal.getId());
 		received = this.messageService.findReceived(principal.getId());
 		result = new ModelAndView("message/list");
 		result.addObject("received", received);
@@ -162,12 +250,14 @@ public class MessageController extends AbstractController {
 			final String messagecode) {
 		ModelAndView result;
 		final Collection<Actor> recipients = this.actorService.findAll();
+		String[] topics = this.configService.findConfiguration().getTopics().split(",");
+		
 		result = new ModelAndView("message/edit");
 		result.addObject("m", m);
 		result.addObject("message", messagecode);
 		result.addObject("recipients", recipients);
-		result.addObject("configuration",
-				this.configService.findConfiguration());
+		result.addObject("topics", topics);
+
 		return result;
 	}
 }

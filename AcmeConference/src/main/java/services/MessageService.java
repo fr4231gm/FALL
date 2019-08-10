@@ -23,7 +23,7 @@ public class MessageService {
 	// Managed repository --------------------------------
 
 	@Autowired
-	private MessageRepository		mRepository;
+	private MessageRepository		messageRepository;
 
 	// Supporting services ----------------------------
 
@@ -34,9 +34,7 @@ public class MessageService {
 	// Simple CRUD methods --------------------------------
 
 	public Message findOne(final int id) {
-		Assert.notNull(id);
-
-		final Message m = this.mRepository.findOne(id);
+		final Message m = this.messageRepository.findOne(id);
 		final Actor principal = this.actorService.findByPrincipal();
 		Assert.isTrue(principal.getId() == m.getSender().getId() || m.getRecipient().getId() == principal.getId());
 		return m;
@@ -53,17 +51,27 @@ public class MessageService {
 		res.setBody(m.getBody());
 		res.setSubject(m.getSubject());
 		res.setTopic(m.getTopic());
+		res.setIsCopy(false);
 
 		final List<Actor> recipients = new ArrayList<Actor>(m.getRecipients());
-
+		
 		for (int i = 0; i < recipients.size(); i++) {
 			final Message copied = this.createcopy(m);
 			copied.setSender(principal);
 			copied.setRecipient(recipients.get(i));
-			this.mRepository.save(copied);
+			copied.setIsCopy(true);
+			this.messageRepository.save(copied);
+		}
+		
+		for (int i = 0; i < recipients.size(); i++) {
+			final Message copied = this.createcopy(m);
+			copied.setSender(principal);
+			copied.setRecipient(recipients.get(i));
+			copied.setIsCopy(false);
+			this.messageRepository.save(copied);
 		}
 
-		return this.mRepository.save(res);
+		return this.messageRepository.save(res);
 	}
 
 	private Message createcopy(final MessageForm m) {
@@ -72,25 +80,26 @@ public class MessageService {
 		res.setBody(m.getBody());
 		res.setSubject(m.getSubject());
 		res.setTopic(m.getTopic());
-
 		return res;
 	}
 
 	public void delete(final Message m) {
 		Assert.notNull(m);
 		final Actor principal = this.actorService.findByPrincipal();
-		if (m.getRecipient() == null){
-			Assert.isTrue((m.getSender().getId() == principal.getId() && m.getRecipient() == null));}
+		if (m.getRecipient().getId() == principal.getId()){
+			Assert.isTrue(m.getIsCopy()); 
+		}
 		else{
-			Assert.isTrue(m.getRecipient().getId() == principal.getId());}
-		this.mRepository.delete(m);
+			Assert.isTrue((m.getSender().getId() == principal.getId()) && !m.getIsCopy());
+		}
+		this.messageRepository.delete(m);
 		
 	}
 
-	public Collection<Message> findSended(final int actorId) {
+	public Collection<Message> findSent(final int actorId) {
 
 		Collection<Message> messages;
-		messages = this.mRepository.findMessagesSent(actorId);
+		messages = this.messageRepository.findMessagesSent(actorId);
 		Assert.notNull(messages);
 
 		return messages;
@@ -98,7 +107,7 @@ public class MessageService {
 
 	public Collection<Message> findReceived(final int actorId) {
 		Collection<Message> messages;
-		messages = this.mRepository.findMessagesRecevied(actorId);
+		messages = this.messageRepository.findMessagesRecevied(actorId);
 		Assert.notNull(messages);
 
 		return messages;

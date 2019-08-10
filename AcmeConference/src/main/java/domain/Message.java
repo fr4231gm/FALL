@@ -61,7 +61,7 @@ public class Message extends DomainEntity {
 	}
 	
 	@NotNull
-	public boolean GetIsCopy() {
+	public boolean getIsCopy() {
 		return isCopy;
 	}
 
