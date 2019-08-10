@@ -35,6 +35,7 @@
 		<security:intercept-url pattern="/submission/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/submission/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/submission/administrator/assign.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/submission/administrator/autoassign.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/reviewer/list.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/reviewer/display.do" access="hasRole('ADMINISTRATOR')" />
 		

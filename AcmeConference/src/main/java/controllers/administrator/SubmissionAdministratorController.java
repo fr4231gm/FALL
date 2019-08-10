@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ReviewerService;
 import services.SubmissionService;
 
 import controllers.AbstractController;
+import domain.Reviewer;
 import domain.Submission;
 
 @Controller
@@ -25,14 +27,21 @@ public class SubmissionAdministratorController extends AbstractController {
 	// Services
 	@Autowired
 	private SubmissionService submissionService;
+	
+	@Autowired
+	private ReviewerService reviewerService;
 
 	// Create
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int conferenceId) {
+	public ModelAndView create(@RequestParam final int submissionId) {
 		ModelAndView res;
-		final Submission sub = this.submissionService.create(conferenceId);
+		Collection <Reviewer> reviewers;
+		final Submission sub = this.submissionService.create(submissionId);
+		
+		reviewers = this.reviewerService.findAll();
 
 		res = this.createEditModelAndView(sub);
+		res.addObject("reviewers", reviewers);
 
 		return res;
 	}

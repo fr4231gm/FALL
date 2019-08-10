@@ -26,5 +26,22 @@
 </display:table>
 
 <br>
+<br>
 
-<acme:back code="reviewer.goback" />
+<form:form action="submission/administrator/assign.do"  modelAttribute="submission" >
+	
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+
+	<acme:select items="${reviewers}" itemLabel="name" code="reviewer.name" path="reviewers"/>
+	<br>
+
+	<acme:submit name="save" code="submission.assign"/>
+	<br>
+	
+</form:form>	
+<br>
+
+<acme:link link="submission/administrator/autoassign.do" code = "submission.autoassign"/>
+
+<acme:back code="submission.goback" />

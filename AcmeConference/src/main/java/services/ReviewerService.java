@@ -128,14 +128,14 @@ public class ReviewerService {
 		return result;
 	}
 	
-	public Collection<Reviewer> findReviewersBySubmission(int submissionId){
-		Collection<Reviewer> res;
-
-		res = this.reviewerRepository.findReviewersBySubmission(submissionId);
-
-		return res;
-	}
-
+	public Collection<Reviewer> findReviewersBySubmission(int submissionId){ 
+		Collection<Reviewer> res; 
+ 
+		res = this.reviewerRepository.findReviewersBySubmission(submissionId); 
+ 
+		return res; 
+	} 
+	
 	public void checkPrincipal() {
 		Reviewer principal;
 		principal = this.findByPrincipal();

@@ -18,31 +18,30 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+	<acme:input code="reviewer.name" path="reviewer.name" readonly="true"/>
+	<br />	
 	
-<acme:input code="registration.creditCard.holder" path="registration.creditCard.holder"
-	readonly="true" />
+	<acme:input code="reviewer.surname" path="reviewer.surname" readonly="true" />
 	<br />
 	
-<acme:input code="registration.creditCard.make" path="registration.creditCard.make"
-	readonly="true" />
+	<acme:input code="reviewer.middleName" path="reviewer.middleName" readonly="true"/>
+	<br />
+	
+	<acme:input code="reviewer.photo" path="reviewer.photo" readonly="true"/>
+	<br />
+	
+	<acme:input code="reviewer.email" path="reviewer.email" readonly="true"/>
+	<br />
+	
+	<acme:input code="reviewer.phone.number" path="reviewer.phoneNumber" readonly="true" id="phoneId"/>
+	<br />
+	
+	<acme:input code="reviewer.address" path="reviewer.address" readonly="true"/>
+	<br />	
+	
+	<acme:input code="reviewer.keywords" path="reviewer.keywords" readonly="true"/>
 	<br />	
 
-<acme:input code="registration.creditCard.number" path="registration.creditCard.number"
-	readonly="true" />
-	<br />
-	
-<acme:input code="registration.creditCard.expirationMonth" path="registration.creditCard.expirationMonth"
-	readonly="true" />
-	<br />
-	
-<acme:input code="registration.creditCard.expirationYear" path="registration.creditCard.expirationYear"
-	readonly="true" />
-	<br />
-	
-<acme:input code="registration.creditCard.CVV" path="registration.creditCard.CVV"
-	readonly="true" />
-	<br />			
-
 <br />	
 <br />	
-<acme:back code="registration.goback"/>
+<acme:back code="reviewer.goback"/>
