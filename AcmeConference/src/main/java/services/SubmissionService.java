@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SubmissionRepository;
+import domain.Actor;
 import domain.Author;
 import domain.Paper;
+import domain.Reviewer;
 import domain.Submission;
 
 @Service
@@ -26,6 +28,15 @@ public class SubmissionService {
 
 	@Autowired
 	private ConferenceService		conferenceService;
+	
+	@Autowired
+	private AdministratorService administratorService;
+	
+	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
+	private ReviewerService reviewerService;
 
 
 	public Collection<Submission> findByAuthor() {
@@ -49,7 +60,6 @@ public class SubmissionService {
 	public Submission findOne(final int submissionId) {
 		Submission s;
 		s = this.submissionRepository.findOne(submissionId);
-		Assert.notNull(s);
 		return s;
 	}
 
@@ -66,6 +76,49 @@ public class SubmissionService {
 
 		return s;
 	}
+	
+	public Submission save(final Submission s) {
+		Submission result;
+		Actor principal;
+
+		principal = this.actorService.findByPrincipal();
+		Assert.notNull(principal);
+		
+		if (principal instanceof Author) {
+			Assert.isTrue(s.getAuthor().getId() == this.authorService.findByPrincipal().getId());
+		}else{
+			Assert.isTrue(s.getConference().getAdministrator().getId() == this.administratorService.findByPrincipal().getId());
+		}
+		
+		final Date actual = new Date(System.currentTimeMillis() - 1);
+		Assert.isTrue(s.getConference().getSubmissionDeadline().after(actual));
+		s.setMoment(actual);
+		result = this.submissionRepository.save(s);
+		return result;
+	}
+	
+	public Submission saveAssign(final Submission s) {
+		Submission result;
+		Actor principal;
+		Collection<Reviewer> reviewers;
+
+		principal = this.actorService.findByPrincipal();
+		Assert.notNull(principal);
+		
+		if (principal instanceof Author) {
+			Assert.isTrue(s.getAuthor().getId() == this.authorService.findByPrincipal().getId());
+		}else{
+			Assert.isTrue(s.getConference().getAdministrator().getId() == this.administratorService.findByPrincipal().getId());
+		}
+		
+		//reviewers = this.reviewerService.findReviewersBySubmission(s.getId());
+		
+		//reviewers.iterator().next().setSubmissions(s);
+		
+		result = this.submissionRepository.save(s);
+		return result;
+	}
+	
 	private String generateTicker(final Submission s) {
 		String res = "";
 
@@ -91,13 +144,4 @@ public class SubmissionService {
 		return res;
 	}
 
-	public Submission save(final Submission s) {
-		Submission result;
-		Assert.isTrue(s.getAuthor().getId() == this.authorService.findByPrincipal().getId());
-		final Date actual = new Date(System.currentTimeMillis() - 1);
-		Assert.isTrue(s.getConference().getSubmissionDeadline().after(actual));
-		s.setMoment(actual);
-		result = this.submissionRepository.save(s);
-		return result;
-	}
 }

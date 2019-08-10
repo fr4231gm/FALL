@@ -27,21 +27,17 @@
 
 <br>
 <br>
+ 
+<acme:select items="${reviewers}" itemLabel="name" code="reviewer.name" path="reviewers"/>
+<br>
+<br>
 
-<form:form action="submission/administrator/assign.do"  modelAttribute="submission" >
-	
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-
-	<acme:select items="${reviewers}" itemLabel="name" code="reviewer.name" path="reviewers"/>
-	<br>
-
-	<acme:submit name="save" code="submission.assign"/>
-	<br>
-	
-</form:form>	
+<acme:link link="submission/administrator/assign.do" code = "submission.assign"/>
+<br>	
 <br>
 
 <acme:link link="submission/administrator/autoassign.do" code = "submission.autoassign"/>
+<br>
+<br>
 
 <acme:back code="submission.goback" />
