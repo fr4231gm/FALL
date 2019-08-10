@@ -15,14 +15,14 @@
 	pagesize="5" class="displaytag">
 	
 	<display:column property="ticker" titleKey="submission.ticker"
-		sortable="true"/>
+		sortable="false"/>
 		
 		<display:column property="moment" titleKey="submission.moment"
-		sortable="true"	format="{0, date, dd/MM/yyyy HH:mm}"/>
+		sortable="false"	format="{0, date, dd/MM/yyyy HH:mm}"/>
 		
 		
 		
-			<display:column titleKey="submission.status" sortable="true">
+	<display:column titleKey="submission.status" sortable="true">
 		<jstl:if test="${row.status eq 'UNDER-REVIEW'}">
 			<spring:message code="submission.underreview"/>
 		</jstl:if>
