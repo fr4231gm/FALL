@@ -38,6 +38,9 @@
 		<security:intercept-url pattern="/submission/administrator/autoassign.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/reviewer/list.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/reviewer/display.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/category/create.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/category/edit.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/category/remove.do" access="hasRole('ADMINISTRATOR')" /> 
 		
 		<!-- AUTHOR -->
 		
@@ -66,6 +69,7 @@
 		<security:intercept-url pattern="/conference/listSearchForthcoming.do" access="permitAll" /> 
 		<security:intercept-url pattern="/conference/listSearchPast.do" access="permitAll" /> 
 		<security:intercept-url pattern="/conference/display.do" access="permitAll" /> 
+		<security:intercept-url pattern="/category/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/comment/**" access="permitAll" /> 
 		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
 		<security:intercept-url pattern="/images/**" access="permitAll" /> 

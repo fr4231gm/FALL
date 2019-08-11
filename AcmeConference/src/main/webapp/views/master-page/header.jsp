@@ -36,8 +36,6 @@
 								code="master.page.administrator.configuration" /></a></li>
 					<li><a class="child" href="submission/administrator/list.do"><spring:message
 								code="master.page.author.submission" /></a></li>			
-
-					
 				</ul></li>
 		</security:authorize>
 		
@@ -88,7 +86,8 @@
 			<li>
 				<a class="child" href="conference/listPastConferences.do"><spring:message code="master.page.listPastConferences" /></a>
 			</li>
-			
+				<li><a class="child" href="category/list.do"><spring:message
+						code="master.page.categories" /></a></li>	
 			</ul>
 			
 		</li>
