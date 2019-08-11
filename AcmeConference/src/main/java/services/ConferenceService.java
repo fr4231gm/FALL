@@ -140,4 +140,13 @@ public class ConferenceService {
 		
 	}
 
+	public Collection<Conference> findConferencesAfter(Date date) {
+		Collection<Conference> conferences;
+		
+		conferences = this.conferenceRepository.findForthcomingConferences(date);
+		Assert.notNull(conferences);
+
+		return conferences;
+	}
+
 }

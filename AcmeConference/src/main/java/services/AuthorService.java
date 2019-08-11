@@ -192,4 +192,7 @@ public class AuthorService {
 		
 	}
 		
+		public Collection<Author> authorsWithCameraReadyPapers(){
+			return this.authorRepository.findAuthorsWithCameraReadyPapers();
+		}
 }

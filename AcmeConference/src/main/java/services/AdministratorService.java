@@ -1,10 +1,22 @@
 
 package services;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,7 +25,12 @@ import org.springframework.util.Assert;
 import repositories.AdministratorRepository;
 import security.LoginService;
 import security.UserAccount;
+import utilities.internal.DatabaseUtil;
 import domain.Administrator;
+import domain.Author;
+import domain.Conference;
+import domain.Paper;
+import domain.Reviewer;
 
 @Service
 @Transactional
@@ -23,6 +40,18 @@ public class AdministratorService {
 	@Autowired
 	private AdministratorRepository	administratorRepository;
 
+	@Autowired
+	private AuthorService 			authorService;
+	
+	@Autowired
+	private SubmissionService 		submissionService;
+	
+	@Autowired
+	private ConfigurationService 	configurationService;
+	
+	@Autowired
+	private ConferenceService 		conferenceService;
+	
 	public Administrator save(final Administrator admin) {
 		Administrator result, principal;
 		Assert.notNull(admin);
@@ -130,7 +159,63 @@ public class AdministratorService {
 	}
 	
 	public Double[] CommentsPerActivity(){
+		this.computeBuzzWords();
 		return this.administratorRepository.CommentsPerActivity();
 	}
+	
+	public String computeBuzzWords(){
+		Administrator principal = this.findByPrincipal();
+		Assert.notNull(principal);
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, -1);
+		Date d = cal.getTime();
+        Collection<Conference> conferences = this.conferenceService.findConferencesAfter(d);
+        String allWords = "";
+    	//Obtenemos todas las palabras
+        for (Conference conference : conferences) {
+    		 allWords += conference.getTitle() + " " + conference.getSummary() + " ";
+    	}
+    	//Borramos las voidWords
+		String[] voidWords  = this.configurationService.findConfiguration().getVoidWords().split(",");
+		for (String voidWord : voidWords) {
+			allWords = this.removeWord(allWords, voidWord);
+		}
+
+        String[] wordsArray = allWords.split(" ");       
+        int maxCount = 1;
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String word : wordsArray) {
+        	word = word.toLowerCase();
+            if (map.containsKey(word)) {
+                int count = map.get(word);
+                map.put(word, count + 1);
+                if (count >= maxCount){
+                	maxCount = count;
+                }
+            } else {
+                map.put(word, 1);
+            }
+        }
+        
+    	Double corte = Math.max(1.1, maxCount*0.8);
+        String buzzWords = "";
+        for (Entry<String, Integer> entry : map.entrySet()) {
+            if(entry.getValue() >= corte){
+            	buzzWords += (entry.getKey()) + ", ";
+            }
+        }
+     
+        return buzzWords;
+
+    }
+	
+	public String removeWord(String string, String word) { 
+	        if (string.contains(word)) {
+	            word = " " + word + " "; 
+	            string = string.replaceAll(word, " "); 
+	        }
+	        return string; 
+	    } 
+	  
 
 }
