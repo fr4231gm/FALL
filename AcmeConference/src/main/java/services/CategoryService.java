@@ -64,6 +64,7 @@ public class CategoryService {
 
 		// Checking parameters
 		Assert.notNull(category);
+		Assert.notNull(category.getParentCategory());
 		List<Category> childs = new ArrayList<Category>(this.findChilds(category.getId()));
 		List<Conference> conferences = new ArrayList<Conference>(this.conferenceService.findByCategoryId(category.getId()));
 		

@@ -48,7 +48,7 @@ public class AdministratorService {
 		return result;
 	}
 
-	// Mï¿½todo para encontrar un administrador a traves de su ID
+	// Método para encontrar un administrador a traves de su ID
 	public Administrator findOne(final int administratorId) {
 		Administrator result;
 

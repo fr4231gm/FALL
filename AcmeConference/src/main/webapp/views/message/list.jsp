@@ -33,7 +33,7 @@
 />
 
 <display:column
-	property	= "recipient"
+	property	= "recipient.name"
 	titleKey	= "message.recipient"
 	sortable	= "true"
 />

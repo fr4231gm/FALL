@@ -35,6 +35,10 @@
 	text-decoration: none;
 }
 
+.jMenu li a .fa{
+	font-size: 20px;
+}
+
 /* Lower levels */
 
 .jMenu li ul {
@@ -64,7 +68,7 @@
 }
 
 .jMenu li ul li a {
-	font-size: 11px;
+    font-size: 14px;
 	text-transform: none;
 	padding: 7px;
 	display: block;

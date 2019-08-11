@@ -28,9 +28,8 @@
 		<!-- ADMINISTRATOR -->
 
 		<security:authorize access="hasRole('ADMINISTRATOR')">
-			<li><a class="fNiv parent"><spring:message code="master.page.administrator" /></a>
+			<li><a class="fNiv parent"><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;<spring:message code="master.page.administrator" /></a>
 				<ul>
-					<li><a class="child" href="administrator/register.do"><spring:message code="master.page.administrator.create.new.administrator" /></a></li>
 					<li><a class="child" href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 					<li><a class="child" href="message/broadcast-everyone.do"> <spring:message code="master.page.broadcast.everyone" /></a></li>
 					<li><a class="child" href="message/broadcast-everyone-and-admins.do"> <spring:message code="master.page.broadcast.everyone.and.admins" /></a></li>
@@ -43,7 +42,7 @@
 		<!-- AUTHOR -->
 
 		<security:authorize access="hasRole('AUTHOR')">
-			<li><a class="fNiv parent"><spring:message
+			<li><a class="fNiv parent"><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;<spring:message
 						code="master.page.author" /></a>
 				<ul>
 					<li><a class="child" href="registration/author/list.do"><spring:message
@@ -57,10 +56,10 @@
 
 		<!-- ******************** NOT AUTHENTICATED ******************** -->
 		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><spring:message
+			<li><a class="fNiv" href="security/login.do"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;&nbsp;<spring:message
 						code="master.page.login" /></a></li>
 
-			<li><a class="fNiv"><spring:message
+			<li><a class="fNiv"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;&nbsp;<spring:message
 						code="master.page.register" /></a>
 				<ul>
 					<li><a class="child" href="author/register.do"><spring:message
@@ -75,7 +74,7 @@
 		</security:authorize>
 
 		<!-- ************************** ALL ************************ -->
-		<li><a class="fNiv"><spring:message
+		<li><a class="fNiv"><i class="fa fa-comments"></i>&nbsp;&nbsp;&nbsp;<spring:message
 					code="master.page.conferences" /></a>
 			<ul>
 			<li>
@@ -92,11 +91,11 @@
 			</ul>
 			
 		</li>
-		<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
+		<li><a class="fNiv" href="about-us/index.do"><i class="fa fa-id-card"></i>&nbsp;&nbsp;&nbsp;<spring:message code="master.page.about-us" /></a></li>
 			
 		<!-- ******************** AUTHENTICATED ******************** -->
 		<security:authorize access="isAuthenticated()">
-			<li><a class="fNiv"> <spring:message
+			<li><a class="fNiv"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;<spring:message
 						code="master.page.profile" /> (<security:authentication
 						property="principal.username" />)
 			</a>
@@ -123,8 +122,6 @@
 					<li><a href="j_spring_security_logout"><spring:message
 								code="master.page.logout" /> </a></li>
 				</ul></li>
-			<li><a class="fNiv" href="about-us/index.do"><spring:message
-						code="master.page.about-us" /></a></li>
 		</security:authorize>
 	</ul>
 </div>

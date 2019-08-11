@@ -78,6 +78,31 @@
 		 	/>
 		</jstl:if>
 	</div>
+</fieldset>
+<br>
+<fieldset>
+	<div class="centrado">
+		<i class="fa fa-user"></i> <spring:message code="message.recipient" />
+		<br><br>
+	</div>
+	<div class="partido">
+ 	<acme:input code="actor.name" path="m.recipient.name" 	readonly="true"/>
+	<acme:input code="actor.middleName" path="m.recipient.middleName" readonly="true"/>
+	<acme:input code="actor.surname" path="m.recipient.surname" readonly="true"/>
+
+	<acme:input code="actor.email" path="m.recipient.email" readonly="true"/>
+	<acme:input code="actor.phone.number" path="m.recipient.phoneNumber" readonly="true"/>
+	<acme:input code="actor.address" path="m.recipient.address" readonly="true"/>
+	</div>
+	<div class="partido" style="    text-align: center;
+    vertical-align: top;">
+		<jstl:if test="${not empty m.recipient.photo}">
+			<img style="width: 350px; height: 320px;"
+		 		src = "${m.recipient.photo}"
+		  		alt="picture not found"
+		 	/>
+		</jstl:if>
+	</div>
 </fieldset>	
 
 <acme:cancel code="actor.cancel" url="/"/>

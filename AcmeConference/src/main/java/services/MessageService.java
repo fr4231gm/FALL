@@ -40,18 +40,12 @@ public class MessageService {
 		return m;
 	}
 
-	public Message save(final MessageForm m) {
+	public void save(final MessageForm m) {
 		Assert.notNull(m);
 		Assert.isTrue(m.getId() == 0);
 
 		final Actor principal = this.actorService.findByPrincipal();
-		final Message res = new Message();
-		res.setSender(principal);
-		res.setMoment(new Date(System.currentTimeMillis() - 1));
-		res.setBody(m.getBody());
-		res.setSubject(m.getSubject());
-		res.setTopic(m.getTopic());
-		res.setIsCopy(false);
+
 
 		final List<Actor> recipients = new ArrayList<Actor>(m.getRecipients());
 		
@@ -71,7 +65,7 @@ public class MessageService {
 			this.messageRepository.save(copied);
 		}
 
-		return this.messageRepository.save(res);
+
 	}
 
 	private Message createcopy(final MessageForm m) {
