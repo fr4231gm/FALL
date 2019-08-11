@@ -28,7 +28,14 @@
 <br>
 <br>
  
-<acme:select items="${reviewers}" itemLabel="name" code="reviewer.name" path="reviewers"/>
+ <form:form modelAttribute="submission">
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+ 
+ <form:select multiple="true" id="reviewers" path="reviewer.name">
+		<form:options items="${reviewers}" itemLabel="name" itemValue="id" />
+</form:select>
+ 
 <br>
 <br>
 
@@ -39,5 +46,7 @@
 <acme:link link="submission/administrator/autoassign.do" code = "submission.autoassign"/>
 <br>
 <br>
+
+</form:form>
 
 <acme:back code="submission.goback" />

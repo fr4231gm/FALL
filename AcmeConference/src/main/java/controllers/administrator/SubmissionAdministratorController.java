@@ -36,11 +36,15 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView create(@RequestParam final int submissionId) {
 		ModelAndView res;
 		Collection <Reviewer> reviewers;
+		Submission submission;
 		
 		reviewers = this.reviewerService.findAll();
+		submission = this.submissionService.findOne(submissionId);
+		
 
 		res = new ModelAndView("submission/assign");
 		res.addObject("reviewers", reviewers);
+		res.addObject("submission", submission);
 
 		return res;
 	}
