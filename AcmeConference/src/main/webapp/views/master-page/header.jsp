@@ -78,19 +78,22 @@
 		<li><a class="fNiv"><spring:message
 					code="master.page.conferences" /></a>
 			<ul>
-				<li><a class="child"
-					href="conference/listForthcomingConferences.do"><spring:message
-							code="master.page.listForthcomingConferences" /></a></li>
-				<li><a class="child"
-					href="conference/listRunningConferences.do"><spring:message
-							code="master.page.listRunningConferences" /></a></li>
-				<li><a class="child" href="conference/listPastConferences.do"><spring:message
-							code="master.page.listPastConferences" /></a></li>
-
-			</ul></li>
-		<li><a class="fNiv" href="about-us/index.do"><spring:message
-					code="master.page.about-us" /></a></li>
-
+			<li>
+				<a class="child" href="conference/listForthcomingConferences.do"><spring:message code="master.page.listForthcomingConferences" /></a>
+			</li>
+			<li>
+				<a class="child" href="conference/listRunningConferences.do"><spring:message code="master.page.listRunningConferences" /></a>
+			</li>
+			<li>
+				<a class="child" href="conference/listPastConferences.do"><spring:message code="master.page.listPastConferences" /></a>
+			</li>
+				<li><a class="child" href="category/list.do"><spring:message
+						code="master.page.categories" /></a></li>	
+			</ul>
+			
+		</li>
+		<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
+			
 		<!-- ******************** AUTHENTICATED ******************** -->
 		<security:authorize access="isAuthenticated()">
 			<li><a class="fNiv"> <spring:message
