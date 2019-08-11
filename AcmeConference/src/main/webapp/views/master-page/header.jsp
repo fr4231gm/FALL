@@ -8,74 +8,74 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
 <div class="banner">
-	<a href="#"><img src="${banner}" alt="${systemName}" height=200px width=30% /></a>
+	<a href="#"><img src="${banner}" alt="${systemName}" height=200px
+		width=30% /></a>
 </div>
 
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
-		
+
 		<!-- ADMINISTRATOR -->
-		
+
 		<security:authorize access="hasRole('ADMINISTRATOR')">
-			<li><a class="fNiv parent"><spring:message
-						code="master.page.administrator" /></a>
+			<li><a class="fNiv parent"><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;<spring:message code="master.page.administrator" /></a>
 				<ul>
-					<li><a class="child" href="administrator/register.do"><spring:message
-								code="master.page.administrator.create.new.administrator" /></a></li>
-					<li><a class="child" href="dashboard/administrator/list.do"><spring:message
-								code="master.page.administrator.dashboard" /></a></li>
-					<li><a class="child" href="configuration/administrator/edit.do"><spring:message
-								code="master.page.administrator.configuration" /></a></li>
-					<li><a class="child" href="submission/administrator/list.do"><spring:message
-								code="master.page.author.submission" /></a></li>			
-				</ul></li>
+					<li><a class="child" href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
+					<li><a class="child" href="message/broadcast-everyone.do"> <spring:message code="master.page.broadcast.everyone" /></a></li>
+					<li><a class="child" href="message/broadcast-everyone-and-admins.do"> <spring:message code="master.page.broadcast.everyone.and.admins" /></a></li>
+					<li><a class="child" href="configuration/administrator/edit.do"><spring:message code="master.page.administrator.configuration" /></a></li>
+					<li><a class="child" href="submission/administrator/list.do"><spring:message code="master.page.author.submission" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
-		
+
 		<!-- AUTHOR -->
-		
+
 		<security:authorize access="hasRole('AUTHOR')">
-			<li><a class="fNiv parent"><spring:message
+			<li><a class="fNiv parent"><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;<spring:message
 						code="master.page.author" /></a>
 				<ul>
 					<li><a class="child" href="registration/author/list.do"><spring:message
 								code="master.page.author.registration" /></a></li>
 					<li><a class="child" href="submission/author/list.do"><spring:message
-								code="master.page.author.submission" /></a></li>			
-					
+								code="master.page.author.submission" /></a></li>
+
 				</ul></li>
 		</security:authorize>
-		
-		
+
+
 		<!-- ******************** NOT AUTHENTICATED ******************** -->
 		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
-		
-			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
-				<ul>	
+			<li><a class="fNiv" href="security/login.do"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;&nbsp;<spring:message
+						code="master.page.login" /></a></li>
+
+			<li><a class="fNiv"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;&nbsp;<spring:message
+						code="master.page.register" /></a>
+				<ul>
+					<li><a class="child" href="author/register.do"><spring:message
+								code="master.page.register.author" /></a></li>
 					<li>
-						<a class="child" href="author/register.do"><spring:message code="master.page.register.author"/></a>
-					</li>
-					<li>
-						<li><a class="child" href="sponsor/register.do"><spring:message code="master.page.register.sponsor" /></a>
-					</li>
-					<li>
-						<a class="child" href="reviewer/register.do"><spring:message code="master.page.register.reviewer"/></a>
-					</li>
-				</ul>
-			</li>
-			
+					<li><a class="child" href="sponsor/register.do"><spring:message
+								code="master.page.register.sponsor" /></a></li>
+					<li><a class="child" href="reviewer/register.do"><spring:message
+								code="master.page.register.reviewer" /></a></li>
+				</ul></li>
+
 		</security:authorize>
-		
+
 		<!-- ************************** ALL ************************ -->
-		<li><a class="fNiv"><spring:message	code="master.page.conferences" /></a>
+		<li><a class="fNiv"><i class="fa fa-comments"></i>&nbsp;&nbsp;&nbsp;<spring:message
+					code="master.page.conferences" /></a>
 			<ul>
 			<li>
 				<a class="child" href="conference/listForthcomingConferences.do"><spring:message code="master.page.listForthcomingConferences" /></a>
@@ -91,33 +91,37 @@
 			</ul>
 			
 		</li>
-		<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
+		<li><a class="fNiv" href="about-us/index.do"><i class="fa fa-id-card"></i>&nbsp;&nbsp;&nbsp;<spring:message code="master.page.about-us" /></a></li>
 			
 		<!-- ******************** AUTHENTICATED ******************** -->
 		<security:authorize access="isAuthenticated()">
-			<li>
-				<a class="fNiv">
-					<spring:message code="master.page.profile" />
-			        (<security:authentication property="principal.username" />)
-				</a>
+			<li><a class="fNiv"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;<spring:message
+						code="master.page.profile" /> (<security:authentication
+						property="principal.username" />)
+			</a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="message/list.do"><spring:message
+								code="master.page.messages" /></a></li>
 					<security:authorize access="hasRole('ADMINISTRATOR')">
-						<li><a href="administrator/edit.do"><spring:message code="master.page.profile.edit.my.profile" /></a></li>
+						<li><a href="administrator/edit.do"><spring:message
+									code="master.page.profile.edit.my.profile" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('AUTHOR')">
-						<li><a href="author/edit.do"><spring:message code="master.page.profile.edit.my.profile" /></a></li>
+						<li><a href="author/edit.do"><spring:message
+									code="master.page.profile.edit.my.profile" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('REVIEWER')">
-						<li><a href="reviewer/edit.do"><spring:message code="master.page.profile.edit.my.profile" /></a></li>
+						<li><a href="reviewer/edit.do"><spring:message
+									code="master.page.profile.edit.my.profile" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('SPONSOR')">
-						<li><a href="sponsor/edit.do"><spring:message code="master.page.profile.edit.my.profile" /></a></li>
+						<li><a href="sponsor/edit.do"><spring:message
+									code="master.page.profile.edit.my.profile" /></a></li>
 					</security:authorize>
-					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
-				</ul>
-			</li>
-			<li><a class="fNiv" href="about-us/index.do"><spring:message code="master.page.about-us" /></a></li>
+					<li><a href="j_spring_security_logout"><spring:message
+								code="master.page.logout" /> </a></li>
+				</ul></li>
 		</security:authorize>
 	</ul>
 </div>
