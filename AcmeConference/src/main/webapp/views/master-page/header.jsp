@@ -30,6 +30,7 @@
 		<security:authorize access="hasRole('ADMINISTRATOR')">
 			<li><a class="fNiv parent"><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;<spring:message code="master.page.administrator" /></a>
 				<ul>
+					<li class="arrow"></li>
 					<li><a class="child" href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 					<li><a class="child" href="message/broadcast-everyone.do"> <spring:message code="master.page.broadcast.everyone" /></a></li>
 					<li><a class="child" href="message/broadcast-everyone-and-admins.do"> <spring:message code="master.page.broadcast.everyone.and.admins" /></a></li>
@@ -45,6 +46,7 @@
 			<li><a class="fNiv parent"><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;<spring:message
 						code="master.page.author" /></a>
 				<ul>
+					<li class="arrow"></li>
 					<li><a class="child" href="registration/author/list.do"><spring:message
 								code="master.page.author.registration" /></a></li>
 					<li><a class="child" href="submission/author/list.do"><spring:message
@@ -62,6 +64,7 @@
 			<li><a class="fNiv"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;&nbsp;<spring:message
 						code="master.page.register" /></a>
 				<ul>
+				<li class="arrow"></li>
 					<li><a class="child" href="author/register.do"><spring:message
 								code="master.page.register.author" /></a></li>
 					<li>
@@ -77,6 +80,7 @@
 		<li><a class="fNiv"><i class="fa fa-comments"></i>&nbsp;&nbsp;&nbsp;<spring:message
 					code="master.page.conferences" /></a>
 			<ul>
+			<li class="arrow"></li>
 			<li>
 				<a class="child" href="conference/listForthcomingConferences.do"><spring:message code="master.page.listForthcomingConferences" /></a>
 			</li>

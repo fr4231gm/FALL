@@ -64,7 +64,8 @@
 	height: 6px;
 	padding: 0;
 	border-bottom: none;
-	padding-bottom: 10px
+	padding-bottom: 10px;
+	margin-top: 10px;
 }
 
 .jMenu li ul li a {
