@@ -40,6 +40,9 @@
 		<security:intercept-url pattern="/message/broadcast-authors-submitted.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/message/broadcast-authors-registered.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/message/broadcast-everyone-and-admins.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/submission/administrator/autoassign.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/reviewer/list.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/reviewer/display.do" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- AUTHOR -->
 		

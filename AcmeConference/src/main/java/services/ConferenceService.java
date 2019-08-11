@@ -1,15 +1,24 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Query;
+
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ConferenceRepository;
+import utilities.internal.DatabaseUtil;
 import domain.Conference;
+import domain.Reviewer;
 
 @Service
 @Transactional
@@ -89,7 +98,37 @@ public class ConferenceService {
 		result = this.conferenceRepository.findAll();
 		return result;
 	}
+	
+	public Collection<Reviewer> getCompatibleReviewers(Conference conference) {
+		List<Reviewer> res;
+		String text = conference.getTitle() + " " + conference.getSummary();
+		
+		try {
+			final DatabaseUtil databaseUtil = new DatabaseUtil();
+			databaseUtil.initialise();
+			final FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(databaseUtil.getEntityManager());
+			databaseUtil.getEntityManager().getTransaction().begin();
+			fullTextEntityManager.createIndexer().startAndWait();
+			res = this.reviewersKeywordsSearch(text, fullTextEntityManager);
+			res =  res.subList(0, Math.min(res.size(), 3));
+		} catch (final Throwable oops) {
+			res = new ArrayList<Reviewer>();
+		}
+	
+		return res;
+		
+	}
 
-	// Servicios externos
+	@SuppressWarnings("unchecked")
+	public List<Reviewer> reviewersKeywordsSearch(final String keywordSearch, final FullTextEntityManager fullTextEntityManager) {
+		List<Reviewer> result;
+		
+		final QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Reviewer.class).get();
+		final org.apache.lucene.search.Query query = qb.keyword().onFields("keywords").matching(keywordSearch).createQuery();
+		final Query fullSearchQuery = fullTextEntityManager.createFullTextQuery(query, Reviewer.class);
+		result = fullSearchQuery.getResultList();
+		
+		return result;
+	}
 
 }

@@ -15,14 +15,14 @@
 	pagesize="5" class="displaytag">
 	
 	<display:column property="ticker" titleKey="submission.ticker"
-		sortable="true"/>
+		sortable="false"/>
 		
 		<display:column property="moment" titleKey="submission.moment"
-		sortable="true"	format="{0, date, dd/MM/yyyy HH:mm}"/>
+		sortable="false"	format="{0, date, dd/MM/yyyy HH:mm}"/>
 		
 		
 		
-			<display:column titleKey="submission.status" sortable="true">
+	<display:column titleKey="submission.status" sortable="true">
 		<jstl:if test="${row.status eq 'UNDER-REVIEW'}">
 			<spring:message code="submission.underreview"/>
 		</jstl:if>
@@ -54,8 +54,12 @@
 	</display:column>
 
 	<display:column>
-		<acme:link link="submission/display.do?submissionId=${row.id}"
+		<acme:link link="submission/administrator/assign.do?submissionId=${row.id}"
 				code="submission.assign" />
+	</display:column>
+	
+	<display:column>
+		<acme:link link="reviewer/list.do?submissionId=${row.id}" code = "submission.reviewer"/>
 	</display:column>
 
 </security:authorize>		
@@ -64,4 +68,4 @@
 
 <br>
 
-<acme:back code="conference.goback" />
+<acme:back code="submission.goback" />

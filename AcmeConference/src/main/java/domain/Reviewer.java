@@ -8,11 +8,17 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Indexed
 public class Reviewer extends Actor {
 
 	// Atributos
@@ -23,6 +29,7 @@ public class Reviewer extends Actor {
 	// Getters
 	@NotBlank
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
 	public String getKeywords() {
 		return this.keywords;
 	}
