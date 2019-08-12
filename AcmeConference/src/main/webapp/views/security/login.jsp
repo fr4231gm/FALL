@@ -22,12 +22,13 @@
 	<acme:input code="actor.username" path="username" placeholder="User"/>
 	<acme:password code="actor.password" path="password" />
 	
+
+	
+	<acme:submit name="save" code="actor.save"/>
+	
 	<jstl:if test="${showError == true}">
 		<div class="error">
 			<spring:message code="security.login.failed" />
 		</div>
 	</jstl:if>
-	
-	<acme:submit name="save" code="actor.save"/>
-	
 </form:form>

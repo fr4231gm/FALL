@@ -62,8 +62,32 @@
 	readonly="true" />
 	<br />	
 
+<br />	
+<br />		
+	
+<jstl:if test="${future eq 'true'}">
+	<jstl:if test="${haveR eq 'false'}">
+		<security:authorize access="hasRole('AUTHOR')">	
+		
+	
+			<acme:link link="registration/author/register.do?conferenceId=${conference.id}"
+				code="conference.registration" />
+	
+		</security:authorize>
+	</jstl:if>
+</jstl:if>
 
+<br />	
+<br />	
+
+
+<acme:link link="message/broadcast-authors-submitted.do?conferenceId=${conference.id}" code="master.page.broadcast.submitted" />
+<br />	
+<acme:link link="message/broadcast-authors-registered.do?conferenceId=${conference.id}"  code="master.page.broadcast.registered" />
+<br />	
 <acme:link code="conference.create.comment" link="comment/createByConference.do?conferenceId=${conference.id}" />
+
+
 <br />	
 <br />	
 <acme:back code="conference.goback"/>

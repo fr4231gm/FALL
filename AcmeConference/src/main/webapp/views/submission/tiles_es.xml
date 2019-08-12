@@ -32,7 +32,9 @@
 		<put-attribute name="body" value="/views/submission/edit.jsp" />
 	</definition>
 	
-	
-	
+	<definition name="submission/assign" extends="master.page">	
+		<put-attribute name="title" value="Asignar presentación" />
+		<put-attribute name="body" value="/views/submission/assign.jsp" />
+	</definition>
 	
 </tiles-definitions>

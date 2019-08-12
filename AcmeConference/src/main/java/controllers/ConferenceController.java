@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AuthorService;
 import services.ConferenceService;
+import services.RegistrationService;
+import domain.Author;
 import domain.Conference;
+import domain.Registration;
 
 @Controller
 @RequestMapping("/conference")
@@ -22,6 +26,11 @@ public class ConferenceController extends AbstractController {
 	@Autowired
 	private ConferenceService	conferenceService;
 
+	@Autowired
+	private RegistrationService registrationService;
+	
+	@Autowired
+	private AuthorService authorService;
 
 	@RequestMapping(value = "/listRunningConferences", method = RequestMethod.GET)
 	public ModelAndView listRunningConferences() {
@@ -37,7 +46,6 @@ public class ConferenceController extends AbstractController {
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/listRunningConferences.do");
 		result.addObject("general", true);
-		result.addObject("future", false);
 		result.addObject("searchPoint", "conference/listSearchRunning.do");
 		result.addObject("fechaActual", actual);
 
@@ -51,14 +59,14 @@ public class ConferenceController extends AbstractController {
 
 		conferences = this.conferenceService.findForthcomingConferences();
 		Assert.notNull(conferences);
-
+		
+			
 		result = new ModelAndView("conference/list");
 		final Date actual = new Date(System.currentTimeMillis() - 1);
 
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/listForthcomingConferences.do");
 		result.addObject("general", true);
-		result.addObject("future", true);
 		result.addObject("searchPoint", "conference/listSearchForthcoming.do");
 		result.addObject("fechaActual", actual);
 
@@ -79,7 +87,6 @@ public class ConferenceController extends AbstractController {
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/listPastConferences.do");
 		result.addObject("general", true);
-		result.addObject("future", false);
 		result.addObject("searchPoint", "conference/listSearchPast.do");
 		result.addObject("fechaActual", actual);
 
@@ -92,13 +99,43 @@ public class ConferenceController extends AbstractController {
 	})
 	public ModelAndView displayAnonymous(@RequestParam final int conferenceId) {
 		ModelAndView res;
+		Boolean future = false;
+		Boolean haveR = false;
+		Collection<Registration> registerConference = registrationService.findRegistrationsByConferenceId(conferenceId);
 
 		// Initialize variables
 		Conference c;
 		c = this.conferenceService.findOne(conferenceId);
-
+		
+		if(conferenceService.findForthcomingConferences().contains(c)){
+			future = true;
+		}
+		
+		try{
+		
+			Author principal = authorService.findByPrincipal();
+			
+				for(Registration r: registerConference){
+					if(r.getAuthor().equals(principal)){
+						haveR = true;
+					}
+				}
+				
 		res = new ModelAndView("conference/display");
 		res.addObject("conference", c);
+		res.addObject("future", future);
+		res.addObject("haveR", haveR);
+		
+			if(haveR == true){
+				res.addObject("message", "registration.commit.error");
+			}
+		}catch (final Throwable oops){
+			
+			res = new ModelAndView("conference/display");
+			res.addObject("conference", c);
+			res.addObject("future", future);
+			res.addObject("haveR", haveR);
+		}
 
 		return res;
 	}
