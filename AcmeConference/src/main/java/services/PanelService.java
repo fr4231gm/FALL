@@ -5,8 +5,11 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import repositories.PanelRepository;
+import domain.Administrator;
+import domain.Conference;
 import domain.Panel;
 
 @Service
@@ -15,11 +18,26 @@ public class PanelService {
 
 	@Autowired
 	private PanelRepository panelRepository;
+	
+	@Autowired
+	private AdministratorService administratorService;
 
-	public Panel create() {
+	@Autowired
+	private ConferenceService conferenceService;
+	
+	public Panel create(int conferenceId) {
+		Administrator principal;
+		Conference conference;
+		
+		conference = this.conferenceService.findOne(conferenceId);
+		Assert.isTrue(!this.conferenceService.findPastConferences().contains(conference));
+		
+		principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
 		Panel res;
 
 		res = new Panel();
+		res.setConference(conference);
 
 		return res;
 	}
@@ -43,12 +61,12 @@ public class PanelService {
 
 		return result;
 	}
-	
-	public Collection<Panel> findPanelsByConferenceId(int conferenceId){
+
+	public Collection<Panel> findPanelsByConferenceId(int conferenceId) {
 		return this.panelRepository.findPanelsByConferenceId(conferenceId);
 	}
-	
-	public void delete(Panel panel){
+
+	public void delete(Panel panel) {
 		this.panelRepository.delete(panel);
 	}
 }
