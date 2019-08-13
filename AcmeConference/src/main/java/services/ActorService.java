@@ -115,6 +115,25 @@ public class ActorService {
 		result.remove(principal);
 		return result;
 	}
+	
+	public Collection<Actor> findAllButAdmins() {
+		Collection<Actor> result;
+		result = this.actorRepository.findAllButAdmins();
+		return result;
+	}
+	
+	public Collection<Actor> findAuthorsSubmittedByConferenceId(int conferenceId) {
+		Collection<Actor> result;
+		result = this.actorRepository.findAuthorsSubmittedByConferenceId(conferenceId);
+		return result;
+	}
+	
+	public Collection<Actor> findAuthorsRegisteredByConferenceId(int conferenceId) {
+		Collection<Actor> result;
+		result = this.actorRepository.findAuthorsRegisteredByConferenceId(conferenceId);
+		return result;
+	}
+
 
 	public Actor save(final Actor principal) {
 		Assert.notNull(principal);

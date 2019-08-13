@@ -116,7 +116,10 @@ Servers/
 Entities.map
 
 # VSCODE
-AcmeMadruga/\.vscode/settings\.json
+AcmeConference/\.vscode/settings\.json
 
 # ASTAH
 *.asta.lock
+
+# Lucene
+*AcmeConference/domain.Reviewer

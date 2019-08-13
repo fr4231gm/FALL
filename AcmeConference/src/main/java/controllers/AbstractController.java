@@ -10,8 +10,11 @@
 
 package controllers;
 
+import java.util.Locale;
+
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ClassUtils;
@@ -32,11 +35,19 @@ public class AbstractController {
 	@ModelAttribute
 	public void getConfiguationObjects(final Model result) {
 		final Configuration configuration = this.configurationService.findConfiguration();
+		String ls;
+		try{
+			final Locale locale = LocaleContextHolder.getLocale();
+			ls = locale.getLanguage();
+		} catch(Throwable oops){
+			ls = "en";
+		}
+		
 		result.addAttribute("banner", configuration.getBanner());
 		result.addAttribute("systemName", configuration.getsystemName());
 		result.addAttribute("welcomeMessage", configuration.getWelcomeMessage());
 		result.addAttribute("config", configuration);
-
+		result.addAttribute("langcode", ls);
 	}
 
 	// Panic handler ----------------------------------------------------------

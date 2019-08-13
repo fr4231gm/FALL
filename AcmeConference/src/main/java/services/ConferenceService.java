@@ -131,4 +131,13 @@ public class ConferenceService {
 		return result;
 	}
 
+	public Collection<Conference> findByCategoryId(int categoryId) {
+		return this.conferenceRepository.findConferencesByCategoryId(categoryId);
+	}
+
+	public void flush() {
+		this.conferenceRepository.flush();
+		
+	}
+
 }
