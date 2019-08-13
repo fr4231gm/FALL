@@ -37,33 +37,36 @@ public class CommentController extends AbstractController {
 	public ModelAndView create(@RequestParam int conferenceId) {
 		ModelAndView res;
 		Comment comment;
+		Conference conference;
 
 		comment = this.commentService.create();
 		Assert.notNull(comment);
+
+		conference = this.conferenceService.findOne(conferenceId);
+
 		res = this.createEditModelAndView(comment);
+		res.addObject("conference", conference);
 
 		return res;
 	}
 
 	@RequestMapping(value = "/createByConference", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Comment comment, @RequestParam int conferenceId, BindingResult binding) {
+	public ModelAndView save(@Valid Comment comment, Conference conference, BindingResult binding) {
 		ModelAndView res;
-		Conference conference;
-		
-		conference = this.conferenceService.findOne(conferenceId);
+		Comment saved;
 		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(comment);
 		} else {
-			try {
-				//this.conferenceService.addCommentToConference(conference, comment);
-				this.commentService.save(comment);
+			//try {
+				saved = this.commentService.save(comment);
+				this.conferenceService.addCommentToConference(conference, saved);
 				res = new ModelAndView("welcome/index");
 
-			} catch (Throwable oops) {
+			/*} catch (Throwable oops) {
 				res = this.createEditModelAndView(comment,
 						"comment.commit.error");
-			}
+			}*/
 		}
 
 		return res;

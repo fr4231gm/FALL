@@ -21,8 +21,8 @@ public class CommentService {
 
 	// Supporting services ----------------------------------------------------
 
-	//@Autowired
-	//private ActorService actorService;
+	// @Autowired
+	// private ActorService actorService;
 
 	// @Autowired
 	// private ConferenceService conferenceService;
@@ -39,12 +39,12 @@ public class CommentService {
 	// Simple CRUDs methods ---------------------------------------------------
 
 	public Comment create() {
-		Comment c;
+		Comment res;
 
-		c = new Comment();
-		c.setMoment(new Date(System.currentTimeMillis() - 1));
-
-		return c;
+		res = new Comment();
+		res.setMoment(new Date(System.currentTimeMillis() - 1));
+		
+		return res;
 	}
 
 	public Comment save(Comment comment) {

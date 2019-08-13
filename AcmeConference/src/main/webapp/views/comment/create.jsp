@@ -23,9 +23,12 @@
 
 <form:form action="comment/createByConference.do" modelAttribute="comment">
 
+	<fmt:formatDate value="${comment.moment}" pattern="dd/MM/yyyy HH:mm"
+		var="formatedMoment" />
+	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="moment" />
+	<form:hidden path="moment" value="${formatedMoment}"/>
 
 	<acme:input code="comment.author" path="author"
 		placeholder="Javier" />
