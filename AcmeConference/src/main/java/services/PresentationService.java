@@ -18,20 +18,21 @@ public class PresentationService {
 
 	@Autowired
 	private PresentationRepository presentationRepository;
-	
+
 	@Autowired
 	private AdministratorService administratorService;
-	
+
 	@Autowired
 	private ConferenceService conferenceService;
 
 	public Presentation create(int conferenceId) {
 		Administrator principal;
 		Conference conference;
-		
+
 		conference = this.conferenceService.findOne(conferenceId);
-		Assert.isTrue(!this.conferenceService.findPastConferences().contains(conference));
-		
+		Assert.isTrue(!this.conferenceService.findPastConferences().contains(
+				conference));
+
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 
@@ -70,6 +71,11 @@ public class PresentationService {
 	}
 
 	public void delete(Presentation presentation) {
+		Administrator principal;
+
+		principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
+
 		this.presentationRepository.delete(presentation);
 	}
 }

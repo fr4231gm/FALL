@@ -69,6 +69,11 @@ public class TutorialService {
 	}
 
 	public void delete(Tutorial tutorial) {
+		Administrator principal;
+
+		principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
+		
 		this.tutorialRepository.delete(tutorial);
 	}
 }

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActivityService;
 import services.PanelService;
+import domain.Conference;
 import domain.Panel;
 
 @Controller
@@ -70,6 +71,28 @@ public class PanelController extends AbstractController {
 
 		return res;
 	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int panelId) {
+
+		ModelAndView result;
+		Panel panel;
+		Conference conference;
+		
+		panel = this.panelService.findOne(panelId);
+		conference = panel.getConference();
+
+		try {
+			this.panelService.delete(panel);
+			result = new ModelAndView("redirect:/activity/list.do?conferenceId="+conference.getId());
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(panel, "activity.commit.error");
+		}
+
+		return result;
+
+	}
+
 
 	// Ancilliary methods
 
