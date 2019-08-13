@@ -54,7 +54,7 @@ public class SubmissionAuthorController extends AbstractController {
 			try {
 
 				aux = this.submissionService.save(s);
-				res = new ModelAndView("redirect:display.do?submissionId=" + aux.getId());
+				res = new ModelAndView("redirect:list.do");
 			}
 
 			catch (final Throwable oops) {
@@ -62,7 +62,6 @@ public class SubmissionAuthorController extends AbstractController {
 			}
 		return res;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int submissionId) {
 		ModelAndView res;
