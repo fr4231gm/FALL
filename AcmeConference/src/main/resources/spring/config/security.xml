@@ -49,6 +49,7 @@
 		<security:intercept-url pattern="/panel/edit.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/presentation/edit.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/tutorial/edit.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/conference/administrator/**" access="hasRole('ADMINISTRATOR')"/>
 		
 		<!-- AUTHOR -->
 		
