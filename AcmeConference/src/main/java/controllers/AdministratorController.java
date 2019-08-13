@@ -100,6 +100,23 @@ public class AdministratorController extends AbstractController {
 
         return res;
     }
+    
+    @RequestMapping(value = "/compute", method = RequestMethod.GET)
+    public ModelAndView computeScore() {
+        ModelAndView res;
+
+        try {
+            Assert.notNull(this.administratorService.findByPrincipal());
+        	res = new ModelAndView("welcome/index");
+            this.administratorService.computeScore();
+            res.addObject("message", "compute.success");
+            
+        } catch (Throwable oops) {
+        	res = new ModelAndView("welcome/index");
+        }
+
+        return res;
+    }
 
     protected ModelAndView createEditModelAndView(final Administrator administrator) {
         final ModelAndView result = this.createEditModelAndView(administrator, null);

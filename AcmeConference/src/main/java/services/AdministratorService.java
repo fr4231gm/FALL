@@ -1,22 +1,15 @@
 
 package services;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import org.hibernate.search.jpa.FullTextEntityManager;
-import org.hibernate.search.jpa.Search;
-import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,12 +18,11 @@ import org.springframework.util.Assert;
 import repositories.AdministratorRepository;
 import security.LoginService;
 import security.UserAccount;
-import utilities.internal.DatabaseUtil;
 import domain.Administrator;
 import domain.Author;
 import domain.Conference;
+import domain.Configuration;
 import domain.Paper;
-import domain.Reviewer;
 
 @Service
 @Transactional
@@ -159,8 +151,41 @@ public class AdministratorService {
 	}
 	
 	public Double[] CommentsPerActivity(){
-		this.computeBuzzWords();
+		this.computeScore();
 		return this.administratorRepository.CommentsPerActivity();
+	}
+	
+	public void computeScore(){
+		Collection<Author> autores = this.authorService.findAll();
+        HashMap<Author, Double> map = new HashMap<>();
+		Double maxCount = 1.;
+		String[] buzzWords  = this.computeBuzzWords().split(",");
+		for (Author autor : autores){
+	        Collection<Paper> papers = this.submissionService.findCameraReadyPapersByAuthorId(autor.getId());
+	        String allWords = "";
+	        for (Paper paper : papers) {
+	    		 allWords += paper.getTitle() + " " + paper.getSummary() + " ";
+	    	}
+	        String[] wordsArray = allWords.split(" ");       
+	        for (String word : wordsArray) {
+	            if (Arrays.asList(buzzWords).contains(word)) {
+	            	if (map.containsKey(word)) {
+		                Double count = map.get(word);
+		                map.put(autor, count + 1);
+		                if (count >= maxCount){
+		                	maxCount = count;
+		                }
+		            } else {
+		                map.put(autor, 1.);
+		            }
+		        }
+	        }
+		}
+		for (Entry<Author, Double> entry : map.entrySet()) {
+			Author autor = entry.getKey();
+	        autor.setScore(map.get(autor)/maxCount);
+	        this.authorService.save(autor);
+		}
 	}
 	
 	public String computeBuzzWords(){
@@ -176,11 +201,13 @@ public class AdministratorService {
     		 allWords += conference.getTitle() + " " + conference.getSummary() + " ";
     	}
     	//Borramos las voidWords
-		String[] voidWords  = this.configurationService.findConfiguration().getVoidWords().split(",");
-		for (String voidWord : voidWords) {
-			allWords = this.removeWord(allWords, voidWord);
-		}
-
+        Collection<Configuration> configurations = this.configurationService.findAll();
+        for (Configuration config : configurations){
+			String[] voidWords  = config.getVoidWords().split(",");
+			for (String voidWord : voidWords) {
+				allWords = this.removeWord(allWords, voidWord);
+			}
+        }
         String[] wordsArray = allWords.split(" ");       
         int maxCount = 1;
         HashMap<String, Integer> map = new HashMap<>();
@@ -204,7 +231,11 @@ public class AdministratorService {
             	buzzWords += (entry.getKey()) + ", ";
             }
         }
-     
+
+        for (Configuration config : configurations){
+        	config.setBuzzWords(buzzWords);
+        	configurationService.save(config);
+        }
         return buzzWords;
 
     }

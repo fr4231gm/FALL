@@ -19,6 +19,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Reviewer;
+import domain.Submission;
 import forms.ReviewerForm;
 
 @Service
@@ -56,6 +57,9 @@ public class ReviewerService {
 		final UserAccount ua = new UserAccount();
 		ua.setAuthorities(authorities);
 
+		final Collection<Submission> submissiones = new ArrayList<Submission>();
+		res.setSubmissions(submissiones);
+		
 		ua.setUsername(username);
 		ua.setPassword(password);
 
