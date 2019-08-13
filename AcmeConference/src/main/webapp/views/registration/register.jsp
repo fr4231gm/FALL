@@ -10,7 +10,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
-<form:form action="registration/register.do"  modelAttribute="registration" >
+<form:form action="registration/author/register.do"  modelAttribute="registration" >
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />

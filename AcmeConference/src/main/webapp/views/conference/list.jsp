@@ -34,15 +34,13 @@
 
 	<display:column property="endDate" titleKey="conference.endDate"
 		sortable="true" format="{0, date, dd/MM/yyyy HH:mm}" />
-		
-<security:authorize access="isAuthenticated()">
-		
-			
-	<display:column property="category.name" titleKey="conference.category"
-		sortable="true"/>
 
+	<security:authorize access="isAuthenticated()">
 
-</security:authorize>		
+		<display:column property="category.name"
+			titleKey="conference.category" sortable="true" />
+
+	</security:authorize>
 
 	<display:column>
 
@@ -50,24 +48,7 @@
 			code="conference.display" />
 
 	</display:column>
-	
-<jstl:if test="${future eq 'true'}">
-	<security:authorize access="hasRole('AUTHOR')">
-		
-			
-	<display:column>
-	
-		<acme:link link="registration/author/register.do?conferenceId=${row.id}"
-				code="conference.registration" />
 
-	</display:column>
-
-
-	</security:authorize>
-</jstl:if>
-	
-
-	
 	<display:column>
 
 		<acme:link link="comment/listByConference.do?conferenceId=${row.id}"
@@ -77,23 +58,21 @@
 
 	<security:authorize access="hasRole('AUTHOR')">
 		<display:column>
-		
-		
+
 			<jstl:if test="${fechaActual.time < row.submissionDeadline.time }">
 				<acme:link link="submission/author/create.do?conferenceId=${row.id}"
 					code="submission.create" />
 			</jstl:if>
 
-
-
-
 		</display:column>
 	</security:authorize>
 
+	<display:column>
 
+		<acme:link link="activity/list.do?conferenceId=${row.id}"
+			code="conference.activities" />
 
-
-
+	</display:column>
 
 
 </display:table>

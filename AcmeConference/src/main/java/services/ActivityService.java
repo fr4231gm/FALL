@@ -1,6 +1,9 @@
 package services;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +42,37 @@ public class ActivityService {
 		result = this.activityRepository.findAll();
 
 		return result;
+	}
 
+	// Other business methods
+
+	public Collection<Activity> findActivitiesByConferenceId(int conferenceId) {
+		Collection<Activity> res;
+
+		res = this.activityRepository.findActivitiesByConferenceId(conferenceId);
+
+		return res;
+	}
+	
+	public String getSchedule(Activity activity){
+		String res;
+		Date startMoment;
+		Integer duration;
+		Calendar c;
+		Date endMoment;
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		startMoment = activity.getStartMoment();
+		duration = activity.getDuration();
+		
+		c = Calendar.getInstance();
+		c.setTime(startMoment);
+		c.add(Calendar.MINUTE, duration);
+		endMoment = c.getTime();
+		
+		res = formatter.format(startMoment) + " - " + formatter.format(endMoment);
+		
+		return res;
 	}
 
 }

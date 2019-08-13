@@ -23,12 +23,6 @@ public class AdministratorService {
 	@Autowired
 	private AdministratorRepository	administratorRepository;
 
-	// Supporting services ----------------------------------------------------
-	
-
-
-	// Simple CRUDs methods ---------------------------------------------------
-
 	public Administrator save(final Administrator admin) {
 		Administrator result, principal;
 		Assert.notNull(admin);
@@ -54,7 +48,7 @@ public class AdministratorService {
 		return result;
 	}
 
-	// Mï¿½todo para encontrar un administrador a traves de su ID
+	// Método para encontrar un administrador a traves de su ID
 	public Administrator findOne(final int administratorId) {
 		Administrator result;
 
@@ -88,8 +82,7 @@ public class AdministratorService {
 	}
 
 	// Metodo que devuelve un administrador a traves del ID de su cuenta de
-	// usuario
-	// Servira para el metodo findByPrincipal()
+	// usuario Servira para el metodo findByPrincipal()
 	public Administrator findAdministratorByUserAccountId(final int userAccountId) {
 		Assert.isTrue(userAccountId != 0);
 
@@ -109,8 +102,35 @@ public class AdministratorService {
 	}
 
 	public void flush() {
-
 		this.administratorRepository.flush();
+	}
+	
+	public Double[] SubmissionsPerConference(){
+		return this.administratorRepository.SubmissionsPerConference();
+	}
+	
+	public Double[] RegistrationsPerConference(){
+		return this.administratorRepository.RegistrationsPerConference();
+	}
+	
+	public Double[] ConferencesFeesStats(){
+		return this.administratorRepository.ConferencesFeesStats();
+	}
+	
+	public Double[] ConferencesDaysStats(){
+		return this.administratorRepository.ConferencesDaysStats();
+	}
+	
+	public Double[] ConferencesPerCategory(){
+		return this.administratorRepository.ConferencesPerCategory();
+	}
+	
+	public Double[] CommentsPerConference(){
+		return this.administratorRepository.CommentsPerConference();
+	}
+	
+	public Double[] CommentsPerActivity(){
+		return this.administratorRepository.CommentsPerActivity();
 	}
 
 }
