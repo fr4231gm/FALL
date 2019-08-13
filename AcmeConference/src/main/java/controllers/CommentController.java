@@ -83,7 +83,7 @@ public class CommentController extends AbstractController {
 
 		return res;
 	}
-
+	
 	@RequestMapping(value = "/listByActivity", method = RequestMethod.GET)
 	public ModelAndView listByActivity(@RequestParam int activityId) {
 		ModelAndView res;
