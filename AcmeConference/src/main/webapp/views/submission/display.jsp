@@ -50,8 +50,13 @@
 	<br />	
 	
 
-
-
+<spring:message code="submission.cameraReadyPaper"> </spring:message>:        
+<jstl:if test="${submission.paper.cameraReadyPaper eq 'true'}">
+<spring:message code="boolean.true"></spring:message>
+</jstl:if>
+<jstl:if test="${submission.paper.cameraReadyPaper eq 'false'}">
+<spring:message code="boolean.false"></spring:message>
+</jstl:if>
 
 </fieldset>
 

@@ -46,6 +46,9 @@
 		<acme:link link="conference/display.do?conferenceId=${row.conference.id}"
 				code="registration.conference.display" />
 	</display:column>
+		<display:column>
+		<acme:link link="submission/author/edit.do?submissionId=${row.id}" code = "submission.edit"/>
+	</display:column>
 	
 <security:authorize access="hasRole('ADMINISTRATOR')">
 
@@ -57,6 +60,7 @@
 		<acme:link link="submission/administrator/assign.do?submissionId=${row.id}"
 				code="submission.assign" />
 	</display:column>
+	
 	
 	<display:column>
 		<acme:link link="reviewer/list.do?submissionId=${row.id}" code = "submission.reviewer"/>
