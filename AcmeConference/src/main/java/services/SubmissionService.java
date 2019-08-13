@@ -77,7 +77,7 @@ public class SubmissionService {
 		final String surname = s.getAuthor().getSurname();
 
 		// Adding formatted date to alphanumeric code
-		res = name.charAt(0) + middleName.charAt(0) + surname.charAt(0) + "-" + res;
+		res = name.substring(0, 1) + middleName.substring(0, 1) + surname.substring(0, 1) + "-" + res;
 
 		return res;
 	}

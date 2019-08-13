@@ -85,6 +85,7 @@ public class SubmissionAuthorController extends AbstractController {
 				res.addObject("submission", s);
 				res.addObject("message", "submission.commit.error");
 			}
+		res.addObject("fecha", System.currentTimeMillis() - 1);
 		return res;
 	}
 
@@ -95,8 +96,9 @@ public class SubmissionAuthorController extends AbstractController {
 		Submission aux;
 
 		if (binding.hasErrors()) {
-			res = new ModelAndView("phase/edit");
+			res = new ModelAndView("submission/edit");
 			res.addObject("submission", submission);
+			res.addObject("fecha", System.currentTimeMillis() - 1);
 		} else
 			try {
 
@@ -105,6 +107,7 @@ public class SubmissionAuthorController extends AbstractController {
 
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(submission, "submission.commit.error");
+				res.addObject("fecha", System.currentTimeMillis() - 1);
 			}
 		return res;
 	}
