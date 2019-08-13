@@ -1,6 +1,8 @@
+
 package services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -26,16 +28,17 @@ public class ConferenceService {
 
 	// Repositorios
 	@Autowired
-	private ConferenceRepository conferenceRepository;
+	private ConferenceRepository	conferenceRepository;
 
-	public Conference update(Conference conference){
+
+	public Conference update(final Conference conference) {
 		Conference res;
-		
+
 		res = this.conferenceRepository.save(conference);
-		
+
 		return res;
 	}
-	
+
 	public Collection<Conference> findRunningConferences() {
 		Collection<Conference> conferences;
 		final Date actual = new Date(System.currentTimeMillis() - 1);
@@ -48,8 +51,7 @@ public class ConferenceService {
 	public Collection<Conference> findForthcomingConferences() {
 		Collection<Conference> conferences;
 		final Date actual = new Date(System.currentTimeMillis() - 1);
-		conferences = this.conferenceRepository
-				.findForthcomingConferences(actual);
+		conferences = this.conferenceRepository.findForthcomingConferences(actual);
 		Assert.notNull(conferences);
 
 		return conferences;
@@ -69,24 +71,21 @@ public class ConferenceService {
 		return c;
 	}
 
-	public Collection<Conference> searchConferenceAnonymousRunning(
-			final String keyword) {
+	public Collection<Conference> searchConferenceAnonymousRunning(final String keyword) {
 		Collection<Conference> res;
 		final Date actual = new Date(System.currentTimeMillis() - 1);
 		res = this.conferenceRepository.filterRunning(keyword, actual);
 		return res;
 	}
 
-	public Collection<Conference> searchConferenceAnonymousForthcomming(
-			final String keyword) {
+	public Collection<Conference> searchConferenceAnonymousForthcomming(final String keyword) {
 		Collection<Conference> res;
 		final Date actual = new Date(System.currentTimeMillis() - 1);
 		res = this.conferenceRepository.filterForthcomming(keyword, actual);
 		return res;
 	}
 
-	public Collection<Conference> searchConferenceAnonymousPast(
-			final String keyword) {
+	public Collection<Conference> searchConferenceAnonymousPast(final String keyword) {
 		Collection<Conference> res;
 		final Date actual = new Date(System.currentTimeMillis() - 1);
 		res = this.conferenceRepository.filterPast(keyword, actual);
@@ -98,11 +97,11 @@ public class ConferenceService {
 		result = this.conferenceRepository.findAll();
 		return result;
 	}
-	
-	public Collection<Reviewer> getCompatibleReviewers(Conference conference) {
+
+	public Collection<Reviewer> getCompatibleReviewers(final Conference conference) {
 		List<Reviewer> res;
-		String text = conference.getTitle() + " " + conference.getSummary();
-		
+		final String text = conference.getTitle() + " " + conference.getSummary();
+
 		try {
 			final DatabaseUtil databaseUtil = new DatabaseUtil();
 			databaseUtil.initialise();
@@ -110,34 +109,68 @@ public class ConferenceService {
 			databaseUtil.getEntityManager().getTransaction().begin();
 			fullTextEntityManager.createIndexer().startAndWait();
 			res = this.reviewersKeywordsSearch(text, fullTextEntityManager);
-			res =  res.subList(0, Math.min(res.size(), 3));
+			res = res.subList(0, Math.min(res.size(), 3));
 		} catch (final Throwable oops) {
 			res = new ArrayList<Reviewer>();
 		}
-	
+
 		return res;
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Reviewer> reviewersKeywordsSearch(final String keywordSearch, final FullTextEntityManager fullTextEntityManager) {
 		List<Reviewer> result;
-		
+
 		final QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Reviewer.class).get();
 		final org.apache.lucene.search.Query query = qb.keyword().onFields("keywords").matching(keywordSearch).createQuery();
 		final Query fullSearchQuery = fullTextEntityManager.createFullTextQuery(query, Reviewer.class);
 		result = fullSearchQuery.getResultList();
-		
+
 		return result;
 	}
 
-	public Collection<Conference> findByCategoryId(int categoryId) {
+	public Collection<Conference> findByCategoryId(final int categoryId) {
 		return this.conferenceRepository.findConferencesByCategoryId(categoryId);
 	}
 
 	public void flush() {
 		this.conferenceRepository.flush();
-		
+
+	}
+
+	public Collection<Conference> findDeadlineElapsed() {
+		final Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
+		calendar.add(Calendar.DATE, -5);
+		final Date x = calendar.getTime();
+		final Collection<Conference> c = this.conferenceRepository.findAllDeadlineElapsed(new Date(System.currentTimeMillis() - 1), x);
+
+		return c;
+	}
+	public Collection<Conference> findNotificationElapsed() {
+		final Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
+		calendar.add(Calendar.DATE, +5);
+		final Date x = calendar.getTime();
+		final Collection<Conference> c = this.conferenceRepository.findAllNotificationElapsed(new Date(System.currentTimeMillis() - 1), x);
+
+		return c;
+	}
+	public Collection<Conference> findCameraReadyElapsed() {
+		final Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
+		calendar.add(Calendar.DATE, +5);
+		final Date x = calendar.getTime();
+		final Collection<Conference> c = this.conferenceRepository.findAllCameraElapsed(new Date(System.currentTimeMillis() - 1), x);
+
+		return c;
+	}
+
+	public Collection<Conference> findFutureConferences() {
+		final Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
+		calendar.add(Calendar.DATE, +5);
+		final Date x = calendar.getTime();
+		final Collection<Conference> c = this.conferenceRepository.findAllFutureConferences(new Date(System.currentTimeMillis() - 1), x);
+
+		return c;
 	}
 
 }

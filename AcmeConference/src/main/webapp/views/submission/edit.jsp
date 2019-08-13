@@ -31,7 +31,7 @@
 	<acme:input code="submission.paper.title" path="paper.title"/>
 	<acme:textarea code="submission.paper.summary" path="paper.summary"/>
 	<acme:input code="submission.paper.documet" path="paper.document"/>
-	<jstl:if test="${submission.id != 0 and submission.status eq 'ACCEPTED' and fecha.time < submission.conference.submissionDeadline.time}">
+	<jstl:if test="${submission.id != 0 and submission.status eq 'ACCEPTED' and fecha.time < submission.conference.cameraReadyDeadline.time}">
 	<acme:checkbox code="submission.paper.cameraReadyPaper" path="paper.cameraReadyPaper" value="paper.cameraReadyPaper"/> 
 
 	</jstl:if>
