@@ -77,6 +77,29 @@ public class AdministratorController extends AbstractController {
 
         return res;
     }
+    
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    public ModelAndView dashboard() {
+        ModelAndView res;
+
+        try {
+            Assert.notNull(this.administratorService.findByPrincipal());
+            res = new ModelAndView("dashboard");
+            
+            res.addObject("SubmissionsPerConference", this.administratorService.SubmissionsPerConference());
+            res.addObject("RegistrationsPerConference", this.administratorService.RegistrationsPerConference());
+            res.addObject("ConferencesFeesStats", this.administratorService.ConferencesFeesStats());
+            res.addObject("ConferencesDaysStats", this.administratorService.ConferencesDaysStats());
+            res.addObject("ConferencesPerCategory", this.administratorService.ConferencesPerCategory());
+            res.addObject("CommentsPerConference", this.administratorService.CommentsPerConference());
+            res.addObject("CommentsPerActivity", this.administratorService.CommentsPerActivity());
+            
+        } catch (Throwable oops) {
+        	res = new ModelAndView("welcome/index");
+        }
+
+        return res;
+    }
 
     protected ModelAndView createEditModelAndView(final Administrator administrator) {
         final ModelAndView result = this.createEditModelAndView(administrator, null);

@@ -32,10 +32,6 @@ public class RegistrationService {
 	
 	@Autowired
 	private ConfigurationService configurationService;
-	
-
-	// @Autowired
-	// private CreditCard creditCardService;
 
 	// Constructors ------------------------------------
 

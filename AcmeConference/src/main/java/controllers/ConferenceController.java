@@ -1,4 +1,3 @@
-
 package controllers;
 
 import java.util.Collection;
@@ -24,11 +23,11 @@ import domain.Registration;
 public class ConferenceController extends AbstractController {
 
 	@Autowired
-	private ConferenceService	conferenceService;
+	private ConferenceService conferenceService;
 
 	@Autowired
 	private RegistrationService registrationService;
-	
+
 	@Autowired
 	private AuthorService authorService;
 
@@ -59,13 +58,13 @@ public class ConferenceController extends AbstractController {
 
 		conferences = this.conferenceService.findForthcomingConferences();
 		Assert.notNull(conferences);
-		
-			
+
 		result = new ModelAndView("conference/list");
 		final Date actual = new Date(System.currentTimeMillis() - 1);
 
 		result.addObject("conferences", conferences);
-		result.addObject("requestURI", "conference/listForthcomingConferences.do");
+		result.addObject("requestURI",
+				"conference/listForthcomingConferences.do");
 		result.addObject("general", true);
 		result.addObject("searchPoint", "conference/listSearchForthcoming.do");
 		result.addObject("fechaActual", actual);
@@ -93,48 +92,67 @@ public class ConferenceController extends AbstractController {
 		return result;
 	}
 
-	//Show
-	@RequestMapping(value = "/display", method = RequestMethod.GET, params = {
-		"conferenceId"
-	})
+	// Show
+	@RequestMapping(value = "/display", method = RequestMethod.GET, params = { "conferenceId" })
 	public ModelAndView displayAnonymous(@RequestParam final int conferenceId) {
 		ModelAndView res;
 		Boolean future = false;
-		Boolean haveR = true;
-		Author principal = authorService.findByPrincipal();
-		Collection<Registration> registerConference = registrationService.findRegistrationsByConferenceId(conferenceId);
+		Boolean canCreateActivity = false;
+		Boolean haveR = false;
+		Collection<Registration> registerConference = registrationService
+				.findRegistrationsByConferenceId(conferenceId);
 
 		// Initialize variables
 		Conference c;
 		c = this.conferenceService.findOne(conferenceId);
-		
-		if(conferenceService.findForthcomingConferences().contains(c)){
+
+		if (conferenceService.findForthcomingConferences().contains(c)) {
 			future = true;
+			canCreateActivity = true;
 		}
-		
-		for(Registration r: registerConference){
-			if(r.getAuthor().equals(principal)){
-				haveR = true;
+
+		if (conferenceService.findRunningConferences().contains(c)) {
+			canCreateActivity = true;
+		}
+
+		try {
+
+			Author principal = authorService.findByPrincipal();
+
+			for (Registration r : registerConference) {
+				if (r.getAuthor().equals(principal)) {
+					haveR = true;
+				}
 			}
-		}	
 
-		res = new ModelAndView("conference/display");
-		res.addObject("conference", c);
-		res.addObject("future", future);
-		res.addObject("haveR", haveR);
+			res = new ModelAndView("conference/display");
+			res.addObject("conference", c);
+			res.addObject("future", future);
+			res.addObject("haveR", haveR);
+			res.addObject("canCreateActivity", canCreateActivity);
 
+			if (haveR == true) {
+				res.addObject("message", "registration.commit.error");
+			}
+		} catch (final Throwable oops) {
+
+			res = new ModelAndView("conference/display");
+			res.addObject("conference", c);
+			res.addObject("future", future);
+			res.addObject("haveR", haveR);
+			res.addObject("canCreateActivity", canCreateActivity);
+		}
 
 		return res;
 	}
 
-	@RequestMapping(value = "/listSearchPast", method = RequestMethod.GET, params = {
-		"keyword"
-	})
+	@RequestMapping(value = "/listSearchPast", method = RequestMethod.GET, params = { "keyword" })
 	public ModelAndView listSearchPast(@RequestParam final String keyword) {
 		ModelAndView result;
 		Collection<Conference> conferences;
 
-		conferences = this.conferenceService.searchConferenceAnonymousPast(keyword);
+		conferences = this.conferenceService
+				.searchConferenceAnonymousPast(keyword);
 
 		result = new ModelAndView("conference/list");
 
@@ -148,14 +166,13 @@ public class ConferenceController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/listSearchForthcoming", method = RequestMethod.GET, params = {
-		"keyword"
-	})
+	@RequestMapping(value = "/listSearchForthcoming", method = RequestMethod.GET, params = { "keyword" })
 	public ModelAndView listSearchForthcoming(@RequestParam final String keyword) {
 		ModelAndView result;
 		Collection<Conference> conferences;
 
-		conferences = this.conferenceService.searchConferenceAnonymousForthcomming(keyword);
+		conferences = this.conferenceService
+				.searchConferenceAnonymousForthcomming(keyword);
 
 		result = new ModelAndView("conference/list");
 
@@ -169,14 +186,13 @@ public class ConferenceController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/listSearchRunning", method = RequestMethod.GET, params = {
-		"keyword"
-	})
+	@RequestMapping(value = "/listSearchRunning", method = RequestMethod.GET, params = { "keyword" })
 	public ModelAndView listSearchRunning(@RequestParam final String keyword) {
 		ModelAndView result;
 		Collection<Conference> conferences;
 
-		conferences = this.conferenceService.searchConferenceAnonymousRunning(keyword);
+		conferences = this.conferenceService
+				.searchConferenceAnonymousRunning(keyword);
 
 		result = new ModelAndView("conference/list");
 
