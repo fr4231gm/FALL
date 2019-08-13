@@ -32,7 +32,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
  
- <form:select multiple="true" id="reviewers" path="reviewer.name">
+<form:select multiple="true" id="reviewers" path="reviewers">
 		<form:options items="${reviewers}" itemLabel="name" itemValue="id" />
 </form:select>
  
