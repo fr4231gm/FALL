@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActivityService;
 import services.TutorialService;
+import domain.Conference;
 import domain.Tutorial;
 
 @Controller
@@ -69,6 +70,27 @@ public class TutorialController extends AbstractController {
 
         return res;
     }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int tutorialId) {
+
+		ModelAndView result;
+		Tutorial tutorial;
+		Conference conference;
+		
+		tutorial = this.tutorialService.findOne(tutorialId);
+		conference = tutorial.getConference();
+
+		try {
+			this.tutorialService.delete(tutorial);
+			result = new ModelAndView("redirect:/activity/list.do?conferenceId="+conference.getId());
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(tutorial, "activity.commit.error");
+		}
+
+		return result;
+
+	}
 
     // Ancilliary methods
 

@@ -38,11 +38,11 @@
 
   	<div class="toggle">
 	<jstl:if test="${value == true}">
-		<input type="checkbox" class="check-checkbox" id="${path}" name="checkTerms" value="true" checked="checked">
-	</jstl:if>
-	<jstl:if test="${value == false}">
-		<input type="checkbox" class="check-checkbox" id="${path}" name="checkTerms" value="true">
-	</jstl:if>
+    <input type="checkbox" class="check-checkbox" id="${path}" name="${path}" value="true" checked="checked">
+  </jstl:if>
+  <jstl:if test="${value == false}">
+    <input type="checkbox" class="check-checkbox" id="${path}" name="${path}" value="true">
+  </jstl:if>
     <label class="check-label" for="${path}">
     <jstl:if test="${true}">
       <div class="background2"></div>
