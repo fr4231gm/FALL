@@ -120,8 +120,6 @@ public class ReviewerController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Reviewer> reviewers;
-
-		//this.reviewerService,findReviewersWithConferenceTitleAndSummaryKeywords()
 		
 		reviewers = this.reviewerService.findAll();
 

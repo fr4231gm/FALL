@@ -28,7 +28,7 @@
 <br>
 <br>
  
- <form:form modelAttribute="submission">
+ <form:form modelAttribute="submissionForm">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
  

@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import services.SubmissionService;
 import controllers.AbstractController;
 import domain.Reviewer;
 import domain.Submission;
+import forms.SubmissionForm;
 
 @Controller
 @RequestMapping("/submission/administrator")
@@ -35,37 +37,57 @@ public class SubmissionAdministratorController extends AbstractController {
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int submissionId) {
 		ModelAndView res;
-		Collection <Reviewer> reviewers;
 		Submission submission;		
+		SubmissionForm submissionForm = new SubmissionForm();
 		
-		reviewers = this.reviewerService.findAll();
 		submission = this.submissionService.findOne(submissionId);	
 
 		res = new ModelAndView("submission/assign");
-		res.addObject("reviewers", reviewers);
 		res.addObject("submission", submission);
+		
+		res = this.createEditModelAndView(submissionForm);
 		
 		return res;
 	}
 
 	@RequestMapping(value = "/assign", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Submission s,
+	public ModelAndView save(@Valid @ModelAttribute("submissionForm") final SubmissionForm submissionForm,
 			final BindingResult binding) {
 		ModelAndView res;
 		Submission aux;
 		
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(s);
+			res = this.createEditModelAndView(submissionForm);
 		else
 			try {
 
-				aux = this.submissionService.saveAssign(s);
-				res = new ModelAndView("redirect:display.do?submissionId="
-						+ aux.getId());
+				aux = this.submissionService.saveAssign(submissionForm);
+				res = new ModelAndView("redirect:list.do");
 			}
 
 			catch (final Throwable oops) {
-				res = this.createEditModelAndView(s, "submission.commit.error");
+				res = this.createEditModelAndView(submissionForm, "submission.commit.error");
+			}
+		return res;
+	}
+	
+	@RequestMapping(value = "/autoassign", method = RequestMethod.GET)
+	public ModelAndView autoassign(@Valid final SubmissionForm submissionForm,
+			final BindingResult binding) {
+		ModelAndView res;
+		Submission aux;
+		
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(submissionForm);
+		else
+			try {
+
+				aux = this.submissionService.saveAutoassign(submissionForm);
+				res = new ModelAndView("redirect:list.do");
+			}
+
+			catch (final Throwable oops) {
+				res = this.createEditModelAndView(submissionForm, "submission.commit.error");
 			}
 		return res;
 	}
@@ -116,6 +138,25 @@ public class SubmissionAdministratorController extends AbstractController {
 		result = new ModelAndView("submission/edit");
 		result.addObject("submission", s);
 		result.addObject("message", messageCode);
+
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndView(final SubmissionForm submissionForm) {
+		final ModelAndView result = this.createEditModelAndView(submissionForm, null);
+		return result;
+	}
+
+	private ModelAndView createEditModelAndView(final SubmissionForm submissionForm,
+			final String messagecode) {
+		ModelAndView result;
+		
+		final Collection<Reviewer> reviewers = this.reviewerService.findAll();
+		
+		result = new ModelAndView("submission/assign");
+		result.addObject("submissionForm", submissionForm);
+		result.addObject("reviewers", reviewers);
+		result.addObject("message", messagecode);
 
 		return result;
 	}
