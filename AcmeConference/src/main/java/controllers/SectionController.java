@@ -26,7 +26,7 @@ public class SectionController extends AbstractController {
 
 	@Autowired
 	private TutorialService tutorialService;
-	
+
 	@Autowired
 	private UtilityService utilityService;
 
@@ -62,16 +62,15 @@ public class SectionController extends AbstractController {
 			final BindingResult binding) {
 		ModelAndView res;
 		Section toSave;
-		
-		if(this.utilityService.checkUrls(section.getPictures())){
+
+		if (this.utilityService.checkUrls(section.getPictures())) {
 			binding.rejectValue("pictures", "section.pictures.error");
 		}
-		
+
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(section);
 		} else {
 			try {
-				binding.rejectValue("pictures", "section.pictures.error");
 				toSave = this.sectionService.save(section);
 				Tutorial tutorial = this.tutorialService
 						.findTutorialBySectionId(toSave.getId());
@@ -94,16 +93,16 @@ public class SectionController extends AbstractController {
 			final BindingResult binding) {
 		ModelAndView res;
 		Section toSave;
-		
-		if(this.utilityService.checkUrls(section.getPictures())){
+
+		if (this.utilityService.checkUrls(section.getPictures())) {
 			binding.rejectValue("pictures", "section.pictures.error");
 		}
-		
+
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(section);
 		} else {
 			try {
-				
+
 				toSave = this.sectionService.save(section);
 				Tutorial tutorial = this.tutorialService
 						.findTutorialBySectionId(toSave.getId());
@@ -119,22 +118,26 @@ public class SectionController extends AbstractController {
 
 		return res;
 	}
-	
+
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int sectionId) {
 
 		ModelAndView result;
 		Section section;
 		Tutorial tutorial;
-		
+
 		section = this.sectionService.findOne(sectionId);
 		tutorial = this.tutorialService.findTutorialBySectionId(sectionId);
 
 		try {
 			this.sectionService.delete(section);
-			result = new ModelAndView("redirect:/tutorial/display.do?tutorialId="+tutorial.getId());
+			result = new ModelAndView(
+					"redirect:/tutorial/display.do?tutorialId="
+							+ tutorial.getId());
 		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/tutorial/display.do?tutorialId="+tutorial.getId());
+			result = new ModelAndView(
+					"redirect:/tutorial/display.do?tutorialId="
+							+ tutorial.getId());
 			result.addObject("tutorial", tutorial);
 			result.addObject("message", "activity.commit.error");
 		}

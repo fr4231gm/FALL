@@ -80,7 +80,9 @@ public class ActivityService {
 	// Return true if the start moment of tutorial is correct
 	public boolean checkStartMoment(Activity activity) {
 		boolean res = true;
-
+		
+		System.out.println("Activity moment: "+ activity.getStartMoment());
+		System.out.println("Conference moment: "+ activity.getConference().getStartDate());
 		if (activity.getStartMoment().before(activity.getConference().getStartDate())) {
 			res = false;
 		}
