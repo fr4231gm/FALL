@@ -40,6 +40,7 @@
 				<li><a class="child" href="conference/administrator/listNotificationElapsed.do"><spring:message code="master.page.administartor.notification.elapsed" /></a></li>
 				<li><a class="child" href="conference/administrator/listCameraElapsed.do"><spring:message code="master.page.administrator.elapsed" /></a></li>
 				<li><a class="child" href="conference/administrator/listFutureConferences.do"><spring:message code="master.page.administrator.future" /></a></li>
+				<li><a class="child" href="conference/administrator/listAllConferences.do"><spring:message code="master.page.administrator.all" /></a></li>
 				
 				</ul>
 			</li>
