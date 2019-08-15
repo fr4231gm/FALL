@@ -2181,7 +2181,7 @@
 
 	<!-- Tutorial -->
 	<bean id="tutorial1" class="domain.Tutorial">
-		<property name="section">
+		<property name="sections">
 			<list>
 				<ref bean="section1" />
 				<ref bean="section2" />
@@ -2207,7 +2207,7 @@
 	</bean>
 
 	<bean id="tutorial2" class="domain.Tutorial">
-		<property name="section">
+		<property name="sections">
 			<list>
 				<ref bean="section4" />
 				<ref bean="section5" />
@@ -2231,7 +2231,7 @@
 	</bean>
 
 	<bean id="tutorial3" class="domain.Tutorial">
-		<property name="section">
+		<property name="sections">
 			<list>
 				<ref bean="section7" />
 				<ref bean="section8" />

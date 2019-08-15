@@ -36,8 +36,6 @@ public class Section extends DomainEntity {
 		return this.pictures;
 	}
 
-
-
 	// Setters
 	public void setTitle(final String title){
 		this.title = title; 

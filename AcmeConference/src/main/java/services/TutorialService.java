@@ -30,7 +30,8 @@ public class TutorialService {
 		Conference conference;
 
 		conference = this.conferenceService.findOne(conferenceId);
-		Assert.isTrue(!this.conferenceService.findPastConferences().contains(conference));
+		Assert.isTrue(!this.conferenceService.findPastConferences().contains(
+				conference));
 
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
@@ -68,12 +69,16 @@ public class TutorialService {
 				.findTutorialsByConferenceId(conferenceId);
 	}
 
+	public Tutorial findTutorialBySectionId(int sectionId) {
+		return this.tutorialRepository.findTutorialBySectionId(sectionId);
+	}
+
 	public void delete(Tutorial tutorial) {
 		Administrator principal;
 
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
-		
+
 		this.tutorialRepository.delete(tutorial);
 	}
 }

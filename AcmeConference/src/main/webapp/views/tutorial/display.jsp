@@ -44,3 +44,16 @@
 <h3><strong><spring:message code="activity.attachments"/></strong></h3>
 <jstl:out value="${tutorial.attachments}" />
 <br />
+
+<table class="displaytag">
+
+	<spring:message code="tutorial.sections"></spring:message>
+	
+	<jstl:forEach items="${tutorial.sections}" var="section">
+		<tr>
+			<td><jstl:out value="${section.title}" /></td>
+			<td><jstl:out value="${section.summary}" /></td>
+			<td><jstl:out value="${section.pictures}" /></td>
+		</tr>
+	</jstl:forEach>
+</table>
