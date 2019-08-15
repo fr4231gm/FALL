@@ -928,6 +928,7 @@
 				<ref bean="conference1" />
 			</list>
 		</property>
+		<property name="author" ref="author1" />
 	</bean>
 
 	<bean id="finder2" class="domain.Finder">
@@ -940,6 +941,7 @@
 				<ref bean="conference2" />
 			</list>
 		</property>
+		<property name="author" ref="author2" />
 	</bean>
 
 	<bean id="finder3" class="domain.Finder">
@@ -952,6 +954,7 @@
 				<ref bean="conference4" />
 			</list>
 		</property>
+		<property name="author" ref="author3" />
 	</bean>
 
 	<bean id="finder4" class="domain.Finder">
@@ -964,6 +967,7 @@
 				<ref bean="conference4" />
 			</list>
 		</property>
+		<property name="author" ref="author4" />
 	</bean>
 
 	<bean id="finder5" class="domain.Finder">
@@ -976,6 +980,7 @@
 				<ref bean="conference5" />
 			</list>
 		</property>
+		<property name="author" ref="author5" />
 	</bean>
 
 	<bean id="finder6" class="domain.Finder">
