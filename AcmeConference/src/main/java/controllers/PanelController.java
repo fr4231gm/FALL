@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActivityService;
+import services.ConferenceService;
 import services.PanelService;
+import services.UtilityService;
 import domain.Conference;
 import domain.Panel;
 
@@ -25,6 +27,12 @@ public class PanelController extends AbstractController {
 	
 	@Autowired
 	private ActivityService activityService;
+	
+	@Autowired
+	private UtilityService utilityService;
+	
+	@Autowired
+	private ConferenceService conferenceService;
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int conferenceId) {
@@ -41,14 +49,32 @@ public class PanelController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Panel panel, BindingResult binding) {
 		ModelAndView res;
+		boolean conferencePast = false;
 
+		if (this.conferenceService.findPastConferences().contains(
+				panel.getConference())) {
+			conferencePast = true;
+		}
+
+		if (this.utilityService.checkUrls(panel.getAttachments())) {
+			binding.rejectValue("attachments", "activity.attachments.error");
+		}
+		
+		if(!this.activityService.checkStartMoment(panel)){
+			binding.rejectValue("startMoment", "activity.startMoment.error");
+		}
+		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(panel);
 		} else {
 			try {
 				this.panelService.save(panel);
 				res = new ModelAndView("panel/display");
-
+				res.addObject("panel", panel);
+				res.addObject("schedule",
+						this.activityService.getSchedule(panel));
+				res.addObject("conferencePast", conferencePast);
+				
 			} catch (Throwable oops) {
 				res = this.createEditModelAndView(panel,
 						"activity.commit.error");
@@ -73,13 +99,31 @@ public class PanelController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save2(@Valid Panel panel, BindingResult binding) {
 		ModelAndView res;
+		boolean conferencePast = false;
 
+		if (this.conferenceService.findPastConferences().contains(
+				panel.getConference())) {
+			conferencePast = true;
+		}
+
+		if (this.utilityService.checkUrls(panel.getAttachments())) {
+			binding.rejectValue("attachments", "activity.attachments.error");
+		}
+		
+		if(!this.activityService.checkStartMoment(panel)){
+			binding.rejectValue("startMoment", "activity.startMoment.error");
+		}
+		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(panel);
 		} else {
 			try {
 				this.panelService.save(panel);
 				res = new ModelAndView("panel/display");
+				res.addObject("panel", panel);
+				res.addObject("schedule",
+						this.activityService.getSchedule(panel));
+				res.addObject("conferencePast", conferencePast);
 
 			} catch (Throwable oops) {
 				res = this.createEditModelAndView(panel,

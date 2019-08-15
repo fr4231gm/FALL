@@ -83,9 +83,18 @@ public class SectionService {
     public void delete(Section section) {
     
         Administrator principal;
+        Collection<Section> sections;
+        Tutorial tutorial;
 
         principal = this.administratorService.findByPrincipal();
         Assert.notNull(principal);
+        
+        tutorial = this.tutorialService.findTutorialBySectionId(section.getId());
+        sections = tutorial.getSections();
+        sections.remove(section);
+        tutorial.setSections(sections);
+        
+        this.tutorialService.save(tutorial);
 
         this.sectionRepository.delete(section);
     }

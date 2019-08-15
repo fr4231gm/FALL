@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ConferenceService;
 import services.PanelService;
 import services.PresentationService;
 import services.TutorialService;
+import domain.Conference;
 import domain.Panel;
 import domain.Presentation;
 import domain.Tutorial;
@@ -28,6 +30,9 @@ public class ActivityController extends AbstractController {
 	
 	@Autowired
 	private PresentationService presentationService;
+	
+	@Autowired
+	private ConferenceService conferenceService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam int conferenceId) {
@@ -35,6 +40,14 @@ public class ActivityController extends AbstractController {
 		Collection<Tutorial> tutorials;
 		Collection<Panel> panels;
 		Collection<Presentation> presentations;
+		Conference conference;
+		boolean conferencePast = false;
+		
+		conference = this.conferenceService.findOne(conferenceId);
+		
+		if(this.conferenceService.findPastConferences().contains(conference)){
+			conferencePast = true;
+		}		
 
 		tutorials = this.tutorialService.findTutorialsByConferenceId(conferenceId);
 		panels = this.panelService.findPanelsByConferenceId(conferenceId);
@@ -44,6 +57,7 @@ public class ActivityController extends AbstractController {
 		res.addObject("tutorials", tutorials);
 		res.addObject("panels", panels);
 		res.addObject("presentations", presentations);
+		res.addObject("conferencePast", conferencePast);
 
 		return res;
 	}

@@ -6,11 +6,15 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Access; 
 import javax.persistence.AccessType; 
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity 
 @Access(AccessType.PROPERTY) 
@@ -68,11 +72,15 @@ public class Conference extends DomainEntity {
 	}
 
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getStartDate(){
 		return this.startDate;
 	}
 
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getEndDate(){
 		return this.endDate;
 	}

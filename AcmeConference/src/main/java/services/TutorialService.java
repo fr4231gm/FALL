@@ -27,6 +27,9 @@ public class TutorialService {
 	
 	@Autowired
 	private UtilityService utilityService;
+	
+	@Autowired
+	private ActivityService activityService;
 
 	public Tutorial create(int conferenceId) {
 		Administrator principal;
@@ -49,8 +52,9 @@ public class TutorialService {
 
 	public Tutorial save(Tutorial tutorial) {
 		Tutorial res;
-
+		
 		Assert.isTrue(!this.utilityService.checkUrls(tutorial.getAttachments()));
+		Assert.isTrue(this.activityService.checkStartMoment(tutorial));
 		res = this.tutorialRepository.save(tutorial);
 
 		return res;

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActivityService;
 import services.ConferenceService;
 import services.TutorialService;
+import services.UtilityService;
 import domain.Conference;
 import domain.Tutorial;
 
@@ -21,133 +22,175 @@ import domain.Tutorial;
 @RequestMapping("/tutorial")
 public class TutorialController extends AbstractController {
 
-    @Autowired
-    private TutorialService tutorialService;
+	@Autowired
+	private TutorialService tutorialService;
 
-    @Autowired
-    private ActivityService activityService;
+	@Autowired
+	private ActivityService activityService;
 
-    @Autowired
-    private ConferenceService conferenceService;
+	@Autowired
+	private ConferenceService conferenceService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView create(@RequestParam int conferenceId) {
-        ModelAndView res;
-        Tutorial tutorial;
+	@Autowired
+	private UtilityService utilityService;
 
-        tutorial = this.tutorialService.create(conferenceId);
-        Assert.notNull(tutorial);
-        res = this.createEditModelAndView(tutorial);
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam int conferenceId) {
+		ModelAndView res;
+		Tutorial tutorial;
 
-        return res;
-    }
-    
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit(@RequestParam int tutorialId) {
-        ModelAndView res;
-        Tutorial tutorial;
+		tutorial = this.tutorialService.create(conferenceId);
+		Assert.notNull(tutorial);
+		res = this.createEditModelAndView(tutorial);
 
-        tutorial = this.tutorialService.findOne(tutorialId);
-        Assert.notNull(tutorial);
-        res = this.createEditModelAndView(tutorial);
+		return res;
+	}
 
-        return res;
-    }
-    
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-    public ModelAndView save2(@Valid Tutorial tutorial, BindingResult binding) {
-        ModelAndView res;
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int tutorialId) {
+		ModelAndView res;
+		Tutorial tutorial;
 
-        if (binding.hasErrors()) {
-            res = this.createEditModelAndView(tutorial);
-        } else {
-            try {
-                this.tutorialService.save(tutorial);
-                res = new ModelAndView("tutorial/display");
+		tutorial = this.tutorialService.findOne(tutorialId);
+		Assert.notNull(tutorial);
+		res = this.createEditModelAndView(tutorial);
 
-            } catch (Throwable oops) {
-                res = this.createEditModelAndView(tutorial, "activity.commit.error");
-            }
-        }
+		return res;
+	}
 
-        return res;
-    }
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save2(@Valid Tutorial tutorial, BindingResult binding) {
+		ModelAndView res;
+		boolean conferencePast = false;
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid Tutorial tutorial, BindingResult binding) {
-        ModelAndView res;
+		if (this.conferenceService.findPastConferences().contains(
+				tutorial.getConference())) {
+			conferencePast = true;
+		}
 
-        if (binding.hasErrors()) {
-            res = this.createEditModelAndView(tutorial);
-        } else {
-            try {
-                this.tutorialService.save(tutorial);
-                res = new ModelAndView("tutorial/display");
+		if (this.utilityService.checkUrls(tutorial.getAttachments())) {
+			binding.rejectValue("attachments", "activity.attachments.error");
+		}
+		
+		if(!this.activityService.checkStartMoment(tutorial)){
+			binding.rejectValue("startMoment", "activity.startMoment.error");
+		}
 
-            } catch (Throwable oops) {
-                res = this.createEditModelAndView(tutorial, "activity.commit.error");
-            }
-        }
+		if (binding.hasErrors()) {
+			res = this.createEditModelAndView(tutorial);
+		} else {
+			try {
+				this.tutorialService.save(tutorial);
+				res = new ModelAndView("tutorial/display");
+				res.addObject("tutorial", tutorial);
+				res.addObject("schedule",
+						this.activityService.getSchedule(tutorial));
+				res.addObject("conferencePast", conferencePast);
 
-        return res;
-    }
+			} catch (Throwable oops) {
+				res = this.createEditModelAndView(tutorial,
+						"activity.commit.error");
+			}
+		}
 
-    @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam final int tutorialId) {
-        ModelAndView res;
-        Tutorial tutorial;
-        boolean conferencePast = false;
+		return res;
+	}
 
-        tutorial = this.tutorialService.findOne(tutorialId);
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Tutorial tutorial, BindingResult binding) {
+		ModelAndView res;
+		boolean conferencePast = false;
 
-        if(this.conferenceService.findPastConferences().contains(tutorial.getConference())){
-            conferencePast = true;
-        }
+		if (this.conferenceService.findPastConferences().contains(
+				tutorial.getConference())) {
+			conferencePast = true;
+		}
 
-        res = new ModelAndView("tutorial/display");
-        res.addObject("tutorial", tutorial);
-        res.addObject("schedule", this.activityService.getSchedule(tutorial));
-        res.addObject("conferencePast", conferencePast);
+		if (this.utilityService.checkUrls(tutorial.getAttachments())) {
+			binding.rejectValue("attachments", "activity.attachments.error");
+		}
 
-        return res;
-    }
-    
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+		if (binding.hasErrors()) {
+			res = this.createEditModelAndView(tutorial);
+		} else {
+			try {
+				this.tutorialService.save(tutorial);
+				res = new ModelAndView("tutorial/display");
+				res.addObject("tutorial", tutorial);
+				res.addObject("schedule",
+						this.activityService.getSchedule(tutorial));
+				res.addObject("conferencePast", conferencePast);
+
+			} catch (Throwable oops) {
+				res = this.createEditModelAndView(tutorial,
+						"activity.commit.error");
+			}
+		}
+
+		return res;
+	}
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int tutorialId) {
+		ModelAndView res;
+		Tutorial tutorial;
+		boolean conferencePast = false;
+
+		tutorial = this.tutorialService.findOne(tutorialId);
+
+		if (this.conferenceService.findPastConferences().contains(
+				tutorial.getConference())) {
+			conferencePast = true;
+		}
+
+		res = new ModelAndView("tutorial/display");
+		res.addObject("tutorial", tutorial);
+		res.addObject("schedule", this.activityService.getSchedule(tutorial));
+		res.addObject("conferencePast", conferencePast);
+
+		return res;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int tutorialId) {
 
 		ModelAndView result;
 		Tutorial tutorial;
 		Conference conference;
-		
+
 		tutorial = this.tutorialService.findOne(tutorialId);
 		conference = tutorial.getConference();
 
 		try {
 			this.tutorialService.delete(tutorial);
-			result = new ModelAndView("redirect:/activity/list.do?conferenceId="+conference.getId());
+			result = new ModelAndView(
+					"redirect:/activity/list.do?conferenceId="
+							+ conference.getId());
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(tutorial, "activity.commit.error");
+			result = this.createEditModelAndView(tutorial,
+					"activity.commit.error");
 		}
 
 		return result;
 
 	}
 
-    // Ancilliary methods
+	// Ancilliary methods
 
-    protected ModelAndView createEditModelAndView(final Tutorial tutorial) {
-        final ModelAndView result = this.createEditModelAndView(tutorial, null);
-        return result;
-    }
+	protected ModelAndView createEditModelAndView(final Tutorial tutorial) {
+		final ModelAndView result = this.createEditModelAndView(tutorial, null);
+		return result;
+	}
 
-    protected ModelAndView createEditModelAndView(final Tutorial tutorial, final String messagecode) {
-        final ModelAndView result;
+	protected ModelAndView createEditModelAndView(final Tutorial tutorial,
+			final String messagecode) {
+		final ModelAndView result;
 
-        result = new ModelAndView("tutorial/edit");
+		result = new ModelAndView("tutorial/edit");
 
-        result.addObject("tutorial", tutorial);
-        result.addObject("message", messagecode);
+		result.addObject("tutorial", tutorial);
+		result.addObject("message", messagecode);
 
-        return result;
-    }
+		return result;
+	}
 }
