@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.util.Assert;
 import repositories.TutorialRepository;
 import domain.Administrator;
 import domain.Conference;
+import domain.Section;
 import domain.Tutorial;
 
 @Service
@@ -46,6 +48,7 @@ public class TutorialService {
 
 		res = new Tutorial();
 		res.setConference(conference);
+		res.setSections(Collections.<Section> emptyList());
 
 		return res;
 	}

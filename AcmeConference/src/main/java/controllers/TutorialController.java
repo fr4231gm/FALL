@@ -71,8 +71,8 @@ public class TutorialController extends AbstractController {
 		if (this.utilityService.checkUrls(tutorial.getAttachments())) {
 			binding.rejectValue("attachments", "activity.attachments.error");
 		}
-		
-		if(!this.activityService.checkStartMoment(tutorial)){
+
+		if (!this.activityService.checkStartMoment(tutorial)) {
 			binding.rejectValue("startMoment", "activity.startMoment.error");
 		}
 
@@ -81,7 +81,9 @@ public class TutorialController extends AbstractController {
 		} else {
 			try {
 				this.tutorialService.save(tutorial);
-				res = new ModelAndView("tutorial/display");
+				res = new ModelAndView(
+						"redirect:/tutorial/display.do?tutorialId="
+								+ tutorial.getId());
 				res.addObject("tutorial", tutorial);
 				res.addObject("schedule",
 						this.activityService.getSchedule(tutorial));
@@ -109,13 +111,19 @@ public class TutorialController extends AbstractController {
 		if (this.utilityService.checkUrls(tutorial.getAttachments())) {
 			binding.rejectValue("attachments", "activity.attachments.error");
 		}
+		
+		if (!this.activityService.checkStartMoment(tutorial)) {
+			binding.rejectValue("startMoment", "activity.startMoment.error");
+		}
 
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(tutorial);
 		} else {
 			try {
 				this.tutorialService.save(tutorial);
-				res = new ModelAndView("tutorial/display");
+				res = new ModelAndView(
+						"redirect:/tutorial/display.do?tutorialId="
+								+ tutorial.getId());
 				res.addObject("tutorial", tutorial);
 				res.addObject("schedule",
 						this.activityService.getSchedule(tutorial));

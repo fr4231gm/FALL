@@ -19,7 +19,6 @@ public class Tutorial extends Activity {
 
 
 	// Getters
-	@NotEmpty
 	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Section> getSections(){
 		return this.sections;
