@@ -14,11 +14,11 @@
 	var="parsedStartDate" />
 	
 <fmt:formatDate value="${finder.endDate}" pattern="dd/MM/yyyy HH:mm"
-	var="parsedStartDate" />
+	var="parsedEndDate" />
 <form:form modelAttribute="finder">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="author"/>
+	<form:hidden path=""/>
 	
 	<acme:input code="finder.keyWord" path="keyWord" placeholder="la n palabra"/>
 	<form:label path="startDate">
@@ -39,8 +39,8 @@
 	<acme:input code="finder.fee" path="fee"/>
 	
 	<acme:submit name="save" code="finder.buscar"/>
-		<acme:submit name="clear" code="finder.clear"/>
-			<acme:cancel url="/" code="finder.cancel"/>	
+
+	<acme:cancel url="/" code="finder.cancel"/>	
 	
 	
 
