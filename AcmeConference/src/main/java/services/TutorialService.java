@@ -24,13 +24,20 @@ public class TutorialService {
 
 	@Autowired
 	private ConferenceService conferenceService;
+	
+	@Autowired
+	private UtilityService utilityService;
+	
+	@Autowired
+	private ActivityService activityService;
 
 	public Tutorial create(int conferenceId) {
 		Administrator principal;
 		Conference conference;
 
 		conference = this.conferenceService.findOne(conferenceId);
-		Assert.isTrue(!this.conferenceService.findPastConferences().contains(conference));
+		Assert.isTrue(!this.conferenceService.findPastConferences().contains(
+				conference));
 
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
@@ -45,7 +52,9 @@ public class TutorialService {
 
 	public Tutorial save(Tutorial tutorial) {
 		Tutorial res;
-
+		
+		Assert.isTrue(!this.utilityService.checkUrls(tutorial.getAttachments()));
+		Assert.isTrue(this.activityService.checkStartMoment(tutorial));
 		res = this.tutorialRepository.save(tutorial);
 
 		return res;
@@ -68,12 +77,18 @@ public class TutorialService {
 				.findTutorialsByConferenceId(conferenceId);
 	}
 
+	public Tutorial findTutorialBySectionId(int sectionId) {
+		return this.tutorialRepository.findTutorialBySectionId(sectionId);
+	}
+
 	public void delete(Tutorial tutorial) {
 		Administrator principal;
 
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
-		
+
 		this.tutorialRepository.delete(tutorial);
 	}
+	
+	
 }
