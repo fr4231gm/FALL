@@ -103,14 +103,14 @@ public class SubmissionService {
 		return result;
 	}
 	
-	public Submission saveAssign(final SubmissionForm submissionForm) {
-		Submission result;
+	public void saveAssign(final SubmissionForm submissionForm) {
 		Actor principal;
 		Collection<Reviewer> reviewers;
+		Assert.notNull(submissionForm);
 
 		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
-		reviewers = this.reviewerService.findAll();
+		reviewers = submissionForm.getReviewers();
 		
 		if (principal instanceof Author) {
 			Assert.isTrue(submissionForm.getAuthor().getId() == this.authorService.findByPrincipal().getId());
@@ -119,12 +119,10 @@ public class SubmissionService {
 		}
 		
 		submissionForm.setReviewers(reviewers);
-		result = this.submissionRepository.save(this.findOne(submissionForm.getId()));
-		return result;
+		this.submissionRepository.save(this.findOne(submissionForm.getId()));
 	}
 	
-	public Submission saveAutoassign(final SubmissionForm submissionForm) {
-		Submission result;
+	public void saveAutoassign(final SubmissionForm submissionForm) {
 		Actor principal;
 		Collection<Reviewer> reviewers;
 
@@ -139,8 +137,7 @@ public class SubmissionService {
 		}
 		
 		submissionForm.setReviewers(reviewers);
-		result = this.submissionRepository.save(this.findOne(submissionForm.getId()));
-		return result;
+		this.submissionRepository.save(this.findOne(submissionForm.getId()));
 	}
 	
 	private String generateTicker(final Submission s) {

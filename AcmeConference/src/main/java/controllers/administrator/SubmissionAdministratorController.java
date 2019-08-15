@@ -35,15 +35,12 @@ public class SubmissionAdministratorController extends AbstractController {
 
 	// Create
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int submissionId) {
+	public ModelAndView create() {
 		ModelAndView res;
-		Submission submission;		
 		SubmissionForm submissionForm = new SubmissionForm();
 		
-		submission = this.submissionService.findOne(submissionId);	
 
 		res = new ModelAndView("submission/assign");
-		res.addObject("submission", submission);
 		
 		res = this.createEditModelAndView(submissionForm);
 		
@@ -54,15 +51,14 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView save(@Valid @ModelAttribute("submissionForm") final SubmissionForm submissionForm,
 			final BindingResult binding) {
 		ModelAndView res;
-		Submission aux;
 		
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(submissionForm);
 		else
 			try {
 
-				aux = this.submissionService.saveAssign(submissionForm);
-				res = new ModelAndView("redirect:list.do");
+				this.submissionService.saveAssign(submissionForm);
+				res = new ModelAndView("redirect:/submission/administrator/list.do");
 			}
 
 			catch (final Throwable oops) {
@@ -75,15 +71,14 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView autoassign(@Valid final SubmissionForm submissionForm,
 			final BindingResult binding) {
 		ModelAndView res;
-		Submission aux;
 		
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(submissionForm);
 		else
 			try {
 
-				aux = this.submissionService.saveAutoassign(submissionForm);
-				res = new ModelAndView("redirect:list.do");
+				this.submissionService.saveAutoassign(submissionForm);
+				res = new ModelAndView("redirect:/submission/administrator/list.do");
 			}
 
 			catch (final Throwable oops) {
