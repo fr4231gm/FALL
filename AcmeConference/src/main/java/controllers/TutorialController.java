@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActivityService;
+import services.ConferenceService;
 import services.TutorialService;
 import domain.Conference;
 import domain.Tutorial;
@@ -26,7 +27,10 @@ public class TutorialController extends AbstractController {
     @Autowired
     private ActivityService activityService;
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    @Autowired
+    private ConferenceService conferenceService;
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create(@RequestParam int conferenceId) {
         ModelAndView res;
         Tutorial tutorial;
@@ -37,8 +41,39 @@ public class TutorialController extends AbstractController {
 
         return res;
     }
+    
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public ModelAndView edit(@RequestParam int tutorialId) {
+        ModelAndView res;
+        Tutorial tutorial;
 
+        tutorial = this.tutorialService.findOne(tutorialId);
+        Assert.notNull(tutorial);
+        res = this.createEditModelAndView(tutorial);
+
+        return res;
+    }
+    
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+    public ModelAndView save2(@Valid Tutorial tutorial, BindingResult binding) {
+        ModelAndView res;
+
+        if (binding.hasErrors()) {
+            res = this.createEditModelAndView(tutorial);
+        } else {
+            try {
+                this.tutorialService.save(tutorial);
+                res = new ModelAndView("tutorial/display");
+
+            } catch (Throwable oops) {
+                res = this.createEditModelAndView(tutorial, "activity.commit.error");
+            }
+        }
+
+        return res;
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
     public ModelAndView save(@Valid Tutorial tutorial, BindingResult binding) {
         ModelAndView res;
 
@@ -61,12 +96,18 @@ public class TutorialController extends AbstractController {
     public ModelAndView display(@RequestParam final int tutorialId) {
         ModelAndView res;
         Tutorial tutorial;
+        boolean conferencePast = false;
 
         tutorial = this.tutorialService.findOne(tutorialId);
+
+        if(this.conferenceService.findPastConferences().contains(tutorial.getConference())){
+            conferencePast = true;
+        }
 
         res = new ModelAndView("tutorial/display");
         res.addObject("tutorial", tutorial);
         res.addObject("schedule", this.activityService.getSchedule(tutorial));
+        res.addObject("conferencePast", conferencePast);
 
         return res;
     }

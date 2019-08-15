@@ -24,6 +24,9 @@ public class TutorialService {
 
 	@Autowired
 	private ConferenceService conferenceService;
+	
+	@Autowired
+	private UtilityService utilityService;
 
 	public Tutorial create(int conferenceId) {
 		Administrator principal;
@@ -47,6 +50,7 @@ public class TutorialService {
 	public Tutorial save(Tutorial tutorial) {
 		Tutorial res;
 
+		Assert.isTrue(!this.utilityService.checkUrls(tutorial.getAttachments()));
 		res = this.tutorialRepository.save(tutorial);
 
 		return res;
@@ -81,4 +85,6 @@ public class TutorialService {
 
 		this.tutorialRepository.delete(tutorial);
 	}
+	
+	
 }

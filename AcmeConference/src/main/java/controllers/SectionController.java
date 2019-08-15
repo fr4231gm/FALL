@@ -66,8 +66,8 @@ public class SectionController extends AbstractController {
 				Tutorial tutorial = this.tutorialService
 						.findTutorialBySectionId(toSave.getId());
 				res = new ModelAndView(
-						"redirect:/tutorial/display.do?conferenceId="
-								+ tutorial.getConference().getId());
+						"redirect:/tutorial/display.do?tutorialId="
+								+ tutorial.getId());
 
 			} catch (Throwable oops) {
 				res = this.createEditModelAndView(section,
@@ -92,8 +92,8 @@ public class SectionController extends AbstractController {
 				Tutorial tutorial = this.tutorialService
 						.findTutorialBySectionId(toSave.getId());
 				res = new ModelAndView(
-						"redirect:/tutorial/display.do?conferenceId="
-								+ tutorial.getConference().getId());
+						"redirect:/tutorial/display.do?tutorialId="
+								+ tutorial.getId());
 
 			} catch (Throwable oops) {
 				res = this.createEditModelAndView(section,

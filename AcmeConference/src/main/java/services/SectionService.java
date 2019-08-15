@@ -28,6 +28,9 @@ public class SectionService {
 
     @Autowired
     private ConferenceService conferenceService;
+    
+    @Autowired
+    private UtilityService utilityService;
 
     public Section create(int tutorialId) {
     
@@ -56,6 +59,7 @@ public class SectionService {
     
         Section res;
 
+        Assert.isTrue(!this.utilityService.checkUrls(section.getPictures()));
         res = this.sectionRepository.save(section);     
 
         return res;

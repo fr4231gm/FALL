@@ -21,39 +21,75 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<h3><strong><spring:message code="activity.title"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.title" /></strong>
+</h3>
 <jstl:out value="${tutorial.title}" />
 <br />
 
-<h3><strong><spring:message code="activity.speakers"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.speakers" /></strong>
+</h3>
 <jstl:out value="${tutorial.speakers}" />
 <br />
 
-<h3><strong><spring:message code="activity.schedule"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.schedule" /></strong>
+</h3>
 <jstl:out value="${schedule}" />
 <br />
 
-<h3><strong><spring:message code="activity.room"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.room" /></strong>
+</h3>
 <jstl:out value="${tutorial.room}" />
 <br />
 
-<h3><strong><spring:message code="activity.summary"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.summary" /></strong>
+</h3>
 <jstl:out value="${tutorial.summary}" />
 <br />
 
-<h3><strong><spring:message code="activity.attachments"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.attachments" /></strong>
+</h3>
 <jstl:out value="${tutorial.attachments}" />
 <br />
 
+<h3>
+	<strong><spring:message code="tutorial.sections" /></strong>
+</h3>
+
 <table class="displaytag">
 
-	<spring:message code="tutorial.sections"></spring:message>
-	
+	<tr>
+		<th><spring:message code="section.title" /></th>
+		<th><spring:message code="section.summary" /></th>
+		<th><spring:message code="section.pictures" /></th>
+		<security:authorize access="hasRole('ADMINISTRATOR')">
+			<th><spring:message code="section.edit" /></th>
+			<th><spring:message code="section.delete" /></th>
+		</security:authorize>
+	</tr>
 	<jstl:forEach items="${tutorial.sections}" var="section">
 		<tr>
 			<td><jstl:out value="${section.title}" /></td>
 			<td><jstl:out value="${section.summary}" /></td>
 			<td><jstl:out value="${section.pictures}" /></td>
+			<security:authorize access="hasRole('ADMINISTRATOR')">
+				<td><acme:link code="section.edit"
+						link="section/edit.do?sectionId=${section.id}" /></td>
+				<td><acme:link code="section.delete"
+						link="section/delete.do?sectionId=${section.id}" /></td>
+			</security:authorize>
 		</tr>
 	</jstl:forEach>
 </table>
+
+<security:authorize access="hasRole('ADMINISTRATOR')">
+	<jstl:if test="${conferencePast eq false }">
+		<acme:link code="tutorial.create.section"
+			link="section/create.do?tutorialId=${tutorial.id}" />
+	</jstl:if>
+</security:authorize>

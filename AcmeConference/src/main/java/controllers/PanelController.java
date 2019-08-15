@@ -26,7 +26,7 @@ public class PanelController extends AbstractController {
 	@Autowired
 	private ActivityService activityService;
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int conferenceId) {
 		ModelAndView res;
 		Panel panel;
@@ -38,8 +38,40 @@ public class PanelController extends AbstractController {
 		return res;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Panel panel, BindingResult binding) {
+		ModelAndView res;
+
+		if (binding.hasErrors()) {
+			res = this.createEditModelAndView(panel);
+		} else {
+			try {
+				this.panelService.save(panel);
+				res = new ModelAndView("panel/display");
+
+			} catch (Throwable oops) {
+				res = this.createEditModelAndView(panel,
+						"activity.commit.error");
+			}
+		}
+
+		return res;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int panelId) {
+		ModelAndView res;
+		Panel panel;
+
+		panel = this.panelService.findOne(panelId);
+		Assert.notNull(panel);
+		res = this.createEditModelAndView(panel);
+
+		return res;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save2(@Valid Panel panel, BindingResult binding) {
 		ModelAndView res;
 
 		if (binding.hasErrors()) {

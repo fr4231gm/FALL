@@ -27,7 +27,14 @@
 
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="true" />
-		
+
+	<display:column>
+
+		<acme:link link="tutorial/display.do?tutorialId=${row.id}"
+			code="activity.display" />
+
+	</display:column>
+
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
 		<display:column>
@@ -40,6 +47,7 @@
 
 		</display:column>
 	</security:authorize>
+
 </display:table>
 
 <h2>
@@ -59,6 +67,13 @@
 
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="true" />
+		
+	<display:column>
+
+		<acme:link link="panel/display.do?panelId=${row.id}"
+			code="activity.display" />
+
+	</display:column>
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
@@ -95,6 +110,13 @@
 
 	<display:column property="paper.title" titleKey="activity.paper"
 		sortable="true" />
+		
+	<display:column>
+
+		<acme:link link="presentation/display.do?presentationId=${row.id}"
+			code="activity.display" />
+
+	</display:column>
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 

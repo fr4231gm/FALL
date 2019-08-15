@@ -26,7 +26,7 @@ public class PresentationController extends AbstractController {
     @Autowired
     private ActivityService activityService;
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create(@RequestParam int conferenceId) {
         ModelAndView res;
         Presentation presentation;
@@ -37,9 +37,41 @@ public class PresentationController extends AbstractController {
 
         return res;
     }
+    
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public ModelAndView edit(@RequestParam int presentationId) {
+        ModelAndView res;
+        Presentation presentation;
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+        presentation = this.presentationService.findOne(presentationId);
+        Assert.notNull(presentation);
+        res = this.createEditModelAndView(presentation);
+
+        return res;
+    }
+
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
     public ModelAndView save(@Valid Presentation presentation, BindingResult binding) {
+        ModelAndView res;
+
+        if (binding.hasErrors()) {
+            res = this.createEditModelAndView(presentation);
+        } else {
+            try {
+                this.presentationService.save(presentation);
+                res = new ModelAndView("presentation/display");
+
+            } catch (Throwable oops) {
+                res = this.createEditModelAndView(presentation, "activity.commit.error");
+            }
+        }
+
+        return res;
+    }
+    
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+    public ModelAndView save2(@Valid Presentation presentation, BindingResult binding) {
         ModelAndView res;
 
         if (binding.hasErrors()) {
