@@ -71,7 +71,7 @@
 	
 	<display:column>
 	<jstl:if test="${row.isDraft eq 'true'}">
-	<acme:link code="conference.edit" link="conference/administrator/edit.do"/>
+	<acme:link code="conference.edit" link="conference/administrator/edit.do?conferenceId=${row.id}"/>
 	</jstl:if>
 	</display:column>
 	</security:authorize>

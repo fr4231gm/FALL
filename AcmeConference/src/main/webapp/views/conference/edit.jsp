@@ -27,7 +27,7 @@
 	<acme:date code="conference.endDate" path="endDate"/>
 	<acme:textarea code="conference.summary" path="summary"/>
 	<acme:input code="conference.fee" path="fee"/>
-	<acme:checkbox code="conference.draft" path="isDraft"/>
+	<acme:checkbox code="conference.draft" path="isDraft" value="${ conference.isDraft}"/>
 	<acme:select itemLabel="name[${lan}]" items="${categories}" code="conference.category" path="category"/>
 	
 	<acme:submit name="save" code="category.save" />

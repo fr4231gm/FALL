@@ -14,8 +14,10 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdministratorService;
 import services.CategoryService;
 import services.ConferenceService;
 import controllers.AbstractController;
@@ -27,10 +29,13 @@ import domain.Conference;
 public class ConferenceAdministratorController extends AbstractController {
 
 	@Autowired
-	private ConferenceService	conferenceService;
+	private ConferenceService		conferenceService;
 
 	@Autowired
-	private CategoryService		categoryService;
+	private CategoryService			categoryService;
+
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	@RequestMapping(value = "/listDeadlineElapsed", method = RequestMethod.GET)
@@ -124,6 +129,57 @@ public class ConferenceAdministratorController extends AbstractController {
 
 		return res;
 	}
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int conferenceId) {
+		ModelAndView res;
+		Conference conf;
+		try {
+
+			this.administratorService.findByPrincipal();
+			conf = this.conferenceService.findOne(conferenceId);
+			Assert.isTrue(conf.getIsDraft() == true);
+			res = this.createEditModelAndView(conf);
+		} catch (final Throwable oops) {
+			res = new ModelAndView("security/hacking");
+		}
+
+		return res;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveEdit(final @Valid Conference c, final BindingResult binding) {
+		ModelAndView res;
+		final Date actual = new Date(System.currentTimeMillis());
+		if (c.getIsDraft() == null)
+			c.setIsDraft(false);
+		if (c.getSubmissionDeadline() != null)
+			if (c.getSubmissionDeadline().before(actual))
+				binding.rejectValue("submissionDeadline", "date.submission.future");
+
+		if (c.getNotificationDeadline() != null)
+			if (c.getNotificationDeadline().before(actual))
+				binding.rejectValue("notificationDeadline", "date.notification.future");
+		if (c.getCameraReadyDeadline() != null)
+			if (c.getCameraReadyDeadline().before(actual))
+				binding.rejectValue("submissionDeadline", "date.camera.ready.future");
+		if (c.getStartDate() != null)
+			if (c.getStartDate().before(actual))
+				binding.rejectValue("startDate", "date.start.future");
+		if (c.getEndDate() != null && c.getStartDate() != null)
+			if (c.getEndDate().before(c.getStartDate()))
+				binding.rejectValue("endDate", "date.end.date.future");
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(c);
+		else
+			try {
+				this.conferenceService.save(c);
+				res = new ModelAndView("redirect:listAllConferences.do");
+
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(c, "conference.commit.error");
+			}
+		return res;
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView saveCreate(final @Valid Conference c, final BindingResult binding) {
@@ -159,6 +215,7 @@ public class ConferenceAdministratorController extends AbstractController {
 			}
 		return res;
 	}
+
 	protected ModelAndView createEditModelAndView(final Conference conf) {
 		ModelAndView result;
 		result = this.createEditModelAndView(conf, null);
