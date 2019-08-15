@@ -63,7 +63,7 @@
 	
 	
 	<display:column>
-		<acme:link link="reviewer/list.do?submissionId=${row.id}" code = "submission.reviewer"/>
+		<acme:link link="reviewer/listBySubmission.do?submissionId=${row.id}" code = "submission.reviewer"/>
 	</display:column>
 
 </security:authorize>		

@@ -67,6 +67,10 @@ public class PanelService {
 	}
 
 	public void delete(Panel panel) {
+		Administrator principal;
+		
+		principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
 		this.panelRepository.delete(panel);
 	}
 }

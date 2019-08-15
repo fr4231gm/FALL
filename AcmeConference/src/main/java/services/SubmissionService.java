@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.SubmissionRepository;
 import domain.Actor;
@@ -15,6 +17,7 @@ import domain.Author;
 import domain.Paper;
 import domain.Reviewer;
 import domain.Submission;
+import forms.SubmissionForm;
 
 @Service
 @Transactional
@@ -37,6 +40,9 @@ public class SubmissionService {
 	
 	@Autowired
 	private ReviewerService reviewerService;
+	
+	@Autowired
+	private Validator	validator;
 
 
 	public Collection<Submission> findByAuthor() {
@@ -97,25 +103,43 @@ public class SubmissionService {
 		return result;
 	}
 	
-	public Submission saveAssign(final Submission s) {
+	public Submission saveAssign(final SubmissionForm submissionForm) {
 		Submission result;
 		Actor principal;
 		Collection<Reviewer> reviewers;
 
 		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
+		reviewers = this.reviewerService.findAll();
 		
 		if (principal instanceof Author) {
-			Assert.isTrue(s.getAuthor().getId() == this.authorService.findByPrincipal().getId());
+			Assert.isTrue(submissionForm.getAuthor().getId() == this.authorService.findByPrincipal().getId());
 		}else{
-			Assert.isTrue(s.getConference().getAdministrator().getId() == this.administratorService.findByPrincipal().getId());
+			Assert.isTrue(submissionForm.getConference().getAdministrator().getId() == this.administratorService.findByPrincipal().getId());
 		}
 		
-		//reviewers = this.reviewerService.findReviewersBySubmission(s.getId());
+		submissionForm.setReviewers(reviewers);
+		result = this.submissionRepository.save(this.findOne(submissionForm.getId()));
+		return result;
+	}
+	
+	public Submission saveAutoassign(final SubmissionForm submissionForm) {
+		Submission result;
+		Actor principal;
+		Collection<Reviewer> reviewers;
+
+		principal = this.actorService.findByPrincipal();
+		Assert.notNull(principal);
+		reviewers = this.conferenceService.getCompatibleReviewers(submissionForm.getConference());
 		
-		//reviewers.iterator().next().setSubmissions(s);
+		if (principal instanceof Author) {
+			Assert.isTrue(submissionForm.getAuthor().getId() == this.authorService.findByPrincipal().getId());
+		}else{
+			Assert.isTrue(submissionForm.getConference().getAdministrator().getId() == this.administratorService.findByPrincipal().getId());
+		}
 		
-		result = this.submissionRepository.save(s);
+		submissionForm.setReviewers(reviewers);
+		result = this.submissionRepository.save(this.findOne(submissionForm.getId()));
 		return result;
 	}
 	
@@ -142,6 +166,47 @@ public class SubmissionService {
 		res = name.substring(0, 1) + middleName.substring(0, 1) + surname.substring(0, 1) + "-" + res;
 
 		return res;
+	}
+	
+	public SubmissionForm construct(Submission submission) {
+		
+		SubmissionForm submissionForm = new SubmissionForm();
+		
+		submissionForm.setId(submission.getId());
+		submissionForm.setVersion(submission.getVersion());
+		submissionForm.setTicker(submission.getTicker());
+		submissionForm.setMoment(submission.getMoment());
+		submissionForm.setStatus(submission.getStatus());
+		submissionForm.setPaper(submission.getPaper());
+		submissionForm.setConference(submission.getConference());
+		submissionForm.setAuthor(submission.getAuthor());
+		submissionForm.setReviewers(reviewerService.findReviewersBySubmission(submission.getId()));
+		
+		return submissionForm;
+	}
+
+	public Submission reconstruct(final SubmissionForm submissionForm, final BindingResult binding) {
+		
+		final Submission submission = new Submission();
+		
+		if (submissionForm.getId() != 0){
+			
+			submission.setConference(submissionForm.getConference());
+			submission.setAuthor(submissionForm.getAuthor());
+			
+		} 		
+			submission.setId(submissionForm.getId());
+			submission.setVersion(submissionForm.getVersion());
+			submission.setTicker(submissionForm.getTicker());
+			submission.setMoment(submissionForm.getMoment());
+			submission.setStatus(submissionForm.getStatus());
+			submission.setPaper(submissionForm.getPaper());
+		
+		// Validar formulario
+		this.validator.validate(submissionForm, binding);
+				
+		return submission;
+
 	}
 
 }
