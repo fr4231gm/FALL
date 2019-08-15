@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ConferenceService;
 import services.ReviewerService;
 import services.SubmissionService;
 
@@ -32,6 +33,9 @@ public class SubmissionAdministratorController extends AbstractController {
 	
 	@Autowired
 	private ReviewerService reviewerService;
+	
+	@Autowired
+	private ConferenceService conferenceService;
 
 	// Create
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
@@ -48,16 +52,18 @@ public class SubmissionAdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/assign", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid @ModelAttribute("submissionForm") final SubmissionForm submissionForm,
+	public ModelAndView save(@Valid @ModelAttribute("submissionForm") final SubmissionForm submissionForm, final int submissionId,
 			final BindingResult binding) {
 		ModelAndView res;
+		Collection<Reviewer> reviewers;
+		
+		reviewers = submissionForm.getReviewers();
 		
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(submissionForm);
 		else
 			try {
-
-				this.submissionService.saveAssign(submissionForm);
+				this.submissionService.setRev(this.submissionService.findOne(submissionId), reviewers);
 				res = new ModelAndView("redirect:/submission/administrator/list.do");
 			}
 
@@ -68,16 +74,18 @@ public class SubmissionAdministratorController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/autoassign", method = RequestMethod.GET)
-	public ModelAndView autoassign(@Valid final SubmissionForm submissionForm,
+	public ModelAndView autoassign(@Valid final SubmissionForm submissionForm, final int submissionId,
 			final BindingResult binding) {
 		ModelAndView res;
+		Collection<Reviewer> reviewers;
 		
+		reviewers = this.conferenceService.getCompatibleReviewers(this.submissionService.findOne(submissionId).getConference());
+				
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(submissionForm);
 		else
 			try {
-
-				this.submissionService.saveAutoassign(submissionForm);
+				this.submissionService.setRev(this.submissionService.findOne(submissionId), reviewers);
 				res = new ModelAndView("redirect:/submission/administrator/list.do");
 			}
 
