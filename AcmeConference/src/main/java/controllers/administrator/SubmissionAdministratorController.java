@@ -96,14 +96,9 @@ public class SubmissionAdministratorController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/decide", method = RequestMethod.GET)
-	public ModelAndView decide(@Valid final int submissionId,
+	public ModelAndView decide(@Valid final Submission submission,
 			final BindingResult binding) {
-		ModelAndView res;
-		
-		
-		Submission submission = this.submissionService.findOne(submissionId);
-		
-		
+		ModelAndView res;		
 		
 		try {
 			this.submissionService.decide(submission);
@@ -111,7 +106,8 @@ public class SubmissionAdministratorController extends AbstractController {
 		}
 
 		catch (final Throwable oops) {
-			res = this.createEditModelAndView(submission, "submission.commit.error");
+			res = this.createEditModelAndView(submission, "submission.decide.error");
+			res = new ModelAndView("redirect:list.do");
 		}
 		
 		return res;
