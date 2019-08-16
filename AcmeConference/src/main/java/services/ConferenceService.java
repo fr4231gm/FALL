@@ -17,6 +17,7 @@ import org.springframework.util.Assert;
 
 import repositories.ConferenceRepository;
 import utilities.internal.DatabaseUtil;
+import domain.Activity;
 import domain.Comment;
 import domain.Conference;
 import domain.Reviewer;
@@ -145,7 +146,6 @@ public class ConferenceService {
 		Collection<Comment> comments;
 		
 		comments = conference.getComments();
-		System.out.println("Conference: " + conference);
 		comments.add(comment);
 		conference.setComments(comments);
 		

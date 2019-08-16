@@ -51,7 +51,7 @@
 	
 	<display:column>
 
-		<acme:link link="comment/createByConference.do?conferenceId=${row.id}"
+		<acme:link link="comment/create.do?targetId=${row.id}"
 			code="conference.create.comment" />
 
 	</display:column>
