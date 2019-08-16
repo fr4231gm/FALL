@@ -25,6 +25,9 @@ public class PanelService {
 	@Autowired
 	private ConferenceService conferenceService;
 	
+	@Autowired
+    private UtilityService utilityService;
+	
 	public Panel create(int conferenceId) {
 		Administrator principal;
 		Conference conference;
@@ -45,6 +48,7 @@ public class PanelService {
 	public Panel save(Panel panel) {
 		Panel res;
 
+		Assert.isTrue(!this.utilityService.checkUrls(panel.getAttachments()));
 		res = this.panelRepository.save(panel);
 
 		return res;

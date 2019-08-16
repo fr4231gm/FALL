@@ -19,6 +19,7 @@ import org.springframework.util.Assert;
 
 import repositories.ConferenceRepository;
 import utilities.internal.DatabaseUtil;
+import domain.Administrator;
 import domain.Conference;
 import domain.Reviewer;
 
@@ -29,6 +30,9 @@ public class ConferenceService {
 	// Repositorios
 	@Autowired
 	private ConferenceRepository	conferenceRepository;
+
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	public Conference update(final Conference conference) {
@@ -173,4 +177,20 @@ public class ConferenceService {
 		return c;
 	}
 
+	public Conference create() {
+		final Conference c = new Conference();
+		c.setAdministrator(this.administratorService.findByPrincipal());
+		c.setIsDraft(true);
+		return c;
+	}
+
+	// SAVE
+	public Conference save(final Conference c) {
+		final Conference res = null;
+		final Administrator principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
+		this.conferenceRepository.save(c);
+
+		return res;
+	}
 }

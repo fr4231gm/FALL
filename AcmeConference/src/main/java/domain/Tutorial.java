@@ -15,20 +15,19 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Tutorial extends Activity {
 
 	// Atributos
-	private Collection<Section>					section;
+	private Collection<Section>					sections;
 
 
 	// Getters
-	@NotEmpty
 	@OneToMany(cascade = CascadeType.ALL)
-	public Collection<Section> getSection(){
-		return this.section;
+	public Collection<Section> getSections(){
+		return this.sections;
 	}
 
 
 	// Setters
-	public void setSection(final Collection<Section> section){
-		this.section = section; 
+	public void setSections(final Collection<Section> sections){
+		this.sections = sections; 
 	}
 
 }

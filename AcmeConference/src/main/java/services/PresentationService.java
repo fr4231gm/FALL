@@ -25,6 +25,9 @@ public class PresentationService {
 	@Autowired
 	private ConferenceService conferenceService;
 
+	@Autowired
+    private UtilityService utilityService;
+	
 	public Presentation create(int conferenceId) {
 		Administrator principal;
 		Conference conference;
@@ -47,6 +50,7 @@ public class PresentationService {
 	public Presentation save(Presentation presentation) {
 		Presentation res;
 
+		Assert.isTrue(!this.utilityService.checkUrls(presentation.getAttachments()));
 		res = this.presentationRepository.save(presentation);
 
 		return res;

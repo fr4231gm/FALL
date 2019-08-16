@@ -34,7 +34,7 @@
 		<value>/views/panel/messages</value>
 		<value>/views/tutorial/messages</value>
 		<value>/views/presentation/messages</value>
-
+		<value>/views/section/messages</value>
 	</util:list>
 
 </beans>
