@@ -48,7 +48,6 @@
 <acme:input code="paper.document" path="submission.paper.document"
 	readonly="true" />
 	<br />	
-	
 
 <spring:message code="submission.cameraReadyPaper"> </spring:message>:        
 <jstl:if test="${submission.paper.cameraReadyPaper eq 'true'}">
@@ -60,6 +59,11 @@
 
 </fieldset>
 
-
+<jstl:if test="${decide eq 'true'}">
+			<acme:link link="submission/administrator/decide.do?"
+					code="submission.decide" />
+</jstl:if>
+<br />		
+<br />		
 
 <acme:back code="conference.goback"/>

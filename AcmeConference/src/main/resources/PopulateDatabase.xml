@@ -787,6 +787,27 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="conference10" class="domain.Conference">
+		<property name="title" value="Beneficios de la exposision al sol" />
+		<property name="acronym" value="BESS" />
+		<property name="venue" value="Meseta, Kanto" />
+		<property name="submissionDeadline" value="06/15/2019" />
+		<property name="notificationDeadline" value="06/16/2019" />
+		<property name="cameraReadyDeadline" value="06/17/2019" />
+		<property name="startDate" value="12/06/2019" />
+		<property name="endDate" value="10/01/2020" />
+		<property name="summary"
+			value="Pikachu está sobrevalorado, adentremonos en el incrible mundo de los pokemon tipo norte Por favor…" />
+		<property name="fee" value="0.95" />
+		<property name="isDraft" value="false" />
+		<property name="Administrator" ref="administrator4" />
+		<property name="Category" ref="category17" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 
 
@@ -1498,6 +1519,14 @@
 		<property name="document"
 			value="https://static3.upandscrap.com/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/0/0/0000856358.jpg" />
 	</bean>
+	
+	<bean id="paper11" class="domain.Paper">
+		<property name="title" value="Papel de navidad" />
+		<property name="summary"
+			value="Por que se llama pape de regalo si el regalo no es el papel, es lo que hay dentro" />
+		<property name="document"
+			value="https://static3.upandscrap.com/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/0/0/0000856358.jpg" />
+	</bean>
 
 
 
@@ -1760,6 +1789,17 @@
 		<property name="reviewer" ref="reviewer4" />
 		<property name="submission" ref="submission7" />
 	</bean>
+	
+	<bean id="report7" class="domain.Report">
+		<property name="decision" value="REJECTED" />
+		<property name="originalityScore" value="10" />
+		<property name="qualityScore" value="10" />
+		<property name="readabilityScore" value="10" />
+		<property name="comments" value="Perfecto" />
+		<property name="notified" value="false" />
+		<property name="reviewer" ref="reviewer4" />
+		<property name="submission" ref="submission11" />
+	</bean>
 
 
 
@@ -1828,6 +1868,7 @@
 			<list>
 				<ref bean="submission5" />
 				<ref bean="submission7" />
+				<ref bean="submission11" />
 			</list>
 		</property>
 		<property name="name" value="mana" />
@@ -2177,6 +2218,14 @@
 		<property name="Author" ref="author2" />
 	</bean>
 
+	<bean id="submission11" class="domain.Submission">
+		<property name="ticker" value="JPO-7610" />
+		<property name="moment" value="04/10/2019" />
+		<property name="status" value="UNDER-REVIEW" />
+		<property name="paper" ref="paper11" />
+		<property name="Conference" ref="conference10" />
+		<property name="Author" ref="author2" />
+	</bean>
 
 
 	<!-- Tutorial -->

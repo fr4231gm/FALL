@@ -12,7 +12,9 @@ import org.springframework.util.Assert;
 import repositories.SubmissionRepository;
 import domain.Actor;
 import domain.Author;
+import domain.Conference;
 import domain.Paper;
+import domain.Report;
 import domain.Reviewer;
 import domain.Submission;
 import forms.SubmissionForm;
@@ -38,6 +40,9 @@ public class SubmissionService {
 	
 	@Autowired
 	private ReviewerService reviewerService;
+	
+	@Autowired
+	private ReportService reportService;
 
 
 	public Collection<Submission> findByAuthor() {
@@ -108,6 +113,43 @@ public class SubmissionService {
 		s.setMoment(actual);
 		
 		result = this.submissionRepository.save(s);
+		
+		return result;
+	}
+	
+	public Submission decide(final Submission submission){
+		
+		Assert.notNull(submission);
+		
+		Submission result;
+		Collection<Report> reports;
+		Conference conference;
+		int accepted = 0;
+		int rejected = 0;
+		int borderLine = 0;
+		
+		conference = submission.getConference();
+		reports = this.reportService.findReportsByConferenceId(conference.getId());
+		
+		for(Report r : reports){
+			if(r.getSubmission().getStatus().equals("ACCEPTED")){
+				accepted = accepted + 1;
+			}else if(r.getSubmission().getStatus().equals("REJECTED")){
+				rejected = rejected + 1;
+			}else{
+				borderLine = borderLine + 1;
+			}
+		}
+		
+		if(accepted >= rejected){
+			submission.setStatus("ACCEPTED");
+		}else if(accepted == 0 && rejected == 0 && (borderLine != 0 || borderLine == 0)){
+			submission.setStatus("ACCEPTED");
+		}else{
+			submission.setStatus("REJECTED");
+		}
+		
+		result = this.save(submission);
 		
 		return result;
 	}

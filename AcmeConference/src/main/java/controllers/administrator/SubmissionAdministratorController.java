@@ -94,13 +94,35 @@ public class SubmissionAdministratorController extends AbstractController {
 			}
 		return res;
 	}
+	
+	@RequestMapping(value = "/decide", method = RequestMethod.GET)
+	public ModelAndView decide(@Valid final int submissionId,
+			final BindingResult binding) {
+		ModelAndView res;
+		
+		
+		Submission submission = this.submissionService.findOne(submissionId);
+		
+		
+		
+		try {
+			this.submissionService.decide(submission);
+			res = new ModelAndView("redirect:list.do");
+		}
+
+		catch (final Throwable oops) {
+			res = this.createEditModelAndView(submission, "submission.commit.error");
+		}
+		
+		return res;
+	}
 
 	// List
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Submission> subs;
-
+		
 		subs = this.submissionService.findAll();
 
 		result = new ModelAndView("submission/list");
@@ -116,6 +138,12 @@ public class SubmissionAdministratorController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET, params = { "submissionId" })
 	public ModelAndView display(@RequestParam final int submissionId) {
 		ModelAndView res;
+		Boolean decide = false;
+		Date actual = new Date(System.currentTimeMillis());
+		
+		if(this.submissionService.findOne(submissionId).getConference().getSubmissionDeadline().before(actual)){
+			decide = true;
+		}
 
 		// Initialize variables
 		Submission s;
@@ -123,6 +151,7 @@ public class SubmissionAdministratorController extends AbstractController {
 
 		res = new ModelAndView("submission/display");
 		res.addObject("submission", s);
+		res.addObject("decide", decide);
 
 		return res;
 	}
