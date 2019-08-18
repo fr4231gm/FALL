@@ -73,6 +73,15 @@
 
 		</display:column>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+	
+	<display:column>
+	<jstl:if test="${row.isDraft eq 'true'}">
+	<acme:link code="conference.edit" link="conference/administrator/edit.do?conferenceId=${row.id}"/>
+	</jstl:if>
+	</display:column>
+	</security:authorize>
 
 	<display:column>
 
@@ -85,5 +94,9 @@
 </display:table>
 
 <br>
+
+<security:authorize access="hasRole('ADMINISTRATOR')">
+<acme:link code="conference.create" link="conference/administrator/create.do"/>
+</security:authorize>
 
 <acme:back code="conference.goback" />

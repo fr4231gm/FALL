@@ -50,29 +50,44 @@ public class ActivityService {
 	public Collection<Activity> findActivitiesByConferenceId(int conferenceId) {
 		Collection<Activity> res;
 
-		res = this.activityRepository.findActivitiesByConferenceId(conferenceId);
+		res = this.activityRepository
+				.findActivitiesByConferenceId(conferenceId);
 
 		return res;
 	}
-	
-	public String getSchedule(Activity activity){
+
+	public String getSchedule(Activity activity) {
 		String res;
 		Date startMoment;
 		Integer duration;
 		Calendar c;
 		Date endMoment;
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		
+
 		startMoment = activity.getStartMoment();
 		duration = activity.getDuration();
-		
+
 		c = Calendar.getInstance();
 		c.setTime(startMoment);
 		c.add(Calendar.MINUTE, duration);
 		endMoment = c.getTime();
+
+		res = formatter.format(startMoment) + " - "
+				+ formatter.format(endMoment);
+
+		return res;
+	}
+
+	// Return true if the start moment of tutorial is correct
+	public boolean checkStartMoment(Activity activity) {
+		boolean res = true;
 		
-		res = formatter.format(startMoment) + " - " + formatter.format(endMoment);
-		
+		System.out.println("Activity moment: "+ activity.getStartMoment());
+		System.out.println("Conference moment: "+ activity.getConference().getStartDate());
+		if (activity.getStartMoment().before(activity.getConference().getStartDate())) {
+			res = false;
+		}
+
 		return res;
 	}
 	

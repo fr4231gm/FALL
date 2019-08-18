@@ -27,20 +27,38 @@
 
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="true" />
-		
+
+	<display:column>
+
+		<acme:link link="tutorial/display.do?tutorialId=${row.id}"
+			code="activity.display" />
+
+	</display:column>
+
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
-		<display:column>
+		<jstl:if test="${conferencePast eq false}">
+			<display:column>
 
-			<acme:link link="tutorial/edit.do?tutorialId=${row.id}"
-				code="activity.edit" />
+				<acme:link link="tutorial/edit.do?tutorialId=${row.id}"
+					code="activity.edit" />
 			&nbsp;
 			<acme:link link="tutorial/delete.do?tutorialId=${row.id}"
-				code="activity.delete" />
+					code="activity.delete" />
 
-		</display:column>
+			</display:column>
+		</jstl:if>
 	</security:authorize>
+
+
 </display:table>
+
+<security:authorize access="hasRole('ADMINISTRATOR')">
+	<jstl:if test="${conferencePast eq false}">
+		<acme:link link="tutorial/create.do?conferenceId=${row.conference.id}"
+			code="tutorial.create" />
+	</jstl:if>
+</security:authorize>
 
 <h2>
 	<spring:message code="activity.panels" />
@@ -60,20 +78,37 @@
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="true" />
 
+	<display:column>
+
+		<acme:link link="panel/display.do?panelId=${row.id}"
+			code="activity.display" />
+
+	</display:column>
+
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
-		<display:column>
+		<jstl:if test="${conferencePast eq false}">
 
-			<acme:link link="panel/edit.do?panelId=${row.id}"
-				code="activity.edit" />
+			<display:column>
+
+				<acme:link link="panel/edit.do?panelId=${row.id}"
+					code="activity.edit" />
 			&nbsp;
 			<acme:link link="panel/delete.do?panelId=${row.id}"
-				code="activity.delete" />
+					code="activity.delete" />
 
-		</display:column>
+			</display:column>
+		</jstl:if>
 	</security:authorize>
 
 </display:table>
+
+<security:authorize access="hasRole('ADMINISTRATOR')">
+	<jstl:if test="${conferencePast eq false}">
+		<acme:link link="panel/create.do?conferenceId=${row.conference.id}"
+			code="panel.create" />
+	</jstl:if>
+</security:authorize>
 
 <h2>
 	<spring:message code="activity.presentations" />
@@ -96,20 +131,36 @@
 	<display:column property="paper.title" titleKey="activity.paper"
 		sortable="true" />
 
+	<display:column>
+
+		<acme:link link="presentation/display.do?presentationId=${row.id}"
+			code="activity.display" />
+
+	</display:column>
+
 	<security:authorize access="hasRole('ADMINISTRATOR')">
+		<jstl:if test="${conferencePast eq false}">
+			<display:column>
 
-		<display:column>
-
-			<acme:link link="presentation/edit.do?presentationId=${row.id}"
-				code="activity.edit" />
+				<acme:link link="presentation/edit.do?presentationId=${row.id}"
+					code="activity.edit" />
 			&nbsp;
 			<acme:link link="presentation/delete.do?presentationId=${row.id}"
-				code="activity.delete" />
+					code="activity.delete" />
 
-		</display:column>
+			</display:column>
+		</jstl:if>
 	</security:authorize>
 
 </display:table>
+
+<security:authorize access="hasRole('ADMINISTRATOR')">
+	<jstl:if test="${conferencePast eq false}">
+		<acme:link
+			link="presentation/create.do?conferenceId=${row.conference.id}"
+			code="presentation.create" />
+	</jstl:if>
+</security:authorize>
 
 <br>
 
