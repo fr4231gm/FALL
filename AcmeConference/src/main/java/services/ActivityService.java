@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import repositories.ActivityRepository;
 import domain.Activity;
+import domain.Comment;
 
 @Service
 @Transactional
@@ -88,6 +89,17 @@ public class ActivityService {
 		}
 
 		return res;
+	}
+	
+	public void addCommentToActivity(Activity activity, Comment comment) {
+		Collection<Comment> comments;
+		
+		comments = activity.getComments();
+		comments.add(comment);
+		activity.setComments(comments);
+		
+		this.activityRepository.save(activity);
+		
 	}
 
 }
