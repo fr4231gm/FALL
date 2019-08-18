@@ -25,11 +25,6 @@
 	<display:column property="text" titleKey="comment.text" sortable="true" />
 
 </display:table>
-
-<p>
-	<spring:message code="comment.creation.explanation" />
-</p>
-
 <br>
 
 <acme:cancel code="comment.goback" url="/" />
