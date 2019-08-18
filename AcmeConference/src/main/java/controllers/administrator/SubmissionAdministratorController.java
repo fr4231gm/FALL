@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ConferenceService;
 import services.ReviewerService;
 import services.SubmissionService;
-
 import controllers.AbstractController;
 import domain.Reviewer;
 import domain.Submission;
@@ -37,61 +35,49 @@ public class SubmissionAdministratorController extends AbstractController {
 	@Autowired
 	private ConferenceService conferenceService;
 
-	// Create
+	// Other Methods
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView assign(@RequestParam final int submissionId) {
 		ModelAndView res;
 		SubmissionForm submissionForm = new SubmissionForm();
-		
-
+		submissionForm.setSubmission(this.submissionService.findOne(submissionId));
 		res = new ModelAndView("submission/assign");
-		
 		res = this.createEditModelAndView(submissionForm);
 		
 		return res;
 	}
 
 	@RequestMapping(value = "/assign", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid @ModelAttribute("submissionForm") final SubmissionForm submissionForm, final int submissionId,
-			final BindingResult binding) {
+	public ModelAndView assignPost(@Valid final SubmissionForm submissionForm, final BindingResult binding) {
 		ModelAndView res;
-		Collection<Reviewer> reviewers;
-		
-		reviewers = submissionForm.getReviewers();
-		
-		if (binding.hasErrors())
-			res = this.createEditModelAndView(submissionForm);
-		else
-			try {
-				this.submissionService.setRev(this.submissionService.findOne(submissionId), reviewers);
+		try {
+			if(binding.hasErrors()){
+				res = this.createEditModelAndView(submissionForm);
+			} else {
+				this.submissionService.setRev(submissionForm.getSubmission(), submissionForm.getReviewers());
 				res = new ModelAndView("redirect:/submission/administrator/list.do");
 			}
 
-			catch (final Throwable oops) {
-				res = this.createEditModelAndView(submissionForm, "submission.commit.error");
-			}
+		} catch (final Throwable oops) {
+			res = this.createEditModelAndView(submissionForm, "submission.commit.error");
+		}
 		return res;
 	}
 	
 	@RequestMapping(value = "/autoassign", method = RequestMethod.GET)
-	public ModelAndView autoassign(@Valid final SubmissionForm submissionForm, final int submissionId,
-			final BindingResult binding) {
+	public ModelAndView autoassign(final int submissionId) {
 		ModelAndView res;
 		Collection<Reviewer> reviewers;
 		
-		reviewers = this.conferenceService.getCompatibleReviewers(this.submissionService.findOne(submissionId).getConference());
-				
-		if (binding.hasErrors())
-			res = this.createEditModelAndView(submissionForm);
-		else
-			try {
-				this.submissionService.setRev(this.submissionService.findOne(submissionId), reviewers);
-				res = new ModelAndView("redirect:/submission/administrator/list.do");
-			}
-
-			catch (final Throwable oops) {
-				res = this.createEditModelAndView(submissionForm, "submission.commit.error");
-			}
+		try {
+			reviewers = this.conferenceService.getCompatibleReviewers(this.submissionService.findOne(submissionId).getConference());
+			this.submissionService.setRev(this.submissionService.findOne(submissionId), reviewers);
+			res = new ModelAndView("redirect:/submission/administrator/list.do");
+		}
+		catch (final Throwable oops) {
+			res = new ModelAndView("redirect:/submission/administrator/list.do");
+			res.addObject("message", "submission.commit.error");
+		}
 		return res;
 	}
 	
@@ -104,16 +90,15 @@ public class SubmissionAdministratorController extends AbstractController {
 			this.submissionService.decide(submission);
 			res = new ModelAndView("redirect:list.do");
 		}
-
 		catch (final Throwable oops) {
-			res = this.createEditModelAndView(submission, "submission.decide.error");
 			res = new ModelAndView("redirect:list.do");
+			res.addObject("message", "submission.commit.error");
 		}
 		
 		return res;
 	}
 
-	// List
+	// Display
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -153,23 +138,6 @@ public class SubmissionAdministratorController extends AbstractController {
 	}
 
 	// Ancillary metods
-	protected ModelAndView createEditModelAndView(final Submission s) {
-		ModelAndView result;
-		result = this.createEditModelAndView(s, null);
-		return result;
-	}
-
-	protected ModelAndView createEditModelAndView(final Submission s,
-			final String messageCode) {
-		ModelAndView result;
-
-		result = new ModelAndView("submission/edit");
-		result.addObject("submission", s);
-		result.addObject("message", messageCode);
-
-		return result;
-	}
-	
 	protected ModelAndView createEditModelAndView(final SubmissionForm submissionForm) {
 		final ModelAndView result = this.createEditModelAndView(submissionForm, null);
 		return result;

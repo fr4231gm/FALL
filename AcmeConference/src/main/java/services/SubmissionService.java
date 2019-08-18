@@ -85,13 +85,11 @@ public class SubmissionService {
 	
 	public void setRev(final Submission s, final Collection<Reviewer> reviewers){
 
-		Assert.notNull(s);
-		
 		for(Reviewer r : reviewers){
 			Collection<Submission> submissions = r.getSubmissions();
 			submissions.add(s);
 			r.setSubmissions(submissions);
-			this.reviewerService.save(r);
+			this.reviewerService.updateSubmissions(r);
 		}
 	}
 	

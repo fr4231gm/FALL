@@ -19,9 +19,7 @@
 		
 		<display:column property="moment" titleKey="submission.moment"
 		sortable="false"	format="{0, date, dd/MM/yyyy HH:mm}"/>
-		
-		
-		
+
 	<display:column titleKey="submission.status" sortable="true">
 		<jstl:if test="${row.status eq 'UNDER-REVIEW'}">
 			<spring:message code="submission.underreview"/>
@@ -59,6 +57,10 @@
 	<display:column>
 		<acme:link link="submission/administrator/assign.do?submissionId=${row.id}"
 				code="submission.assign" />
+	</display:column>
+	
+	<display:column>
+		<acme:link link="submission/administrator/autoassign.do?submissionId=${row.id}" code = "submission.autoassign"/>
 	</display:column>
 	
 	
