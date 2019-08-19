@@ -105,7 +105,7 @@
 	code="master.page.broadcast.registered" />
 <br />
 <acme:link code="conference.create.comment"
-	link="comment/createByConference.do?conferenceId=${conference.id}" />
+	link="comment/create.do?targetId=${conference.id}" />
 
 
 <br />

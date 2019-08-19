@@ -19,6 +19,8 @@ import org.springframework.util.Assert;
 
 import repositories.ConferenceRepository;
 import utilities.internal.DatabaseUtil;
+import domain.Activity;
+import domain.Comment;
 import domain.Administrator;
 import domain.Conference;
 import domain.Reviewer;
@@ -141,6 +143,16 @@ public class ConferenceService {
 	public void flush() {
 		this.conferenceRepository.flush();
 
+	}
+
+	public void addCommentToConference(Conference conference, Comment comment){
+		Collection<Comment> comments;
+		
+		comments = conference.getComments();
+		comments.add(comment);
+		conference.setComments(comments);
+		
+		this.update(conference);
 	}
 
 	public Collection<Conference> findDeadlineElapsed() {
