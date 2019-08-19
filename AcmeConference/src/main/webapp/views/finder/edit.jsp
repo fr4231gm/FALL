@@ -18,7 +18,7 @@
 <form:form modelAttribute="finder">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path=""/>
+
 	
 	<acme:input code="finder.keyWord" path="keyWord" placeholder="la n palabra"/>
 	<form:label path="startDate">
@@ -36,8 +36,17 @@
 	<form:errors cssClass="error" path="endDate" />
 	<br/>
 	
+	
 	<acme:input code="finder.fee" path="fee"/>
 	
+	
+	<form:label path="category">
+			<spring:message code="finder.category" />
+		</form:label>
+		<form:select id="categories" path="category">
+			<form:option itemLabel="root" value="" />
+			<form:options items="${categories}" itemLabel="name" itemValue="id" />
+		</form:select>
 	<acme:submit name="save" code="finder.buscar"/>
 
 	<acme:cancel url="/" code="finder.cancel"/>	

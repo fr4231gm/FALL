@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AuthorService;
+import services.CategoryService;
 import services.ConfigurationService;
 import services.FinderService;
 import controllers.AbstractController;
@@ -25,19 +27,25 @@ public class FinderAuthorController extends AbstractController {
 
 	//AQUI VAN LOS SERVISIOS QUE  NOS HAGA FALTA
 	@Autowired
-	private FinderService			finderService;
+	private AuthorService			authorService;
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private CategoryService			categoryService;
+
+	@Autowired
+	private FinderService			finderService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView allConferences() {
 		ModelAndView result;
 		final Collection<Conference> conference;
-		final Finder finder = this.finderService.findAuthorByFinder();
+		final Finder finder = this.authorService.findByPrincipal().getFinder();
 		if (finder.getId() != 0)
-			finder.setVersion(this.finderService.findAuthorByFinder().getVersion());
+			finder.setVersion(this.authorService.findByPrincipal().getFinder().getVersion());
 		try {
 			this.finderService.saveFinder(finder);
 		} catch (final Throwable oops) {
@@ -57,7 +65,7 @@ public class FinderAuthorController extends AbstractController {
 		ModelAndView result;
 		Finder finder;
 
-		finder = this.finderService.findAuthorByFinder();
+		finder = this.authorService.findByPrincipal().getFinder();
 		Assert.notNull(finder);
 		result = this.createEditModelAndView(finder);
 		return result;
@@ -70,8 +78,13 @@ public class FinderAuthorController extends AbstractController {
 	public ModelAndView save(@Valid final Finder finder, final BindingResult binding) {
 		ModelAndView result;
 		if (finder.getId() != 0)
-			finder.setVersion(this.finderService.findAuthorByFinder().getVersion());
-
+			finder.setVersion(this.authorService.findByPrincipal().getFinder().getVersion());
+		if (finder.getStartDate() != null & finder.getEndDate() != null)
+			if (!finder.getStartDate().before(finder.getEndDate())) {
+				binding.rejectValue("startDate", "date.end.date.future");
+				result = this.createEditModelAndView(finder);
+				result.addObject("bind", binding);
+			}
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(finder);
 			result.addObject("bind", binding);
@@ -97,6 +110,7 @@ public class FinderAuthorController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("finder/edit");
+		result.addObject("categories", this.categoryService.findAll());
 		result.addObject("finder", finder);
 		result.addObject("configuration", this.configurationService.findConfiguration());
 		result.addObject("message", messageCode);
@@ -104,5 +118,4 @@ public class FinderAuthorController extends AbstractController {
 		return result;
 
 	}
-
 }

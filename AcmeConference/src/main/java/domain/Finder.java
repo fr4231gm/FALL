@@ -27,6 +27,7 @@ public class Finder extends DomainEntity {
 	private Double					fee;
 	private Collection<Conference>	conferences;
 	private Author					author;
+	private Category				category;
 
 
 	// Getters
@@ -76,13 +77,12 @@ public class Finder extends DomainEntity {
 		this.conferences = conferences;
 	}
 
-	@OneToOne
-	public Author getAuthor() {
-		return this.author;
+	@OneToOne(optional = true)
+	public Category getCategory() {
+		return this.category;
 	}
-
-	public void setAuthor(final Author a) {
-		this.author = a;
+	public void setCategory(final Category category) {
+		this.category = category;
 	}
 
 }

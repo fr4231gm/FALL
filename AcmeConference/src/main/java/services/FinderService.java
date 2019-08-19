@@ -39,7 +39,7 @@ public class FinderService {
 		Finder result;
 		result = new Finder();
 		final Collection<Conference> confs = new ArrayList<Conference>();
-		result.setAuthor(this.authorService.findByPrincipal());
+
 		result.setConferences(confs);
 
 		return result;
@@ -50,7 +50,7 @@ public class FinderService {
 		if (finder.getStartDate() != null && finder.getEndDate() != null)
 			Assert.isTrue(finder.getStartDate().before(finder.getEndDate()));
 		if (finder.getId() != 0)
-			Assert.isTrue(finder.equals(this.finderRepository.findAuthorByFinder(this.authorService.findByPrincipal().getId())));
+			Assert.isTrue(finder.equals(this.authorService.findByPrincipal().getFinder()));
 
 		String keyWord = "";
 
@@ -78,7 +78,12 @@ public class FinderService {
 			fee = finder.getFee();
 
 		final Collection<Conference> conferences2;
-		conferences2 = this.finderRepository.filter(keyWord, minDate, maxDate, fee);
+		if (finder.getCategory() == null)
+			conferences2 = this.finderRepository.filter(keyWord, minDate, maxDate, fee);
+		else {
+			final int id = finder.getCategory().getId();
+			conferences2 = this.finderRepository.filter2(keyWord, minDate, maxDate, fee, id);
+		}
 		finder.setConferences(conferences2);
 
 		return this.finderRepository.save(finder);
@@ -93,12 +98,6 @@ public class FinderService {
 	public void deleteByUserDropOut(final Finder finder) {
 		this.finderRepository.delete(finder);
 
-	}
-
-	public Finder findAuthorByFinder() {
-		final Finder f = this.finderRepository.findAuthorByFinder(this.authorService.findByPrincipal().getId());
-		Assert.notNull(f);
-		return f;
 	}
 
 }
