@@ -44,3 +44,10 @@
 <h3><strong><spring:message code="activity.attachments"/></strong></h3>
 <jstl:out value="${panel.attachments}" />
 <br />
+
+<acme:link code="comment.create"
+			link="comment/create.do?targetId=${panel.id}" />
+<br/>
+<acme:link code="activity.conference"
+			link="conference/display.do?conferenceId=${panel.conference.id}" />
+<br/>

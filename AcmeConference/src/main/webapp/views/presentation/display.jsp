@@ -44,3 +44,7 @@
 <h3><strong><spring:message code="activity.attachments"/></strong></h3>
 <jstl:out value="${presentation.attachments}" />
 <br />
+
+<acme:link code="comment.create"
+			link="comment/create.do?targetId=${presentation.id}" />
+<br/>

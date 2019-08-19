@@ -2089,9 +2089,9 @@
 		<property name="ticker" value="LMJ-1234" />
 		<property name="moment" value="03/01/2019" />
 
-		<property name="status" value="REJECTED" />
+		<property name="status" value="ACCEPTED" />
 		<property name="paper" ref="paper1" />
-		<property name="Conference" ref="conference6" />
+		<property name="Conference" ref="conference8" />
 		<property name="Author" ref="author1" />
 	</bean>
 

@@ -25,6 +25,7 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="conference" />
 
 	<acme:input code="activity.title" path="title"
 		placeholder="Title of panel" />
@@ -51,6 +52,9 @@
 	
 	<acme:textarea code="activity.attachments" path="attachments"
 		placeholder="https://www.example.com/asasdf"/>
+	<br />
+	
+	<acme:select code="presentation.paper" path="paper" items="${papers}" itemLabel="title"/>
 	<br />
 
 	<button type="submit" name="save">

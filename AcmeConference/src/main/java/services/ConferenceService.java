@@ -19,10 +19,10 @@ import org.springframework.util.Assert;
 
 import repositories.ConferenceRepository;
 import utilities.internal.DatabaseUtil;
-import domain.Activity;
-import domain.Comment;
 import domain.Administrator;
+import domain.Comment;
 import domain.Conference;
+import domain.Paper;
 import domain.Reviewer;
 
 @Service
@@ -204,5 +204,9 @@ public class ConferenceService {
 		this.conferenceRepository.save(c);
 
 		return res;
+	}
+	
+	public Collection<Paper> findPapersAcceptedByConferenceId(int conferenceId){
+		return this.conferenceRepository.findPapersAcceptedByConferenceId(conferenceId);
 	}
 }

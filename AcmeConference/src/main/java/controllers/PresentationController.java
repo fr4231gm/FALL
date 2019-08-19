@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,90 +18,56 @@ import services.ConferenceService;
 import services.PresentationService;
 import services.UtilityService;
 import domain.Conference;
+import domain.Paper;
 import domain.Presentation;
 
 @Controller
 @RequestMapping("/presentation")
 public class PresentationController extends AbstractController {
 
-    @Autowired
-    private PresentationService presentationService;
+	@Autowired
+	private PresentationService presentationService;
 
-    @Autowired
-    private ActivityService activityService;
-    
-    @Autowired
-    private UtilityService utilityService;
-    
-    @Autowired
-    private ConferenceService conferenceService;
+	@Autowired
+	private ActivityService activityService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView create(@RequestParam int conferenceId) {
-        ModelAndView res;
-        Presentation presentation;
+	@Autowired
+	private UtilityService utilityService;
 
-        presentation = this.presentationService.create(conferenceId);
-        Assert.notNull(presentation);
-        res = this.createEditModelAndView(presentation);
+	@Autowired
+	private ConferenceService conferenceService;
 
-        return res;
-    }
-    
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit(@RequestParam int presentationId) {
-        ModelAndView res;
-        Presentation presentation;
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam int conferenceId) {
+		ModelAndView res;
+		Presentation presentation;
 
-        presentation = this.presentationService.findOne(presentationId);
-        Assert.notNull(presentation);
-        res = this.createEditModelAndView(presentation);
+		presentation = this.presentationService.create(conferenceId);
+		Assert.notNull(presentation);
+		res = this.createEditModelAndView(presentation);
+		res.addObject("actionURI", "presentation/create.do");
 
-        return res;
-    }
+		return res;
+	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int presentationId) {
+		ModelAndView res;
+		Presentation presentation;
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid Presentation presentation, BindingResult binding) {
-        ModelAndView res;
-        boolean conferencePast = false;
+		presentation = this.presentationService.findOne(presentationId);
+		Assert.notNull(presentation);
+		res = this.createEditModelAndView(presentation);
+		res.addObject("actionURI", "presentation/edit.do");
 
-		if (this.conferenceService.findPastConferences().contains(
-				presentation.getConference())) {
-			conferencePast = true;
-		}
+		return res;
+	}
 
-		if (this.utilityService.checkUrls(presentation.getAttachments())) {
-			binding.rejectValue("attachments", "activity.attachments.error");
-		}
-		
-		if(!this.activityService.checkStartMoment(presentation)){
-			binding.rejectValue("startMoment", "activity.startMoment.error");
-		}
-
-        if (binding.hasErrors()) {
-            res = this.createEditModelAndView(presentation);
-        } else {
-            try {
-                this.presentationService.save(presentation);
-                res = new ModelAndView("presentation/display");
-                res.addObject("presentation", presentation);
-				res.addObject("schedule",
-						this.activityService.getSchedule(presentation));
-				res.addObject("conferencePast", conferencePast);
-
-            } catch (Throwable oops) {
-                res = this.createEditModelAndView(presentation, "activity.commit.error");
-            }
-        }
-
-        return res;
-    }
-    
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-    public ModelAndView save2(@Valid Presentation presentation, BindingResult binding) {
-        ModelAndView res;
-        boolean conferencePast = false;
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Presentation presentation,
+			BindingResult binding) {
+		ModelAndView res;
+		boolean conferencePast = false;
 
 		if (this.conferenceService.findPastConferences().contains(
 				presentation.getConference())) {
@@ -109,80 +77,137 @@ public class PresentationController extends AbstractController {
 		if (this.utilityService.checkUrls(presentation.getAttachments())) {
 			binding.rejectValue("attachments", "activity.attachments.error");
 		}
-		
-		if(!this.activityService.checkStartMoment(presentation)){
-			binding.rejectValue("startMoment", "activity.startMoment.error");
+
+		if (presentation.getStartMoment() != null) {
+			if (!this.activityService.checkStartMoment(presentation)) {
+				binding.rejectValue("startMoment", "activity.startMoment.error");
+			}
 		}
 
-        if (binding.hasErrors()) {
-            res = this.createEditModelAndView(presentation);
-        } else {
-            try {
-                this.presentationService.save(presentation);
-                res = new ModelAndView("presentation/display");
-                res.addObject("presentation", presentation);
+		if (binding.hasErrors()) {
+			res = this.createEditModelAndView(presentation);
+		} else {
+			try {
+				this.presentationService.save(presentation);
+				res = new ModelAndView("presentation/display");
+				res.addObject("presentation", presentation);
 				res.addObject("schedule",
 						this.activityService.getSchedule(presentation));
 				res.addObject("conferencePast", conferencePast);
+				res.addObject("actionURI", "presentation/create.do");
 
-            } catch (Throwable oops) {
-                res = this.createEditModelAndView(presentation, "activity.commit.error");
-            }
-        }
+			} catch (Throwable oops) {
+				res = this.createEditModelAndView(presentation,
+						"activity.commit.error");
+			}
+		}
 
-        return res;
-    }
+		return res;
+	}
 
-    @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam final int presentationId) {
-        ModelAndView res;
-        Presentation presentation;
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save2(@Valid Presentation presentation,
+			BindingResult binding) {
+		ModelAndView res;
+		boolean conferencePast = false;
 
-        presentation = this.presentationService.findOne(presentationId);
+		if (this.conferenceService.findPastConferences().contains(
+				presentation.getConference())) {
+			conferencePast = true;
+		}
 
-        res = new ModelAndView("presentation/display");
-        res.addObject("presentation", presentation);
-        res.addObject("schedule", this.activityService.getSchedule(presentation));
+		if (this.utilityService.checkUrls(presentation.getAttachments())) {
+			binding.rejectValue("attachments", "activity.attachments.error");
+		}
 
-        return res;
-    }
-    
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+		if (presentation.getStartMoment() != null) {
+			if (!this.activityService.checkStartMoment(presentation)) {
+				binding.rejectValue("startMoment", "activity.startMoment.error");
+			}
+		}
+
+		if (binding.hasErrors()) {
+			res = this.createEditModelAndView(presentation);
+		} else {
+			try {
+				this.presentationService.save(presentation);
+				res = new ModelAndView("presentation/display");
+				res.addObject("presentation", presentation);
+				res.addObject("schedule",
+						this.activityService.getSchedule(presentation));
+				res.addObject("conferencePast", conferencePast);
+				res.addObject("actionURI", "presentation/edit.do");
+
+			} catch (Throwable oops) {
+				res = this.createEditModelAndView(presentation,
+						"activity.commit.error");
+			}
+		}
+
+		return res;
+	}
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int presentationId) {
+		ModelAndView res;
+		Presentation presentation;
+
+		presentation = this.presentationService.findOne(presentationId);
+
+		res = new ModelAndView("presentation/display");
+		res.addObject("presentation", presentation);
+		res.addObject("schedule",
+				this.activityService.getSchedule(presentation));
+
+		return res;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int presentationId) {
 
 		ModelAndView result;
 		Presentation presentation;
 		Conference conference;
-		
+
 		presentation = this.presentationService.findOne(presentationId);
 		conference = presentation.getConference();
 
 		try {
 			this.presentationService.delete(presentation);
-			result = new ModelAndView("redirect:/activity/list.do?conferenceId="+conference.getId());
+			result = new ModelAndView(
+					"redirect:/activity/list.do?conferenceId="
+							+ conference.getId());
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(presentation, "activity.commit.error");
+			result = this.createEditModelAndView(presentation,
+					"activity.commit.error");
 		}
 
 		return result;
 
 	}
 
-    // Ancilliary methods
+	// Ancilliary methods
 
-    protected ModelAndView createEditModelAndView(final Presentation presentation) {
-        final ModelAndView result = this.createEditModelAndView(presentation, null);
-        return result;
-    }
+	protected ModelAndView createEditModelAndView(
+			final Presentation presentation) {
+		final ModelAndView result = this.createEditModelAndView(presentation,
+				null);
+		return result;
+	}
 
-    protected ModelAndView createEditModelAndView(final Presentation presentation, final String messagecode) {
-        final ModelAndView result;
+	protected ModelAndView createEditModelAndView(
+			final Presentation presentation, final String messagecode) {
+		final ModelAndView result;
+		Collection<Paper> papers;
+		
+		papers = this.conferenceService.findPapersAcceptedByConferenceId(presentation.getConference().getId());
 
-        result = new ModelAndView("presentation/edit");
+		result = new ModelAndView("presentation/edit");
 
-        result.addObject("presentation", presentation);
-        result.addObject("message", messagecode);
+		result.addObject("presentation", presentation);
+		result.addObject("message", messagecode);
+		result.addObject(papers);
 
-        return result;
-    }
+		return result;
+	}
 }

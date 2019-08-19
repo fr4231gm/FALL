@@ -21,10 +21,11 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<form:form action="panel/edit.do" modelAttribute="panel">
+<form:form action="${actionURI}" modelAttribute="panel">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="conference" />
 
 	<acme:input code="activity.title" path="title"
 		placeholder="Title of panel" />

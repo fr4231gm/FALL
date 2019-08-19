@@ -25,6 +25,7 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="conference" />
 
 	<acme:input code="activity.title" path="title"
 		placeholder="Title of panel" />

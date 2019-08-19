@@ -82,9 +82,7 @@ public class ActivityService {
 	public boolean checkStartMoment(Activity activity) {
 		boolean res = true;
 		
-		System.out.println("Activity moment: "+ activity.getStartMoment());
-		System.out.println("Conference moment: "+ activity.getConference().getStartDate());
-		if (activity.getStartMoment().before(activity.getConference().getStartDate())) {
+		if (activity.getStartMoment().before(activity.getConference().getStartDate()) || activity.getStartMoment().after(activity.getConference().getEndDate())) {
 			res = false;
 		}
 

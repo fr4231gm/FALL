@@ -15,6 +15,7 @@ import services.AuthorService;
 import services.ConferenceService;
 import services.RegistrationService;
 import domain.Author;
+import domain.Comment;
 import domain.Conference;
 import domain.Registration;
 
@@ -101,6 +102,7 @@ public class ConferenceController extends AbstractController {
 		Boolean haveR = false;
 		Collection<Registration> registerConference = registrationService
 				.findRegistrationsByConferenceId(conferenceId);
+		Collection<Comment> comments;
 
 		// Initialize variables
 		Conference c;
@@ -114,6 +116,8 @@ public class ConferenceController extends AbstractController {
 		if (conferenceService.findRunningConferences().contains(c)) {
 			canCreateActivity = true;
 		}
+		
+		comments = c.getComments();
 
 		try {
 
@@ -130,6 +134,7 @@ public class ConferenceController extends AbstractController {
 			res.addObject("future", future);
 			res.addObject("haveR", haveR);
 			res.addObject("canCreateActivity", canCreateActivity);
+			res.addObject("comments", comments);
 
 			if (haveR == true) {
 				res.addObject("message", "registration.commit.error");
@@ -141,6 +146,7 @@ public class ConferenceController extends AbstractController {
 			res.addObject("future", future);
 			res.addObject("haveR", haveR);
 			res.addObject("canCreateActivity", canCreateActivity);
+			res.addObject("comments", comments);
 		}
 
 		return res;

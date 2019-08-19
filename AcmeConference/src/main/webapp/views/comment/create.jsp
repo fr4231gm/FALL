@@ -44,6 +44,6 @@
 		<spring:message code="comment.save" />
 	</button>
 
-	<acme:cancel code="comment.cancel" url="/" />
+	<acme:back code="comment.cancel"/>
 
 </form:form>
