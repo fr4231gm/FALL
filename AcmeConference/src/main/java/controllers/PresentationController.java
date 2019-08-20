@@ -18,8 +18,8 @@ import services.ConferenceService;
 import services.PresentationService;
 import services.UtilityService;
 import domain.Conference;
-import domain.Paper;
 import domain.Presentation;
+import domain.Submission;
 
 @Controller
 @RequestMapping("/presentation")
@@ -128,6 +128,7 @@ public class PresentationController extends AbstractController {
 
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(presentation);
+			
 		} else {
 			try {
 				this.presentationService.save(presentation);
@@ -198,15 +199,17 @@ public class PresentationController extends AbstractController {
 	protected ModelAndView createEditModelAndView(
 			final Presentation presentation, final String messagecode) {
 		final ModelAndView result;
-		Collection<Paper> papers;
-		
-		papers = this.conferenceService.findPapersAcceptedByConferenceId(presentation.getConference().getId());
+		Collection<Submission> submissions;
+
+		submissions = this.conferenceService
+				.findSubmissionsPapersAcceptedByConferenceId(presentation.getConference()
+						.getId());
 
 		result = new ModelAndView("presentation/edit");
 
 		result.addObject("presentation", presentation);
 		result.addObject("message", messagecode);
-		result.addObject(papers);
+		result.addObject("submissions", submissions);
 
 		return result;
 	}

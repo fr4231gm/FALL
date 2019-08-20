@@ -89,13 +89,13 @@
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
 
-		<acme:link link="panel/edit.do?conferenceId=${conference.id}"
+		<acme:link link="panel/create.do?conferenceId=${conference.id}"
 			code="conference.panel" />
 			&nbsp;
-			<acme:link link="presentation/edit.do?conferenceId=${conference.id}"
+			<acme:link link="presentation/create.do?conferenceId=${conference.id}"
 			code="conference.presentation" />
 			&nbsp;
-			<acme:link link="tutorial/edit.do?conferenceId=${conference.id}"
+			<acme:link link="tutorial/create.do?conferenceId=${conference.id}"
 			code="conference.tutorial" />
 		<br />
 	</security:authorize>

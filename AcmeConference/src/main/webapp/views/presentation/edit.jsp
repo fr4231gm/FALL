@@ -28,12 +28,13 @@
 	<form:hidden path="conference" />
 
 	<acme:input code="activity.title" path="title"
-		placeholder="Title of panel" />
+		placeholder="Title of presentation" />
 	<br />
 
 	<acme:input code="activity.speakers" path="speakers" placeholder="Javier González, Rocío Gutiérrez" />
 	<br />
-
+	
+	<p>Note: Start moment of conference: ${presentation.conference.startDate}, End moment of conference: ${presentation.conference.endDate} </p>
 	<acme:input code="activity.startMoment" path="startMoment"
 		placeholder="dd/MM/yyyy HH:mm" />
 	<br />
@@ -54,9 +55,7 @@
 		placeholder="https://www.example.com/asasdf"/>
 	<br />
 	
-	<acme:select code="presentation.paper" path="paper" items="${papers}" itemLabel="title"/>
-	<br />
-
+	<br/>
 	<button type="submit" name="save">
 		<spring:message code="activity.save" />
 	</button>

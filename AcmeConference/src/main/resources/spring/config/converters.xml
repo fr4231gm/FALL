@@ -71,6 +71,10 @@
 		<bean class = "converters.PanelToStringConverter" />
 		<bean class = "converters.StringToPanelConverter" />
 		
+		<!-- PAPER -->
+		<bean class = "converters.PaperToStringConverter" />
+		<bean class = "converters.StringToPaperConverter" />
+		
 		<!-- PRESENTATION -->
 		<bean class = "converters.PresentationToStringConverter" />
 		<bean class = "converters.StringToPresentationConverter" />

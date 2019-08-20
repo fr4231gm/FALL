@@ -1431,6 +1431,7 @@
 			value="Una piedra me toca una piedra me llevo Juanita" />
 		<property name="document"
 			value="https://media2.giphy.com/media/ZRCRRmlTx7X3y/giphy.gif" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
 
 	<bean id="paper2" class="domain.Paper">

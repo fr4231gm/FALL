@@ -28,7 +28,7 @@
 	<form:hidden path="conference" />
 
 	<acme:input code="activity.title" path="title"
-		placeholder="Title of panel" />
+		placeholder="Title of tutorial" />
 	<br />
 
 	<acme:input code="activity.speakers" path="speakers" placeholder="Javier González, Rocío Gutiérrez" />

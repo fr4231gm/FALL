@@ -22,8 +22,8 @@ import utilities.internal.DatabaseUtil;
 import domain.Administrator;
 import domain.Comment;
 import domain.Conference;
-import domain.Paper;
 import domain.Reviewer;
+import domain.Submission;
 
 @Service
 @Transactional
@@ -206,7 +206,7 @@ public class ConferenceService {
 		return res;
 	}
 	
-	public Collection<Paper> findPapersAcceptedByConferenceId(int conferenceId){
-		return this.conferenceRepository.findPapersAcceptedByConferenceId(conferenceId);
+	public Collection<Submission> findSubmissionsPapersAcceptedByConferenceId(int conferenceId){
+		return this.conferenceRepository.findSubmissionsPapersAcceptedByConferenceId(conferenceId);
 	}
 }
