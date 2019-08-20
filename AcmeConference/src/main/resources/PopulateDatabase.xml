@@ -83,7 +83,7 @@
 			value="https://assets.drdata.xyz/bf/media-photo_5851864f159f19277a97e7bf_320w.jpeg" />
 		<property name="email" value="pollo@gmail.com" />
 		<property name="address" value="C/Champions nº2" />
-
+		<property name="finder" ref="finder1" />
 		<property name="phoneNumber" value="662130575" />
 		<property name="userAccount" ref="userAccount6" />
 	</bean>
@@ -96,7 +96,7 @@
 			value="https://i1.wp.com/www.sopitas.com/wp-content/uploads/2018/08/david-banda-madonna-futbol.png" />
 		<property name="email" value="reinona@gmail.com" />
 		<property name="address" value="C/Champions nº3" />
-
+	<property name="finder" ref="finder2" />
 		<property name="phoneNumber" value="662130576" />
 		<property name="userAccount" ref="userAccount7" />
 	</bean>
@@ -109,7 +109,7 @@
 			value="https://www.justbake.in/userfiles/ben10-cake.jpg" />
 		<property name="email" value="ben10@gmail.com" />
 		<property name="address" value="C/Champions nº4" />
-
+	<property name="finder" ref="finder3" />
 		<property name="phoneNumber" value="662130577" />
 		<property name="userAccount" ref="userAccount8" />
 	</bean>
@@ -122,7 +122,7 @@
 			value="https://media1.tenor.com/images/72ac5cfeda7d90964ee9008e310528ff/tenor.gif?itemid=5481122" />
 		<property name="email" value="fitforrivals@gmail.com" />
 		<property name="address" value="C/Champions nº5" />
-
+	<property name="finder" ref="finder4" />
 		<property name="phoneNumber" value="662130578" />
 		<property name="userAccount" ref="userAccount9" />
 	</bean>
@@ -135,7 +135,7 @@
 			value="https://www.diariodesevilla.es/2018/06/05/espana/Jose-Maria-Aznar_1251785630_85554259_667x375.jpg" />
 		<property name="email" value="pollo@gmail.com" />
 		<property name="address" value="C/Champions nº6" />
-
+	<property name="finder" ref="finder5" />
 		<property name="phoneNumber" value="662130579" />
 		<property name="userAccount" ref="userAccount10" />
 	</bean>
@@ -928,6 +928,7 @@
 				<ref bean="conference1" />
 			</list>
 		</property>
+		
 	</bean>
 
 	<bean id="finder2" class="domain.Finder">
@@ -940,6 +941,7 @@
 				<ref bean="conference2" />
 			</list>
 		</property>
+		
 	</bean>
 
 	<bean id="finder3" class="domain.Finder">
@@ -952,6 +954,7 @@
 				<ref bean="conference4" />
 			</list>
 		</property>
+		
 	</bean>
 
 	<bean id="finder4" class="domain.Finder">
@@ -964,6 +967,7 @@
 				<ref bean="conference4" />
 			</list>
 		</property>
+		
 	</bean>
 
 	<bean id="finder5" class="domain.Finder">
@@ -976,6 +980,7 @@
 				<ref bean="conference5" />
 			</list>
 		</property>
+	
 	</bean>
 
 	<bean id="finder6" class="domain.Finder">

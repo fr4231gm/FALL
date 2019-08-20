@@ -67,6 +67,7 @@
 		<security:intercept-url pattern="/conference/author/list.do" access="hasRole('AUTHOR')" />
 		<security:intercept-url pattern="/author/edit.do" access="hasRole('AUTHOR')" /> 
 		<security:intercept-url pattern="/submission/author/**" access="hasRole('AUTHOR')" /> 
+		<security:intercept-url pattern="/finder/author/**" access="hasRole('AUTHOR')" /> 
 		
 		<!-- REVIEWER -->
 
