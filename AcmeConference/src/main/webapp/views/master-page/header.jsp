@@ -36,12 +36,6 @@
 					<li><a class="child" href="message/broadcast-everyone-and-admins.do"> <spring:message code="master.page.broadcast.everyone.and.admins" /></a></li>
 					<li><a class="child" href="configuration/administrator/edit.do"><spring:message code="master.page.administrator.configuration" /></a></li>
 					<li><a class="child" href="submission/administrator/list.do"><spring:message code="master.page.author.submission" /></a></li>
-				<li><a class="child" href="conference/administrator/listDeadlineElapsed.do"><spring:message code="master.page.administrator.submission.elapsed" /></a></li>
-				<li><a class="child" href="conference/administrator/listNotificationElapsed.do"><spring:message code="master.page.administartor.notification.elapsed" /></a></li>
-				<li><a class="child" href="conference/administrator/listCameraElapsed.do"><spring:message code="master.page.administrator.elapsed" /></a></li>
-				<li><a class="child" href="conference/administrator/listFutureConferences.do"><spring:message code="master.page.administrator.future" /></a></li>
-				<li><a class="child" href="conference/administrator/listAllConferences.do"><spring:message code="master.page.administrator.all" /></a></li>
-				
 				</ul>
 			</li>
 		</security:authorize>
@@ -83,8 +77,7 @@
 		</security:authorize>
 
 		<!-- ************************** ALL ************************ -->
-		<li><a class="fNiv"><i class="fa fa-comments"></i>&nbsp;&nbsp;&nbsp;<spring:message
-					code="master.page.conferences" /></a>
+		<li><a class="fNiv"><i class="fa fa-comments"></i>&nbsp;&nbsp;&nbsp;<spring:message code="master.page.conferences" /></a>
 			<ul>
 			<li class="arrow"></li>
 			<li>
@@ -96,8 +89,12 @@
 			<li>
 				<a class="child" href="conference/listPastConferences.do"><spring:message code="master.page.listPastConferences" /></a>
 			</li>
-				<li><a class="child" href="category/list.do"><spring:message
-						code="master.page.categories" /></a></li>	
+			<security:authorize access="hasRole('ADMINISTRATOR')">
+					<li><a class="child" href="conference/administrator/listbyfivedays.do"><spring:message code="master.page.administrator.listbyfivedays" /></a></li>
+					<li><a class="child" href="conference/administrator/listAllConferences.do"><spring:message code="master.page.administrator.all" /></a></li>
+			</security:authorize>
+			
+			<li><a class="child" href="category/list.do"><spring:message code="master.page.categories" /></a></li>	
 			</ul>
 			
 		</li>

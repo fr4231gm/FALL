@@ -159,23 +159,23 @@ public class ConferenceService {
 		final Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
 		calendar.add(Calendar.DATE, -5);
 		final Date x = calendar.getTime();
-		final Collection<Conference> c = this.conferenceRepository.findAllDeadlineElapsed(new Date(System.currentTimeMillis() - 1), x);
+		final Collection<Conference> c = this.conferenceRepository.findAllDeadlineElapsed(x);
 
 		return c;
 	}
 	public Collection<Conference> findNotificationElapsed() {
 		final Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
-		calendar.add(Calendar.DATE, +5);
+		calendar.add(Calendar.DATE, -5);
 		final Date x = calendar.getTime();
-		final Collection<Conference> c = this.conferenceRepository.findAllNotificationElapsed(new Date(System.currentTimeMillis() - 1), x);
+		final Collection<Conference> c = this.conferenceRepository.findAllNotificationElapsed(x);
 
 		return c;
 	}
 	public Collection<Conference> findCameraReadyElapsed() {
 		final Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
-		calendar.add(Calendar.DATE, +5);
+		calendar.add(Calendar.DATE, -5);
 		final Date x = calendar.getTime();
-		final Collection<Conference> c = this.conferenceRepository.findAllCameraElapsed(new Date(System.currentTimeMillis() - 1), x);
+		final Collection<Conference> c = this.conferenceRepository.findAllCameraElapsed(x);
 
 		return c;
 	}
@@ -184,7 +184,7 @@ public class ConferenceService {
 		final Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
 		calendar.add(Calendar.DATE, +5);
 		final Date x = calendar.getTime();
-		final Collection<Conference> c = this.conferenceRepository.findAllFutureConferences(new Date(System.currentTimeMillis() - 1), x);
+		final Collection<Conference> c = this.conferenceRepository.findAllFutureConferences(x);
 
 		return c;
 	}
