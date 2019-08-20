@@ -46,14 +46,14 @@ public class SubmissionAuthorController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Submission s, final BindingResult binding) {
 		ModelAndView res;
-		Submission aux;
+
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(s);
 		else
 			try {
 
-				aux = this.submissionService.save(s);
+				this.submissionService.save(s);
 				res = new ModelAndView("redirect:list.do");
 			}
 
@@ -92,7 +92,7 @@ public class SubmissionAuthorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save2(@Valid final Submission submission, final BindingResult binding) {
 		ModelAndView res;
-		Submission aux;
+
 
 		if (binding.hasErrors()) {
 			res = new ModelAndView("submission/edit");
@@ -101,7 +101,7 @@ public class SubmissionAuthorController extends AbstractController {
 		} else
 			try {
 
-				aux = this.submissionService.save(submission);
+				this.submissionService.save(submission);
 				res = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {

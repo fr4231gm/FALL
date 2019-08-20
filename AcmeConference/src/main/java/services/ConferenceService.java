@@ -7,21 +7,14 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Query;
-
-import org.hibernate.search.jpa.FullTextEntityManager;
-import org.hibernate.search.jpa.Search;
-import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ConferenceRepository;
-import utilities.internal.DatabaseUtil;
-import domain.Activity;
-import domain.Comment;
 import domain.Administrator;
+import domain.Comment;
 import domain.Conference;
 import domain.Reviewer;
 
@@ -35,6 +28,9 @@ public class ConferenceService {
 
 	@Autowired
 	private AdministratorService	administratorService;
+	
+	@Autowired
+	private ReviewerService			reviewerService;
 
 
 	public Conference update(final Conference conference) {
@@ -103,38 +99,57 @@ public class ConferenceService {
 		result = this.conferenceRepository.findAll();
 		return result;
 	}
-
+	
+	
 	public Collection<Reviewer> getCompatibleReviewers(final Conference conference) {
-		List<Reviewer> res;
-		final String text = conference.getTitle() + " " + conference.getSummary();
-
-		try {
-			final DatabaseUtil databaseUtil = new DatabaseUtil();
-			databaseUtil.initialise();
-			final FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(databaseUtil.getEntityManager());
-			databaseUtil.getEntityManager().getTransaction().begin();
-			fullTextEntityManager.createIndexer().startAndWait();
-			res = this.reviewersKeywordsSearch(text, fullTextEntityManager);
-			res = res.subList(0, Math.min(res.size(), 3));
-		} catch (final Throwable oops) {
-			res = new ArrayList<Reviewer>();
+		Collection<Reviewer>  all = this.reviewerService.findAll();
+		List<Reviewer> res = new ArrayList<Reviewer>();
+		String[] words = (conference.getTitle() + " " + conference.getSummary()).split(" ");
+		for (Reviewer reviewer: all){
+			for (String vocablo : words){
+				if (reviewer.getKeywords().indexOf(vocablo) !=-1){
+					res.add(reviewer);
+					break;
+				}
+			}
 		}
-
-		return res;
-
+		return res.subList(0, Math.min(res.size(), 3));
 	}
-
-	@SuppressWarnings("unchecked")
-	public List<Reviewer> reviewersKeywordsSearch(final String keywordSearch, final FullTextEntityManager fullTextEntityManager) {
-		List<Reviewer> result;
-
-		final QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Reviewer.class).get();
-		final org.apache.lucene.search.Query query = qb.keyword().onFields("keywords").matching(keywordSearch).createQuery();
-		final Query fullSearchQuery = fullTextEntityManager.createFullTextQuery(query, Reviewer.class);
-		result = fullSearchQuery.getResultList();
-
-		return result;
-	}
+//	public Collection<Reviewer> getCompatibleReviewers(final Conference conference) {
+//		List<Reviewer> res;
+//		final String text = conference.getTitle() + " " + conference.getSummary();
+//
+//		try {
+//
+//			final DatabaseUtil databaseUtil = new DatabaseUtil();
+//			databaseUtil.initialise();
+//			final FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(databaseUtil.getEntityManager());
+//			databaseUtil.getEntityManager().getTransaction().begin();
+//
+//			fullTextEntityManager.createIndexer().startAndWait();
+//			res = this.reviewersKeywordsSearch(text, fullTextEntityManager);
+//			fullTextEntityManager.close();
+//			res = res.subList(0, Math.min(res.size(), 3));
+//		} catch (final Throwable oops) {
+//			res = new ArrayList<Reviewer>();
+//		}
+//
+//		return res;
+//
+//	}
+//
+//	@SuppressWarnings("unchecked")
+//	public List<Reviewer> reviewersKeywordsSearch(final String keywordSearch, final FullTextEntityManager fullTextEntityManager) {
+//		List<Reviewer> result;
+//
+//		final QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Reviewer.class).get();
+//		final org.apache.lucene.search.Query query = qb.keyword().onFields("keywords").matching(keywordSearch).createQuery();
+//		final Query fullSearchQuery = fullTextEntityManager.createFullTextQuery(query, Reviewer.class);
+//
+//		result = fullSearchQuery.getResultList();
+//		
+//		return result;
+//	}
 
 	public Collection<Conference> findByCategoryId(final int categoryId) {
 		return this.conferenceRepository.findConferencesByCategoryId(categoryId);
@@ -168,7 +183,6 @@ public class ConferenceService {
 		calendar.add(Calendar.DATE, -5);
 		final Date x = calendar.getTime();
 		final Collection<Conference> c = this.conferenceRepository.findAllNotificationElapsed(x);
-
 		return c;
 	}
 	public Collection<Conference> findCameraReadyElapsed() {
@@ -176,7 +190,6 @@ public class ConferenceService {
 		calendar.add(Calendar.DATE, -5);
 		final Date x = calendar.getTime();
 		final Collection<Conference> c = this.conferenceRepository.findAllCameraElapsed(x);
-
 		return c;
 	}
 
@@ -185,7 +198,6 @@ public class ConferenceService {
 		calendar.add(Calendar.DATE, +5);
 		final Date x = calendar.getTime();
 		final Collection<Conference> c = this.conferenceRepository.findAllFutureConferences(x);
-
 		return c;
 	}
 

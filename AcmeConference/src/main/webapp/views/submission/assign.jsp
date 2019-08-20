@@ -10,7 +10,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
-<display:table name="reviewers" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
+<display:table name="reviewers" id="row" requestURI="submission/administrator/assign.do" pagesize="5" class="displaytag">
 	
 	<display:column property="name" titleKey="reviewer.name" sortable="true"/>
 	<display:column property="keywords" titleKey="reviewer.keywords" sortable="true"/>	
