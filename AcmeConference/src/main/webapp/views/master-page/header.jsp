@@ -28,7 +28,8 @@
 		<!-- ADMINISTRATOR -->
 
 		<security:authorize access="hasRole('ADMINISTRATOR')">
-			<li><a class="fNiv parent"><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;<spring:message code="master.page.administrator" /></a>
+			<li><a class="fNiv parent"><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;<spring:message
+						code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a class="child" href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
@@ -51,6 +52,8 @@
 								code="master.page.author.registration" /></a></li>
 					<li><a class="child" href="submission/author/list.do"><spring:message
 								code="master.page.author.submission" /></a></li>
+					<li><a class="child" href="finder/author/edit.do"><spring:message
+								code="master.page.author.finder" /></a></li>
 
 				</ul></li>
 		</security:authorize>
@@ -58,13 +61,14 @@
 
 		<!-- ******************** NOT AUTHENTICATED ******************** -->
 		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;&nbsp;<spring:message
+			<li><a class="fNiv" href="security/login.do"><i
+					class="fa fa-sign-in"></i>&nbsp;&nbsp;&nbsp;<spring:message
 						code="master.page.login" /></a></li>
 
 			<li><a class="fNiv"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;&nbsp;<spring:message
 						code="master.page.register" /></a>
 				<ul>
-				<li class="arrow"></li>
+					<li class="arrow"></li>
 					<li><a class="child" href="author/register.do"><spring:message
 								code="master.page.register.author" /></a></li>
 					<li>
@@ -95,17 +99,14 @@
 			</security:authorize>
 			
 			<li><a class="child" href="category/list.do"><spring:message code="master.page.categories" /></a></li>	
-			</ul>
-			
-		</li>
+			</ul> 	</li>
 		<li><a class="fNiv" href="about-us/index.do"><i class="fa fa-id-card"></i>&nbsp;&nbsp;&nbsp;<spring:message code="master.page.about-us" /></a></li>
 			
 		<!-- ******************** AUTHENTICATED ******************** -->
 		<security:authorize access="isAuthenticated()">
 			<li><a class="fNiv"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;<spring:message
 						code="master.page.profile" /> (<security:authentication
-						property="principal.username" />)
-			</a>
+						property="principal.username" />) </a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="message/list.do"><spring:message
