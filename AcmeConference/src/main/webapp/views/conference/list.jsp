@@ -48,6 +48,13 @@
 			code="conference.display" />
 
 	</display:column>
+	
+	<display:column>
+
+		<acme:link link="comment/create.do?targetId=${row.id}"
+			code="conference.create.comment" />
+
+	</display:column>
 
 	<display:column>
 

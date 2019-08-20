@@ -774,7 +774,7 @@
 		<property name="notificationDeadline" value="03/09/2019" />
 		<property name="cameraReadyDeadline" value="04/09/2019" />
 		<property name="startDate" value="08/06/2019" />
-		<property name="endDate" value="10/01/2019" />
+		<property name="endDate" value="10/01/2020" />
 		<property name="summary"
 			value="Pikachu está sobrevalorado, adentremonos en el incrible mundo de los pokemon tipo norte Por favor…" />
 		<property name="fee" value="0.95" />
@@ -2186,7 +2186,7 @@
 
 	<!-- Tutorial -->
 	<bean id="tutorial1" class="domain.Tutorial">
-		<property name="section">
+		<property name="sections">
 			<list>
 				<ref bean="section1" />
 				<ref bean="section2" />
@@ -2195,7 +2195,7 @@
 		</property>
 		<property name="title" value="Tutorial de hacer tutoriales" />
 		<property name="speakers" value="Jhon lenon" />
-		<property name="startMoment" value="05/01/2019" />
+		<property name="startMoment" value="05/07/2019" />
 		<property name="duration" value="50" />
 		<property name="room" value="A3.10" />
 		<property name="summary"
@@ -2208,11 +2208,11 @@
 				<ref bean="comment25" />
 			</list>
 		</property>
-		<property name="Conference" ref="conference1" />
+		<property name="Conference" ref="conference9" />
 	</bean>
 
 	<bean id="tutorial2" class="domain.Tutorial">
-		<property name="section">
+		<property name="sections">
 			<list>
 				<ref bean="section4" />
 				<ref bean="section5" />
@@ -2236,7 +2236,7 @@
 	</bean>
 
 	<bean id="tutorial3" class="domain.Tutorial">
-		<property name="section">
+		<property name="sections">
 			<list>
 				<ref bean="section7" />
 				<ref bean="section8" />

@@ -21,11 +21,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<form:form action="comment/createByConference.do" modelAttribute="comment">
+
+<form:form action="comment/create.do" modelAttribute="commentForm">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="moment" />
+	<form:hidden path="conference" />
+	<form:hidden path="activity" />
 
 	<acme:input code="comment.author" path="author"
 		placeholder="Javier" />
