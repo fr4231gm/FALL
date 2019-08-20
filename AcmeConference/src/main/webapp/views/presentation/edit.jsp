@@ -21,7 +21,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<form:form action="presentation/edit.do" modelAttribute="presentation">
+<form:form action="${actionURI}" modelAttribute="presentationForm">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -34,7 +34,7 @@
 	<acme:input code="activity.speakers" path="speakers" placeholder="Javier González, Rocío Gutiérrez" />
 	<br />
 	
-	<p>Note: Start moment of conference: ${presentation.conference.startDate}, End moment of conference: ${presentation.conference.endDate} </p>
+	<p><spring:message code="presentation.paper.startMoment" /> ${presentationForm.conference.startDate}<spring:message code="presentation.paper.endMoment"/> ${presentationForm.conference.endDate} </p>
 	<acme:input code="activity.startMoment" path="startMoment"
 		placeholder="dd/MM/yyyy HH:mm" />
 	<br />
@@ -53,9 +53,11 @@
 	
 	<acme:textarea code="activity.attachments" path="attachments"
 		placeholder="https://www.example.com/asasdf"/>
-	<br />
-	
 	<br/>
+	${presentationForm.submission}
+	<!--<acme:select code="presentation.submission" path="submission" items="${submissions}"/>-->
+	<br/>
+	
 	<button type="submit" name="save">
 		<spring:message code="activity.save" />
 	</button>
