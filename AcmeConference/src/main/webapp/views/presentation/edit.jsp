@@ -54,8 +54,8 @@
 	<acme:textarea code="activity.attachments" path="attachments"
 		placeholder="https://www.example.com/asasdf"/>
 	<br/>
-	${presentationForm.submission}
-	<!--<acme:select code="presentation.submission" path="submission" items="${submissions}"/>-->
+	
+	<acme:select code="presentation.submission" path="submission" items="${submissions}" itemLabel="paper.title"/>
 	<br/>
 	
 	<button type="submit" name="save">

@@ -19,9 +19,6 @@ import services.ConferenceService;
 import domain.Activity;
 import domain.Comment;
 import domain.Conference;
-import domain.Panel;
-import domain.Presentation;
-import domain.Tutorial;
 import forms.CommentForm;
 
 @Controller
@@ -46,7 +43,7 @@ public class CommentController extends AbstractController {
 					.findConferenceOrActivity(targetId);
 			if (target.getClass() == Conference.class) {
 				commentForm.setConference((Conference) target);
-			} else if (target.getClass() == Activity.class) {
+			} else {
 				commentForm.setActivity((Activity) target);
 			}
 			res = this.createEditModelAndView(commentForm);
@@ -80,21 +77,9 @@ public class CommentController extends AbstractController {
 				} else {
 					Activity activity = commentForm.getActivity();
 					this.activityService.addCommentToActivity(activity, saved);
-					if (activity instanceof Panel) {
-						res = new ModelAndView(
-								"redirect:/panel/display.do?panelId="
-										+ commentForm.getConference().getId());
-					}
-					if (activity instanceof Tutorial) {
-						res = new ModelAndView(
-								"redirect:/tutorial/display.do?tutorialId="
-										+ commentForm.getConference().getId());
-					}
-					if (activity instanceof Presentation) {
-						res = new ModelAndView(
-								"redirect:/presentation/display.do?presentationId="
-										+ commentForm.getConference().getId());
-					}
+					res = new ModelAndView(
+							"redirect:/comment/list.do?targetId="
+									+ commentForm.getActivity().getId());
 
 				}
 
@@ -118,7 +103,7 @@ public class CommentController extends AbstractController {
 		if (target.getClass() == Conference.class) {
 			conference = this.conferenceService.findOne(targetId);
 			comments = conference.getComments();
-		} else if (target.getClass() == Activity.class) {
+		} else {
 			activity = this.activityService.findOne(targetId);
 			comments = activity.getComments();
 		}
@@ -129,37 +114,6 @@ public class CommentController extends AbstractController {
 		return res;
 
 	}
-
-	/*@RequestMapping(value = "/listByConference", method = RequestMethod.GET)
-	public ModelAndView listByConference(@RequestParam int conferenceId) {
-		ModelAndView res;
-		Conference conference;
-		Collection<Comment> comments;
-
-		conference = this.conferenceService.findOne(conferenceId);
-		comments = conference.getComments();
-
-		res = new ModelAndView("comment/list");
-		res.addObject("comments", comments);
-
-		return res;
-	}
-
-	@RequestMapping(value = "/listByActivity", method = RequestMethod.GET)
-	public ModelAndView listByActivity(@RequestParam int activityId) {
-		ModelAndView res;
-		Activity activity;
-		Collection<Comment> comments;
-
-		activity = this.activityService.findOne(activityId);
-		comments = activity.getComments();
-
-		res = new ModelAndView("comment/list");
-		res.addObject("comments", comments);
-
-		return res;
-	}*/
-
 	// Ancilliary methods
 	// --------------------------------------------------------
 

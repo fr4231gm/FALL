@@ -31,6 +31,9 @@ public class PresentationService {
 
 	@Autowired
 	private ActivityService activityService;
+	
+	@Autowired
+	private SubmissionService submissionService;
 
 	public Presentation create(int conferenceId) {
 		Administrator principal;
@@ -109,6 +112,25 @@ public class PresentationService {
 		res.setStartMoment(presentationForm.getStartMoment());
 		res.setSummary(presentationForm.getSummary());
 		res.setTitle(presentationForm.getTitle());
+
+		return res;
+	}
+	
+	public PresentationForm construct(final Presentation presentation) {
+		final PresentationForm res = new PresentationForm();
+
+		res.setId(presentation.getId());
+		res.setVersion(presentation.getVersion());
+		res.setAttachments(presentation.getAttachments());
+		res.setComments(presentation.getComments());
+		res.setConference(presentation.getConference());
+		res.setDuration(presentation.getDuration());
+		res.setSubmission(this.submissionService.findSubmissionByPaperTitle(presentation.getPaper().getTitle()));
+		res.setRoom(presentation.getRoom());
+		res.setSpeakers(presentation.getSpeakers());
+		res.setStartMoment(presentation.getStartMoment());
+		res.setSummary(presentation.getSummary());
+		res.setTitle(presentation.getTitle());
 
 		return res;
 	}
