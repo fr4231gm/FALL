@@ -21,6 +21,10 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+
+
+
+
 <form:form action="${actionURI}" modelAttribute="presentationForm">
 
 	<form:hidden path="id" />
@@ -31,33 +35,40 @@
 		placeholder="Title of presentation" />
 	<br />
 
-	<acme:input code="activity.speakers" path="speakers" placeholder="Javier González, Rocío Gutiérrez" />
+	<acme:input code="activity.speakers" path="speakers"
+		placeholder="Javier González, Rocío Gutiérrez" />
 	<br />
-	
-	<p><spring:message code="presentation.paper.startMoment" /> ${presentationForm.conference.startDate}<spring:message code="presentation.paper.endMoment"/> ${presentationForm.conference.endDate} </p>
+
+	<p>
+		<spring:message code="presentation.paper.startMoment" />
+		<fmt:formatDate value="${presentationForm.conference.startDate}"
+			pattern="dd/MM/yyyy HH:mm" />
+		<spring:message code="presentation.paper.endMoment" />
+		<fmt:formatDate value="${presentationForm.conference.endDate}"
+			pattern="dd/MM/yyyy HH:mm" />
+	</p>
 	<acme:input code="activity.startMoment" path="startMoment"
 		placeholder="dd/MM/yyyy HH:mm" />
 	<br />
-	
-	<acme:input code="activity.duration" path="duration"
-		placeholder="30" />
+
+	<acme:input code="activity.duration" path="duration" placeholder="30" />
 	<br />
-	
-	<acme:input code="activity.room" path="room"
-		placeholder="Room A1.13" />
+
+	<acme:input code="activity.room" path="room" placeholder="Room A1.13" />
 	<br />
-	
+
 	<acme:textarea code="activity.summary" path="summary"
 		placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
 	<br />
-	
+
 	<acme:textarea code="activity.attachments" path="attachments"
-		placeholder="https://www.example.com/asasdf"/>
-	<br/>
-	
-	<acme:select code="presentation.submission" path="submission" items="${submissions}" itemLabel="paper.title"/>
-	<br/>
-	
+		placeholder="https://www.example.com/asasdf" />
+	<br />
+
+	<acme:select code="presentation.paper" path="submission"
+		items="${submissions}" itemLabel="paper.title" />
+	<br />
+
 	<button type="submit" name="save">
 		<spring:message code="activity.save" />
 	</button>

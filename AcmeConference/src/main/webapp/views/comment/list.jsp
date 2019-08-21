@@ -27,4 +27,8 @@
 </display:table>
 <br>
 
+<acme:link code="comment.create"
+	link="comment/create.do?targetId=${target.id}" />
+<br />
+
 <acme:cancel code="comment.goback" url="/"/>

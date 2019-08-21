@@ -66,8 +66,6 @@
 	code="comments" />
 
 <br />
-<acme:link code="conference.create.comment"
-	link="comment/create.do?targetId=${conference.id}" />
 
 <jstl:if test="${future eq 'true'}">
 	<jstl:if test="${haveR eq 'false'}">

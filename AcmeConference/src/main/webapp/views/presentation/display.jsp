@@ -81,6 +81,3 @@
 </fieldset>
 <br />
 <br />
-<acme:link code="comment.create"
-	link="comment/create.do?targetId=${presentation.id}" />
-<br />

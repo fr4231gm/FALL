@@ -110,6 +110,7 @@ public class CommentController extends AbstractController {
 
 		res = new ModelAndView("comment/list");
 		res.addObject("comments", comments);
+		res.addObject("target", target);
 
 		return res;
 
