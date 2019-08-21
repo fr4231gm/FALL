@@ -54,14 +54,13 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView save(@Valid @ModelAttribute("submissionForm") final SubmissionForm submissionForm,
 			final BindingResult binding) {
 		ModelAndView res;
-		Submission aux;
 		
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(submissionForm);
 		else
 			try {
 
-				aux = this.submissionService.saveAssign(submissionForm);
+				this.submissionService.saveAssign(submissionForm);
 				res = new ModelAndView("redirect:list.do");
 			}
 
@@ -75,14 +74,13 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView autoassign(@Valid final SubmissionForm submissionForm,
 			final BindingResult binding) {
 		ModelAndView res;
-		Submission aux;
 		
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(submissionForm);
 		else
 			try {
 
-				aux = this.submissionService.saveAutoassign(submissionForm);
+				this.submissionService.saveAutoassign(submissionForm);
 				res = new ModelAndView("redirect:list.do");
 			}
 

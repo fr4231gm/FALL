@@ -80,7 +80,6 @@ public class RegistrationAuthorController extends AbstractController {
 			final BindingResult binding) {
 		ModelAndView res;
 		String[] makes;
-		Registration r;
 
 		makes = this.configurationService.findConfiguration().getMake()
 				.split(",");
@@ -93,7 +92,7 @@ public class RegistrationAuthorController extends AbstractController {
 				res = this.createEditModelAndView(reg);
 				res.addObject("makes", makes);
 			} else {
-				r = this.registrationService.save(reg);
+				this.registrationService.save(reg);
 				res = new ModelAndView("redirect:/conference/author/list.do");
 				res.addObject("makes", makes);
 			}
