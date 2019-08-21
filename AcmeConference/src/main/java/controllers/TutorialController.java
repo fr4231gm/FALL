@@ -42,6 +42,7 @@ public class TutorialController extends AbstractController {
 		tutorial = this.tutorialService.create(conferenceId);
 		Assert.notNull(tutorial);
 		res = this.createEditModelAndView(tutorial);
+		res.addObject("actionURI", "tutorial/create.do");
 
 		return res;
 	}
@@ -54,6 +55,7 @@ public class TutorialController extends AbstractController {
 		tutorial = this.tutorialService.findOne(tutorialId);
 		Assert.notNull(tutorial);
 		res = this.createEditModelAndView(tutorial);
+		res.addObject("actionURI", "tutorial/edit.do");
 
 		return res;
 	}
@@ -72,8 +74,10 @@ public class TutorialController extends AbstractController {
 			binding.rejectValue("attachments", "activity.attachments.error");
 		}
 
-		if (!this.activityService.checkStartMoment(tutorial)) {
-			binding.rejectValue("startMoment", "activity.startMoment.error");
+		if (tutorial.getStartMoment() != null) {
+			if (!this.activityService.checkStartMoment(tutorial)) {
+				binding.rejectValue("startMoment", "activity.startMoment.error");
+			}
 		}
 
 		if (binding.hasErrors()) {
@@ -88,6 +92,7 @@ public class TutorialController extends AbstractController {
 				res.addObject("schedule",
 						this.activityService.getSchedule(tutorial));
 				res.addObject("conferencePast", conferencePast);
+				res.addObject("actionURI", "tutorial/edit.do");
 
 			} catch (Throwable oops) {
 				res = this.createEditModelAndView(tutorial,
@@ -111,9 +116,11 @@ public class TutorialController extends AbstractController {
 		if (this.utilityService.checkUrls(tutorial.getAttachments())) {
 			binding.rejectValue("attachments", "activity.attachments.error");
 		}
-		
-		if (!this.activityService.checkStartMoment(tutorial)) {
-			binding.rejectValue("startMoment", "activity.startMoment.error");
+
+		if (tutorial.getStartMoment() != null) {
+			if (!this.activityService.checkStartMoment(tutorial)) {
+				binding.rejectValue("startMoment", "activity.startMoment.error");
+			}
 		}
 
 		if (binding.hasErrors()) {
@@ -128,6 +135,7 @@ public class TutorialController extends AbstractController {
 				res.addObject("schedule",
 						this.activityService.getSchedule(tutorial));
 				res.addObject("conferencePast", conferencePast);
+				res.addObject("actionURI", "tutorial/create.do");
 
 			} catch (Throwable oops) {
 				res = this.createEditModelAndView(tutorial,

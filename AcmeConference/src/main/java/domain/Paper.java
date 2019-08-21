@@ -1,4 +1,3 @@
-
 package domain;
 
 import javax.persistence.Access;
@@ -14,11 +13,10 @@ import org.hibernate.validator.constraints.URL;
 public class Paper {
 
 	// Atributos
-	private String	title;
-	private String	summary;
-	private String	document;
-	private boolean	cameraReadyPaper;
-
+	private String title;
+	private String summary;
+	private String document;
+	private boolean cameraReadyPaper;
 
 	// Getters
 	@NotBlank

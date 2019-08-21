@@ -62,6 +62,13 @@
 <acme:input code="conference.fee" path="conference.fee" readonly="true" />
 <br />
 
+<acme:link link="comment/list.do?targetId=${conference.id}"
+	code="comments" />
+
+<br />
+<acme:link code="conference.create.comment"
+	link="comment/create.do?targetId=${conference.id}" />
+
 <jstl:if test="${future eq 'true'}">
 	<jstl:if test="${haveR eq 'false'}">
 		<security:authorize access="hasRole('AUTHOR')">
@@ -82,15 +89,15 @@
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
 
-		<acme:link link="panel/edit.do?conferenceId=${conference.id}"
+		<acme:link link="panel/create.do?conferenceId=${conference.id}"
 			code="conference.panel" />
 			&nbsp;
-			<acme:link link="presentation/edit.do?conferenceId=${conference.id}"
+			<acme:link link="presentation/create.do?conferenceId=${conference.id}"
 			code="conference.presentation" />
 			&nbsp;
-			<acme:link link="tutorial/edit.do?conferenceId=${conference.id}"
+			<acme:link link="tutorial/create.do?conferenceId=${conference.id}"
 			code="conference.tutorial" />
-			<br />
+		<br />
 	</security:authorize>
 </jstl:if>
 
@@ -104,10 +111,6 @@
 	link="message/broadcast-authors-registered.do?conferenceId=${conference.id}"
 	code="master.page.broadcast.registered" />
 <br />
-<acme:link code="conference.create.comment"
-	link="comment/create.do?targetId=${conference.id}" />
-
-
 <br />
 <br />
-<acme:back code="conference.goback" />
+<acme:cancel code="conference.goback" url="/" />

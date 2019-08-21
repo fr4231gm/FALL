@@ -86,6 +86,11 @@
 		</tr>
 	</jstl:forEach>
 </table>
+<br/>
+
+<acme:link code="comment.create"
+			link="comment/create.do?targetId=${tutorial.id}" />
+<br/>
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<jstl:if test="${conferencePast eq false }">

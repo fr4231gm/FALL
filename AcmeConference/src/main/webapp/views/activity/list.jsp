@@ -27,7 +27,14 @@
 
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="true" />
+		
+	<display:column>
 
+		<acme:link link="comment/list.do?targetId=${row.id}"
+			code="activity.comments" />
+
+	</display:column>
+	
 	<display:column>
 
 		<acme:link link="tutorial/display.do?tutorialId=${row.id}"
@@ -77,6 +84,13 @@
 
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="true" />
+
+	<display:column>
+
+		<acme:link link="comment/list.do?targetId=${row.id}"
+			code="activity.comments" />
+
+	</display:column>
 
 	<display:column>
 
@@ -130,6 +144,13 @@
 
 	<display:column property="paper.title" titleKey="activity.paper"
 		sortable="true" />
+		
+	<display:column>
+
+		<acme:link link="comment/list.do?targetId=${row.id}"
+			code="activity.comments" />
+
+	</display:column>
 
 	<display:column>
 

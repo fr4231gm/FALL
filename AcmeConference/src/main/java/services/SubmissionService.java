@@ -208,5 +208,9 @@ public class SubmissionService {
 		return submission;
 
 	}
+	
+	public Submission findSubmissionByPaperTitle(String title) {
+		return this.submissionRepository.findSubmissionByPaperTitle(title);
+	}
 
 }

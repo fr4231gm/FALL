@@ -27,4 +27,4 @@
 </display:table>
 <br>
 
-<acme:cancel code="comment.goback" url="/" />
+<acme:cancel code="comment.goback" url="/"/>
