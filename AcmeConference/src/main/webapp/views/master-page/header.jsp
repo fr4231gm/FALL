@@ -80,6 +80,20 @@
 
 				</ul></li>
 		</security:authorize>
+		
+		<!-- SPONSOR -->
+		
+		<security:authorize access="hasRole('SPONSOR')">
+			<li><a class="fNiv parent"><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;<spring:message
+						code="master.page.sponsor" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a class="child" href="sponsorship/sponsor/list.do"><spring:message
+								code="master.page.sponsor.sponsorships" /></a></li>
+					
+
+				</ul></li>
+		</security:authorize>
 
 
 		<!-- ******************** NOT AUTHENTICATED ******************** -->
