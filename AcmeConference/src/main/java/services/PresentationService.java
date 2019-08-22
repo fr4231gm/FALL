@@ -134,4 +134,8 @@ public class PresentationService {
 
 		return res;
 	}
+	
+	public void flush(){
+		this.presentationRepository.flush();
+	}
 }

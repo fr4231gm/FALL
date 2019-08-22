@@ -16,86 +16,90 @@ import repositories.SectionRepository;
 @Transactional
 public class SectionService {
 
-    @Autowired
-    private SectionRepository sectionRepository;
+	@Autowired
+	private SectionRepository sectionRepository;
 
+	@Autowired
+	private AdministratorService administratorService;
 
-    @Autowired
-    private AdministratorService administratorService;
+	@Autowired
+	private TutorialService tutorialService;
 
-    @Autowired
-    private TutorialService tutorialService;
+	@Autowired
+	private ConferenceService conferenceService;
 
-    @Autowired
-    private ConferenceService conferenceService;
-    
-    @Autowired
-    private UtilityService utilityService;
+	@Autowired
+	private UtilityService utilityService;
 
-    public Section create(int tutorialId) {
-    
-        Administrator principal;
-        Tutorial tutorial;
-        Collection<Section> sections;
+	public Section create(int tutorialId) {
 
-        tutorial = this.tutorialService.findOne(tutorialId);
-        Assert.isTrue(!this.conferenceService.findPastConferences().contains(tutorial.getConference()));
+		Administrator principal;
+		Tutorial tutorial;
+		Collection<Section> sections;
 
-        sections = tutorial.getSections();
+		tutorial = this.tutorialService.findOne(tutorialId);
+		Assert.isTrue(!this.conferenceService.findPastConferences().contains(
+				tutorial.getConference()));
 
-        principal = this.administratorService.findByPrincipal();
-        Assert.notNull(principal);
+		sections = tutorial.getSections();
 
-        Section res;
+		principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
 
-        res = new Section();
-        sections.add(res);
-        tutorial.setSections(sections);
+		Section res;
 
-        return res;
-    }
+		res = new Section();
+		sections.add(res);
+		tutorial.setSections(sections);
 
-    public Section save(Section section) {
-    
-        Section res;
+		return res;
+	}
 
-        Assert.isTrue(!this.utilityService.checkUrls(section.getPictures()));
-        res = this.sectionRepository.save(section);     
+	public Section save(Section section) {
 
-        return res;
-    }
+		Section res;
 
-    public Section findOne(int sectionId) {
-    
-        return this.sectionRepository.findOne(sectionId);
-    }
+		Assert.isTrue(!this.utilityService.checkUrls(section.getPictures()));
+		res = this.sectionRepository.save(section);
 
-    public Collection<Section> findAll() {
-    
-        Collection<Section> result;
-    
+		return res;
+	}
 
-        result = this.sectionRepository.findAll();
+	public Section findOne(int sectionId) {
 
-        return result;
-    }
+		return this.sectionRepository.findOne(sectionId);
+	}
 
-    public void delete(Section section) {
-    
-        Administrator principal;
-        Collection<Section> sections;
-        Tutorial tutorial;
+	public Collection<Section> findAll() {
 
-        principal = this.administratorService.findByPrincipal();
-        Assert.notNull(principal);
-        
-        tutorial = this.tutorialService.findTutorialBySectionId(section.getId());
-        sections = tutorial.getSections();
-        sections.remove(section);
-        tutorial.setSections(sections);
-        
-        this.tutorialService.save(tutorial);
+		Collection<Section> result;
 
-        this.sectionRepository.delete(section);
-    }
+		result = this.sectionRepository.findAll();
+
+		return result;
+	}
+
+	public void delete(Section section) {
+
+		Administrator principal;
+		Collection<Section> sections;
+		Tutorial tutorial;
+
+		principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
+
+		tutorial = this.tutorialService
+				.findTutorialBySectionId(section.getId());
+		sections = tutorial.getSections();
+		sections.remove(section);
+		tutorial.setSections(sections);
+
+		this.tutorialService.save(tutorial);
+
+		this.sectionRepository.delete(section);
+	}
+
+	public void flush() {
+		this.sectionRepository.flush();
+	}
 }

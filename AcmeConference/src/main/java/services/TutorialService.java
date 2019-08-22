@@ -26,10 +26,10 @@ public class TutorialService {
 
 	@Autowired
 	private ConferenceService conferenceService;
-	
+
 	@Autowired
 	private UtilityService utilityService;
-	
+
 	@Autowired
 	private ActivityService activityService;
 
@@ -55,7 +55,7 @@ public class TutorialService {
 
 	public Tutorial save(Tutorial tutorial) {
 		Tutorial res;
-		
+
 		Assert.isTrue(!this.utilityService.checkUrls(tutorial.getAttachments()));
 		Assert.isTrue(this.activityService.checkStartMoment(tutorial));
 		res = this.tutorialRepository.save(tutorial);
@@ -92,6 +92,9 @@ public class TutorialService {
 
 		this.tutorialRepository.delete(tutorial);
 	}
-	
-	
+
+	public void flush() {
+		this.tutorialRepository.flush();
+	}
+
 }

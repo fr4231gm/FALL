@@ -146,6 +146,10 @@ public class SponsorService {
 
 		return res;
 	}
+	
+	public void flush(){
+		this.sponsorRepository.flush();
+	}
 
 	public Sponsor findOneTrimmedByPrincipal() {
 

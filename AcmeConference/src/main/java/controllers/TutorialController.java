@@ -107,6 +107,7 @@ public class TutorialController extends AbstractController {
 	public ModelAndView save(@Valid Tutorial tutorial, BindingResult binding) {
 		ModelAndView res;
 		boolean conferencePast = false;
+		Tutorial saved;
 
 		if (this.conferenceService.findPastConferences().contains(
 				tutorial.getConference())) {
@@ -127,13 +128,13 @@ public class TutorialController extends AbstractController {
 			res = this.createEditModelAndView(tutorial);
 		} else {
 			try {
-				this.tutorialService.save(tutorial);
+				saved = this.tutorialService.save(tutorial);
 				res = new ModelAndView(
 						"redirect:/tutorial/display.do?tutorialId="
-								+ tutorial.getId());
-				res.addObject("tutorial", tutorial);
+								+ saved.getId());
+				res.addObject("tutorial", saved);
 				res.addObject("schedule",
-						this.activityService.getSchedule(tutorial));
+						this.activityService.getSchedule(saved));
 				res.addObject("conferencePast", conferencePast);
 				res.addObject("actionURI", "tutorial/create.do");
 
