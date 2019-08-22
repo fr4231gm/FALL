@@ -47,13 +47,14 @@ public class SubmissionAuthorController extends AbstractController {
 	public ModelAndView save(@Valid final Submission s, final BindingResult binding) {
 		ModelAndView res;
 
+		if(this.submissionService.findSubmissionByPaperTitle(s.getPaper().getTitle()) != null){
+			binding.rejectValue("paper.title", "submission.paper.title.error");
+		}
+
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(s);
 		else
 			try {
-				if(this.submissionService.findSubmissionByPaperTitle(s.getPaper().getTitle()) != null){
-					binding.rejectValue("paper.title", "submission.paper.title.error");
-				}
 				this.submissionService.save(s);
 				res = new ModelAndView("redirect:list.do");
 			}
