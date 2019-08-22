@@ -1,7 +1,9 @@
+
 package controllers;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,22 +16,28 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AuthorService;
 import services.ConferenceService;
 import services.RegistrationService;
+import services.SponsorshipService;
 import domain.Author;
 import domain.Conference;
 import domain.Registration;
+import domain.Sponsorship;
 
 @Controller
 @RequestMapping("/conference")
 public class ConferenceController extends AbstractController {
 
 	@Autowired
-	private ConferenceService conferenceService;
+	private ConferenceService	conferenceService;
 
 	@Autowired
-	private RegistrationService registrationService;
+	private RegistrationService	registrationService;
 
 	@Autowired
-	private AuthorService authorService;
+	private AuthorService		authorService;
+
+	@Autowired
+	private SponsorshipService	sponsorshipService;
+
 
 	@RequestMapping(value = "/listRunningConferences", method = RequestMethod.GET)
 	public ModelAndView listRunningConferences() {
@@ -63,8 +71,7 @@ public class ConferenceController extends AbstractController {
 		final Date actual = new Date(System.currentTimeMillis() - 1);
 
 		result.addObject("conferences", conferences);
-		result.addObject("requestURI",
-				"conference/listForthcomingConferences.do");
+		result.addObject("requestURI", "conference/listForthcomingConferences.do");
 		result.addObject("general", true);
 		result.addObject("searchPoint", "conference/listSearchForthcoming.do");
 		result.addObject("fechaActual", actual);
@@ -93,37 +100,40 @@ public class ConferenceController extends AbstractController {
 	}
 
 	// Show
-	@RequestMapping(value = "/display", method = RequestMethod.GET, params = { "conferenceId" })
+	@RequestMapping(value = "/display", method = RequestMethod.GET, params = {
+		"conferenceId"
+	})
 	public ModelAndView displayAnonymous(@RequestParam final int conferenceId) {
 		ModelAndView res;
 		Boolean future = false;
 		Boolean canCreateActivity = false;
 		Boolean haveR = false;
-		Collection<Registration> registerConference = registrationService
-				.findRegistrationsByConferenceId(conferenceId);
+		final Collection<Registration> registerConference = this.registrationService.findRegistrationsByConferenceId(conferenceId);
+		final List<Sponsorship> sp = (List<Sponsorship>) this.sponsorshipService.findAll();
+
+		final int numero = (int) (Math.random() * sp.size());
+
+		final Sponsorship p = sp.get(numero);
 
 		// Initialize variables
 		Conference c;
 		c = this.conferenceService.findOne(conferenceId);
 
-		if (conferenceService.findForthcomingConferences().contains(c)) {
+		if (this.conferenceService.findForthcomingConferences().contains(c)) {
 			future = true;
 			canCreateActivity = true;
 		}
 
-		if (conferenceService.findRunningConferences().contains(c)) {
+		if (this.conferenceService.findRunningConferences().contains(c))
 			canCreateActivity = true;
-		}
 
 		try {
 
-			Author principal = authorService.findByPrincipal();
+			final Author principal = this.authorService.findByPrincipal();
 
-			for (Registration r : registerConference) {
-				if (r.getAuthor().equals(principal)) {
+			for (final Registration r : registerConference)
+				if (r.getAuthor().equals(principal))
 					haveR = true;
-				}
-			}
 
 			res = new ModelAndView("conference/display");
 			res.addObject("conference", c);
@@ -131,9 +141,8 @@ public class ConferenceController extends AbstractController {
 			res.addObject("haveR", haveR);
 			res.addObject("canCreateActivity", canCreateActivity);
 
-			if (haveR == true) {
+			if (haveR == true)
 				res.addObject("message", "registration.commit.error");
-			}
 		} catch (final Throwable oops) {
 
 			res = new ModelAndView("conference/display");
@@ -142,17 +151,17 @@ public class ConferenceController extends AbstractController {
 			res.addObject("haveR", haveR);
 			res.addObject("canCreateActivity", canCreateActivity);
 		}
-
+		res.addObject("sponsorshipURL", p.getBanner());
 		return res;
 	}
-
-	@RequestMapping(value = "/listSearchPast", method = RequestMethod.GET, params = { "keyword" })
+	@RequestMapping(value = "/listSearchPast", method = RequestMethod.GET, params = {
+		"keyword"
+	})
 	public ModelAndView listSearchPast(@RequestParam final String keyword) {
 		ModelAndView result;
 		Collection<Conference> conferences;
 
-		conferences = this.conferenceService
-				.searchConferenceAnonymousPast(keyword);
+		conferences = this.conferenceService.searchConferenceAnonymousPast(keyword);
 
 		result = new ModelAndView("conference/list");
 
@@ -166,13 +175,14 @@ public class ConferenceController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/listSearchForthcoming", method = RequestMethod.GET, params = { "keyword" })
+	@RequestMapping(value = "/listSearchForthcoming", method = RequestMethod.GET, params = {
+		"keyword"
+	})
 	public ModelAndView listSearchForthcoming(@RequestParam final String keyword) {
 		ModelAndView result;
 		Collection<Conference> conferences;
 
-		conferences = this.conferenceService
-				.searchConferenceAnonymousForthcomming(keyword);
+		conferences = this.conferenceService.searchConferenceAnonymousForthcomming(keyword);
 
 		result = new ModelAndView("conference/list");
 
@@ -186,13 +196,14 @@ public class ConferenceController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/listSearchRunning", method = RequestMethod.GET, params = { "keyword" })
+	@RequestMapping(value = "/listSearchRunning", method = RequestMethod.GET, params = {
+		"keyword"
+	})
 	public ModelAndView listSearchRunning(@RequestParam final String keyword) {
 		ModelAndView result;
 		Collection<Conference> conferences;
 
-		conferences = this.conferenceService
-				.searchConferenceAnonymousRunning(keyword);
+		conferences = this.conferenceService.searchConferenceAnonymousRunning(keyword);
 
 		result = new ModelAndView("conference/list");
 

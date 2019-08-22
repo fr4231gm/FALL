@@ -63,4 +63,26 @@ public class SponsorshipService {
 		return this.sponsorshipRepository.findOne(sponsorshipId);
 	}
 
+	public Sponsorship create() {
+
+		final Sponsor principal = this.sponsorService.findByPrincipal();
+		Assert.notNull(principal);
+
+		final Sponsorship res = new Sponsorship();
+
+		res.setSponsor(principal);
+
+		return res;
+	}
+
+	public Collection<Sponsorship> findAll() {
+		return this.sponsorshipRepository.findAll();
+	}
+
+	public void delete(final Sponsorship sponsorship) {
+		Assert.notNull(sponsorship);
+		this.sponsorshipRepository.delete(sponsorship);
+
+	}
+
 }

@@ -42,6 +42,11 @@
 			code="sponsorship.edit" />
 	</display:column>
 	
+	
+	<display:column titleKey="sponsorship.delete">
+		<acme:link link="sponsorship/sponsor/delete.do?sponsorshipId=${row.id}"
+			code="sponsorship.delete" />
+	</display:column>
 
 
 </display:table>
