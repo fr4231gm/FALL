@@ -62,7 +62,7 @@
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<jstl:if test="${conferencePast eq false}">
-		<acme:link link="tutorial/create.do?conferenceId=${row.conference.id}"
+		<acme:link link="tutorial/create.do?conferenceId=${conferenceId}"
 			code="tutorial.create" />
 	</jstl:if>
 </security:authorize>
@@ -119,7 +119,7 @@
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<jstl:if test="${conferencePast eq false}">
-		<acme:link link="panel/create.do?conferenceId=${row.conference.id}"
+		<acme:link link="panel/create.do?conferenceId=${conferenceId}"
 			code="panel.create" />
 	</jstl:if>
 </security:authorize>
@@ -178,7 +178,7 @@
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<jstl:if test="${conferencePast eq false}">
 		<acme:link
-			link="presentation/create.do?conferenceId=${row.conference.id}"
+			link="presentation/create.do?conferenceId=${conferenceId}"
 			code="presentation.create" />
 	</jstl:if>
 </security:authorize>

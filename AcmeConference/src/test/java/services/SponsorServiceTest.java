@@ -11,17 +11,18 @@
 package services;
 
 import javax.transaction.Transactional;
-import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.CreditCard;
 import domain.Sponsor;
+import forms.SponsorForm;
 
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,24 +35,25 @@ public class SponsorServiceTest extends AbstractTest {
 
 	// Tests ------------------------------------------------------------------
 
-	/*@Test
-	public void registerRookieTestDriver() {
+	@Test
+	public void registerSponsorTestDriver() {
 
 		final Object testingData[][] = {
 
 				// TEST POSITIVO:
-				{ "name", "surname", "A12345678",
+				{ "name", "middleName", "surname",
 						"http://www.google.es/photo.jpg", "123456789",
 						"email@gmail.com", "address", "sponsorbalboa",
-						"sponsorbalboa", 123, 1, 19, "jose",
+						"sponsorbalboa", 123, 1, 22, "jose",
 						"4111111111111111", "AMEX", null },
 
 				// TEST NEGATIVO:
-				{ "", "surname", "A12345678", "http://www.google.es/photo.jpg",
-						"123456789", "email@gmail.com", "address",
-						"RookieTheRock", "RookieTheRock", 123, 1, 19, "jose",
+				{ "name", "middleName", "surname",
+						"asdfgsasdf", "123456789",
+						"email@gmail.com", "address", "sponsorbalboa",
+						"sponsorbalboa", 123, 1, 22, "jose",
 						"4111111111111111", "AMEX",
-						ConstraintViolationException.class },
+						null },
 
 		};
 
@@ -61,31 +63,36 @@ public class SponsorServiceTest extends AbstractTest {
 					(String) testingData[i][1], (String) testingData[i][2],
 					(String) testingData[i][3], (String) testingData[i][4],
 					(String) testingData[i][5], (String) testingData[i][6],
-					(String) testingData[i][7], (Integer) testingData[i][8],
+					(String) testingData[i][7], (String) testingData[i][8],
 					(Integer) testingData[i][9], (Integer) testingData[i][10],
-					(String) testingData[i][11], (String) testingData[i][12],
-					(Class<?>) testingData[i][13]);
+					(Integer) testingData[i][11], (String) testingData[i][12],
+					(String) testingData[i][13], (String) testingData[i][14],
+					(Class<?>) testingData[i][15]);
 			this.rollbackTransaction();
 		}
 	}
 
 	protected void registerSponsorTemplate(final String name,
-			final String surname, final String photo, final String phoneNumber,
-			final String email, final String address, final String username,
-			final String password, final Integer cVV,
+			String middleName, final String surname, final String photo,
+			final String phoneNumber, final String email, final String address,
+			final String username, final String password, final Integer cVV,
 			final Integer expirationMonth, final Integer expirationYear,
 			final String holder, final String number, final String make,
 			final Class<?> expected) {
 
 		Class<?> caught;
+		Sponsor saved;
 
 		caught = null;
 
 		try {
+			super.authenticate(null);
+			
 			final Sponsor sponsor = this.sponsorService.create(username,
 					password);
 			final CreditCard c = new CreditCard();
 			sponsor.setName(name);
+			sponsor.setMiddleName(middleName);
 			sponsor.setSurname(surname);
 			sponsor.setAddress(address);
 			sponsor.setEmail(email);
@@ -98,14 +105,14 @@ public class SponsorServiceTest extends AbstractTest {
 			c.setNumber(number);
 			c.setMake(make);
 
-			this.sponsorService.save(sponsor);
+			saved = this.sponsorService.save(sponsor);
 
-			this.sponsorService.flush();
+			Assert.isTrue(saved.getId() != 0);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 		this.checkExceptions(expected, caught);
-	}*/
+	}
 
 }

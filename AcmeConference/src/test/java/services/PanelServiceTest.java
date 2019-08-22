@@ -24,7 +24,7 @@ public class PanelServiceTest extends AbstractTest {
 	private PanelService panelService;
 
 	@Test
-	public void createPanelTemplate() {
+	public void createPanelTestDriver() {
 
 		final Object testingData[][] = {
 
@@ -89,7 +89,7 @@ public class PanelServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void deletePanelTemplate() {
+	public void deletePanelTestDriver() {
 
 		final Object testingData[][] = {
 

@@ -24,7 +24,7 @@ public class TutorialServiceTest extends AbstractTest {
 	private TutorialService tutorialService;
 
 	@Test
-	public void createTutorialTemplate() {
+	public void createTutorialTestDriver() {
 
 		final Object testingData[][] = {
 
@@ -89,7 +89,7 @@ public class TutorialServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void deleteTutorialTemplate() {
+	public void deleteTutorialTestDriver() {
 
 		final Object testingData[][] = {
 
