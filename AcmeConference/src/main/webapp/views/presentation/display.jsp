@@ -21,26 +21,63 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<h3><strong><spring:message code="activity.title"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.title" /></strong>
+</h3>
 <jstl:out value="${presentation.title}" />
 <br />
 
-<h3><strong><spring:message code="activity.speakers"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.speakers" /></strong>
+</h3>
 <jstl:out value="${presentation.speakers}" />
 <br />
 
-<h3><strong><spring:message code="activity.schedule"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.schedule" /></strong>
+</h3>
 <jstl:out value="${schedule}" />
 <br />
 
-<h3><strong><spring:message code="activity.room"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.room" /></strong>
+</h3>
 <jstl:out value="${presentation.room}" />
 <br />
 
-<h3><strong><spring:message code="activity.summary"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.summary" /></strong>
+</h3>
 <jstl:out value="${presentation.summary}" />
 <br />
 
-<h3><strong><spring:message code="activity.attachments"/></strong></h3>
+<h3>
+	<strong><spring:message code="activity.attachments" /></strong>
+</h3>
 <jstl:out value="${presentation.attachments}" />
+<br />
+
+<h3>
+	<strong><spring:message code="presentation.paper" /></strong>
+</h3>
+
+<fieldset>
+	<h4>
+		<strong><spring:message code="paper.title" /></strong>
+	</h4>
+	<jstl:out value="${presentation.paper.title}" />
+	<br />
+
+	<h4>
+		<strong><spring:message code="paper.summary" /></strong>
+	</h4>
+	<jstl:out value="${presentation.paper.summary}" />
+	<br />
+
+	<h4>
+		<strong><spring:message code="paper.document" /></strong>
+	</h4>
+	<jstl:out value="${presentation.paper.document}" />
+</fieldset>
+<br />
 <br />

@@ -18,6 +18,7 @@ import services.ConferenceService;
 import services.RegistrationService;
 import services.SponsorshipService;
 import domain.Author;
+import domain.Comment;
 import domain.Conference;
 import domain.Registration;
 import domain.Sponsorship;
@@ -108,7 +109,9 @@ public class ConferenceController extends AbstractController {
 		Boolean future = false;
 		Boolean canCreateActivity = false;
 		Boolean haveR = false;
-		final Collection<Registration> registerConference = this.registrationService.findRegistrationsByConferenceId(conferenceId);
+		Collection<Registration> registerConference = registrationService
+				.findRegistrationsByConferenceId(conferenceId);
+		Collection<Comment> comments;
 		final List<Sponsorship> sp = (List<Sponsorship>) this.sponsorshipService.findAll();
 
 		final int numero = (int) (Math.random() * sp.size());
@@ -126,6 +129,7 @@ public class ConferenceController extends AbstractController {
 
 		if (this.conferenceService.findRunningConferences().contains(c))
 			canCreateActivity = true;
+		comments = c.getComments();
 
 		try {
 
@@ -140,6 +144,7 @@ public class ConferenceController extends AbstractController {
 			res.addObject("future", future);
 			res.addObject("haveR", haveR);
 			res.addObject("canCreateActivity", canCreateActivity);
+			res.addObject("comments", comments);
 
 			if (haveR == true)
 				res.addObject("message", "registration.commit.error");
@@ -150,6 +155,7 @@ public class ConferenceController extends AbstractController {
 			res.addObject("future", future);
 			res.addObject("haveR", haveR);
 			res.addObject("canCreateActivity", canCreateActivity);
+			res.addObject("comments", comments);
 		}
 		res.addObject("sponsorshipURL", p.getBanner());
 		return res;

@@ -18,23 +18,27 @@ public class PanelService {
 
 	@Autowired
 	private PanelRepository panelRepository;
-	
+
 	@Autowired
 	private AdministratorService administratorService;
 
 	@Autowired
 	private ConferenceService conferenceService;
-	
+
 	@Autowired
-    private UtilityService utilityService;
-	
+	private UtilityService utilityService;
+
+	@Autowired
+	private ActivityService activityService;
+
 	public Panel create(int conferenceId) {
 		Administrator principal;
 		Conference conference;
-		
+
 		conference = this.conferenceService.findOne(conferenceId);
-		Assert.isTrue(!this.conferenceService.findPastConferences().contains(conference));
-		
+		Assert.isTrue(!this.conferenceService.findPastConferences().contains(
+				conference));
+
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 		Panel res;
@@ -49,6 +53,7 @@ public class PanelService {
 		Panel res;
 
 		Assert.isTrue(!this.utilityService.checkUrls(panel.getAttachments()));
+		Assert.isTrue(this.activityService.checkStartMoment(panel));
 		res = this.panelRepository.save(panel);
 
 		return res;
@@ -72,9 +77,13 @@ public class PanelService {
 
 	public void delete(Panel panel) {
 		Administrator principal;
-		
+
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 		this.panelRepository.delete(panel);
+	}
+
+	public void flush() {
+		this.panelRepository.flush();
 	}
 }

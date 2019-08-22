@@ -57,6 +57,7 @@ public class ActivityController extends AbstractController {
 		res.addObject("tutorials", tutorials);
 		res.addObject("panels", panels);
 		res.addObject("presentations", presentations);
+		res.addObject("conferenceId", conferenceId);
 		res.addObject("conferencePast", conferencePast);
 
 		return res;

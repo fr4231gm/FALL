@@ -86,6 +86,7 @@
 		</tr>
 	</jstl:forEach>
 </table>
+<br/>
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<jstl:if test="${conferencePast eq false }">
