@@ -26,7 +26,6 @@ public class Finder extends DomainEntity {
 	private Date					endDate;
 	private Double					fee;
 	private Collection<Conference>	conferences;
-	private Author					author;
 	private Category				category;
 
 

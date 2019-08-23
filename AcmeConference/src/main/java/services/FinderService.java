@@ -29,9 +29,6 @@ public class FinderService {
 	@Autowired
 	private AuthorService			authorService;
 
-	@Autowired
-	private ConfigurationService	configurationService;
-
 
 	//Simple CRUD'S methods
 

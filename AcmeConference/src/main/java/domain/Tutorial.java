@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-
 @Entity 
 @Access(AccessType.PROPERTY) 
 public class Tutorial extends Activity {

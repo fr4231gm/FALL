@@ -174,4 +174,33 @@ public class SubmissionService {
 		
 		return submissionForm;
 	}
+
+	public Submission reconstruct(final SubmissionForm submissionForm, final BindingResult binding) {
+		
+		final Submission submission = new Submission();
+		
+		if (submissionForm.getId() != 0){
+			
+			submission.setConference(submissionForm.getConference());
+			submission.setAuthor(submissionForm.getAuthor());
+			
+		} 		
+			submission.setId(submissionForm.getId());
+			submission.setVersion(submissionForm.getVersion());
+			submission.setTicker(submissionForm.getTicker());
+			submission.setMoment(submissionForm.getMoment());
+			submission.setStatus(submissionForm.getStatus());
+			submission.setPaper(submissionForm.getPaper());
+		
+		// Validar formulario
+		this.validator.validate(submissionForm, binding);
+				
+		return submission;
+
+	}
+	
+	public Submission findSubmissionByPaperTitle(String title) {
+		return this.submissionRepository.findSubmissionByPaperTitle(title);
+	}
+
 }

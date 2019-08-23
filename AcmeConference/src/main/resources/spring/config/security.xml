@@ -77,7 +77,7 @@
 		<!-- SPONSOR -->
 
 		<security:intercept-url pattern="/sponsor/edit.do" access="hasRole('SPONSOR')" /> 
-		
+		<security:intercept-url pattern="/sponsorship/sponsor/**" access="hasRole('SPONSOR')" /> 
 		<!-- ************************ ALL ************************ -->
 		<security:intercept-url pattern="/" access="permitAll" /> 
 		<security:intercept-url pattern="/activity/**" access="permitAll" />

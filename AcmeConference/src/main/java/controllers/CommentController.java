@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -18,9 +19,6 @@ import services.ConferenceService;
 import domain.Activity;
 import domain.Comment;
 import domain.Conference;
-import domain.Panel;
-import domain.Presentation;
-import domain.Tutorial;
 import forms.CommentForm;
 
 @Controller
@@ -40,12 +38,12 @@ public class CommentController extends AbstractController {
 	public ModelAndView create(@RequestParam int targetId) {
 		ModelAndView res;
 		CommentForm commentForm = new CommentForm();
-		try{
-			Object target = this.commentService.findConferenceOrActivity(targetId);
-			if(target.getClass() == Conference.class){
+		try {
+			Object target = this.commentService
+					.findConferenceOrActivity(targetId);
+			if (target.getClass() == Conference.class) {
 				commentForm.setConference((Conference) target);
-			}
-			else if(target.getClass() == Activity.class){
+			} else {
 				commentForm.setActivity((Activity) target);
 			}
 			res = this.createEditModelAndView(commentForm);
@@ -58,83 +56,76 @@ public class CommentController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid CommentForm commentForm, BindingResult binding) {
+	public ModelAndView save(@Valid CommentForm commentForm,
+			BindingResult binding) {
 		ModelAndView res = null;
 		Comment saved;
 		Comment comment = this.commentService.reconstruct(commentForm, binding);
-		
+
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(commentForm);
 		} else {
 			try {
 				saved = this.commentService.save(comment);
-				
-				if(commentForm.getConference() != null){
-					this.conferenceService.addCommentToConference(commentForm.getConference(), saved);
-					res = new ModelAndView("redirect:/conference/display.do?conferenceId=" + commentForm.getConference().getId());
+
+				if (commentForm.getConference() != null) {
+					this.conferenceService.addCommentToConference(
+							commentForm.getConference(), saved);
+					res = new ModelAndView(
+							"redirect:/conference/display.do?conferenceId="
+									+ commentForm.getConference().getId());
 				} else {
 					Activity activity = commentForm.getActivity();
 					this.activityService.addCommentToActivity(activity, saved);
-					if(activity instanceof Panel){
-						res = new ModelAndView("redirect:/panel/display.do?panelId=" + commentForm.getConference().getId());
-					}
-					if(activity instanceof Tutorial){
-						res = new ModelAndView("redirect:/tutorial/display.do?tutorialId=" + commentForm.getConference().getId());
-					}
-					if(activity instanceof Presentation){
-						res = new ModelAndView("redirect:/presentation/display.do?presentationId=" + commentForm.getConference().getId());
-					}
-					
+					res = new ModelAndView(
+							"redirect:/comment/list.do?targetId="
+									+ commentForm.getActivity().getId());
+
 				}
 
 			} catch (Throwable oops) {
-				res = this.createEditModelAndView(commentForm, "comment.commit.error");
+				res = this.createEditModelAndView(commentForm,
+						"comment.commit.error");
 			}
 		}
 
 		return res;
 	}
 
-	@RequestMapping(value = "/listByConference", method = RequestMethod.GET)
-	public ModelAndView listByConference(@RequestParam int conferenceId) {
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int targetId) {
 		ModelAndView res;
+		Collection<Comment> comments = new ArrayList<Comment>();
 		Conference conference;
-		Collection<Comment> comments;
-
-		conference = this.conferenceService.findOne(conferenceId);
-		comments = conference.getComments();
-
-		res = new ModelAndView("comment/list");
-		res.addObject("comments", comments);
-
-		return res;
-	}
-	
-	@RequestMapping(value = "/listByActivity", method = RequestMethod.GET)
-	public ModelAndView listByActivity(@RequestParam int activityId) {
-		ModelAndView res;
 		Activity activity;
-		Collection<Comment> comments;
+		Object target = this.commentService.findConferenceOrActivity(targetId);
 
-		activity = this.activityService.findOne(activityId);
-		comments = activity.getComments();
+		if (target.getClass() == Conference.class) {
+			conference = this.conferenceService.findOne(targetId);
+			comments = conference.getComments();
+		} else {
+			activity = this.activityService.findOne(targetId);
+			comments = activity.getComments();
+		}
 
 		res = new ModelAndView("comment/list");
 		res.addObject("comments", comments);
+		res.addObject("target", target);
 
 		return res;
-	}
 
+	}
 	// Ancilliary methods
 	// --------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final CommentForm commentForm) {
-		final ModelAndView result = this.createEditModelAndView(commentForm, null);
+		final ModelAndView result = this.createEditModelAndView(commentForm,
+				null);
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final CommentForm commentForm,
-			final String messagecode) {
+	protected ModelAndView createEditModelAndView(
+			final CommentForm commentForm, final String messagecode) {
 		final ModelAndView result;
 
 		result = new ModelAndView("comment/create");

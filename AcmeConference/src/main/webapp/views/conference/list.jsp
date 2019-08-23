@@ -39,13 +39,12 @@
 	<display:column>
 		<acme:link link="conference/display.do?conferenceId=${row.id}" code="conference.display" /> 
 	</display:column>
-	
-	<display:column>
-		<acme:link link="comment/create.do?targetId=${row.id}" code="conference.create.comment" />
-	</display:column>
 
 	<display:column>
-		<acme:link link="comment/listByConference.do?conferenceId=${row.id}" code="conference.comments" />
+
+		<acme:link link="comment/list.do?targetId=${row.id}"
+			code="conference.comments" />
+
 	</display:column>
 
 	<security:authorize access="hasRole('AUTHOR')">
@@ -55,12 +54,13 @@
 			</jstl:if>
 		</display:column>
 	</security:authorize>
-	
+
 	<security:authorize access="hasRole('ADMINISTRATOR')">
-	
+
 		<display:column>
 			<jstl:if test="${row.isDraft eq 'true'}">
-				<acme:link code="conference.edit" link="conference/administrator/edit.do?conferenceId=${row.id}"/>
+				<acme:link code="conference.edit"
+					link="conference/administrator/edit.do?conferenceId=${row.id}" />
 			</jstl:if>
 		</display:column>
 	</security:authorize>
@@ -72,10 +72,13 @@
 
 </display:table>
 
-<br>
+<br />
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
-<acme:link code="conference.create" link="conference/administrator/create.do"/>
+	<acme:link code="conference.create"
+		link="conference/administrator/create.do" />
 </security:authorize>
 
+<br />
+<br />
 <acme:back code="conference.goback" />

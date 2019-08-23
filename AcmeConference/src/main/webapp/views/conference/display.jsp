@@ -8,21 +8,34 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
+<acme:image src="${sponsorshipURL}"/>
 <acme:input code="conference.title" path="conference.title" readonly="true" />
 <acme:input code="conference.acronym" path="conference.acronym" readonly="true" />
 <acme:input code="conference.venue" path="conference.venue" readonly="true" />
-<acme:input code="conference.submissionDeadline" path="conference.submissionDeadline" readonly="true" />
 <acme:input code="conference.notificationDeadline" path="conference.notificationDeadline" readonly="true" />
+<acme:input code="conference.submissionDeadline" path="conference.submissionDeadline" readonly="true" />
 <acme:input code="conference.cameraReadyDeadline" path="conference.cameraReadyDeadline" readonly="true" />
 <acme:input code="conference.startDate" path="conference.startDate" readonly="true" />
-<acme:input code="conference.endDate" path="conference.endDate" readonly="true" />
 <acme:textarea code="conference.summary" path="conference.summary" readonly="true" />
+<acme:input code="conference.endDate" path="conference.endDate" readonly="true" />
 <acme:input code="conference.fee" path="conference.fee" readonly="true" />
 
-<jstl:if test="${future eq 'true' and haveR eq 'false'}">
-	<security:authorize access="hasRole('AUTHOR')">
-		<acme:link link="registration/author/register.do?conferenceId=${conference.id}" code="conference.registration" />
-	</security:authorize>
+<acme:link link="comment/list.do?targetId=${conference.id}"
+	code="comments" />
+
+<br />
+
+<jstl:if test="${future eq 'true'}">
+	<jstl:if test="${haveR eq 'false'}">
+		<security:authorize access="hasRole('AUTHOR')">
+
+
+			<acme:link
+				link="registration/author/register.do?conferenceId=${conference.id}"
+				code="conference.registration" />
+
+		</security:authorize>
+	</jstl:if>
 </jstl:if>
 
 <jstl:if test="${canCreateActivity eq true}">
