@@ -35,13 +35,12 @@ public class SectionService {
 
 		Administrator principal;
 		Tutorial tutorial;
-		Collection<Section> sections;
 
 		tutorial = this.tutorialService.findOne(tutorialId);
+		System.out.print(tutorialId);
+		System.out.println(tutorial.getId());
 		Assert.isTrue(!this.conferenceService.findPastConferences().contains(
 				tutorial.getConference()));
-
-		sections = tutorial.getSections();
 
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
@@ -49,8 +48,6 @@ public class SectionService {
 		Section res;
 
 		res = new Section();
-		sections.add(res);
-		tutorial.setSections(sections);
 
 		return res;
 	}
@@ -61,6 +58,24 @@ public class SectionService {
 
 		Assert.isTrue(!this.utilityService.checkUrls(section.getPictures()));
 		res = this.sectionRepository.save(section);
+
+		return res;
+	}
+
+	public Section saveCreate(Section section, int id) {
+		Section res;
+		Collection<Section> sections;
+
+		Tutorial tutorial = this.tutorialService.findOne(id);
+		sections = tutorial.getSections();
+
+		res = this.sectionRepository.save(section);
+
+		if (section.getId() == 0) {
+			sections.add(res);
+			tutorial.setSections(sections);
+			this.tutorialService.save(tutorial);
+		}
 
 		return res;
 	}

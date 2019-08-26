@@ -60,7 +60,7 @@ public class TutorialController extends AbstractController {
 		return res;
 	}
 
-	/*@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save2(@Valid Tutorial tutorial, BindingResult binding) {
 		ModelAndView res;
 		boolean conferencePast = false;
@@ -101,7 +101,7 @@ public class TutorialController extends AbstractController {
 		}
 
 		return res;
-	}*/
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Tutorial tutorial, BindingResult binding) {

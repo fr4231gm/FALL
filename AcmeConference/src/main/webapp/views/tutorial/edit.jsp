@@ -21,7 +21,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<form:form action="tutorial/edit.do" modelAttribute="tutorial">
+<form:form action="${actionURI }" modelAttribute="tutorial">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
