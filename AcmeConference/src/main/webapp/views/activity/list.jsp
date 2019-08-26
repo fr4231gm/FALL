@@ -27,14 +27,14 @@
 
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="true" />
-		
+
 	<display:column>
 
 		<acme:link link="comment/list.do?targetId=${row.id}"
 			code="activity.comments" />
 
 	</display:column>
-	
+
 	<display:column>
 
 		<acme:link link="tutorial/display.do?tutorialId=${row.id}"
@@ -42,9 +42,10 @@
 
 	</display:column>
 
-	<security:authorize access="hasRole('ADMINISTRATOR')">
 
+	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<jstl:if test="${conferencePast eq false}">
+
 			<display:column>
 
 				<acme:link link="tutorial/edit.do?tutorialId=${row.id}"
@@ -144,7 +145,7 @@
 
 	<display:column property="paper.title" titleKey="activity.paper"
 		sortable="true" />
-		
+
 	<display:column>
 
 		<acme:link link="comment/list.do?targetId=${row.id}"
@@ -177,8 +178,7 @@
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<jstl:if test="${conferencePast eq false}">
-		<acme:link
-			link="presentation/create.do?conferenceId=${conferenceId}"
+		<acme:link link="presentation/create.do?conferenceId=${conferenceId}"
 			code="presentation.create" />
 	</jstl:if>
 </security:authorize>

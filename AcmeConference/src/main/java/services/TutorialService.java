@@ -55,7 +55,7 @@ public class TutorialService {
 
 	public Tutorial save(Tutorial tutorial) {
 		Tutorial res;
-
+		
 		Assert.isTrue(!this.utilityService.checkUrls(tutorial.getAttachments()));
 		Assert.isTrue(this.activityService.checkStartMoment(tutorial));
 		res = this.tutorialRepository.save(tutorial);

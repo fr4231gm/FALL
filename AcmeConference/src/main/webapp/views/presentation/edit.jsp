@@ -40,10 +40,10 @@
 	<br />
 
 	<p>
-		<spring:message code="presentation.paper.startMoment" />
+		<spring:message code="activity.message.startMoment" />
 		<fmt:formatDate value="${presentationForm.conference.startDate}"
 			pattern="dd/MM/yyyy HH:mm" />
-		<spring:message code="presentation.paper.endMoment" />
+		<spring:message code="activity.message.endMoment" />
 		<fmt:formatDate value="${presentationForm.conference.endDate}"
 			pattern="dd/MM/yyyy HH:mm" />
 	</p>

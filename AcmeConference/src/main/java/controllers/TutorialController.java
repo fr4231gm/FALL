@@ -130,8 +130,7 @@ public class TutorialController extends AbstractController {
 			try {
 				saved = this.tutorialService.save(tutorial);
 				res = new ModelAndView(
-						"redirect:/tutorial/display.do?tutorialId="
-								+ saved.getId());
+						"tutorial/display");
 				res.addObject("tutorial", saved);
 				res.addObject("schedule",
 						this.activityService.getSchedule(saved));
