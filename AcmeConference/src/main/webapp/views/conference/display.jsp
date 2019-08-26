@@ -20,6 +20,9 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
+<acme:image src="${sponsorshipURL}"/>
+
+
 <acme:input code="conference.title" path="conference.title"
 	readonly="true" />
 <br />
