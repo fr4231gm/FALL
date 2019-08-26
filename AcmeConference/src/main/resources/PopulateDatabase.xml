@@ -1736,7 +1736,6 @@
 		<property name="qualityScore" value="5" />
 		<property name="readabilityScore" value="6" />
 		<property name="comments" value="Está ok" />
-		<property name="notified" value="true" />
 		<property name="reviewer" ref="reviewer1" />
 		<property name="submission" ref="submission1" />
 	</bean>
@@ -1747,7 +1746,6 @@
 		<property name="qualityScore" value="4" />
 		<property name="readabilityScore" value="6" />
 		<property name="comments" value="Pasadito, no es ninguna lumbrera" />
-		<property name="notified" value="false" />
 		<property name="reviewer" ref="reviewer1" />
 		<property name="submission" ref="submission3" />
 	</bean>
@@ -1758,7 +1756,6 @@
 		<property name="qualityScore" value="1" />
 		<property name="readabilityScore" value="1" />
 		<property name="comments" value="Muy lejos del mínimo" />
-		<property name="notified" value="false" />
 		<property name="reviewer" ref="reviewer2" />
 		<property name="submission" ref="submission1" />
 	</bean>
@@ -1769,7 +1766,6 @@
 		<property name="qualityScore" value="9" />
 		<property name="readabilityScore" value="8" />
 		<property name="comments" value="Muy bueno" />
-		<property name="notified" value="false" />
 		<property name="reviewer" ref="reviewer4" />
 		<property name="submission" ref="submission5" />
 	</bean>
@@ -1780,7 +1776,6 @@
 		<property name="qualityScore" value="5" />
 		<property name="readabilityScore" value="4" />
 		<property name="comments" value="Está ahí ahí" />
-		<property name="notified" value="false" />
 		<property name="reviewer" ref="reviewer5" />
 		<property name="submission" ref="submission6" />
 	</bean>
@@ -1791,7 +1786,6 @@
 		<property name="qualityScore" value="10" />
 		<property name="readabilityScore" value="10" />
 		<property name="comments" value="Perfecto" />
-		<property name="notified" value="false" />
 		<property name="reviewer" ref="reviewer4" />
 		<property name="submission" ref="submission7" />
 	</bean>
@@ -1802,7 +1796,6 @@
 		<property name="qualityScore" value="10" />
 		<property name="readabilityScore" value="10" />
 		<property name="comments" value="Perfecto" />
-		<property name="notified" value="false" />
 		<property name="reviewer" ref="reviewer4" />
 		<property name="submission" ref="submission11" />
 	</bean>
@@ -2135,7 +2128,7 @@
 	<bean id="submission1" class="domain.Submission">
 		<property name="ticker" value="LMJ-1234" />
 		<property name="moment" value="03/01/2019" />
-
+		<property name="notified" value="false" />
 		<property name="status" value="ACCEPTED" />
 		<property name="paper" ref="paper1" />
 		<property name="Conference" ref="conference8" />
@@ -2145,7 +2138,7 @@
 	<bean id="submission2" class="domain.Submission">
 		<property name="ticker" value="DAM-7532" />
 		<property name="moment" value="03/02/2019" />
-
+		<property name="notified" value="false" />
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="paper" ref="paper2" />
 		<property name="Conference" ref="conference2" />
@@ -2155,6 +2148,7 @@
 	<bean id="submission3" class="domain.Submission">
 		<property name="ticker" value="DAM-8523" />
 		<property name="moment" value="03/03/2019" />
+		<property name="notified" value="false" />
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="paper" ref="paper3" />
 		<property name="Conference" ref="conference1" />
@@ -2165,6 +2159,7 @@
 		<property name="ticker" value="RXP-7456" />
 		<property name="moment" value="03/04/2019" />
 		<property name="status" value="UNDER-REVIEW" />
+		<property name="notified" value="false" />
 		<property name="paper" ref="paper4" />
 		<property name="Conference" ref="conference4" />
 		<property name="Author" ref="author4" />
@@ -2173,6 +2168,7 @@
 	<bean id="submission5" class="domain.Submission">
 		<property name="ticker" value="JMA-1235" />
 		<property name="moment" value="03/05/2019" />
+		<property name="notified" value="false" />
 		<property name="status" value="ACCEPTED" />
 		<property name="paper" ref="paper5" />
 		<property name="Conference" ref="conference5" />
@@ -2182,6 +2178,7 @@
 	<bean id="submission6" class="domain.Submission">
 		<property name="ticker" value="DAM-7319" />
 		<property name="moment" value="03/06/2019" />
+		<property name="notified" value="false" />
 		<property name="status" value="REJECTED" />
 		<property name="paper" ref="paper6" />
 		<property name="Conference" ref="conference6" />
@@ -2191,6 +2188,7 @@
 	<bean id="submission7" class="domain.Submission">
 		<property name="ticker" value="RXP-0258" />
 		<property name="moment" value="03/07/2019" />
+		<property name="notified" value="false" />
 		<property name="status" value="ACCEPTED" />
 		<property name="paper" ref="paper7" />
 		<property name="Conference" ref="conference1" />
@@ -2200,6 +2198,7 @@
 	<bean id="submission8" class="domain.Submission">
 		<property name="ticker" value="JMA-9614" />
 		<property name="moment" value="03/08/2019" />
+		<property name="notified" value="false" />
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="paper" ref="paper8" />
 		<property name="Conference" ref="conference1" />
@@ -2210,6 +2209,7 @@
 		<property name="ticker" value="RXP-0134" />
 		<property name="moment" value="03/09/2019" />
 		<property name="status" value="UNDER-REVIEW" />
+		<property name="notified" value="false" />
 		<property name="paper" ref="paper9" />
 		<property name="Conference" ref="conference9" />
 		<property name="Author" ref="author4" />
@@ -2219,6 +2219,7 @@
 		<property name="ticker" value="JMA-7610" />
 		<property name="moment" value="03/10/2019" />
 		<property name="status" value="ACCEPTED" />
+		<property name="notified" value="false" />
 		<property name="paper" ref="paper10" />
 		<property name="Conference" ref="conference9" />
 		<property name="Author" ref="author2" />
@@ -2228,6 +2229,7 @@
 		<property name="ticker" value="JPO-7610" />
 		<property name="moment" value="04/10/2019" />
 		<property name="status" value="UNDER-REVIEW" />
+		<property name="notified" value="false" />
 		<property name="paper" ref="paper11" />
 		<property name="Conference" ref="conference10" />
 		<property name="Author" ref="author2" />

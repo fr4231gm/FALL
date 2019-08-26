@@ -82,12 +82,12 @@ public class SubmissionAdministratorController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/decide", method = RequestMethod.GET)
-	public ModelAndView decide(@Valid final Submission submission,
-			final BindingResult binding) {
+	public ModelAndView decide(@RequestParam final int submissionId) {
 		ModelAndView res;		
 		
 		try {
-			this.submissionService.decide(submission);
+			Submission toDecide = this.submissionService.findOne(submissionId);
+			this.submissionService.decide(toDecide);
 			res = new ModelAndView("redirect:list.do");
 		}
 		catch (final Throwable oops) {
@@ -98,7 +98,7 @@ public class SubmissionAdministratorController extends AbstractController {
 		return res;
 	}
 
-	// Display
+	// List
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -115,7 +115,7 @@ public class SubmissionAdministratorController extends AbstractController {
 		return result;
 	}
 
-	// Show
+	// Display
 	@RequestMapping(value = "/display", method = RequestMethod.GET, params = { "submissionId" })
 	public ModelAndView display(@RequestParam final int submissionId) {
 		ModelAndView res;

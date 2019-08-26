@@ -42,8 +42,7 @@ public class SubmissionService {
 	
 	@Autowired
 	private ReportService reportService;
-
-
+	
 	public Collection<Submission> findByAuthor() {
 		final Author a = this.authorService.findByPrincipal();
 		Assert.notNull(a);
@@ -115,7 +114,8 @@ public class SubmissionService {
 	}
 	
 	public Submission decide(final Submission submission){
-		
+		Actor principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
 		Assert.notNull(submission);
 		int borderLine = 0, rejected = 0, accepted = 0;
 		Collection<Report> reports = this.reportService.findReportsByConferenceId(submission.getConference().getId());
@@ -175,30 +175,6 @@ public class SubmissionService {
 		return submissionForm;
 	}
 
-	public Submission reconstruct(final SubmissionForm submissionForm, final BindingResult binding) {
-		
-		final Submission submission = new Submission();
-		
-		if (submissionForm.getId() != 0){
-			
-			submission.setConference(submissionForm.getConference());
-			submission.setAuthor(submissionForm.getAuthor());
-			
-		} 		
-			submission.setId(submissionForm.getId());
-			submission.setVersion(submissionForm.getVersion());
-			submission.setTicker(submissionForm.getTicker());
-			submission.setMoment(submissionForm.getMoment());
-			submission.setStatus(submissionForm.getStatus());
-			submission.setPaper(submissionForm.getPaper());
-		
-		// Validar formulario
-		this.validator.validate(submissionForm, binding);
-				
-		return submission;
-
-	}
-	
 	public Submission findSubmissionByPaperTitle(String title) {
 		return this.submissionRepository.findSubmissionByPaperTitle(title);
 	}

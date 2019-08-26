@@ -58,10 +58,10 @@
 </jstl:if>
 
 </fieldset>
-
 <jstl:if test="${decide eq 'true'}">
-			<acme:link link="submission/administrator/decide.do?"
-					code="submission.decide" />
+			
+<h3><acme:link link="submission/administrator/decide.do?submissionId=${submission.id}"
+					code="submission.decide" /></h3>
 </jstl:if>
 <br />		
 <br />		
