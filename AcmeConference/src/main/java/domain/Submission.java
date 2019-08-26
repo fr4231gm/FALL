@@ -8,7 +8,6 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -61,7 +60,7 @@ public class Submission extends DomainEntity {
 		return this.paper;
 	}
 
-	@OneToOne
+	@ManyToOne
 	public Conference getConference() {
 		return this.conference;
 	}
