@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -114,7 +115,7 @@ public class Conference extends DomainEntity {
 		return this.category;
 	}
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	public Collection<Comment> getComments() {
 		return this.comments;
 	}

@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AuthorService;
 import services.ConfigurationService;
 import services.RegistrationService;
-
 import controllers.AbstractController;
 import domain.Author;
 import domain.Registration;

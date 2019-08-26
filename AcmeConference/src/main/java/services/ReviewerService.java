@@ -189,4 +189,8 @@ public class ReviewerService {
 		return reviewer;
 	}
 
+	public void updateSubmissions(Reviewer r) {
+		this.reviewerRepository.save(r);
+	}
+
 }

@@ -36,4 +36,9 @@
 		<put-attribute name="body" value="/views/conference/list.jsp" />
 	</definition>
 	
+	<definition name="conference/listbyfivedays" extends="master.page">	
+		<put-attribute name="title" value="Lista de conferencias de los próximos 5 dias" />
+		<put-attribute name="body" value="/views/conference/listbyfivedays.jsp" />
+	</definition>
+	
 </tiles-definitions>

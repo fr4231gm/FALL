@@ -8,15 +8,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ConferenceService;
 import services.ReviewerService;
 import services.SubmissionService;
-
 import controllers.AbstractController;
 import domain.Reviewer;
 import domain.Submission;
@@ -32,61 +31,70 @@ public class SubmissionAdministratorController extends AbstractController {
 	
 	@Autowired
 	private ReviewerService reviewerService;
+	
+	@Autowired
+	private ConferenceService conferenceService;
 
-	// Create
+	// Other Methods
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int submissionId) {
+	public ModelAndView assign(@RequestParam final int submissionId) {
 		ModelAndView res;
-		Submission submission;		
 		SubmissionForm submissionForm = new SubmissionForm();
-		
-		submission = this.submissionService.findOne(submissionId);	
-
+		submissionForm.setSubmission(this.submissionService.findOne(submissionId));
 		res = new ModelAndView("submission/assign");
-		res.addObject("submission", submission);
-		
 		res = this.createEditModelAndView(submissionForm);
 		
 		return res;
 	}
 
 	@RequestMapping(value = "/assign", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid @ModelAttribute("submissionForm") final SubmissionForm submissionForm,
-			final BindingResult binding) {
+	public ModelAndView assignPost(@Valid final SubmissionForm submissionForm, final BindingResult binding) {
 		ModelAndView res;
-		
-		if (binding.hasErrors())
-			res = this.createEditModelAndView(submissionForm);
-		else
-			try {
-
-				this.submissionService.saveAssign(submissionForm);
-				res = new ModelAndView("redirect:list.do");
+		try {
+			if(binding.hasErrors()){
+				res = this.createEditModelAndView(submissionForm);
+			} else {
+				this.submissionService.setRev(submissionForm.getSubmission(), submissionForm.getReviewers());
+				res = new ModelAndView("redirect:/submission/administrator/list.do");
 			}
 
-			catch (final Throwable oops) {
-				res = this.createEditModelAndView(submissionForm, "submission.commit.error");
-			}
+		} catch (final Throwable oops) {
+			res = this.createEditModelAndView(submissionForm, "submission.commit.error");
+		}
 		return res;
 	}
 	
 	@RequestMapping(value = "/autoassign", method = RequestMethod.GET)
-	public ModelAndView autoassign(@Valid final SubmissionForm submissionForm,
-			final BindingResult binding) {
+	public ModelAndView autoassign(final int submissionId) {
 		ModelAndView res;
+		Collection<Reviewer> reviewers;
 		
-		if (binding.hasErrors())
-			res = this.createEditModelAndView(submissionForm);
-		else
-			try {
-
-				this.submissionService.saveAutoassign(submissionForm);
-				res = new ModelAndView("redirect:list.do");
-			}
-
-			catch (final Throwable oops) {
-				res = this.createEditModelAndView(submissionForm, "submission.commit.error");
-			}
+		try {
+			reviewers = this.conferenceService.getCompatibleReviewers(this.submissionService.findOne(submissionId).getConference());
+			this.submissionService.setRev(this.submissionService.findOne(submissionId), reviewers);
+			res = new ModelAndView("redirect:/submission/administrator/list.do");
+		}
+		catch (final Throwable oops) {
+			res = new ModelAndView("redirect:/submission/administrator/list.do");
+			res.addObject("message", "submission.commit.error");
+		}
+		return res;
+	}
+	
+	@RequestMapping(value = "/decide", method = RequestMethod.GET)
+	public ModelAndView decide(@RequestParam final int submissionId) {
+		ModelAndView res;		
+		
+		try {
+			Submission toDecide = this.submissionService.findOne(submissionId);
+			this.submissionService.decide(toDecide);
+			res = new ModelAndView("redirect:list.do");
+		}
+		catch (final Throwable oops) {
+			res = new ModelAndView("redirect:list.do");
+			res.addObject("message", "submission.commit.error");
+		}
+		
 		return res;
 	}
 
@@ -95,7 +103,7 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Submission> subs;
-
+		
 		subs = this.submissionService.findAll();
 
 		result = new ModelAndView("submission/list");
@@ -107,10 +115,16 @@ public class SubmissionAdministratorController extends AbstractController {
 		return result;
 	}
 
-	// Show
+	// Display
 	@RequestMapping(value = "/display", method = RequestMethod.GET, params = { "submissionId" })
 	public ModelAndView display(@RequestParam final int submissionId) {
 		ModelAndView res;
+		Boolean decide = false;
+		Date actual = new Date(System.currentTimeMillis());
+		
+		if(this.submissionService.findOne(submissionId).getConference().getSubmissionDeadline().before(actual)){
+			decide = true;
+		}
 
 		// Initialize variables
 		Submission s;
@@ -118,28 +132,12 @@ public class SubmissionAdministratorController extends AbstractController {
 
 		res = new ModelAndView("submission/display");
 		res.addObject("submission", s);
+		res.addObject("decide", decide);
 
 		return res;
 	}
 
 	// Ancillary metods
-	protected ModelAndView createEditModelAndView(final Submission s) {
-		ModelAndView result;
-		result = this.createEditModelAndView(s, null);
-		return result;
-	}
-
-	protected ModelAndView createEditModelAndView(final Submission s,
-			final String messageCode) {
-		ModelAndView result;
-
-		result = new ModelAndView("submission/edit");
-		result.addObject("submission", s);
-		result.addObject("message", messageCode);
-
-		return result;
-	}
-	
 	protected ModelAndView createEditModelAndView(final SubmissionForm submissionForm) {
 		final ModelAndView result = this.createEditModelAndView(submissionForm, null);
 		return result;

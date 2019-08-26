@@ -17,23 +17,23 @@
 <tiles-definitions>
 
 	<definition name="submission/list" extends="master.page">	
-		<put-attribute name="title" value="Presentaciones" />
+		<put-attribute name="title" value="Solicitudes" />
 		<put-attribute name="body" value="/views/submission/list.jsp" />
 	</definition>
 	
 	<definition name="submission/display" extends="master.page">	
-		<put-attribute name="title" value="Ver presentacion" />
+		<put-attribute name="title" value="Ver solicitud" />
 		<put-attribute name="body" value="/views/submission/display.jsp" />
 	</definition>
 	
 	
 	<definition name="submission/edit" extends="master.page">	
-		<put-attribute name="title" value="Presentación" />
+		<put-attribute name="title" value="Solicitudes" />
 		<put-attribute name="body" value="/views/submission/edit.jsp" />
 	</definition>
 	
 	<definition name="submission/assign" extends="master.page">	
-		<put-attribute name="title" value="Asignar presentación" />
+		<put-attribute name="title" value="Asignar solicitud" />
 		<put-attribute name="body" value="/views/submission/assign.jsp" />
 	</definition>
 	
