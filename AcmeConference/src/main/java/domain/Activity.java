@@ -7,8 +7,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -55,6 +55,7 @@ public class Activity extends DomainEntity {
 	}
 
 	@Range(min = 0)
+	@NotNull
 	public Integer getDuration() {
 		return this.duration;
 	}
@@ -82,7 +83,7 @@ public class Activity extends DomainEntity {
 		return this.comments;
 	}
 
-	@OneToOne
+	@ManyToOne
 	public Conference getConference() {
 		return this.conference;
 	}
