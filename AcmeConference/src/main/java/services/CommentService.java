@@ -19,19 +19,15 @@ public class CommentService {
 	// Managed repository -----------------------------------------------------
 	@Autowired
 	private CommentRepository commentRepository;
-	
 
 	// Supporting services ----------------------------------------------------
 
-	// @Autowired
-	// private ActorService actorService;
+	@Autowired
+	private ConferenceService conferenceService;
 
-	 @Autowired
-	 private ConferenceService conferenceService;
-	
-	 @Autowired
-	 private ActivityService activityService;
-	
+	@Autowired
+	private ActivityService activityService;
+
 	// Constructors ------------------------------------
 
 	public CommentService() {
@@ -41,7 +37,7 @@ public class CommentService {
 	// Simple CRUDs methods ---------------------------------------------------
 	public Comment save(Comment comment) {
 		Comment res;
-		comment.setMoment(new Date(System.currentTimeMillis()-1));
+		comment.setMoment(new Date(System.currentTimeMillis() - 1));
 		res = this.commentRepository.save(comment);
 
 		return res;
@@ -62,31 +58,38 @@ public class CommentService {
 		return result;
 
 	}
-	
-	public Comment reconstruct(CommentForm commentForm,  final BindingResult binding){
+
+	public Comment reconstruct(CommentForm commentForm,
+			final BindingResult binding) {
 		Comment res = new Comment();
-		
+
 		res.setId(commentForm.getId());
 		res.setVersion(commentForm.getVersion());
-		
+
 		res.setAuthor(commentForm.getAuthor());
 		res.setText(commentForm.getText());
 		res.setTitle(commentForm.getTitle());
-		
-		if((commentForm.getConference() != null && commentForm.getActivity() != null) || (commentForm.getConference() == null && commentForm.getActivity() == null)){
+
+		if ((commentForm.getConference() != null && commentForm.getActivity() != null)
+				|| (commentForm.getConference() == null && commentForm
+						.getActivity() == null)) {
 			binding.rejectValue("title", "comment.duplicated.target");
 		}
 		return res;
 	}
-	
-	public Object findConferenceOrActivity(int objectId){
+
+	public Object findConferenceOrActivity(int objectId) {
 		Object res;
-		 res = this.conferenceService.findOne(objectId);
-		 if (res == null){
-			 res = this.activityService.findOne(objectId);
-		 }
+		res = this.conferenceService.findOne(objectId);
+		if (res == null) {
+			res = this.activityService.findOne(objectId);
+		}
 		return res;
 
+	}
+
+	public void flush() {
+		this.commentRepository.flush();
 	}
 
 }

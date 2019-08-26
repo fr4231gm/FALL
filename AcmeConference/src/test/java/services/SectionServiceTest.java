@@ -1,8 +1,5 @@
 package services;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -115,9 +112,9 @@ public class SectionServiceTest extends AbstractTest {
 			section = this.sectionService.findOne(sectionId);
 			this.sectionService.delete(section);
 
-			Assert.isTrue(this.sectionService.findOne(sectionId) == null);
-
 			this.sectionService.flush();
+			
+			Assert.isTrue(this.sectionService.findOne(sectionId) == null);
 
 			super.unauthenticate();
 		} catch (final Throwable oops) {

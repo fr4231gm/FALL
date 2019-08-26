@@ -67,7 +67,7 @@ public class SubmissionService {
 		return s;
 	}
 
-	public Submission create(final Integer conferenceId) {
+	public Submission create(int conferenceId) {
 		final Submission s = new Submission();
 		s.setAuthor(this.authorService.findByPrincipal());
 		s.setConference(this.conferenceService.findOne(conferenceId));
