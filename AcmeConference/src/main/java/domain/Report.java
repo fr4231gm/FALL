@@ -20,7 +20,6 @@ public class Report extends DomainEntity {
 	private Double					qualityScore;
 	private Double					readabilityScore;
 	private String					comments;
-	private Boolean					notified;
 	private Reviewer				reviewer;
 	private Submission				submission;
 
@@ -55,11 +54,6 @@ public class Report extends DomainEntity {
 		return this.comments;
 	}
 
-	@NotNull
-	public Boolean getNotified(){
-		return this.notified;
-	}
-
 	@ManyToOne
 	public Reviewer getReviewer(){
 		return this.reviewer;
@@ -69,8 +63,6 @@ public class Report extends DomainEntity {
 	public Submission getSubmission(){
 		return this.submission;
 	}
-
-
 
 	// Setters
 	public void setDecision(final String decision){
@@ -91,10 +83,6 @@ public class Report extends DomainEntity {
 
 	public void setComments(final String comments){
 		this.comments = comments; 
-	}
-
-	public void setNotified(final Boolean notified){
-		this.notified = notified; 
 	}
 
 	public void setReviewer(final Reviewer reviewer){

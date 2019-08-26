@@ -101,6 +101,28 @@ public class ConferenceAdministratorController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/listbyfivedays", method = RequestMethod.GET)
+	public ModelAndView listByfFive() {
+		ModelAndView result;
+		Collection<Conference> futureConferences, runningConferences, pastConferences, notificationElpasedConferences;
+
+		futureConferences 				= this.conferenceService.findFutureConferences();
+		runningConferences 				= this.conferenceService.findCameraReadyElapsed();
+		pastConferences 				= this.conferenceService.findDeadlineElapsed();
+		notificationElpasedConferences 	= this.conferenceService.findNotificationElapsed();
+		result 							= new ModelAndView("conference/listbyfivedays");
+
+		result.addObject("futureConferences", 				futureConferences);
+		result.addObject("runningConferences", 				runningConferences);
+		result.addObject("pastConferences", 				pastConferences);
+		result.addObject("notificationElpasedConferences", 	notificationElpasedConferences);
+		result.addObject("requestURI", 						"conference/administrator/listbyfivedays.do");
+
+		return result;
+	}
+	
+	
 
 	@RequestMapping(value = "/listAllConferences", method = RequestMethod.GET)
 	public ModelAndView listAllConferences() {

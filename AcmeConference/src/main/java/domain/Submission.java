@@ -29,6 +29,7 @@ public class Submission extends DomainEntity {
 	private Date		moment;
 	private String		status;
 	private Paper		paper;
+	private Boolean		notified;
 	private Conference	conference;
 	private Author		author;
 
@@ -60,14 +61,19 @@ public class Submission extends DomainEntity {
 		return this.paper;
 	}
 
-	// Setters
-	public void setPaper(final Paper p) {
-		this.paper = p;
-	}
-
 	@OneToOne
 	public Conference getConference() {
 		return this.conference;
+	}
+	
+	@NotNull
+	public Boolean getNotified(){
+		return this.notified;
+	}
+	
+	@ManyToOne
+	public Author getAuthor() {
+		return this.author;
 	}
 
 	// Setters
@@ -90,10 +96,12 @@ public class Submission extends DomainEntity {
 	public void setAuthor(final Author author) {
 		this.author = author;
 	}
-
-	@ManyToOne
-	public Author getAuthor() {
-		return this.author;
+	
+	public void setPaper(final Paper p) {
+		this.paper = p;
 	}
 
+	public void setNotified(final Boolean notified){
+		this.notified = notified; 
+	}
 }

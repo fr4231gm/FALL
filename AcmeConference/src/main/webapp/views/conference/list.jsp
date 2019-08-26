@@ -23,30 +23,21 @@
 <display:table name="conferences" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
-	<display:column property="title" titleKey="conference.title"
-		sortable="true" />
-
-	<display:column property="acronym" titleKey="conference.acronym"
-		sortable="true" />
-
-	<display:column property="startDate" titleKey="conference.startDate"
-		sortable="true" format="{0, date, dd/MM/yyyy HH:mm}" />
-
-	<display:column property="endDate" titleKey="conference.endDate"
-		sortable="true" format="{0, date, dd/MM/yyyy HH:mm}" />
-
-	<security:authorize access="isAuthenticated()">
-
-		<display:column property="category.name"
-			titleKey="conference.category" sortable="true" />
-
-	</security:authorize>
+	<display:column property="title" titleKey="conference.title" sortable="true" />
+	<display:column property="acronym" titleKey="conference.acronym" sortable="true" />
+	<display:column property="startDate" titleKey="conference.startDate" sortable="true" format="{0, date, dd/MM/yyyy HH:mm}" />
+	<display:column property="endDate" titleKey="conference.endDate" sortable="true" format="{0, date, dd/MM/yyyy HH:mm}" />
+	<jstl:choose>
+		<jstl:when test="${language=='es'}">
+			<display:column property='category.name.es' titleKey="conference.category"/>
+		</jstl:when>
+		<jstl:otherwise>
+			<display:column property='category.name.en' titleKey="conference.category"/>
+		</jstl:otherwise>
+	</jstl:choose>
 
 	<display:column>
-
-		<acme:link link="conference/display.do?conferenceId=${row.id}"
-			code="conference.display" />
-
+		<acme:link link="conference/display.do?conferenceId=${row.id}" code="conference.display" /> 
 	</display:column>
 
 	<display:column>
@@ -58,12 +49,9 @@
 
 	<security:authorize access="hasRole('AUTHOR')">
 		<display:column>
-
 			<jstl:if test="${fechaActual.time < row.submissionDeadline.time }">
-				<acme:link link="submission/author/create.do?conferenceId=${row.id}"
-					code="submission.create" />
+				<acme:link link="submission/author/create.do?conferenceId=${row.id}" code="submission.create" />
 			</jstl:if>
-
 		</display:column>
 	</security:authorize>
 
@@ -78,10 +66,7 @@
 	</security:authorize>
 
 	<display:column>
-
-		<acme:link link="activity/list.do?conferenceId=${row.id}"
-			code="conference.activities" />
-
+		<acme:link link="activity/list.do?conferenceId=${row.id}" code="conference.activities" />
 	</display:column>
 
 

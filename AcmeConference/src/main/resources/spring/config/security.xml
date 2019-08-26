@@ -36,6 +36,7 @@
 		<security:intercept-url pattern="/submission/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/submission/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/submission/administrator/assign.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/submission/administrator/decide.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/message/broadcast-everyone.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/message/broadcast-authors-submitted.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/message/broadcast-authors-registered.do" access="hasRole('ADMINISTRATOR')" />

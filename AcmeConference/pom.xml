@@ -321,18 +321,18 @@
             <version>1.11.2</version>
         </dependency>
         
-        <!-- Adding dependency to Search reviewers keywords -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-search</artifactId>
-			<version>4.5.0.Final</version>
-		</dependency>
+<!--         Adding dependency to Search reviewers keywords -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.hibernate</groupId> -->
+<!-- 			<artifactId>hibernate-search</artifactId> -->
+<!-- 			<version>4.5.0.Final</version> -->
+<!-- 		</dependency> -->
 		
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-search-analyzers</artifactId>
-			<version>4.5.0.Final</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.hibernate</groupId> -->
+<!-- 			<artifactId>hibernate-search-analyzers</artifactId> -->
+<!-- 			<version>4.5.0.Final</version> -->
+<!-- 		</dependency> -->
 
 	</dependencies>
 </project>

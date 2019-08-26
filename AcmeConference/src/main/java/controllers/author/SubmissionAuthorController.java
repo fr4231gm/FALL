@@ -95,6 +95,7 @@ public class SubmissionAuthorController extends AbstractController {
 	public ModelAndView save2(@Valid final Submission submission, final BindingResult binding) {
 		ModelAndView res;
 
+
 		if (binding.hasErrors()) {
 			res = new ModelAndView("submission/edit");
 			res.addObject("submission", submission);
