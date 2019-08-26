@@ -728,11 +728,11 @@
 		<property name="title" value="Acercamiento a la Biologia humana" />
 		<property name="acronym" value="SEX" />
 		<property name="venue" value="Motel 33" />
-		<property name="submissionDeadline" value="04/07/2019" />
-		<property name="notificationDeadline" value="05/07/2019" />
-		<property name="cameraReadyDeadline" value="06/07/2019" />
-		<property name="startDate" value="07/07/2019" />
-		<property name="endDate" value="08/07/2019" />
+		<property name="submissionDeadline" value="04/07/2020" />
+		<property name="notificationDeadline" value="05/07/2020" />
+		<property name="cameraReadyDeadline" value="06/07/2020" />
+		<property name="startDate" value="07/07/2020" />
+		<property name="endDate" value="08/07/2020" />
 		<property name="summary"
 			value="Nuestro sudor será el rocio en el extraño jardin en flor de tu cuerpo sobre el mio" />
 		<property name="fee" value="0.75" />
@@ -2196,7 +2196,7 @@
 		</property>
 		<property name="title" value="Tutorial de hacer tutoriales" />
 		<property name="speakers" value="Jhon lenon" />
-		<property name="startMoment" value="05/07/2019" />
+		<property name="startMoment" value="09/11/2019" />
 		<property name="duration" value="50" />
 		<property name="room" value="A3.10" />
 		<property name="summary"

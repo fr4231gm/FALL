@@ -11,6 +11,7 @@
 package services;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +23,6 @@ import org.springframework.util.Assert;
 import utilities.AbstractTest;
 import domain.CreditCard;
 import domain.Sponsor;
-import forms.SponsorForm;
 
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -48,12 +48,11 @@ public class SponsorServiceTest extends AbstractTest {
 						"4111111111111111", "AMEX", null },
 
 				// TEST NEGATIVO:
-				{ "name", "middleName", "surname",
-						"asdfgsasdf", "123456789",
+				{ "", "middleName", "surname", "asdfgsasdf", "123456789",
 						"email@gmail.com", "address", "sponsorbalboa",
 						"sponsorbalboa", 123, 1, 22, "jose",
 						"4111111111111111", "AMEX",
-						null },
+						ConstraintViolationException.class },
 
 		};
 
@@ -87,7 +86,7 @@ public class SponsorServiceTest extends AbstractTest {
 
 		try {
 			super.authenticate(null);
-			
+
 			final Sponsor sponsor = this.sponsorService.create(username,
 					password);
 			final CreditCard c = new CreditCard();
@@ -104,8 +103,11 @@ public class SponsorServiceTest extends AbstractTest {
 			c.setHolder(holder);
 			c.setNumber(number);
 			c.setMake(make);
+			sponsor.setCreditCard(c);
 
 			saved = this.sponsorService.save(sponsor);
+
+			this.sponsorService.flush();
 
 			Assert.isTrue(saved.getId() != 0);
 
