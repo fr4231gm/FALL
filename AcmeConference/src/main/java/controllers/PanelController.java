@@ -70,12 +70,12 @@ public class PanelController extends AbstractController {
 			res = this.createEditModelAndView(panel);
 		} else {
 			try {
-				this.panelService.save(panel);
+				Panel saved = this.panelService.save(panel);
 				res = new ModelAndView("redirect:/panel/display.do?panelId="
-						+ panel.getId());
-				res.addObject("panel", panel);
+						+ saved.getId());
+				res.addObject("panel", saved);
 				res.addObject("schedule",
-						this.activityService.getSchedule(panel));
+						this.activityService.getSchedule(saved));
 				res.addObject("conferencePast", conferencePast);
 				res.addObject("actionURI", "panel/create.do");
 
@@ -125,12 +125,12 @@ public class PanelController extends AbstractController {
 			res = this.createEditModelAndView(panel);
 		} else {
 			try {
-				this.panelService.save(panel);
+				Panel saved = this.panelService.save(panel);
 				res = new ModelAndView("redirect:/panel/display.do?panelId="
-						+ panel.getId());
-				res.addObject("panel", panel);
+						+ saved.getId());
+				res.addObject("panel", saved);
 				res.addObject("schedule",
-						this.activityService.getSchedule(panel));
+						this.activityService.getSchedule(saved));
 				res.addObject("conferencePast", conferencePast);
 				res.addObject("actionURI", "panel/edit.do");
 			} catch (Throwable oops) {
