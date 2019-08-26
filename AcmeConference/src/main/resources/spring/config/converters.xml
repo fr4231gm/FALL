@@ -39,10 +39,6 @@
 		<bean class = "converters.AuthorToStringConverter" />
 		<bean class = "converters.StringToAuthorConverter" />
 		
-		<!-- BASE -->
-		<bean class = "converters.BaseToStringConverter" />
-		<bean class = "converters.StringToBaseConverter" />
-		
 		<!-- CATEGORY -->
 		<bean class = "converters.CategoryToStringConverter" />
 		<bean class = "converters.StringToCategoryConverter" />
