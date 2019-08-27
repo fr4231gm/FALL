@@ -1,5 +1,8 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -10,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Reviewer;
 import domain.Submission;
 
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })
@@ -19,6 +23,9 @@ public class SubmissionServiceTest extends AbstractTest {
 
 	@Autowired
 	private SubmissionService submissionService;
+	
+	@Autowired
+	private ReviewerService reviewerService;
 
 	@Test
 	public void createSubmissionTestDriver() {
@@ -71,48 +78,44 @@ public class SubmissionServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 	
-	/*@Test
+	@Test
 	public void assignSubmissionTestDriver() {
 
 		final Object testingData[][] = {
 
 				// TEST POSITIVO:
-				{  },
-
-				// TEST NEGATIVO: Crear una submission para una conferencia cuyo
-				// deadline ya ha pasado
-				{  },
+				{  "admin", super.getEntityId("submission12"), super.getEntityId("reviewer1"), null},
 
 				// TEST NEGATIVO: Un actor que no es autor intenta crear una
 				// submission
-				{  } 
+				{  "author1", super.getEntityId("submission12"), super.getEntityId("reviewer1"), IllegalArgumentException.class} 
 				
 		};
 
 		for (int i = 0; i < testingData.length; i++) {
 			this.startTransaction();
 			this.assignSubmissionTemplate((String) testingData[i][0],
-					(int) testingData[i][1], (Class<?>) testingData[i][2]);
+					(int) testingData[i][1], (int) testingData[i][2], (Class<?>) testingData[i][3]);
 			this.rollbackTransaction();
 		}
 	}
 
-	protected void assignSubmissionTemplate(String username, int submissionId,
+	protected void assignSubmissionTemplate(String username, int submissionId, int reviewerId,
 			final Class<?> expected) {
 
 		Class<?> caught;
 
 		caught = null;
 
-		Submission s, saved;
+		Submission s;
 
 		try {
+			Collection<Reviewer> reviewers = new ArrayList<>();
+			reviewers.add(this.reviewerService.findOne(reviewerId));
 			super.authenticate(username);
 
 			s = this.submissionService.findOne(submissionId);
-			saved = this.submissionService.saveAssign(s);
-
-			Assert.isTrue(saved.getId() != 0);
+			this.submissionService.setRev(s, reviewers);
 
 			super.unauthenticate();
 
@@ -120,6 +123,6 @@ public class SubmissionServiceTest extends AbstractTest {
 			caught = oops.getClass();
 		}
 		this.checkExceptions(expected, caught);
-	}*/
+	}
 
 }

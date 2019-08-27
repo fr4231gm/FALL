@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import repositories.SectionRepository;
 import domain.Administrator;
 import domain.Section;
 import domain.Tutorial;
-import repositories.SectionRepository;
+import forms.SectionForm;
 
 @Service
 @Transactional
@@ -37,8 +38,7 @@ public class SectionService {
 		Tutorial tutorial;
 
 		tutorial = this.tutorialService.findOne(tutorialId);
-		System.out.print(tutorialId);
-		System.out.println(tutorial.getId());
+
 		Assert.isTrue(!this.conferenceService.findPastConferences().contains(
 				tutorial.getConference()));
 
@@ -52,23 +52,14 @@ public class SectionService {
 		return res;
 	}
 
-	public Section save(Section section) {
-
-		Section res;
-
-		Assert.isTrue(!this.utilityService.checkUrls(section.getPictures()));
-		res = this.sectionRepository.save(section);
-
-		return res;
-	}
-
-	public Section saveCreate(Section section, int id) {
+	public Section save(Section section, int id) {
 		Section res;
 		Collection<Section> sections;
 
+		Assert.isTrue(!this.utilityService.checkUrls(section.getPictures()));
 		Tutorial tutorial = this.tutorialService.findOne(id);
 		sections = tutorial.getSections();
-
+		
 		res = this.sectionRepository.save(section);
 
 		if (section.getId() == 0) {
@@ -116,5 +107,35 @@ public class SectionService {
 
 	public void flush() {
 		this.sectionRepository.flush();
+	}
+	
+	public Section reconstruct(SectionForm sectionForm) {
+		Section res;
+		if (sectionForm.getId() != 0) {
+			res = this.findOne(sectionForm.getId());
+		} else {
+			res = new Section();
+			res.setVersion(sectionForm.getVersion());
+			res.setId(sectionForm.getId());
+		}
+
+		res.setTitle(sectionForm.getTitle());
+		res.setSummary(sectionForm.getSummary());
+		res.setPictures(sectionForm.getPictures());
+
+		return res;
+	}
+	
+	public SectionForm construct(final Section section) {
+		final SectionForm res = new SectionForm();
+
+		res.setId(section.getId());
+		res.setVersion(section.getVersion());
+		res.setTitle(section.getTitle());
+		res.setSummary(section.getSummary());
+		res.setPictures(section.getPictures());
+		res.setTutorial(this.tutorialService.findTutorialBySectionId(section.getId()));
+
+		return res;
 	}
 }
