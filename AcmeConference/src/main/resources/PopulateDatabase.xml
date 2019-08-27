@@ -813,10 +813,10 @@
 		<property name="title" value="Beneficios de la dieta cetogénica" />
 		<property name="acronym" value="BDC" />
 		<property name="venue" value="Meseta, Kanto" />
-		<property name="submissionDeadline" value="06/15/2019" />
-		<property name="notificationDeadline" value="06/16/2019" />
-		<property name="cameraReadyDeadline" value="06/17/2019" />
-		<property name="startDate" value="12/06/2019" />
+		<property name="submissionDeadline" value="12/15/2019" />
+		<property name="notificationDeadline" value="12/16/2019" />
+		<property name="cameraReadyDeadline" value="12/17/2019" />
+		<property name="startDate" value="12/25/2019" />
 		<property name="endDate" value="05/01/2020" />
 		<property name="summary"
 			value="Puedes hincharte a verduras pero vigila los carbohidratos." />
