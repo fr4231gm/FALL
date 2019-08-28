@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.SubmissionRepository;
 import domain.Actor;
+import domain.Administrator;
 import domain.Author;
 import domain.Paper;
 import domain.Report;
@@ -83,7 +84,10 @@ public class SubmissionService {
 	}
 	
 	public void setRev(final Submission s, final Collection<Reviewer> reviewers){
-
+		Administrator principal;
+		principal = this.administratorService.findByPrincipal();
+		Assert.notNull(principal);
+		
 		for(Reviewer r : reviewers){
 			Collection<Submission> submissions = r.getSubmissions();
 			submissions.add(s);

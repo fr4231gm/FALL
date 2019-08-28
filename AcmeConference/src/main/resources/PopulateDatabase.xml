@@ -808,6 +808,27 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="conference11" class="domain.Conference">
+		<property name="title" value="Beneficios de la dieta cetogénica" />
+		<property name="acronym" value="BDC" />
+		<property name="venue" value="Meseta, Kanto" />
+		<property name="submissionDeadline" value="12/15/2019" />
+		<property name="notificationDeadline" value="12/16/2019" />
+		<property name="cameraReadyDeadline" value="12/17/2019" />
+		<property name="startDate" value="12/25/2019" />
+		<property name="endDate" value="05/01/2020" />
+		<property name="summary"
+			value="Puedes hincharte a verduras pero vigila los carbohidratos." />
+		<property name="fee" value="0.95" />
+		<property name="isDraft" value="false" />
+		<property name="Administrator" ref="administrator4" />
+		<property name="Category" ref="category17" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 
 
@@ -1534,6 +1555,13 @@
 			value="https://static3.upandscrap.com/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/0/0/0000856358.jpg" />
 	</bean>
 
+	<bean id="paper12" class="domain.Paper">
+		<property name="title" value="Papel de cumple" />
+		<property name="summary"
+			value="Por que se llama pape de cumple si el cumple no es el papel, es lo que hay dentro" />
+		<property name="document"
+			value="https://static3.upandscrap.com/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/0/0/0000856358.jpg" />
+	</bean>
 
 
 	<!-- Presentation -->
@@ -1799,6 +1827,16 @@
 		<property name="reviewer" ref="reviewer4" />
 		<property name="submission" ref="submission11" />
 	</bean>
+	
+	<bean id="report8" class="domain.Report">
+		<property name="decision" value="BORDER-LINE" />
+		<property name="originalityScore" value="10" />
+		<property name="qualityScore" value="10" />
+		<property name="readabilityScore" value="10" />
+		<property name="comments" value="Perfecto" />
+		<property name="reviewer" ref="reviewer4" />
+		<property name="submission" ref="submission12" />
+	</bean>
 
 
 
@@ -1868,6 +1906,7 @@
 				<ref bean="submission5" />
 				<ref bean="submission7" />
 				<ref bean="submission11" />
+				<ref bean="submission12" />
 			</list>
 		</property>
 		<property name="name" value="mana" />
@@ -2234,7 +2273,16 @@
 		<property name="Conference" ref="conference10" />
 		<property name="Author" ref="author2" />
 	</bean>
-
+	
+	<bean id="submission12" class="domain.Submission">
+		<property name="ticker" value="JSL-7640" />
+		<property name="moment" value="04/10/2019" />
+		<property name="status" value="UNDER-REVIEW" />
+		<property name="notified" value="false" />
+		<property name="paper" ref="paper12" />
+		<property name="Conference" ref="conference11" />
+		<property name="Author" ref="author2" />
+	</bean>
 
 	<!-- Tutorial -->
 	<bean id="tutorial1" class="domain.Tutorial">

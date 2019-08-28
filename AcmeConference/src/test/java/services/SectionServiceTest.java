@@ -64,7 +64,7 @@ public class SectionServiceTest extends AbstractTest {
 			section.setSummary(summary);
 			section.setPictures(pictures);
 
-			toSave = this.sectionService.save(section);
+			toSave = this.sectionService.save(section, tutorialId);
 
 			Assert.isTrue(toSave.getId() != 0);
 

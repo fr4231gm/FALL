@@ -7,6 +7,7 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity 
 @Access(AccessType.PROPERTY) 
@@ -19,6 +20,7 @@ public class Category extends DomainEntity {
 
 	// Getters
 	@ElementCollection
+	@NotNull
 	public Map<String, String> getName(){
 		return this.name;
 	}

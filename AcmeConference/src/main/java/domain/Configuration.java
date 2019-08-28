@@ -75,6 +75,7 @@ public class Configuration extends DomainEntity {
 		return this.voidWords;
 	}
 
+	
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
 	public String getBuzzWords(){
 		return this.buzzWords;

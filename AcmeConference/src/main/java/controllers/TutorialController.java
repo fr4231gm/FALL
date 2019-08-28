@@ -84,13 +84,13 @@ public class TutorialController extends AbstractController {
 			res = this.createEditModelAndView(tutorial);
 		} else {
 			try {
-				this.tutorialService.save(tutorial);
+				Tutorial saved = this.tutorialService.save(tutorial);
 				res = new ModelAndView(
 						"redirect:/tutorial/display.do?tutorialId="
-								+ tutorial.getId());
+								+ saved.getId());
 				res.addObject("tutorial", tutorial);
 				res.addObject("schedule",
-						this.activityService.getSchedule(tutorial));
+						this.activityService.getSchedule(saved));
 				res.addObject("conferencePast", conferencePast);
 				res.addObject("actionURI", "tutorial/edit.do");
 
@@ -129,9 +129,9 @@ public class TutorialController extends AbstractController {
 		} else {
 			try {
 				saved = this.tutorialService.save(tutorial);
+				System.out.println(saved.getId());
 				res = new ModelAndView(
-						"redirect:/tutorial/display.do?tutorialId="
-								+ saved.getId());
+						"redirect:/tutorial/display.do?tutorialId="+saved.getId());
 				res.addObject("tutorial", saved);
 				res.addObject("schedule",
 						this.activityService.getSchedule(saved));

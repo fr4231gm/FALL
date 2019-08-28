@@ -24,7 +24,6 @@ public class Reviewer extends Actor {
 	// Getters
 	@NotBlank
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-	//@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
 	public String getKeywords() {
 		return this.keywords;
 	}
