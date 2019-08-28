@@ -59,6 +59,7 @@
 		<security:intercept-url pattern="/tutorial/delete.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/conference/administrator/**" access="hasRole('ADMINISTRATOR')"/>
 		<security:intercept-url pattern="/section/**" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/report/administrator/**" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- AUTHOR -->
 		
@@ -69,10 +70,12 @@
 		<security:intercept-url pattern="/author/edit.do" access="hasRole('AUTHOR')" /> 
 		<security:intercept-url pattern="/submission/author/**" access="hasRole('AUTHOR')" /> 
 		<security:intercept-url pattern="/finder/author/**" access="hasRole('AUTHOR')" /> 
-		
+		<security:intercept-url pattern="/report/author/**" access="hasRole('AUTHOR')" /> 
 		<!-- REVIEWER -->
 
-		<security:intercept-url pattern="/reviewer/edit.do" access="hasRole('REVIEWER')" /> 
+		<security:intercept-url pattern="/reviewer/edit.do" access="hasRole('REVIEWER')" />
+		<security:intercept-url pattern="/report/reviewer/**" access="hasRole('REVIEWER')" /> 
+		<security:intercept-url pattern="/submission/reviewer/**" access="hasRole('REVIEWER')" />
 		
 		<!-- SPONSOR -->
 

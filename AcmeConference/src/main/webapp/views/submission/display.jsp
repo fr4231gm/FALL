@@ -58,12 +58,13 @@
 </jstl:if>
 
 </fieldset>
-<jstl:if test="${decide eq 'true'}">
-			
-<h3><acme:link link="submission/administrator/decide.do?submissionId=${submission.id}"
-					code="submission.decide" /></h3>
-</jstl:if>
-<br />		
-<br />		
+
+<security:authorize access="hasRole('ADMINISTRATOR')">
+	<jstl:if test="${decide eq 'true'}">
+		<h3><acme:link link="submission/administrator/decide.do?submissionId=${submission.id}" code="submission.decide" /></h3>
+	</jstl:if>
+	<br />		
+	<br />		
+</security:authorize>
 
 <acme:back code="conference.goback"/>

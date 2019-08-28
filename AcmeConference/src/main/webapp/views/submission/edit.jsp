@@ -20,6 +20,7 @@
 	<form:hidden path="author" />
 	<form:hidden path="ticker"/>
 	<form:hidden path="moment"/>
+	<form:hidden path="notified"/>
 	<form:hidden path="status"/>
 	<form:hidden path="conference"/>
 	<jstl:if test="${submission.id ==0 }">
@@ -31,8 +32,9 @@
 	<acme:input code="submission.paper.title" path="paper.title" placeholder="Title of paper"/>
 	<acme:textarea code="submission.paper.summary" path="paper.summary" placeholder="Summary can be long.."/>
 	<acme:input code="submission.paper.documet" path="paper.document" placeholder="https://www.url.com"/>
-	<jstl:if test="${submission.id != 0 and submission.status eq 'ACCEPTED' and fecha.time < submission.conference.cameraReadyDeadline.time}">
-	<acme:checkbox code="submission.paper.cameraReadyPaper" path="paper.cameraReadyPaper" value="paper.cameraReadyPaper"/> 
+	
+	<jstl:if test="${submission.id != 0 and submission.status eq 'ACCEPTED' and fecha < submission.conference.cameraReadyDeadline.time}">
+		<acme:checkbox code="submission.paper.cameraReadyPaper" path="paper.cameraReadyPaper" value="paper.cameraReadyPaper"/> 
 
 	</jstl:if>
 	<acme:submit name="save" code="submission.save" />

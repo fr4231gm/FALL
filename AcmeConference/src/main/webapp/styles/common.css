@@ -58,15 +58,15 @@ img {
 
 
 
-::-webkit-input-placeholder { /* Edge */
-  color: white;
-  opacity: 0.8;
-}
+/* ::-webkit-input-placeholder { Edge */
+/*   color: white; */
+/*   opacity: 0.8; */
+/* } */
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: white;
-    opacity: 0.8;
-}
+/* :-ms-input-placeholder { Internet Explorer 10-11 */
+/*   color: white; */
+/*     opacity: 0.8; */
+/* } */
 
 ::placeholder {
   color: gray;
@@ -76,6 +76,11 @@ img {
 .centrado {
 	text-align: center;
 	font-size: 25px;
+}
+
+.sponsorship{
+	width: 65.5%;  
+	height: 200px;
 }
 
 ::-webkit-scrollbar-track {

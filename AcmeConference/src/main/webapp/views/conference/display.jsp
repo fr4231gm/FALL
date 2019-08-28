@@ -8,7 +8,8 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<acme:image src="${sponsorshipURL}"/>
+<acme:image src="${sponsorshipURL}" cssClass="sponsorship"/>
+<br><br>
 <acme:input code="conference.title" path="conference.title" readonly="true" />
 <acme:input code="conference.acronym" path="conference.acronym" readonly="true" />
 <acme:input code="conference.venue" path="conference.venue" readonly="true" />
@@ -19,11 +20,6 @@
 <acme:textarea code="conference.summary" path="conference.summary" readonly="true" />
 <acme:input code="conference.endDate" path="conference.endDate" readonly="true" />
 <acme:input code="conference.fee" path="conference.fee" readonly="true" />
-
-<acme:link link="comment/list.do?targetId=${conference.id}"
-	code="comments" />
-
-<br />
 
 <jstl:if test="${future eq 'true'}">
 	<jstl:if test="${haveR eq 'false'}">
@@ -43,19 +39,21 @@
 		<acme:link link="panel/edit.do?conferenceId=${conference.id}" code="conference.panel" />	&nbsp;
 		<acme:link link="presentation/edit.do?conferenceId=${conference.id}" code="conference.presentation" />	&nbsp;
 		<acme:link link="tutorial/edit.do?conferenceId=${conference.id}" code="conference.tutorial" /><br><br>
+		<acme:link link="message/broadcast-authors-submitted.do?conferenceId=${conference.id}" code="master.page.broadcast.submitted" />&nbsp;
+		<acme:link link="message/broadcast-authors-registered.do?conferenceId=${conference.id}" code="master.page.broadcast.registered" /><br><br>
 	</security:authorize>
 </jstl:if>
 
-<acme:link link="message/broadcast-authors-submitted.do?conferenceId=${conference.id}" code="master.page.broadcast.submitted" />&nbsp;
-<acme:link link="message/broadcast-authors-registered.do?conferenceId=${conference.id}" code="master.page.broadcast.registered" /><br><br>
 <acme:link code="conference.create.comment" link="comment/create.do?targetId=${conference.id}" /> <br><br>
 
-<display:table  requestURI="conference/display.do" name="conference.comments" id="row" pagesize="5" class="displaytag">
-	<display:column property="moment" titleKey="comment.moment" sortable="true" format="{0, date, dd/MM/yyyy HH:mm}" />
-	<display:column property="author" titleKey="comment.author" sortable="true" />
-	<display:column property="title" titleKey="comment.title" sortable="true" />
-	<display:column property="text" titleKey="comment.text" sortable="true" />
-</display:table>
-
-<acme:back code="conference.goback" />
+<jstl:if test="${not empty conference.comments}">
+	<display:table  requestURI="conference/display.do" name="conference.comments" id="row" pagesize="5" class="displaytag">
+		<display:column property="moment" titleKey="comment.moment" sortable="true" format="{0, date, dd/MM/yyyy HH:mm}" />
+		<display:column property="author" titleKey="comment.author" sortable="true" />
+		<display:column property="title" titleKey="comment.title" sortable="true" />
+		<display:column property="text" titleKey="comment.text" sortable="true" />
+	</display:table>
+	<br>
+</jstl:if>
+<acme:back code="master.go.back" />
 

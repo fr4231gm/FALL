@@ -15,8 +15,8 @@
 
 <jstl:if test="${general eq 'true'}">
 	<form name="searchForm" action="${searchPoint}" method="get">
-		<input type="text" name="keyword"> <input type="submit"
-			value="<spring:message code="conference.search"/>">
+		<input type="text" name="keyword" style="width: 50%;"> 
+		<input type="submit" value="<spring:message code="conference.search"/>">
 	</form>
 </jstl:if>
 
