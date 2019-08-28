@@ -164,8 +164,8 @@
 		<jstl:if test="${conferencePast eq false}">
 			<display:column>
 
-				<acme:link link="presentation/edit.do?presentationId=${row.id}"
-					code="activity.edit" />
+					<acme:link link="presentation/edit.do?presentationId=${row.id}"
+						code="activity.edit" />
 			&nbsp;
 			<acme:link link="presentation/delete.do?presentationId=${row.id}"
 					code="activity.delete" />
@@ -178,8 +178,10 @@
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<jstl:if test="${conferencePast eq false}">
-		<acme:link link="presentation/create.do?conferenceId=${conferenceId}"
-			code="presentation.create" />
+		<jstl:if test="${canCreatePresentation eq true }">
+			<acme:link link="presentation/create.do?conferenceId=${conferenceId}"
+				code="presentation.create" />
+		</jstl:if>
 	</jstl:if>
 </security:authorize>
 
