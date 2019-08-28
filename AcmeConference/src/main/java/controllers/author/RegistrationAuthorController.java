@@ -92,7 +92,7 @@ public class RegistrationAuthorController extends AbstractController {
 				res.addObject("makes", makes);
 			} else {
 				this.registrationService.save(reg);
-				res = new ModelAndView("redirect:/conference/author/list.do");
+				res = new ModelAndView("redirect:/registration/author/list.do");
 				res.addObject("makes", makes);
 			}
 
