@@ -96,7 +96,7 @@
 			value="https://i1.wp.com/www.sopitas.com/wp-content/uploads/2018/08/david-banda-madonna-futbol.png" />
 		<property name="email" value="reinona@gmail.com" />
 		<property name="address" value="C/Champions nº3" />
-	<property name="finder" ref="finder2" />
+		<property name="finder" ref="finder2" />
 		<property name="phoneNumber" value="662130576" />
 		<property name="userAccount" ref="userAccount7" />
 	</bean>
@@ -109,7 +109,7 @@
 			value="https://www.justbake.in/userfiles/ben10-cake.jpg" />
 		<property name="email" value="ben10@gmail.com" />
 		<property name="address" value="C/Champions nº4" />
-	<property name="finder" ref="finder3" />
+		<property name="finder" ref="finder3" />
 		<property name="phoneNumber" value="662130577" />
 		<property name="userAccount" ref="userAccount8" />
 	</bean>
@@ -122,7 +122,7 @@
 			value="https://media1.tenor.com/images/72ac5cfeda7d90964ee9008e310528ff/tenor.gif?itemid=5481122" />
 		<property name="email" value="fitforrivals@gmail.com" />
 		<property name="address" value="C/Champions nº5" />
-	<property name="finder" ref="finder4" />
+		<property name="finder" ref="finder4" />
 		<property name="phoneNumber" value="662130578" />
 		<property name="userAccount" ref="userAccount9" />
 	</bean>
@@ -135,7 +135,7 @@
 			value="https://www.diariodesevilla.es/2018/06/05/espana/Jose-Maria-Aznar_1251785630_85554259_667x375.jpg" />
 		<property name="email" value="pollo@gmail.com" />
 		<property name="address" value="C/Champions nº6" />
-	<property name="finder" ref="finder5" />
+		<property name="finder" ref="finder5" />
 		<property name="phoneNumber" value="662130579" />
 		<property name="userAccount" ref="userAccount10" />
 	</bean>
@@ -787,7 +787,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="conference10" class="domain.Conference">
 		<property name="title" value="Beneficios de la exposision al sol" />
 		<property name="acronym" value="BESS" />
@@ -808,7 +808,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="conference11" class="domain.Conference">
 		<property name="title" value="Beneficios de la dieta cetogénica" />
 		<property name="acronym" value="BDC" />
@@ -970,7 +970,7 @@
 				<ref bean="conference1" />
 			</list>
 		</property>
-		
+
 	</bean>
 
 	<bean id="finder2" class="domain.Finder">
@@ -983,7 +983,7 @@
 				<ref bean="conference2" />
 			</list>
 		</property>
-		
+
 	</bean>
 
 	<bean id="finder3" class="domain.Finder">
@@ -996,7 +996,7 @@
 				<ref bean="conference4" />
 			</list>
 		</property>
-		
+
 	</bean>
 
 	<bean id="finder4" class="domain.Finder">
@@ -1009,7 +1009,7 @@
 				<ref bean="conference4" />
 			</list>
 		</property>
-		
+
 	</bean>
 
 	<bean id="finder5" class="domain.Finder">
@@ -1022,7 +1022,7 @@
 				<ref bean="conference5" />
 			</list>
 		</property>
-	
+
 	</bean>
 
 	<bean id="finder6" class="domain.Finder">
@@ -1209,117 +1209,123 @@
 
 	<!-- Message -->
 	<bean id="message1" class="domain.Message">
-		<property name="moment" value="04/01/2019" /> 
-		<property name="subject" value="Pinocho" /> 
-		<property name="body" value="¿Cuál es el hermano mayor de Pinocho? Pinueve." /> 
-		<property name="topic" value="INQUIRY" /> 
+		<property name="moment" value="04/01/2019" />
+		<property name="subject" value="Pinocho" />
+		<property name="body"
+			value="¿Cuál es el hermano mayor de Pinocho? Pinueve." />
+		<property name="topic" value="INQUIRY" />
 		<property name="isCopy" value="false" />
-		<property name="sender" ref="author1" /> 
-		<property name="recipient" ref="administrator1" />					
+		<property name="sender" ref="author1" />
+		<property name="recipient" ref="administrator1" />
 	</bean>
 
 	<bean id="message2" class="domain.Message">
-		<property name="moment" value="04/02/2019" /> 
-		<property name="subject" value="Suegra" /> 
-		<property name="body" value="¿Cómo se dice suegra en ruso? Kela Rrifen." /> 
+		<property name="moment" value="04/02/2019" />
+		<property name="subject" value="Suegra" />
+		<property name="body" value="¿Cómo se dice suegra en ruso? Kela Rrifen." />
 		<property name="topic" value="REGISTRATION" />
 		<property name="isCopy" value="false" />
-		<property name="sender" ref="author2" /> 
+		<property name="sender" ref="author2" />
 		<property name="recipient" ref="author1" />
 	</bean>
 
 	<bean id="message3" class="domain.Message">
-		<property name="moment" value="04/02/2019" /> 
-		<property name="subject" value="Piña" /> 
-		<property name="body" value="Había una piña colada y la sacaron de la fila." /> 
-		<property name="topic" value="TOPICS" /> 
+		<property name="moment" value="04/02/2019" />
+		<property name="subject" value="Piña" />
+		<property name="body"
+			value="Había una piña colada y la sacaron de la fila." />
+		<property name="topic" value="TOPICS" />
 		<property name="isCopy" value="false" />
-		<property name="sender" ref="author3" /> 
+		<property name="sender" ref="author3" />
 		<property name="recipient" ref="author2" />
 	</bean>
 
 	<bean id="message4" class="domain.Message">
-		<property name="moment" value="04/01/2019" /> 
-		<property name="subject" value="Otro de suegra" /> 
-		<property name="body" value="¡Que viva mi suegra, pero bien lejos!" /> 
-		<property name="topic" value="REBUTTAL" /> 
+		<property name="moment" value="04/01/2019" />
+		<property name="subject" value="Otro de suegra" />
+		<property name="body" value="¡Que viva mi suegra, pero bien lejos!" />
+		<property name="topic" value="REBUTTAL" />
 		<property name="isCopy" value="false" />
-		<property name="sender" ref="author4" /> 
+		<property name="sender" ref="author4" />
 		<property name="recipient" ref="author3" />
 	</bean>
 
 	<bean id="message5" class="domain.Message">
-		<property name="moment" value="04/02/2019" /> 
-		<property name="subject" value="Que gusto" /> 
-		<property name="body" value="Hola, ¿está Agustín? No estoy incomodín." /> 
-		<property name="topic" value="OTHER" /> 
+		<property name="moment" value="04/02/2019" />
+		<property name="subject" value="Que gusto" />
+		<property name="body" value="Hola, ¿está Agustín? No estoy incomodín." />
+		<property name="topic" value="OTHER" />
 		<property name="isCopy" value="false" />
-		<property name="sender" ref="author5" /> 
+		<property name="sender" ref="author5" />
 		<property name="recipient" ref="author4" />
 	</bean>
 
 	<bean id="message6" class="domain.Message">
-		<property name="moment" value="04/01/2019" /> 
-		<property name="subject" value="Duda esta gorda" /> 
-		<property name="body" value="¡No cabe duda! Y duda se tuvo que bajar." /> 
-		<property name="topic" value="CONSULTA" /> 
+		<property name="moment" value="04/01/2019" />
+		<property name="subject" value="Duda esta gorda" />
+		<property name="body" value="¡No cabe duda! Y duda se tuvo que bajar." />
+		<property name="topic" value="CONSULTA" />
 		<property name="isCopy" value="true" />
-		<property name="sender" ref="author1" /> 
+		<property name="sender" ref="author1" />
 		<property name="recipient" ref="administrator1" />
 	</bean>
 
 	<bean id="message7" class="domain.Message">
-		<property name="moment" value="04/02/2019" /> 
-		<property name="subject" value="Al abordaje" /> 
-		<property name="body" value="Capitán: ¡Todos a bordo! Y Bordo se murió aplastado." /> 
-		<property name="topic" value="REFUTACIÓN" /> 
+		<property name="moment" value="04/02/2019" />
+		<property name="subject" value="Al abordaje" />
+		<property name="body"
+			value="Capitán: ¡Todos a bordo! Y Bordo se murió aplastado." />
+		<property name="topic" value="REFUTACIÓN" />
 		<property name="isCopy" value="true" />
-		<property name="sender" ref="author2" /> 
+		<property name="sender" ref="author2" />
 		<property name="recipient" ref="sponsor1" />
 	</bean>
 
 	<bean id="message8" class="domain.Message">
-		<property name="moment" value="04/02/2019" /> 
-		<property name="subject" value="Lo peor es que es verdad" /> 
-		<property name="body" value="Hola Caperucita Verde...!!! Hola lobo daltónico...!!!" /> 
-		<property name="topic" value="REGISTRO" /> 
+		<property name="moment" value="04/02/2019" />
+		<property name="subject" value="Lo peor es que es verdad" />
+		<property name="body"
+			value="Hola Caperucita Verde...!!! Hola lobo daltónico...!!!" />
+		<property name="topic" value="REGISTRO" />
 		<property name="isCopy" value="true" />
-		<property name="sender" ref="author3" /> 
+		<property name="sender" ref="author3" />
 		<property name="recipient" ref="sponsor2" />
 	</bean>
 
 	<bean id="message9" class="domain.Message">
-		<property name="moment" value="04/01/2019" /> 
-		<property name="subject" value="Esto está lleno de suegras" /> 
-		<property name="body" value="Busco perro y suegra perdidos. Se recompensará por el perro." /> 
-		<property name="topic" value="TEMAS" /> 
+		<property name="moment" value="04/01/2019" />
+		<property name="subject" value="Esto está lleno de suegras" />
+		<property name="body"
+			value="Busco perro y suegra perdidos. Se recompensará por el perro." />
+		<property name="topic" value="TEMAS" />
 		<property name="isCopy" value="true" />
-		<property name="sender" ref="author4" /> 
+		<property name="sender" ref="author4" />
 		<property name="recipient" ref="sponsor3" />
 	</bean>
 
 	<bean id="message10" class="domain.Message">
-		<property name="moment" value="04/02/2019" /> 
-		<property name="subject" value="Chistaco" /> 
-		<property name="body" value="¿Qué animal hace pipi por la boca? El correcaminos." /> 
+		<property name="moment" value="04/02/2019" />
+		<property name="subject" value="Chistaco" />
+		<property name="body"
+			value="¿Qué animal hace pipi por la boca? El correcaminos." />
 		<property name="topic" value=" OTROS" />
-		<property name="isCopy" value="true" /> 
-		<property name="sender" ref="author5" /> 
+		<property name="isCopy" value="true" />
+		<property name="sender" ref="author5" />
 		<property name="recipient" ref="sponsor4" />
 	</bean>
 
 	<bean id="message11" class="domain.Message">
-		<property name="moment" value="04/03/2019" /> 
-		<property name="subject" value="Mensaje importante" /> 
-		<property name="body" value="Cómo estornuda un leñador? ¡Achaaaa!" /> 
-		<property name="topic" value=" OTROS" /> 
+		<property name="moment" value="04/03/2019" />
+		<property name="subject" value="Mensaje importante" />
+		<property name="body" value="Cómo estornuda un leñador? ¡Achaaaa!" />
+		<property name="topic" value=" OTROS" />
 		<property name="isCopy" value="true" />
-		<property name="sender" ref="administrator1" /> 
+		<property name="sender" ref="administrator1" />
 		<property name="recipient" ref="reviewer1" />
 	</bean>
-	
 
-	<!-- Panel-->
+
+	<!-- Panel -->
 	<bean id="panel1" class="domain.Panel">
 		<property name="title" value="Panel de abejas" />
 		<property name="speakers" value="Lionel" />
@@ -1486,6 +1492,7 @@
 		<property name="summary" value="Que ganas de gofio escaldao con tunos" />
 		<property name="document"
 			value="http://ecoprintalgeciras-istore.es/WebRoot/Store19/Shops/b2d4b1b2-6274-4e84-bc58-9bc09d0050fe/5460/8E69/2514/AD1B/BDF5/0A48/354D/7B91/LOGOTIPO_A3_ml.png" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
 
 	<bean id="paper3" class="domain.Paper">
@@ -1493,6 +1500,7 @@
 		<property name="summary" value="Sancocha unas papas loco" />
 		<property name="document"
 			value="http://ecoprintalgeciras-istore.es/WebRoot/Store19/Shops/b2d4b1b2-6274-4e84-bc58-9bc09d0050fe/580D/F005/351B/7A58/A2F5/0A48/3548/35CA/LOGOTIPO_A2_ml.png" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
 
 	<bean id="paper4" class="domain.Paper">
@@ -1500,6 +1508,7 @@
 		<property name="summary" value="Chacho chacho chacho" />
 		<property name="document"
 			value="https://www.din-formate.de/pixel/tabelle-a1.gif" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
 
 	<bean id="paper5" class="domain.Paper">
@@ -1507,6 +1516,7 @@
 		<property name="summary" value="Planten pinos y coman pinocha mis hijos" />
 		<property name="document"
 			value="https://www.sublimacionexpress.com/wp-content/uploads/2017/12/papel-sublimacion-sublimacionexpress.jpg" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
 
 	<bean id="paper6" class="domain.Paper">
@@ -1515,6 +1525,7 @@
 			value="En resumen, la pelicula va de un barco con handyworkers" />
 		<property name="document"
 			value="http://www.libreriavictornunez.com/1030-tm_large_default/pte-25-hojas-papel-seda-50x75-cm.jpg" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
 
 	<bean id="paper7" class="domain.Paper">
@@ -1522,6 +1533,7 @@
 		<property name="summary" value="Juan se enamora del caballo de Jimena" />
 		<property name="document"
 			value="https://www.digitalpapel.com/imagenes/normal/productos/800/800/057c281592/papel-vegetal-blanco-a4-100gr.jpg" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
 
 	<bean id="paper8" class="domain.Paper">
@@ -1529,6 +1541,7 @@
 		<property name="summary" value="Multiples usos en forma de rollo" />
 		<property name="document"
 			value="https://dok7xy59qfw9h.cloudfront.net/144/369/491/1650003029-1r2gemp-5pe3rok4mto1mna/original/scott.jpg" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
 
 	<bean id="paper9" class="domain.Paper">
@@ -1537,6 +1550,7 @@
 			value="Pesa un poco y no vuela, recomiendo lanzarlo contra torres mellizas" />
 		<property name="document"
 			value="https://pbs.twimg.com/media/A_BYSfwCYAAGLuv.jpg" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
 
 	<bean id="paper10" class="domain.Paper">
@@ -1545,14 +1559,16 @@
 			value="Por que se llama pape de regalo si el regalo no es el papel, es lo que hay dentro" />
 		<property name="document"
 			value="https://static3.upandscrap.com/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/0/0/0000856358.jpg" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
-	
+
 	<bean id="paper11" class="domain.Paper">
 		<property name="title" value="Papel de navidad" />
 		<property name="summary"
 			value="Por que se llama pape de regalo si el regalo no es el papel, es lo que hay dentro" />
 		<property name="document"
 			value="https://static3.upandscrap.com/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/0/0/0000856358.jpg" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
 
 	<bean id="paper12" class="domain.Paper">
@@ -1561,6 +1577,7 @@
 			value="Por que se llama pape de cumple si el cumple no es el papel, es lo que hay dentro" />
 		<property name="document"
 			value="https://static3.upandscrap.com/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/0/0/0000856358.jpg" />
+		<property name="cameraReadyPaper" value="true" />
 	</bean>
 
 
@@ -1709,7 +1726,7 @@
 		<property name="paper" ref="paper9" />
 		<property name="title" value="Presentacion ISPP" />
 		<property name="speakers" value="Renee" />
-		<property name="startMoment" value="07/23/2019" />
+		<property name="startMoment" value="09/23/2019" />
 		<property name="duration" value="117" />
 		<property name="room" value="A019" />
 		<property name="summary" value="Esta es la presentación 9" />
@@ -1817,7 +1834,7 @@
 		<property name="reviewer" ref="reviewer4" />
 		<property name="submission" ref="submission7" />
 	</bean>
-	
+
 	<bean id="report7" class="domain.Report">
 		<property name="decision" value="REJECTED" />
 		<property name="originalityScore" value="10" />
@@ -1827,7 +1844,7 @@
 		<property name="reviewer" ref="reviewer4" />
 		<property name="submission" ref="submission11" />
 	</bean>
-	
+
 	<bean id="report8" class="domain.Report">
 		<property name="decision" value="BORDER-LINE" />
 		<property name="originalityScore" value="10" />
@@ -2218,7 +2235,7 @@
 		<property name="ticker" value="DAM-7319" />
 		<property name="moment" value="03/06/2019" />
 		<property name="notified" value="false" />
-		<property name="status" value="REJECTED" />
+		<property name="status" value="ACCEPTED" />
 		<property name="paper" ref="paper6" />
 		<property name="Conference" ref="conference6" />
 		<property name="Author" ref="author2" />
@@ -2273,7 +2290,7 @@
 		<property name="Conference" ref="conference10" />
 		<property name="Author" ref="author2" />
 	</bean>
-	
+
 	<bean id="submission12" class="domain.Submission">
 		<property name="ticker" value="JSL-7640" />
 		<property name="moment" value="04/10/2019" />
