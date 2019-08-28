@@ -1,4 +1,3 @@
-
 package controllers.author;
 
 import java.util.Collection;
@@ -24,13 +23,12 @@ import domain.Submission;
 @RequestMapping("/submission/author")
 public class SubmissionAuthorController extends AbstractController {
 
-	//Services
+	// Services
 	@Autowired
-	private SubmissionService	submissionService;
+	private SubmissionService submissionService;
 
 	@Autowired
-	private AuthorService		authorService;
-
+	private AuthorService authorService;
 
 	// Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -44,16 +42,19 @@ public class SubmissionAuthorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Submission s, final BindingResult binding) {
+	public ModelAndView save(@Valid final Submission s,
+			final BindingResult binding) {
 		ModelAndView res;
 
-		if(this.submissionService.findSubmissionByPaperTitle(s.getPaper().getTitle()) != null){
+		if (this.submissionService.findSubmissionByPaperTitle(s.getPaper()
+				.getTitle()) != null) {
 			binding.rejectValue("paper.title", "submission.paper.title.error");
 		}
 
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(s);
-		else
+			res.addObject("binding", binding);
+		} else
 			try {
 				this.submissionService.save(s);
 				res = new ModelAndView("redirect:list.do");
@@ -64,6 +65,7 @@ public class SubmissionAuthorController extends AbstractController {
 			}
 		return res;
 	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int submissionId) {
 		ModelAndView res;
@@ -86,15 +88,20 @@ public class SubmissionAuthorController extends AbstractController {
 				res.addObject("submission", s);
 				res.addObject("message", "submission.commit.error");
 			}
-		res.addObject("fecha", System.currentTimeMillis() - 1);
+		res.addObject("fecha", new Date(System.currentTimeMillis() - 1));
 		return res;
 	}
 
-	//Save edit
+	// Save edit
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save2(@Valid final Submission submission, final BindingResult binding) {
+	public ModelAndView save2(@Valid final Submission submission,
+			final BindingResult binding) {
 		ModelAndView res;
 
+		if (this.submissionService.findSubmissionByPaperTitle(submission
+				.getPaper().getTitle()) != null) {
+			binding.rejectValue(null, "submission.paper.title.error");
+		}
 
 		if (binding.hasErrors()) {
 			res = new ModelAndView("submission/edit");
@@ -107,12 +114,14 @@ public class SubmissionAuthorController extends AbstractController {
 				res = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(submission, "submission.commit.error");
-				res.addObject("fecha", System.currentTimeMillis() - 1);
+				res = this.createEditModelAndView(submission,
+						"submission.commit.error");
+				res.addObject("fecha", new Date(System.currentTimeMillis() - 1));
 			}
 		return res;
 	}
-	//List
+
+	// List
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -129,10 +138,8 @@ public class SubmissionAuthorController extends AbstractController {
 		return result;
 	}
 
-	//Show
-	@RequestMapping(value = "/display", method = RequestMethod.GET, params = {
-		"submissionId"
-	})
+	// Show
+	@RequestMapping(value = "/display", method = RequestMethod.GET, params = { "submissionId" })
 	public ModelAndView display(@RequestParam final int submissionId) {
 		ModelAndView res;
 
@@ -153,7 +160,8 @@ public class SubmissionAuthorController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Submission s, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final Submission s,
+			final String messageCode) {
 		ModelAndView result;
 
 		result = new ModelAndView("submission/edit");

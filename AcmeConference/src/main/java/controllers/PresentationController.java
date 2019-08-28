@@ -40,12 +40,17 @@ public class PresentationController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int conferenceId) {
 		ModelAndView res;
+		boolean hasPapers = true;
 		
 		PresentationForm presentationForm = new PresentationForm();
 		presentationForm.setConference(this.conferenceService.findOne(conferenceId));
 		
+		if(this.conferenceService.findSubmissionsPapersAcceptedByConferenceId(conferenceId).isEmpty()){
+			hasPapers = false;
+		}
 		res = this.createEditModelAndView(presentationForm);
 		res.addObject("actionURI", "presentation/create.do");
+		res.addObject("hasPapers", hasPapers);
 
 		return res;
 	}
@@ -211,6 +216,7 @@ public class PresentationController extends AbstractController {
 		submissions = this.conferenceService
 				.findSubmissionsPapersAcceptedByConferenceId(presentationForm.getConference()
 						.getId());
+		System.out.println(submissions);
 
 		result = new ModelAndView("presentation/edit");
 

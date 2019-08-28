@@ -42,12 +42,17 @@ public class ActivityController extends AbstractController {
 		Collection<Presentation> presentations;
 		Conference conference;
 		boolean conferencePast = false;
+		boolean canCreatePresentation = true;
 		
 		conference = this.conferenceService.findOne(conferenceId);
 		
 		if(this.conferenceService.findPastConferences().contains(conference)){
 			conferencePast = true;
 		}		
+		
+		if (this.conferenceService.findSubmissionsPapersAcceptedByConferenceId(conferenceId).isEmpty()){
+			canCreatePresentation = false;
+		}
 
 		tutorials = this.tutorialService.findTutorialsByConferenceId(conferenceId);
 		panels = this.panelService.findPanelsByConferenceId(conferenceId);
@@ -59,6 +64,7 @@ public class ActivityController extends AbstractController {
 		res.addObject("presentations", presentations);
 		res.addObject("conferenceId", conferenceId);
 		res.addObject("conferencePast", conferencePast);
+		res.addObject("canCreatePresentation", canCreatePresentation);
 
 		return res;
 	}

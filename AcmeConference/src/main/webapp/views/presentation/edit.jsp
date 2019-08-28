@@ -51,7 +51,7 @@
 		placeholder="dd/MM/yyyy HH:mm" />
 	<br />
 
-	<acme:input code="activity.duration" path="duration" placeholder="30" />
+	<acme:input code="activity.duration" path="duration" placeholder="30" type="number"/>
 	<br />
 
 	<acme:input code="activity.room" path="room" placeholder="Room A1.13" />
@@ -65,9 +65,19 @@
 		placeholder="https://www.example.com/asasdf" />
 	<br />
 
-	<acme:select code="presentation.paper" path="submission"
-		items="${submissions}" itemLabel="paper.title" />
-	<br />
+	<jstl:if test="${hasPapers eq true}">
+		<acme:select code="presentation.paper" path="submission"
+			items="${submissions}" itemLabel="paper.title" />
+		<br />
+	</jstl:if>
+	
+	<jstl:if test="${hasPapers eq false}">
+	<p><spring:message code="presentation.paper.disabled" />
+		<acme:select code="presentation.paper" path="submission"
+			items="${submissions}" itemLabel="paper.title" disabled="true"/>
+		<br />
+	</jstl:if>
+
 
 	<button type="submit" name="save">
 		<spring:message code="activity.save" />
