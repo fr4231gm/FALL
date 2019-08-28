@@ -81,6 +81,7 @@ public class SponsorshipService {
 
 	public void delete(final Sponsorship sponsorship) {
 		Assert.notNull(sponsorship);
+		Assert.isTrue(sponsorship.getSponsor().equals(this.sponsorService.findByPrincipal()));
 		this.sponsorshipRepository.delete(sponsorship);
 
 	}
