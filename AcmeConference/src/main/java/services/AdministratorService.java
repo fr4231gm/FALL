@@ -1,7 +1,12 @@
 
 package services;
 
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.transaction.Transactional;
 
@@ -14,6 +19,10 @@ import repositories.AdministratorRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
+import domain.Author;
+import domain.Conference;
+import domain.Configuration;
+import domain.Paper;
 
 @Service
 @Transactional
@@ -23,6 +32,18 @@ public class AdministratorService {
 	@Autowired
 	private AdministratorRepository	administratorRepository;
 
+	@Autowired
+	private AuthorService 			authorService;
+	
+	@Autowired
+	private SubmissionService 		submissionService;
+	
+	@Autowired
+	private ConfigurationService 	configurationService;
+	
+	@Autowired
+	private ConferenceService 		conferenceService;
+	
 	public Administrator save(final Administrator admin) {
 		Administrator result, principal;
 		Assert.notNull(admin);
@@ -130,7 +151,102 @@ public class AdministratorService {
 	}
 	
 	public Double[] CommentsPerActivity(){
+		this.computeScore();
 		return this.administratorRepository.CommentsPerActivity();
 	}
+	
+	public void computeScore(){
+		Collection<Author> autores = this.authorService.findAll();
+        HashMap<Author, Double> map = new HashMap<>();
+		Double maxCount = 1.;
+		String[] buzzWords  = this.computeBuzzWords().split(",");
+		for (Author autor : autores){
+	        Collection<Paper> papers = this.submissionService.findCameraReadyPapersByAuthorId(autor.getId());
+	        String allWords = "";
+	        for (Paper paper : papers) {
+	    		 allWords += paper.getTitle() + " " + paper.getSummary() + " ";
+	    	}
+	        String[] wordsArray = allWords.split(" ");       
+	        for (String word : wordsArray) {
+	            if (Arrays.asList(buzzWords).contains(word)) {
+	            	if (map.containsKey(word)) {
+		                Double count = map.get(word);
+		                map.put(autor, count + 1);
+		                if (count >= maxCount){
+		                	maxCount = count;
+		                }
+		            } else {
+		                map.put(autor, 1.);
+		            }
+		        }
+	        }
+		}
+		for (Entry<Author, Double> entry : map.entrySet()) {
+			Author autor = entry.getKey();
+	        autor.setScore(map.get(autor)/maxCount);
+	        this.authorService.save(autor);
+		}
+	}
+	
+	public String computeBuzzWords(){
+		Administrator principal = this.findByPrincipal();
+		Assert.notNull(principal);
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, -1);
+		Date d = cal.getTime();
+        Collection<Conference> conferences = this.conferenceService.findConferencesAfter(d);
+        String allWords = "";
+    	//Obtenemos todas las palabras
+        for (Conference conference : conferences) {
+    		 allWords += conference.getTitle() + " " + conference.getSummary() + " ";
+    	}
+    	//Borramos las voidWords
+        Collection<Configuration> configurations = this.configurationService.findAll();
+        for (Configuration config : configurations){
+			String[] voidWords  = config.getVoidWords().split(",");
+			for (String voidWord : voidWords) {
+				allWords = this.removeWord(allWords, voidWord);
+			}
+        }
+        String[] wordsArray = allWords.split(" ");       
+        int maxCount = 1;
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String word : wordsArray) {
+        	word = word.toLowerCase();
+            if (map.containsKey(word)) {
+                int count = map.get(word);
+                map.put(word, count + 1);
+                if (count >= maxCount){
+                	maxCount = count;
+                }
+            } else {
+                map.put(word, 1);
+            }
+        }
+        
+    	Double corte = Math.max(1.1, maxCount*0.8);
+        String buzzWords = "";
+        for (Entry<String, Integer> entry : map.entrySet()) {
+            if(entry.getValue() >= corte){
+            	buzzWords += (entry.getKey()) + ", ";
+            }
+        }
+
+        for (Configuration config : configurations){
+        	config.setBuzzWords(buzzWords);
+        	configurationService.save(config);
+        }
+        return buzzWords;
+
+    }
+	
+	public String removeWord(String string, String word) { 
+	        if (string.contains(word)) {
+	            word = " " + word + " "; 
+	            string = string.replaceAll(word, " "); 
+	        }
+	        return string; 
+	    } 
+	  
 
 }

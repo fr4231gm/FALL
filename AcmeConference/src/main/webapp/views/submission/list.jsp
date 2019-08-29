@@ -32,43 +32,61 @@
 		</jstl:if>
 	</display:column>
 
-<security:authorize access="hasRole('AUTHOR')">
-	
-	<display:column>
-		<acme:link link="submission/author/display.do?submissionId=${row.id}" code = "submission.display"/>
-	</display:column>
-
-</security:authorize>	
-	
 	<display:column>
 		<acme:link link="conference/display.do?conferenceId=${row.conference.id}"
 				code="registration.conference.display" />
 	</display:column>
-		<display:column>
-		<acme:link link="submission/author/edit.do?submissionId=${row.id}" code = "submission.edit"/>
+	
+<security:authorize access="hasRole('AUTHOR')">
+
+	<display:column>
+
+		<acme:link link="submission/author/display.do?submissionId=${row.id}" code = "submission.display"/>
+
 	</display:column>
+
+	<display:column>
+		<jstl:if test="${row.paper.cameraReadyPaper eq false}">
+			<acme:link link="submission/author/edit.do?submissionId=${row.id}" code = "submission.edit"/>
+		</jstl:if>
+	</display:column>
+	
+	<display:column>
+		<jstl:if test="${row.notified eq true}">
+			<acme:link link="report/author/list.do?submissionId=${row.id}" code = "report.list"/>
+		</jstl:if>
+	</display:column>
+	
+	</security:authorize>	
 	
 <security:authorize access="hasRole('ADMINISTRATOR')">
 
 	<display:column>
 		<acme:link link="submission/administrator/display.do?submissionId=${row.id}" code = "submission.display"/>
 	</display:column>
-
-	<display:column>
-		<acme:link link="submission/administrator/assign.do?submissionId=${row.id}"
-				code="submission.assign" />
-	</display:column>
-	
-	<display:column>
-		<acme:link link="submission/administrator/autoassign.do?submissionId=${row.id}" code = "submission.autoassign"/>
-	</display:column>
-	
 	
 	<display:column>
 		<acme:link link="reviewer/listBySubmission.do?submissionId=${row.id}" code = "submission.reviewer"/>
 	</display:column>
+		
+	<display:column>
+		<acme:link link="report/administrator/list.do?submissionId=${row.id}" code = "report.list"/>
+	</display:column>
 	
-</security:authorize>		
+</security:authorize>	
+
+<security:authorize access="hasRole('REVIEWER')">
+	<display:column>
+
+		<acme:link link="submission/reviewer/display.do?submissionId=${row.id}" code = "submission.display"/>
+
+	</display:column>
+	<jstl:if test="${reportable eq true}">
+		<display:column>
+			<acme:link link="report/reviewer/create.do?submissionId=${row.id}" code = "report.create"/>
+		</display:column>
+	</jstl:if>
+</security:authorize>
 
 </display:table>
 

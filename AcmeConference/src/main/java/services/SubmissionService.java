@@ -74,6 +74,7 @@ public class SubmissionService {
 		s.setConference(this.conferenceService.findOne(conferenceId));
 		s.setTicker(this.generateTicker(s));
 		s.setStatus("UNDER-REVIEW");
+		s.setNotified(false);
 		s.setMoment(new Date(System.currentTimeMillis() + 1));
 		final Paper p = new Paper();
 		p.setCameraReadyPaper(false);
@@ -86,6 +87,7 @@ public class SubmissionService {
 		Administrator principal;
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
+		Assert.isTrue(this.isAssignable(s));
 		
 		for(Reviewer r : reviewers){
 			Collection<Submission> submissions = r.getSubmissions();
@@ -153,17 +155,17 @@ public class SubmissionService {
 			res += alphanumeric.charAt(randomNumber);
 			;
 		}
-		String middleName;
-		final String name = s.getAuthor().getName();
-		if (s.getAuthor().getMiddleName() != null)
-			middleName = s.getAuthor().getMiddleName();
-		else
-			middleName = "X";
-
-		final String surname = s.getAuthor().getSurname();
+		char middleName = 'X';
+		final char name = s.getAuthor().getName().charAt(0);
+		final char surname = s.getAuthor().getSurname().charAt(0);
+		if (s.getAuthor().getMiddleName() != null){
+			if (!s.getAuthor().getMiddleName().isEmpty()){
+				middleName = s.getAuthor().getMiddleName().charAt(0);
+			}
+		}
 
 		// Adding formatted date to alphanumeric code
-		res = name.substring(0, 1) + middleName.substring(0, 1) + surname.substring(0, 1) + "-" + res;
+		res = String.valueOf(name).toUpperCase()  + String.valueOf(middleName).toUpperCase() + String.valueOf(surname).toUpperCase() + "-" + res;
 
 		return res;
 	}
@@ -181,6 +183,44 @@ public class SubmissionService {
 
 	public Submission findSubmissionByPaperTitle(String title) {
 		return this.submissionRepository.findSubmissionByPaperTitle(title);
+	}
+
+	public Collection<Submission> findReportablesSubmissions() {
+		Reviewer principal = this.reviewerService.findByPrincipal();
+		return this.submissionRepository.findReportablesSubmissions(principal.getId());
+	}
+
+	public Boolean isAssignable(Submission submission) {
+		boolean res = false;
+		//Para poder asignar reviewers a una submission, tiene que estar en fecha, estar bajo revisión y no tener ningún reviewer asignado
+		if (submission.getConference().getNotificationDeadline().after(new Date()) && submission.getStatus().equals("UNDER-REVIEW") && this.reviewerService.findBySubmission(submission.getId()).isEmpty()){
+			res = true;
+		}
+		return res;
+	}
+
+	public Boolean canDecide(Submission submission) {
+		boolean res = false;
+		
+		//Para poder cambiar el estado de una submission, tiene que estar en fecha, estar bajo revisión y tener al menos un reviewer asignado
+		if(submission.getConference().getSubmissionDeadline().before(new Date()) && submission.getStatus().equals("UNDER-REVIEW") && !this.reviewerService.findBySubmission(submission.getId()).isEmpty()){
+			res = true;
+		}
+		return res;
+	}
+
+	public Boolean isNotificable(Submission submission) {
+		boolean res = false;
+		
+		//Para poder notifcar la actualización de estado de una submission, no debe haberse notifcado con anterioridad, debe estár en fecha, y la decisión del estado debe haber sido tomada
+		if(!submission.getNotified() && submission.getConference().getNotificationDeadline().after(new Date()) && !submission.getStatus().equals("UNDER-REVIEW")){
+			res = true;
+		}
+		return res;
+	}
+	
+	public Collection<Paper> findCameraReadyPapersByAuthorId(int authorId){
+		return this.submissionRepository.findCameraReadyPapersByAuthorId(authorId);
 	}
 
 }

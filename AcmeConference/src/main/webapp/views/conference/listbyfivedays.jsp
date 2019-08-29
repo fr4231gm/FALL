@@ -229,4 +229,4 @@
 <acme:link code="conference.create" link="conference/administrator/create.do"/>
 </security:authorize>
 
-<acme:back code="conference.goback" />
+<acme:back code="master.go.back" />

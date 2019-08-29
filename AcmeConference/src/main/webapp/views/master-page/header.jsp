@@ -71,6 +71,19 @@
 
 				</ul></li>
 		</security:authorize>
+		
+		<!-- REVIEWER -->
+		<security:authorize access="hasRole('REVIEWER')">
+			<li><a class="fNiv parent"><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;<spring:message
+						code="master.page.reviewer" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a class="child" href="report/reviewer/list.do"><spring:message code="master.page.report.list" /></a></li>
+					<li><a class="child" href="submission/reviewer/list.do"><spring:message code="master.page.reviewer.submission.list" /></a></li>
+					
+
+				</ul></li>
+		</security:authorize>
 
 
 		<!-- ******************** NOT AUTHENTICATED ******************** -->

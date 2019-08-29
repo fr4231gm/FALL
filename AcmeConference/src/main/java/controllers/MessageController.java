@@ -101,6 +101,7 @@ public class MessageController extends AbstractController {
 				.findByPrincipal();
 		Assert.notNull(principal);
 		result = this.createEditModelAndView(m);
+		result.addObject("hideRecipients", true);
 		return result;
 	}
 
@@ -112,6 +113,7 @@ public class MessageController extends AbstractController {
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(me);
 			result.addObject("bind", binding);
+			result.addObject("hideRecipients", true);
 		} else
 			try {
 				this.messageService.save(me);
@@ -131,6 +133,7 @@ public class MessageController extends AbstractController {
 		final Administrator principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 		result = this.createEditModelAndView(m);
+		result.addObject("hideRecipients", true);
 		return result;
 	}
 
@@ -142,6 +145,7 @@ public class MessageController extends AbstractController {
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(me);
 			result.addObject("bind", binding);
+			result.addObject("hideRecipients", true);
 		} else
 			try {
 				this.messageService.save(me);
@@ -161,6 +165,7 @@ public class MessageController extends AbstractController {
 		final Administrator principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 		result = this.createEditModelAndView(m);
+		result.addObject("hideRecipients", true);
 		return result;
 	}
 
@@ -172,6 +177,7 @@ public class MessageController extends AbstractController {
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(me);
 			result.addObject("bind", binding);
+			result.addObject("hideRecipients", true);
 		} else
 			try {
 				this.messageService.save(me);
@@ -191,6 +197,7 @@ public class MessageController extends AbstractController {
 		final Administrator principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
 		result = this.createEditModelAndView(m);
+		result.addObject("hideRecipients", true);
 		return result;
 	}
 
@@ -202,6 +209,7 @@ public class MessageController extends AbstractController {
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(me);
 			result.addObject("bind", binding);
+			result.addObject("hideRecipients", true);
 		} else
 			try {
 				this.messageService.save(me);
@@ -211,17 +219,29 @@ public class MessageController extends AbstractController {
 			}
 		return result;
 	}
+	
+	@RequestMapping(value = "/notify", method = RequestMethod.GET)
+	public ModelAndView notify(@RequestParam int submissionId) {
+		ModelAndView result;
+		try {
+			this.messageService.notifySubmission(submissionId);
+			result = new ModelAndView("redirect:/message/list.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/message/list.do");
+		}
+		return result;
+	}
 
 	// Deleting
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView remove(@RequestParam final int id) {
 		ModelAndView result;
-//		try {
+		try {
 			this.messageService.delete(this.messageService.findOne(id));
 			result = new ModelAndView("redirect:/message/list.do");
-//		} catch (final Throwable oops) {
-//			result = new ModelAndView("redirect:/message/list.do");
-//		}
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/message/list.do");
+		}
 		return result;
 	}
 

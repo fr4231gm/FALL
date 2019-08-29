@@ -191,5 +191,13 @@ public class AuthorService {
 			return author;
 		
 	}
+
+		public void flush() {
+			this.authorRepository.flush();
+			
+		}
 		
+		public Collection<Author> authorsWithCameraReadyPapers(){
+			return this.authorRepository.findAuthorsWithCameraReadyPapers();
+		}
 }

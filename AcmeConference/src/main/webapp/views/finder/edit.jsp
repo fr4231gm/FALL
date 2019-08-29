@@ -21,20 +21,22 @@
 
 	
 	<acme:input code="finder.keyWord" path="keyWord" placeholder="la n palabra"/>
-	<form:label path="startDate">
-		<spring:message code="finder.startDate" />:&nbsp;
-	</form:label>
 	
-	<form:input path="startDate" value="${parsedStartDate}" placeholder="11/11/2019 22:00"/>
-	<form:errors cssClass="error" path="startDate" />
-	<br/>
-	<form:label path="endDate">
-		<spring:message code="finder.endDate" />:&nbsp;
-	</form:label>
+	<div class="form-group">
+		<form:label path="startDate">
+			<spring:message code="finder.startDate" />:&nbsp;
+		</form:label>
+		<form:input path="startDate" value="${parsedStartDate}" placeholder="11/11/2019 22:00"/>
+		<form:errors cssClass="error" path="startDate" />
+	</div><br/>
 	
-	<form:input path="endDate" value="${parsedEndDate}" placeholder="11/11/2019 22:00"/>
-	<form:errors cssClass="error" path="endDate" />
-	<br/>
+	<div class="form-group">
+		<form:label path="endDate">
+			<spring:message code="finder.endDate" />:&nbsp;
+		</form:label>
+		<form:input path="endDate" value="${parsedEndDate}" placeholder="11/11/2019 22:00"/>
+		<form:errors cssClass="error" path="endDate" />
+	</div><br/>
 	
 	
 	<acme:input code="finder.fee" path="fee"/>
@@ -45,8 +47,10 @@
 		</form:label>
 		<form:select id="categories" path="category">
 			<form:option itemLabel="root" value="" />
-			<form:options items="${categories}" itemLabel="name" itemValue="id" />
-		</form:select>
+			<form:options items="${categories}" itemLabel="name[${langcode}]" itemValue="id" />
+	</form:select>
+		
+	<br/><br/>
 	<acme:submit name="save" code="finder.buscar"/>
 
 	<acme:cancel url="/" code="finder.cancel"/>	

@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.MessageRepository;
 import domain.Actor;
 import domain.Message;
+import domain.Submission;
 import forms.MessageForm;
 
 @Service
@@ -29,7 +30,9 @@ public class MessageService {
 
 	@Autowired
 	private ActorService			actorService;
-
+	
+	@Autowired
+	private SubmissionService		submissionService;
 
 	// Simple CRUD methods --------------------------------
 
@@ -105,6 +108,18 @@ public class MessageService {
 		Assert.notNull(messages);
 
 		return messages;
+	}
+
+	public void notifySubmission(int submissionId) {
+		Submission s = this.submissionService.findOne(submissionId);
+		MessageForm message = new MessageForm();
+		Collection<Actor> recipients = new ArrayList<Actor>();
+		recipients.add(s.getAuthor());
+		message.setRecipients(recipients);
+		message.setBody("The submission " + s.getTicker() + "has been " + s.getStatus());
+		message.setTopic("NOTIFICATION");
+		message.setSubject("Submission Update");
+		this.save(message);
 	}
 
 }

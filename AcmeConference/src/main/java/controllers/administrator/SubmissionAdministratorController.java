@@ -119,20 +119,24 @@ public class SubmissionAdministratorController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET, params = { "submissionId" })
 	public ModelAndView display(@RequestParam final int submissionId) {
 		ModelAndView res;
-		Boolean decide = false;
-		Date actual = new Date(System.currentTimeMillis());
-		
-		if(this.submissionService.findOne(submissionId).getConference().getSubmissionDeadline().before(actual)){
-			decide = true;
+		Submission submission = this.submissionService.findOne(submissionId);
+		Boolean decide;
+		Boolean asignable;
+		Boolean notificable;
+		try{
+			decide = this.submissionService.canDecide(submission);
+			asignable = this.submissionService.isAssignable(submission);
+			notificable = this.submissionService.isNotificable(submission);
+		} catch (Throwable oops){
+			decide = false;
+			notificable = false;
+			asignable = false;
 		}
-
-		// Initialize variables
-		Submission s;
-		s = this.submissionService.findOne(submissionId);
-
 		res = new ModelAndView("submission/display");
-		res.addObject("submission", s);
+		res.addObject("submission", submission);
 		res.addObject("decide", decide);
+		res.addObject("asignable", asignable);
+		res.addObject("notificable", notificable);
 
 		return res;
 	}
