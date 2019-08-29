@@ -126,7 +126,6 @@ public class AdministratorController extends AbstractController {
             Assert.notNull(this.administratorService.findByPrincipal());
         	res = new ModelAndView("welcome/index");
             String buzzWords = this.administratorService.computeBuzzWords();
-            res.addObject("message", "computeBuzz.success");
             res.addObject("buzzwords", buzzWords);
         } catch (Throwable oops) {
         	res = new ModelAndView("welcome/index");

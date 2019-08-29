@@ -36,6 +36,8 @@
 					<li><a class="child" href="message/broadcast-everyone.do"> <spring:message code="master.page.broadcast.everyone" /></a></li>
 					<li><a class="child" href="message/broadcast-everyone-and-admins.do"> <spring:message code="master.page.broadcast.everyone.and.admins" /></a></li>
 					<li><a class="child" href="configuration/administrator/edit.do"><spring:message code="master.page.administrator.configuration" /></a></li>
+					<li><a class="child" href="administrator/compute.do"><spring:message code="master.page.compute" /></a></li>
+					<li><a class="child" href="administrator/computebuzzwords.do"><spring:message code="master.page.computebuzzwords" /></a></li>
 					<li><a class="child" href="submission/administrator/list.do"><spring:message code="master.page.author.submission" /></a></li>
 				</ul>
 			</li>
