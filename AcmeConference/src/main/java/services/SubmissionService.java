@@ -192,8 +192,28 @@ public class SubmissionService {
 
 	public Boolean isAssignable(Submission submission) {
 		boolean res = false;
+		//Para poder asignar reviewers a una submission, tiene que estar en fecha, estar bajo revisión y no tener ningún reviewer asignado
+		if (submission.getConference().getNotificationDeadline().after(new Date()) && submission.getStatus().equals("UNDER-REVIEW") && this.reviewerService.findBySubmission(submission.getId()).isEmpty()){
+			res = true;
+		}
+		return res;
+	}
+
+	public Boolean canDecide(Submission submission) {
+		boolean res = false;
 		
-		if (submission.getStatus().equals("UNDER-REVIEW") && this.reviewerService.findBySubmission(submission.getId()).isEmpty()){
+		//Para poder cambiar el estado de una submission, tiene que estar en fecha, estar bajo revisión y tener al menos un reviewer asignado
+		if(submission.getConference().getSubmissionDeadline().before(new Date()) && submission.getStatus().equals("UNDER-REVIEW") && !this.reviewerService.findBySubmission(submission.getId()).isEmpty()){
+			res = true;
+		}
+		return res;
+	}
+
+	public Boolean isNotificable(Submission submission) {
+		boolean res = false;
+		
+		//Para poder notifcar la actualización de estado de una submission, no debe haberse notifcado con anterioridad, debe estár en fecha, y la decisión del estado debe haber sido tomada
+		if(!submission.getNotified() && submission.getConference().getNotificationDeadline().after(new Date()) && !submission.getStatus().equals("UNDER-REVIEW")){
 			res = true;
 		}
 		return res;

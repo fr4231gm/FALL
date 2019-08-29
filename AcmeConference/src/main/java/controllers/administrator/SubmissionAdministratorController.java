@@ -120,13 +120,23 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView display(@RequestParam final int submissionId) {
 		ModelAndView res;
 		Submission submission = this.submissionService.findOne(submissionId);
-		Boolean decide = submission.getConference().getSubmissionDeadline().before(new Date());
-		Boolean asignable = this.submissionService.isAssignable(submission);
-
+		Boolean decide;
+		Boolean asignable;
+		Boolean notificable;
+		try{
+			decide = this.submissionService.canDecide(submission);
+			asignable = this.submissionService.isAssignable(submission);
+			notificable = this.submissionService.isNotificable(submission);
+		} catch (Throwable oops){
+			decide = false;
+			notificable = false;
+			asignable = false;
+		}
 		res = new ModelAndView("submission/display");
 		res.addObject("submission", submission);
 		res.addObject("decide", decide);
 		res.addObject("asignable", asignable);
+		res.addObject("notificable", notificable);
 
 		return res;
 	}

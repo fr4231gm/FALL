@@ -58,20 +58,40 @@
 </jstl:if>
 
 </fieldset>
+	
+	<br />		
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
-	<jstl:if test="${decide eq 'true'}">
-		<h3><acme:link link="submission/administrator/decide.do?submissionId=${submission.id}" code="submission.decide" /></h3>
-	</jstl:if>
-	${submission.status }
-	<jstl:if test="${asignable eq 'false'}">
-		<h3><acme:link link="submission/administrator/assign.do?submissionId=${submission.id}" code="submission.assign" /></h3>
-	
-		<h3><acme:link link="submission/administrator/autoassign.do?submissionId=${submission.id}" code = "submission.autoassign"/></h3>
-	</jstl:if>
-	
-	<br />		
-	<br />		
+	<table>
+		<tr>
+			<jstl:if test="${asignable eq 'true'}">
+				<td style="width:25%; vertical-align:middle;text-align: center;"><h3><acme:link link="submission/administrator/assign.do?submissionId=${submission.id}" code="submission.assign.reviewer" /></h3></td>
+				<td style="width:25%; vertical-align:middle;text-align: center;"><h3><acme:link link="submission/administrator/autoassign.do?submissionId=${submission.id}" code = "submission.autoassign"/></h3></td>
+			</jstl:if>
+			
+			<jstl:if test="${asignable eq 'false'}">
+				<td style="width:25%; vertical-align:middle;text-align: center; opacity:0.5;"><h3><spring:message code="submission.assign.reviewer" /></h3></td>
+				<td style="width:25%; vertical-align:middle;text-align: center; opacity:0.5;"><h3><spring:message code = "submission.autoassign"/></h3></td>
+			</jstl:if>
+			
+			<jstl:if test="${decide eq 'true'}">
+				<td style="width:25%; vertical-align:middle;text-align: center;"><h3><acme:link link="submission/administrator/decide.do?submissionId=${submission.id}" code="submission.decide" /></h3></td>
+			</jstl:if>
+			
+			<jstl:if test="${decide eq 'false'}">
+				<td style="width:25%; vertical-align:middle;text-align: center; opacity:0.5;"><h3><spring:message code="submission.decide" /></h3></td>
+			</jstl:if>
+		
+			<jstl:if test="${notificable eq 'true'}">
+				<td style="width:25%; vertical-align:middle;text-align: center;"><h3><acme:link link="message/notify.do?submissionId=${submission.id}" code = "submission.notify"/></h3></td>
+			</jstl:if>
+		
+			<jstl:if test="${notificable eq 'false'}">
+				<td style="width:25%; vertical-align:middle;text-align: center; opacity:0.5;"><h3><spring:message code = "submission.notify"/></h3></td>
+			</jstl:if>
+		<tr>
+	</table>
+<br />	<br />	
 </security:authorize>
 
 <acme:back code="conference.goback"/>

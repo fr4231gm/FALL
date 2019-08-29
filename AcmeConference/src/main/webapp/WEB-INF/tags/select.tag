@@ -30,6 +30,7 @@
 <%@ attribute name="id" required="false" %>
 <%@ attribute name="onchange" required="false" %>
 <%@ attribute name="multiple" required="false" %>
+<%@ attribute name="readOnly" required="false" %>
 <%@ attribute name="disabled" required="false" %>
 
 <jstl:if test="${id == null}">
@@ -43,6 +44,9 @@
 <jstl:if test="${multiple == null}">
 	<jstl:set var="multiple" value="false" />
 </jstl:if>
+<jstl:if test="${readOnly == null}">
+	<jstl:set var="readOnly" value="false" />
+</jstl:if>
 
 <%-- Definition --%>
 
@@ -50,7 +54,7 @@
 	<form:label path="${path}">
 		<spring:message code="${code}" />
 	</form:label>	
-	<form:select id="${id}" path="${path}" multiple="${multiple}" onchange="${onchange}" disabled="${disabled}">	
+	<form:select id="${id}" path="${path}" multiple="${multiple}" onchange="${onchange}" disabled="${disabled}" readOnly="${readOnly}">	
 		<form:options items="${items}" itemValue="id" itemLabel="${itemLabel}" />
 	</form:select>
 	<form:errors path="${path}" cssClass="error" />

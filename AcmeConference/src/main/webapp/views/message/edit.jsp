@@ -18,8 +18,16 @@
 	<form:hidden path="version" />
 
 	<acme:input code="message.subject" path="subject" placeholder="Hello moto" />
-	<acme:textarea code="message.body" path="body"  placeholder="the reason of this message is..." />
-	<acme:select itemLabel="name" items="${recipients}" code="message.recipients" path="recipients"  multiple="true" id="recipients" />
+	<acme:textarea code="message.body" path="body" placeholder="the reason of this message is..." />
+	
+	<jstl:choose>
+		<jstl:when test="${hideRecipients eq true}">
+			<form:hidden path="recipients" />
+		</jstl:when>
+		<jstl:otherwise>
+			<acme:select itemLabel="name" items="${recipients}" code="message.recipients" path="recipients"  multiple="true" id="recipients"/>
+		</jstl:otherwise>
+	</jstl:choose>
 	
 	<div class="form-group">
 		<form:label path="topic"> <spring:message code="message.topic" /> </form:label>
