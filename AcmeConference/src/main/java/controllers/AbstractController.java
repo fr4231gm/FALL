@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,6 +49,7 @@ public class AbstractController {
 		result.addAttribute("welcomeMessage", configuration.getWelcomeMessage());
 		result.addAttribute("config", configuration);
 		result.addAttribute("langcode", ls);
+
 	}
 
 	// Panic handler ----------------------------------------------------------
@@ -56,7 +58,7 @@ public class AbstractController {
 	public ModelAndView panic(final Throwable oops) {
 		ModelAndView result;
 
-		result = new ModelAndView("misc/panic");
+		result = new ModelAndView("misc/error");
 		result.addObject("name", ClassUtils.getShortName(oops.getClass()));
 		result.addObject("exception", oops.getMessage());
 		result.addObject("stackTrace", ExceptionUtils.getStackTrace(oops));
