@@ -200,4 +200,8 @@ public class AuthorService {
 		public Collection<Author> authorsWithCameraReadyPapers(){
 			return this.authorRepository.findAuthorsWithCameraReadyPapers();
 		}
+
+		public void updateScore(Author autor) {
+			this.authorRepository.save(autor);
+		}
 }

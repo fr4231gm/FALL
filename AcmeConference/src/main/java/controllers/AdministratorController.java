@@ -118,8 +118,8 @@ public class AdministratorController extends AbstractController {
         return res;
     }
     
-    @RequestMapping(value = "/computeBuzzScore", method = RequestMethod.GET)
-    public ModelAndView computeBuzzScore() {
+    @RequestMapping(value = "/computebuzzwords", method = RequestMethod.GET)
+    public ModelAndView computeBuzzWords() {
         ModelAndView res;
 
         try {
@@ -127,7 +127,7 @@ public class AdministratorController extends AbstractController {
         	res = new ModelAndView("welcome/index");
             String buzzWords = this.administratorService.computeBuzzWords();
             res.addObject("message", "computeBuzz.success");
-            res.addObject("buzzWords", buzzWords);
+            res.addObject("buzzwords", buzzWords);
         } catch (Throwable oops) {
         	res = new ModelAndView("welcome/index");
         }
