@@ -64,16 +64,6 @@
 	<display:column>
 		<acme:link link="submission/administrator/display.do?submissionId=${row.id}" code = "submission.display"/>
 	</display:column>
-
-	<display:column>
-		<acme:link link="submission/administrator/assign.do?submissionId=${row.id}"
-				code="submission.assign" />
-	</display:column>
-	
-	<display:column>
-		<acme:link link="submission/administrator/autoassign.do?submissionId=${row.id}" code = "submission.autoassign"/>
-	</display:column>
-	
 	
 	<display:column>
 		<acme:link link="reviewer/listBySubmission.do?submissionId=${row.id}" code = "submission.reviewer"/>

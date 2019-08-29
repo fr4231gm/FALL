@@ -193,4 +193,8 @@ public class ReviewerService {
 		this.reviewerRepository.save(r);
 	}
 
+	public Collection<Reviewer> findBySubmission(int submissionId) {
+		return  this.reviewerRepository.findReviewersBySubmission(submissionId);
+	}
+
 }

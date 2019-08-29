@@ -63,6 +63,13 @@
 	<jstl:if test="${decide eq 'true'}">
 		<h3><acme:link link="submission/administrator/decide.do?submissionId=${submission.id}" code="submission.decide" /></h3>
 	</jstl:if>
+	${submission.status }
+	<jstl:if test="${asignable eq 'false'}">
+		<h3><acme:link link="submission/administrator/assign.do?submissionId=${submission.id}" code="submission.assign" /></h3>
+	
+		<h3><acme:link link="submission/administrator/autoassign.do?submissionId=${submission.id}" code = "submission.autoassign"/></h3>
+	</jstl:if>
+	
 	<br />		
 	<br />		
 </security:authorize>

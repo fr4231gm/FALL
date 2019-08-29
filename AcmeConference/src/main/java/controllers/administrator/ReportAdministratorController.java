@@ -28,7 +28,7 @@ public class ReportAdministratorController extends AbstractController {
 		reports = this.reportService.findReportsBySubmissionId(submissionId);
 
 		res = new ModelAndView("report/list");
-		res.addObject(reports);
+		res.addObject("reports", reports);
 		res.addObject("requestURI", "report/administrator/list.do");
 		
 		return res;

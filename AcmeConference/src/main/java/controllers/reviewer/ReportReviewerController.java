@@ -57,22 +57,22 @@ public class ReportReviewerController extends AbstractController {
 	public ModelAndView save(@Valid Report report,  final BindingResult binding) {
 		ModelAndView result;
 		
-//		try {
-//			if (binding.hasErrors()) {
-//				result = new ModelAndView("report/create");
-//				result.addObject(report);
-//				result.addObject("bind", binding);
-//			}
-//			else{
+		try {
+			if (binding.hasErrors()) {
+				result = new ModelAndView("report/create");
+				result.addObject(report);
+				result.addObject("bind", binding);
+			}
+			else{
 				Report saved = this.reportService.save(report);
 				result = new ModelAndView("redirect:/report/reviewer/display.do?reportId=" + saved.getId());
 				result.addObject(report);
-//			}
-//
-//		} catch(Throwable oops) {
-//			result = new ModelAndView("redirect:/");
-//			result.addObject("message", "commit.error");
-//		}
+			}
+
+		} catch(Throwable oops) {
+			result = new ModelAndView("redirect:/");
+			result.addObject("message", "commit.error");
+		}
 
 		return result;
 	}

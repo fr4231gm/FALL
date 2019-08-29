@@ -191,5 +191,10 @@ public class AuthorService {
 			return author;
 		
 	}
+
+		public void flush() {
+			this.authorRepository.flush();
+			
+		}
 		
 }

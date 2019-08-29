@@ -87,6 +87,7 @@ public class SubmissionService {
 		Administrator principal;
 		principal = this.administratorService.findByPrincipal();
 		Assert.notNull(principal);
+		Assert.isTrue(this.isAssignable(s));
 		
 		for(Reviewer r : reviewers){
 			Collection<Submission> submissions = r.getSubmissions();
@@ -187,6 +188,15 @@ public class SubmissionService {
 	public Collection<Submission> findReportablesSubmissions() {
 		Reviewer principal = this.reviewerService.findByPrincipal();
 		return this.submissionRepository.findReportablesSubmissions(principal.getId());
+	}
+
+	public Boolean isAssignable(Submission submission) {
+		boolean res = false;
+		
+		if (submission.getStatus().equals("UNDER-REVIEW") && this.reviewerService.findBySubmission(submission.getId()).isEmpty()){
+			res = true;
+		}
+		return res;
 	}
 
 }
