@@ -218,5 +218,9 @@ public class SubmissionService {
 		}
 		return res;
 	}
+	
+	public Collection<Paper> findCameraReadyPapersByAuthorId(int authorId){
+		return this.submissionRepository.findCameraReadyPapersByAuthorId(authorId);
+	}
 
 }

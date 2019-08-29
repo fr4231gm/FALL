@@ -222,4 +222,13 @@ public class ConferenceService {
 	public Collection<Submission> findSubmissionsPapersAcceptedByConferenceId(int conferenceId){
 		return this.conferenceRepository.findSubmissionsPapersAcceptedByConferenceId(conferenceId);
 	}
+	public Collection<Conference> findConferencesAfter(Date date) {
+		Collection<Conference> conferences;
+		
+		conferences = this.conferenceRepository.findForthcomingConferences(date);
+		Assert.notNull(conferences);
+
+		return conferences;
+	}
+
 }
