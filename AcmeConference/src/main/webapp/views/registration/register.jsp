@@ -22,7 +22,7 @@
 		<spring:message code="creditCard" />
 		<br><br>
 	</div>
-	<acme:input code="creditCard.holder" path="creditCard.holder"/>
+	<acme:input code="creditCard.holder" path="creditCard.holder" placeholder="Juan Pérez Prado"/>
 	<div class="form-group">
 		<form:label path="creditCard.make"> <spring:message code="creditCard.make" /> </form:label>
 	   	<form:select path="creditCard.make" >
@@ -32,10 +32,10 @@
 	</div> 
 	<br>
 	
-	<acme:input code="creditCard.number" path="creditCard.number"/>
-	<acme:input code="creditCard.expirationMonth" path="creditCard.expirationMonth"/>
-	<acme:input code="creditCard.expirationYear" path="creditCard.expirationYear"/>
-	<acme:input code="creditCard.CVV" path="creditCard.CVV"/>
+	<acme:input code="creditCard.number" path="creditCard.number" placeholder="5332563560352168"/>
+	<acme:input code="creditCard.expirationMonth" path="creditCard.expirationMonth" type="number" placeholder="07"/>
+	<acme:input code="creditCard.expirationYear" path="creditCard.expirationYear" type="number" placeholder="24"/>
+	<acme:input code="creditCard.CVV" path="creditCard.CVV" type="number" placeholder="324"/>
 	
 	<acme:submit name="save" code="actor.save"/>
 	<acme:cancel code="actor.cancel" url="/"/>

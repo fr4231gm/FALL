@@ -48,7 +48,7 @@
 		placeholder="dd/MM/yyyy HH:mm" />
 	<br />
 
-	<acme:input code="activity.duration" path="duration" placeholder="30" />
+	<acme:input code="activity.duration" path="duration" placeholder="30" type="number" />
 	<br />
 
 	<acme:input code="activity.room" path="room" placeholder="Room A1.13" />

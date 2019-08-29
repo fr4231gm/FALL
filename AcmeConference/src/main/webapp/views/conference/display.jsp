@@ -34,6 +34,9 @@
 	</jstl:if>
 </jstl:if>
 
+<br />
+
+
 <jstl:if test="${canCreateActivity eq true}">
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<acme:link link="panel/edit.do?conferenceId=${conference.id}" code="conference.panel" />	&nbsp;

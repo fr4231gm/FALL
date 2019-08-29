@@ -23,11 +23,10 @@
 	<form:hidden path="notified"/>
 	<form:hidden path="status"/>
 	<form:hidden path="conference"/>
+	<form:hidden path="notified"/>
 	<jstl:if test="${submission.id ==0 }">
 	<form:hidden path="paper.cameraReadyPaper"/>
 </jstl:if>		
-
-	
 	
 	<acme:input code="submission.paper.title" path="paper.title" placeholder="Title of paper"/>
 	<acme:textarea code="submission.paper.summary" path="paper.summary" placeholder="Summary can be long.."/>
