@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ConferenceService;
 import services.SectionService;
 import services.TutorialService;
 import services.UtilityService;
@@ -30,11 +31,19 @@ public class SectionController extends AbstractController {
 
 	@Autowired
 	private UtilityService utilityService;
+	
+	@Autowired
+	private ConferenceService conferenceService;
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int tutorialId) {
 		ModelAndView res;
 		Section section;
+		
+		Tutorial tutorial = this.tutorialService.findOne(tutorialId);
+		
+		Assert.isTrue(!this.conferenceService.findPastConferences().contains(
+				tutorial.getConference()));
 
 		section = this.sectionService.create(tutorialId);
 		SectionForm sectionForm = this.sectionService.construct(section);
@@ -135,6 +144,9 @@ public class SectionController extends AbstractController {
 
 		section = this.sectionService.findOne(sectionId);
 		tutorial = this.tutorialService.findTutorialBySectionId(sectionId);
+		
+		Assert.isTrue(!this.conferenceService.findPastConferences().contains(
+				tutorial.getConference()));
 
 		try {
 			this.sectionService.delete(section);

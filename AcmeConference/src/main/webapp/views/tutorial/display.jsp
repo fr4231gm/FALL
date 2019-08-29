@@ -68,8 +68,10 @@
 		<th><spring:message code="section.summary" /></th>
 		<th><spring:message code="section.pictures" /></th>
 		<security:authorize access="hasRole('ADMINISTRATOR')">
-			<th><spring:message code="section.edit" /></th>
-			<th><spring:message code="section.delete" /></th>
+			<jstl:if test="${conferencePast eq false }">
+				<th><spring:message code="section.edit" /></th>
+				<th><spring:message code="section.delete" /></th>
+			</jstl:if>
 		</security:authorize>
 	</tr>
 	<jstl:forEach items="${tutorial.sections}" var="section">
@@ -78,15 +80,17 @@
 			<td><jstl:out value="${section.summary}" /></td>
 			<td><jstl:out value="${section.pictures}" /></td>
 			<security:authorize access="hasRole('ADMINISTRATOR')">
-				<td><acme:link code="section.edit"
-						link="section/edit.do?sectionId=${section.id}" /></td>
-				<td><acme:link code="section.delete"
-						link="section/delete.do?sectionId=${section.id}" /></td>
+				<jstl:if test="${conferencePast eq false }">
+					<td><acme:link code="section.edit"
+							link="section/edit.do?sectionId=${section.id}" /></td>
+					<td><acme:link code="section.delete"
+							link="section/delete.do?sectionId=${section.id}" /></td>
+				</jstl:if>
 			</security:authorize>
 		</tr>
 	</jstl:forEach>
 </table>
-<br/>
+<br />
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<jstl:if test="${conferencePast eq false }">
