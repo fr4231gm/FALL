@@ -151,7 +151,6 @@ public class AdministratorService {
 	}
 	
 	public Double[] CommentsPerActivity(){
-		this.computeScore();
 		return this.administratorRepository.CommentsPerActivity();
 	}
 	
@@ -184,7 +183,7 @@ public class AdministratorService {
 		for (Entry<Author, Double> entry : map.entrySet()) {
 			Author autor = entry.getKey();
 	        autor.setScore(map.get(autor)/maxCount);
-	        this.authorService.save(autor);
+	        this.authorService.updateScore(autor);
 		}
 	}
 	

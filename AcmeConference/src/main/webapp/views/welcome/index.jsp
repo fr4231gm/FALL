@@ -19,3 +19,7 @@
 <p><spring:message code="welcome.greeting.prefix" /> ${name}<spring:message code="welcome.greeting.suffix" /></p>
 
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
+
+<jstl:if test="${not empty buzzwords }">
+	<p><spring:message code="computeBuzz.success" /> ${buzzwords} ".</p> 
+</jstl:if>
