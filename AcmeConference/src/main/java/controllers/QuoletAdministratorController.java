@@ -1,6 +1,8 @@
 package controllers;
 
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,24 +26,6 @@ public class QuoletAdministratorController {
 	@Autowired
 	private QuoletService			quoletService;
 
-	@Autowired
-	private AdministratorService	adminService;
-
-
-	//List----------------------------------------------------------------
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
-		ModelAndView res;
-		final Collection<Quolet> quolets = this.quoletService.findByAdministrator(this.adminService.findByPrincipal().getId());
-		res = new ModelAndView("quolet/list");
-		res.addObject("quolets", quolets);
-		res.addObject("requestURI", "quolet/administrator/list.do");
-		return res;
-	}
-
-	@Autowired
-	private QuoletService quoletService;
-	
 	@Autowired
 	private AdministratorService administratorService;
 
@@ -122,6 +106,17 @@ public class QuoletAdministratorController {
 			}
 		return res;
 	}
+	
+	//List----------------------------------------------------------------
+		@RequestMapping(value = "/list", method = RequestMethod.GET)
+		public ModelAndView list() {
+			ModelAndView res;
+			final Collection<Quolet> quolets = this.quoletService.findByAdministrator(this.administratorService.findByPrincipal().getId());
+			res = new ModelAndView("quolet/list");
+			res.addObject("quolets", quolets);
+			res.addObject("requestURI", "quolet/administrator/list.do");
+			return res;
+		}
 
 	// Ancillary metods
 	protected ModelAndView createEditModelAndView(final Quolet q) {
