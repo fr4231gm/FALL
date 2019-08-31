@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdministratorService;
 import services.ConferenceService;
 import services.ReviewerService;
 import services.SubmissionService;
 import controllers.AbstractController;
+import domain.Administrator;
 import domain.Reviewer;
 import domain.Submission;
 import forms.SubmissionForm;
@@ -34,15 +36,28 @@ public class SubmissionAdministratorController extends AbstractController {
 	
 	@Autowired
 	private ConferenceService conferenceService;
+	
+	@Autowired
+	private AdministratorService administratorService;
 
 	// Other Methods
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
 	public ModelAndView assign(@RequestParam final int submissionId) {
 		ModelAndView res;
+		final Submission s;
+		Administrator principal;
+		principal = this.administratorService.findByPrincipal();
 		SubmissionForm submissionForm = new SubmissionForm();
+		s = this.submissionService.findOne(submissionId);
+		
+		if (s.getConference().getAdministrator().getId() != principal.getId())
+			res = new ModelAndView("security/hacking");
+		else{
+			
 		submissionForm.setSubmission(this.submissionService.findOne(submissionId));
 		res = new ModelAndView("submission/assign");
 		res = this.createEditModelAndView(submissionForm);
+		}
 		
 		return res;
 	}
@@ -68,33 +83,52 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView autoassign(final int submissionId) {
 		ModelAndView res;
 		Collection<Reviewer> reviewers;
+		final Submission s;
+		Administrator principal;
+		principal = this.administratorService.findByPrincipal();
+		s = this.submissionService.findOne(submissionId);
 		
-		try {
-			reviewers = this.conferenceService.getCompatibleReviewers(this.submissionService.findOne(submissionId).getConference());
-			this.submissionService.setRev(this.submissionService.findOne(submissionId), reviewers);
-			res = new ModelAndView("redirect:/submission/administrator/list.do");
+		if (s.getConference().getAdministrator().getId() != principal.getId())
+			res = new ModelAndView("security/hacking");
+		else{
+		
+			try {
+				reviewers = this.conferenceService.getCompatibleReviewers(this.submissionService.findOne(submissionId).getConference());
+				this.submissionService.setRev(this.submissionService.findOne(submissionId), reviewers);
+				res = new ModelAndView("redirect:/submission/administrator/list.do");
+			}
+			catch (final Throwable oops) {
+				res = new ModelAndView("redirect:/submission/administrator/list.do");
+				res.addObject("message", "submission.commit.error");
+			}
 		}
-		catch (final Throwable oops) {
-			res = new ModelAndView("redirect:/submission/administrator/list.do");
-			res.addObject("message", "submission.commit.error");
-		}
+		
 		return res;
 	}
 	
 	@RequestMapping(value = "/decide", method = RequestMethod.GET)
 	public ModelAndView decide(@RequestParam final int submissionId) {
 		ModelAndView res;		
+		final Submission s;
+		Administrator principal;
+		principal = this.administratorService.findByPrincipal();
+		s = this.submissionService.findOne(submissionId);
 		
-		try {
-			Submission toDecide = this.submissionService.findOne(submissionId);
-			this.submissionService.decide(toDecide);
-			res = new ModelAndView("redirect:list.do");
-		}
-		catch (final Throwable oops) {
-			res = new ModelAndView("redirect:list.do");
-			res.addObject("message", "submission.commit.error");
-		}
+		if (s.getConference().getAdministrator().getId() != principal.getId())
+			res = new ModelAndView("security/hacking");
+		else{
 		
+			try {
+				Submission toDecide = this.submissionService.findOne(submissionId);
+				this.submissionService.decide(toDecide);
+				res = new ModelAndView("redirect:list.do");
+			}
+			catch (final Throwable oops) {
+				res = new ModelAndView("redirect:list.do");
+				res.addObject("message", "submission.commit.error");
+			}
+		}
+			
 		return res;
 	}
 

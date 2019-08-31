@@ -63,14 +63,21 @@ public class RegistrationAuthorController extends AbstractController {
 		ModelAndView res;
 		final Registration registration = this.registrationService
 				.create(conferenceId);
+		Author principal;
+		principal = this.authorService.findByPrincipal();
 		String[] makes;
 
 		makes = this.configurationService.findConfiguration().getMake()
 				.split(",");
 
-		res = this.createEditModelAndView(registration);
-		res.addObject("makes", makes);
-
+		if (registration.getAuthor().getId() != principal.getId())
+			res = new ModelAndView("security/hacking");
+		else{
+		
+			res = this.createEditModelAndView(registration);
+			res.addObject("makes", makes);
+		}	
+			
 		return res;
 	}
 
