@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
 import services.QuoletService;
+import domain.Administrator;
 import domain.Quolet;
 
 @Controller
@@ -19,7 +21,10 @@ import domain.Quolet;
 public class QuoletController extends AbstractController {
 
 	@Autowired
-	private QuoletService			quoletService;
+	private QuoletService quoletService;
+	
+	@Autowired
+	private AdministratorService administratorService;
 
 	@Autowired
 	private AdministratorService	adminService;
@@ -31,6 +36,11 @@ public class QuoletController extends AbstractController {
 		Quolet quolet;
 
 		quolet = this.quoletService.findOne(quoletId);
+		
+		if(quolet.getIsDraft().equals(false)){
+			Administrator principal = this.administratorService.findByPrincipal();
+			Assert.notNull(principal);
+		}
 
 		res = new ModelAndView("quolet/display");
 		res.addObject("quolet", quolet);

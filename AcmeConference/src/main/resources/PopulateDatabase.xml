@@ -1579,7 +1579,7 @@
 			value="https://static3.upandscrap.com/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/0/0/0000856358.jpg" />
 		<property name="cameraReadyPaper" value="true" />
 	</bean>
-	
+
 	<bean id="paper13" class="domain.Paper">
 		<property name="title" value="Papel de cumple 2" />
 		<property name="summary"
@@ -2309,7 +2309,7 @@
 		<property name="Conference" ref="conference11" />
 		<property name="Author" ref="author2" />
 	</bean>
-	
+
 	<bean id="submission13" class="domain.Submission">
 		<property name="ticker" value="JSL-7641" />
 		<property name="moment" value="04/10/2019" />
@@ -2635,49 +2635,53 @@
 			</list>
 		</property>
 	</bean>
-	
-<!-- Quolets-->
+
+	<!-- Quolets -->
 	<bean id="quolet1" class="domain.Quolet">
-		<property name="ticker" value="AAA-123" /> 
-		<property name="body" value="This is the body" /> 
-		<property name="publicationMoment" value="08/03/2019" /> 
-		<property name="atributo1" value="atributo1" /> 
-		<property name="isDraft" value="true" /> 
-		<property name="administrator" ref="administrator1" /> 
-		<property name="conference" ref="conference1" /> 
-		<property name="title" value="TEST" /> 
+		<property name="ticker" value="AAA-123" />
+		<property name="body" value="This is the body" />
+		<property name="publicationMoment">
+			<null></null>
+		</property>
+		<property name="atributo1" value="atributo1" />
+		<property name="isDraft" value="true" />
+		<property name="administrator" ref="administrator1" />
+		<property name="conference" ref="conference1" />
+		<property name="title" value="TEST Quolet 1" />
 	</bean>
 
 	<bean id="quolet2" class="domain.Quolet">
-		<property name="ticker" value="AAA-124" /> 
-		<property name="body" value="This is the body" /> 
-		<property name="publicationMoment" value="07/25/2019" /> 
-		<property name="atributo1" value="atributo2" /> 
-		<property name="isDraft" value="false" /> 
-		<property name="administrator" ref="administrator1" /> 
-		<property name="conference" ref="conference1" /> 
-		<property name="title" value="TEST" /> 
+		<property name="ticker" value="AAA-124" />
+		<property name="body" value="This is the body" />
+		<property name="publicationMoment" value="07/25/2019" />
+		<property name="atributo1" value="atributo2" />
+		<property name="isDraft" value="false" />
+		<property name="administrator" ref="administrator1" />
+		<property name="conference" ref="conference1" />
+		<property name="title" value="TEST Quolet 2" />
 	</bean>
 
 	<bean id="quolet3" class="domain.Quolet">
-		<property name="ticker" value="AAA-125" /> 
-		<property name="body" value="This is the body" /> 
-		<property name="publicationMoment" value="05/03/2019" /> 
-		<property name="atributo1" value="atributo3" /> 
-		<property name="isDraft" value="true" /> 
-		<property name="administrator" ref="administrator2" /> 
-		<property name="conference" ref="conference2" /> 
-		<property name="title" value="TEST" /> 
+		<property name="ticker" value="AAA-125" />
+		<property name="body" value="This is the body" />
+		<property name="publicationMoment">
+			<null></null>
+		</property>
+		<property name="atributo1" value="atributo3" />
+		<property name="isDraft" value="true" />
+		<property name="administrator" ref="administrator2" />
+		<property name="conference" ref="conference2" />
+		<property name="title" value="TEST Quolet 3" />
 	</bean>
 
 	<bean id="quolet4" class="domain.Quolet">
-		<property name="ticker" value="AAA-126" /> 
-		<property name="body" value="This is the body" /> 
-		<property name="publicationMoment" value="06/04/2019" /> 
-		<property name="atributo1" value="atributo4" /> 
-		<property name="isDraft" value="false" /> 
-		<property name="administrator" ref="administrator2" /> 
-		<property name="conference" ref="conference2" /> 
-		<property name="title" value="TEST" /> 
+		<property name="ticker" value="AAA-126" />
+		<property name="body" value="This is the body" />
+		<property name="publicationMoment" value="06/04/2019" />
+		<property name="atributo1" value="atributo4" />
+		<property name="isDraft" value="false" />
+		<property name="administrator" ref="administrator2" />
+		<property name="conference" ref="conference2" />
+		<property name="title" value="TEST Quolet 4" />
 	</bean>
 </beans>
