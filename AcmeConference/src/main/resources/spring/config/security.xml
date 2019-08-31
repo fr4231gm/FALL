@@ -63,7 +63,7 @@
 		<security:intercept-url pattern="/conference/administrator/**" access="hasRole('ADMINISTRATOR')"/>
 		<security:intercept-url pattern="/section/**" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/report/administrator/**" access="hasRole('ADMINISTRATOR')" />
-		
+
 		<!-- AUTHOR -->
 		
 		<security:intercept-url pattern="/registration/author/list.do" access="hasRole('AUTHOR')" />
