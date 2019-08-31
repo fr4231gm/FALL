@@ -26,9 +26,6 @@ public class QuoletController extends AbstractController {
 	@Autowired
 	private AdministratorService administratorService;
 
-	@Autowired
-	private AdministratorService	adminService;
-
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int quoletId) {
@@ -53,7 +50,7 @@ public class QuoletController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView res;
-		final Collection<Quolet> quolets = this.quoletService.findByAdministrator(this.adminService.findByPrincipal().getId());
+		final Collection<Quolet> quolets = this.quoletService.findByAdministrator(this.administratorService.findByPrincipal().getId());
 		res = new ModelAndView("quolet/list");
 		res.addObject("quolets", quolets);
 		res.addObject("requestURI", "quolet/list.do");
