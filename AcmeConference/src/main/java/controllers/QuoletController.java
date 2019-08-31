@@ -1,4 +1,7 @@
+
 package controllers;
+
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,10 @@ public class QuoletController extends AbstractController {
 	@Autowired
 	private AdministratorService administratorService;
 
+	@Autowired
+	private AdministratorService	adminService;
+
+
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int quoletId) {
 		ModelAndView res;
@@ -39,6 +46,17 @@ public class QuoletController extends AbstractController {
 		res.addObject("quolet", quolet);
 		res.addObject("conference", quolet.getConference());
 
+		return res;
+	}
+
+	//List----------------------------------------------------------------
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView res;
+		final Collection<Quolet> quolets = this.quoletService.findByAdministrator(this.adminService.findByPrincipal().getId());
+		res = new ModelAndView("quolet/list");
+		res.addObject("quolets", quolets);
+		res.addObject("requestURI", "quolet/list.do");
 		return res;
 	}
 }
