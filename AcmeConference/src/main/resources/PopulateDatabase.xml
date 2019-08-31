@@ -2684,4 +2684,15 @@
 		<property name="conference" ref="conference2" />
 		<property name="title" value="TEST Quolet 4" />
 	</bean>
+	
+	<bean id="quolet5" class="domain.Quolet">
+		<property name="ticker" value="AAA-127" />
+		<property name="body" value="This is the body" />
+		<property name="publicationMoment" value="08/04/2019" />
+		<property name="atributo1" value="atributo5" />
+		<property name="isDraft" value="false" />
+		<property name="administrator" ref="administrator2" />
+		<property name="conference" ref="conference1" />
+		<property name="title" value="TEST Quolet 5" />
+	</bean>
 </beans>
