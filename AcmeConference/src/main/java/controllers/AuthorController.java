@@ -21,6 +21,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AuthorService;
@@ -31,46 +32,65 @@ import forms.ActorForm;
 @RequestMapping("/author")
 public class AuthorController extends AbstractController {
 
-    @Autowired
-    private AuthorService authorService;
-    
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit() {
-        ModelAndView res;
-        Author author;
+	@Autowired
+	private AuthorService	authorService;
 
-        author = this.authorService.findByPrincipal();
-        Assert.notNull(author);
-        res = this.createEditModelAndView(author);
-        
-        return res;
-    }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, params="save")
-    public ModelAndView save(@Valid Author author, BindingResult binding) {
-        ModelAndView res;
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit() {
+		ModelAndView res;
+		Author author;
 
-        
-        try {
+		author = this.authorService.findByPrincipal();
+		Assert.notNull(author);
+		res = this.createEditModelAndView(author);
+
+		return res;
+	}
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET, params = {
+		"authorId"
+	})
+	public ModelAndView display(@RequestParam final int authorId) {
+		ModelAndView result;
+
+		// Initialize variables
+		Author author;
+		author = this.authorService.findOne(authorId);
+
+		//
+
+		result = new ModelAndView("author/display");
+		result.addObject("author", author);
+		result.addObject("requestURI", "author/display.do?authorId=" + authorId);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Author author, final BindingResult binding) {
+		ModelAndView res;
+
+		try {
 			if (!(author.getEmail().matches("[A-Za-z_.]+[\\w]+[\\S]+@[a-zA-Z0-9.-]+|[\\w\\s]+[\\<][A-Za-z_.]+[\\w]+@[a-zA-Z0-9.-]+[\\>]")) && author.getEmail().length() > 0)
 				binding.rejectValue("email", "actor.email.check");
-	        if(binding.hasErrors()){
-	            res = this.createEditModelAndView(author);            
-	        } else {
-                Author saved = this.authorService.save(author);
-                res = new ModelAndView("welcome/index");
-                res.addObject("name", saved.getName());
-                res.addObject("exitCode", "actor.edit.success");
-                res.addObject("moment", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
-	        	}
-       } catch (Throwable oops) {
-       		res = this.createEditModelAndView(author, "author.commit.error");
- 
-        }
+			if (binding.hasErrors())
+				res = this.createEditModelAndView(author);
+			else {
+				final Author saved = this.authorService.save(author);
+				res = new ModelAndView("welcome/index");
+				res.addObject("name", saved.getName());
+				res.addObject("exitCode", "actor.edit.success");
+				res.addObject("moment", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
+			}
+		} catch (final Throwable oops) {
+			res = this.createEditModelAndView(author, "author.commit.error");
 
-        return res;
-    }
-    
+		}
+
+		return res;
+	}
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	ModelAndView register() {
 		ModelAndView result;
@@ -94,9 +114,9 @@ public class AuthorController extends AbstractController {
 		author = this.authorService.reconstruct(actorForm, binding);
 		try {
 			//If the form has errors prints it
-			if (binding.hasErrors()) {
+			if (binding.hasErrors())
 				result = new ModelAndView("author/register");
-			} else {
+			else {
 				//If the form does not have errors, try to save it
 				this.authorService.save(author);
 				result = new ModelAndView("redirect:../");
@@ -111,19 +131,19 @@ public class AuthorController extends AbstractController {
 		return result;
 	}
 
-    protected ModelAndView createEditModelAndView(final Author author) {
-        final ModelAndView result = this.createEditModelAndView(author, null);
-        return result;
-    }
+	protected ModelAndView createEditModelAndView(final Author author) {
+		final ModelAndView result = this.createEditModelAndView(author, null);
+		return result;
+	}
 
-    protected ModelAndView createEditModelAndView(final Author author, final String messagecode) {
-        final ModelAndView result;
+	protected ModelAndView createEditModelAndView(final Author author, final String messagecode) {
+		final ModelAndView result;
 
-        result = new ModelAndView("author/edit");
+		result = new ModelAndView("author/edit");
 
-        result.addObject("author", author);
-        result.addObject("message", messagecode);
+		result.addObject("author", author);
+		result.addObject("message", messagecode);
 
-        return result;
-    }
+		return result;
+	}
 }

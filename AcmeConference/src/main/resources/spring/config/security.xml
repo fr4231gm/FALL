@@ -84,7 +84,10 @@
 
 		<security:intercept-url pattern="/sponsor/edit.do" access="hasRole('SPONSOR')" /> 
 		<security:intercept-url pattern="/sponsorship/sponsor/**" access="hasRole('SPONSOR')" /> 
+	
 		<!-- ************************ ALL ************************ -->
+		
+		<security:intercept-url pattern="/author/display.do" access="permitAll" />
 		<security:intercept-url pattern="/" access="permitAll" /> 
 		<security:intercept-url pattern="/activity/**" access="permitAll" />
 		<security:intercept-url pattern="/conference/listRunningConferences.do" access="permitAll" /> 
@@ -109,7 +112,7 @@
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/notfind.do" access="permitAll" /> 
-
+		
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/legal-terms/index.do" access="permitAll" />

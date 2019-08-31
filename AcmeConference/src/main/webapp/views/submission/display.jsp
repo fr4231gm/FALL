@@ -94,4 +94,6 @@
 <br />	<br />	
 </security:authorize>
 
+<acme:link code="author.display" link="author/display.do?authorId=${author.id}"/>
+
 <acme:back code="conference.goback"/>

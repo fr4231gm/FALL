@@ -1,3 +1,4 @@
+
 package controllers.administrator;
 
 import java.util.Collection;
@@ -14,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
+import services.AuthorService;
 import services.ConferenceService;
 import services.ReviewerService;
 import services.SubmissionService;
 import controllers.AbstractController;
 import domain.Administrator;
+import domain.Author;
 import domain.Reviewer;
 import domain.Submission;
 import forms.SubmissionForm;
@@ -29,16 +32,20 @@ public class SubmissionAdministratorController extends AbstractController {
 
 	// Services
 	@Autowired
-	private SubmissionService submissionService;
-	
+	private SubmissionService		submissionService;
+
 	@Autowired
-	private ReviewerService reviewerService;
-	
+	private ReviewerService			reviewerService;
+
 	@Autowired
-	private ConferenceService conferenceService;
-	
+	private ConferenceService		conferenceService;
+
 	@Autowired
-	private AdministratorService administratorService;
+	private AdministratorService	administratorService;
+
+	@Autowired
+	private AuthorService			authorService;
+
 
 	// Other Methods
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
@@ -47,18 +54,18 @@ public class SubmissionAdministratorController extends AbstractController {
 		final Submission s;
 		Administrator principal;
 		principal = this.administratorService.findByPrincipal();
-		SubmissionForm submissionForm = new SubmissionForm();
+		final SubmissionForm submissionForm = new SubmissionForm();
 		s = this.submissionService.findOne(submissionId);
-		
+
 		if (s.getConference().getAdministrator().getId() != principal.getId())
 			res = new ModelAndView("security/hacking");
-		else{
-			
-		submissionForm.setSubmission(this.submissionService.findOne(submissionId));
-		res = new ModelAndView("submission/assign");
-		res = this.createEditModelAndView(submissionForm);
+		else {
+
+			submissionForm.setSubmission(this.submissionService.findOne(submissionId));
+			res = new ModelAndView("submission/assign");
+			res = this.createEditModelAndView(submissionForm);
 		}
-		
+
 		return res;
 	}
 
@@ -66,9 +73,9 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView assignPost(@Valid final SubmissionForm submissionForm, final BindingResult binding) {
 		ModelAndView res;
 		try {
-			if(binding.hasErrors()){
+			if (binding.hasErrors())
 				res = this.createEditModelAndView(submissionForm);
-			} else {
+			else {
 				this.submissionService.setRev(submissionForm.getSubmission(), submissionForm.getReviewers());
 				res = new ModelAndView("redirect:/submission/administrator/list.do");
 			}
@@ -78,7 +85,7 @@ public class SubmissionAdministratorController extends AbstractController {
 		}
 		return res;
 	}
-	
+
 	@RequestMapping(value = "/autoassign", method = RequestMethod.GET)
 	public ModelAndView autoassign(final int submissionId) {
 		ModelAndView res;
@@ -87,48 +94,42 @@ public class SubmissionAdministratorController extends AbstractController {
 		Administrator principal;
 		principal = this.administratorService.findByPrincipal();
 		s = this.submissionService.findOne(submissionId);
-		
+
 		if (s.getConference().getAdministrator().getId() != principal.getId())
 			res = new ModelAndView("security/hacking");
-		else{
-		
+		else
 			try {
 				reviewers = this.conferenceService.getCompatibleReviewers(this.submissionService.findOne(submissionId).getConference());
 				this.submissionService.setRev(this.submissionService.findOne(submissionId), reviewers);
 				res = new ModelAndView("redirect:/submission/administrator/list.do");
-			}
-			catch (final Throwable oops) {
+			} catch (final Throwable oops) {
 				res = new ModelAndView("redirect:/submission/administrator/list.do");
 				res.addObject("message", "submission.commit.error");
 			}
-		}
-		
+
 		return res;
 	}
-	
+
 	@RequestMapping(value = "/decide", method = RequestMethod.GET)
 	public ModelAndView decide(@RequestParam final int submissionId) {
-		ModelAndView res;		
+		ModelAndView res;
 		final Submission s;
 		Administrator principal;
 		principal = this.administratorService.findByPrincipal();
 		s = this.submissionService.findOne(submissionId);
-		
+
 		if (s.getConference().getAdministrator().getId() != principal.getId())
 			res = new ModelAndView("security/hacking");
-		else{
-		
+		else
 			try {
-				Submission toDecide = this.submissionService.findOne(submissionId);
+				final Submission toDecide = this.submissionService.findOne(submissionId);
 				this.submissionService.decide(toDecide);
 				res = new ModelAndView("redirect:list.do");
-			}
-			catch (final Throwable oops) {
+			} catch (final Throwable oops) {
 				res = new ModelAndView("redirect:list.do");
 				res.addObject("message", "submission.commit.error");
 			}
-		}
-			
+
 		return res;
 	}
 
@@ -137,7 +138,7 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Submission> subs;
-		
+
 		subs = this.submissionService.findAll();
 
 		result = new ModelAndView("submission/list");
@@ -150,23 +151,28 @@ public class SubmissionAdministratorController extends AbstractController {
 	}
 
 	// Display
-	@RequestMapping(value = "/display", method = RequestMethod.GET, params = { "submissionId" })
+	@RequestMapping(value = "/display", method = RequestMethod.GET, params = {
+		"submissionId"
+	})
 	public ModelAndView display(@RequestParam final int submissionId) {
 		ModelAndView res;
-		Submission submission = this.submissionService.findOne(submissionId);
+		final Submission submission = this.submissionService.findOne(submissionId);
 		Boolean decide;
 		Boolean asignable;
 		Boolean notificable;
-		try{
+
+		final Author a = submission.getAuthor();
+		try {
 			decide = this.submissionService.canDecide(submission);
 			asignable = this.submissionService.isAssignable(submission);
 			notificable = this.submissionService.isNotificable(submission);
-		} catch (Throwable oops){
+		} catch (final Throwable oops) {
 			decide = false;
 			notificable = false;
 			asignable = false;
 		}
 		res = new ModelAndView("submission/display");
+		res.addObject("author", a);
 		res.addObject("submission", submission);
 		res.addObject("decide", decide);
 		res.addObject("asignable", asignable);
@@ -174,19 +180,17 @@ public class SubmissionAdministratorController extends AbstractController {
 
 		return res;
 	}
-
 	// Ancillary metods
 	protected ModelAndView createEditModelAndView(final SubmissionForm submissionForm) {
 		final ModelAndView result = this.createEditModelAndView(submissionForm, null);
 		return result;
 	}
 
-	private ModelAndView createEditModelAndView(final SubmissionForm submissionForm,
-			final String messagecode) {
+	private ModelAndView createEditModelAndView(final SubmissionForm submissionForm, final String messagecode) {
 		ModelAndView result;
-		
+
 		final Collection<Reviewer> reviewers = this.reviewerService.findAll();
-		
+
 		result = new ModelAndView("submission/assign");
 		result.addObject("submissionForm", submissionForm);
 		result.addObject("reviewers", reviewers);
