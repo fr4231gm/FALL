@@ -8,9 +8,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Sponsor;
 import domain.Sponsorship;
 
 @ContextConfiguration(locations = {
@@ -22,11 +22,7 @@ public class SponsorshipServiceTest extends AbstractTest {
 
 	@Autowired
 	private SponsorshipService	sponsorshipService;
-
-	@Autowired
-	private SponsorService		sponsorService;
-
-
+	
 	@Test
 	public void CreateEditSponsorshipTestDriver() {
 
@@ -111,9 +107,8 @@ public class SponsorshipServiceTest extends AbstractTest {
 
 		try {
 			super.authenticate(username);
-			final Sponsor s = this.sponsorService.findByPrincipal();
 			this.sponsorshipService.delete(this.sponsorshipService.findOne(super.getEntityId(sponsorshipId)));
-
+			Assert.isNull(this.sponsorshipService.findOne(super.getEntityId(sponsorshipId)));
 			this.unauthenticate();
 
 		} catch (final Throwable oops) {
