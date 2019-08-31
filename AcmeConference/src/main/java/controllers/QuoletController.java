@@ -30,7 +30,7 @@ public class QuoletController extends AbstractController {
 
 		quolet = this.quoletService.findOne(quoletId);
 		
-		if(quolet.getIsDraft().equals(false)){
+		if(quolet.getIsDraft().equals(true)){
 			Administrator principal = this.administratorService.findByPrincipal();
 			Assert.notNull(principal);
 		}
