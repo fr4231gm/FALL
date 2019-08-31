@@ -102,6 +102,9 @@
 		<security:intercept-url pattern="/panel/display.do" access="permitAll" />
 		<security:intercept-url pattern="/presentation/display.do" access="permitAll" />
 		<security:intercept-url pattern="/tutorial/display.do" access="permitAll" />
+		
+		<security:intercept-url pattern="/quolet/display.do" access="permitAll" />
+		
 		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
 		<security:intercept-url pattern="/images/**" access="permitAll" /> 
 		<security:intercept-url pattern="/scripts/**" access="permitAll" /> 
