@@ -37,17 +37,14 @@ public class AuthorServiceTest extends AbstractTest {
 				{"name test", "", "surname test", "", "", "", "", "author1", "testPassword",DataIntegrityViolationException.class },
 				// TEST NEGATIVO 4: Nombre de usuario existente:
 				{"name test", "", "surname test", "", "email@mail.com", "", "", "author1", "testPassword", DataIntegrityViolationException.class },
-				// TEST NEGATIVO 5: Constraseña de 1 letra:
-				{"name test", "", "surname test", "", "email@mail.com", "", "", "testUserName", "a", ConstraintViolationException.class },
-				// TEST NEGATIVO 6: introducir código html en el nombre:
-				{"<script>alert('hello world')</script>", "", "surname test", "", "email@mail.com", "", "", "testUserName", "a", ConstraintViolationException.class },
+				// TEST NEGATIVO 5: introducir código html en el nombre:
+				{"<script>alert('hello world')</script>", "", "surname test", "", "email@mail.com", "", "", "testUserName", "testPassWord", ConstraintViolationException.class },
 		};
 		
 		for (int i = 0; i < testingData.length; i++) {
 			this.startTransaction();
 			this.CreateEditAuthorTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6], (String) testingData[i][7], (String) testingData[i][8],  (Class<?>) testingData[i][9]);
 			this.rollbackTransaction();
-			System.out.println(i);
 		}
 	}
 	
@@ -55,7 +52,6 @@ public class AuthorServiceTest extends AbstractTest {
 		Class<?> caught;
 
 		caught = null;
-
 		try {
 			final Author author = this.authorService.create(userName, password);
 

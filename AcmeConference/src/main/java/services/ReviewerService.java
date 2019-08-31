@@ -201,4 +201,9 @@ public class ReviewerService {
 		return  this.reviewerRepository.findReviewersBySubmission(submissionId);
 	}
 
+	public void flush() {
+		this.reviewerRepository.flush();
+		
+	}
+
 }

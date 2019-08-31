@@ -42,7 +42,6 @@ public class CategoryServiceTest extends AbstractTest {
 		categories = this.categoryService.findAll();
 		parent = categories.iterator().next();
 		category = this.categoryService.create();
-		//... Initialise the Category...
 		Map<String, String> name = new HashMap<String, String>();
 		name.put("en", "testing Category");
 		name.put("es", "prueba de categorias");
