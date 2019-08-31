@@ -60,7 +60,7 @@ public class QuoletService {
 			Assert.isTrue(quolet.getConference().getAdministrator().getId() == this.administratorService.findByPrincipal().getId());
 		}
 		final Date actual = new Date(System.currentTimeMillis() - 1);
-		Assert.isTrue(quolet.getConference().getSubmissionDeadline().after(actual));
+		Assert.isTrue(!quolet.getConference().getIsDraft());
 		
 		if(!quolet.getIsDraft()){
 			
