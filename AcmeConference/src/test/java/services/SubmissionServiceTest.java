@@ -92,7 +92,7 @@ public class SubmissionServiceTest extends AbstractTest {
 
 			// TEST POSITIVO:
 			{
-				"admin", super.getEntityId("submission12"), super.getEntityId("reviewer1"), null
+				"admin", super.getEntityId("submission13"), super.getEntityId("reviewer1"), null
 			},
 
 			// TEST NEGATIVO: Un actor que no es autor intenta crear una
