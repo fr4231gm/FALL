@@ -2316,7 +2316,7 @@
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="notified" value="false" />
 		<property name="paper" ref="paper13" />
-		<property name="Conference" ref="conference7" />
+		<property name="Conference" ref="conference11" />
 		<property name="Author" ref="author2" />
 	</bean>
 
