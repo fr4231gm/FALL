@@ -94,4 +94,8 @@ public class QuoletService {
 		final Collection<Quolet> q = this.quoletRepository.findQuoletsByAdministratorId(id);
 		return q;
 	}
+
+	public Collection<Quolet> findByConference(final int id) {
+		return this.quoletRepository.findQuoletsByConferenceId(id);
+	}
 }

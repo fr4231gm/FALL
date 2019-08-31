@@ -1,5 +1,7 @@
+
 package controllers;
 
+import java.util.Collection;
 
 import javax.validation.Valid;
 
@@ -11,18 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Administrator;
-import domain.Quolet;
-
 import services.AdministratorService;
 import services.QuoletService;
+import domain.Administrator;
+import domain.Quolet;
 
 @Controller
 @RequestMapping("/quolet/administrator")
 public class QuoletAdministratorController {
 
 	@Autowired
-	private QuoletService			quoletService;
+	private QuoletService			quoletService1;
 
 	@Autowired
 	private AdministratorService	adminService;
@@ -32,24 +33,26 @@ public class QuoletAdministratorController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView res;
-		final Collection<Quolet> quolets = this.quoletService.findByAdministrator(this.adminService.findByPrincipal().getId());
+		final Collection<Quolet> quolets = this.quoletService1.findByAdministrator(this.adminService.findByPrincipal().getId());
 		res = new ModelAndView("quolet/list");
 		res.addObject("quolets", quolets);
 		res.addObject("requestURI", "quolet/administrator/list.do");
 		return res;
 	}
 
+
 	@Autowired
-	private QuoletService quoletService;
-	
+	private QuoletService			quoletService;
+
 	@Autowired
-	private AdministratorService administratorService;
+	private AdministratorService	administratorService;
+
 
 	// Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView res;
-		final Quolet quolet = this.quoletService.create();
+		final Quolet quolet = this.quoletService1.create();
 
 		res = this.createEditModelAndView(quolet);
 
@@ -57,8 +60,7 @@ public class QuoletAdministratorController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Quolet quolet,
-			final BindingResult binding) {
+	public ModelAndView save(@Valid final Quolet quolet, final BindingResult binding) {
 		ModelAndView res;
 
 		if (binding.hasErrors()) {
@@ -66,7 +68,7 @@ public class QuoletAdministratorController {
 			res.addObject("binding", binding);
 		} else
 			try {
-				this.quoletService.save(quolet);
+				this.quoletService1.save(quolet);
 				res = new ModelAndView("redirect:list.do");
 			}
 
@@ -81,7 +83,7 @@ public class QuoletAdministratorController {
 		ModelAndView res;
 		final Quolet quolet;
 		Administrator principal;
-		quolet = this.quoletService.findOne(quoletId);
+		quolet = this.quoletService1.findOne(quoletId);
 		principal = this.administratorService.findByPrincipal();
 
 		if (quolet.getAdministrator().getId() != principal.getId())
@@ -103,8 +105,7 @@ public class QuoletAdministratorController {
 
 	// Save edit
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save2(@Valid final Quolet quolet,
-			final BindingResult binding) {
+	public ModelAndView save2(@Valid final Quolet quolet, final BindingResult binding) {
 		ModelAndView res;
 
 		if (binding.hasErrors()) {
@@ -113,12 +114,11 @@ public class QuoletAdministratorController {
 		} else
 			try {
 
-				this.quoletService.save(quolet);
+				this.quoletService1.save(quolet);
 				res = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(quolet,
-						"quolet.commit.error");
+				res = this.createEditModelAndView(quolet, "quolet.commit.error");
 			}
 		return res;
 	}
@@ -130,8 +130,7 @@ public class QuoletAdministratorController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Quolet q,
-			final String messageCode) {
+	protected ModelAndView createEditModelAndView(final Quolet q, final String messageCode) {
 		ModelAndView result;
 
 		result = new ModelAndView("quolet/edit");
