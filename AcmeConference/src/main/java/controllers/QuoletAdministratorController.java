@@ -1,11 +1,126 @@
-
 package controllers;
 
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import domain.Administrator;
+import domain.Quolet;
+
+import services.AdministratorService;
+import services.QuoletService;
 
 @Controller
 @RequestMapping("/quolet/administrator")
 public class QuoletAdministratorController {
+
+	@Autowired
+	private QuoletService quoletService;
+	
+	@Autowired
+	private AdministratorService administratorService;
+
+	// Create
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView res;
+		final Quolet quolet = this.quoletService.create();
+
+		res = this.createEditModelAndView(quolet);
+
+		return res;
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Quolet quolet,
+			final BindingResult binding) {
+		ModelAndView res;
+
+		if (binding.hasErrors()) {
+			res = this.createEditModelAndView(quolet);
+			res.addObject("binding", binding);
+		} else
+			try {
+				this.quoletService.save(quolet);
+				res = new ModelAndView("redirect:list.do");
+			}
+
+			catch (final Throwable oops) {
+				res = this.createEditModelAndView(quolet, "quolet.commit.error");
+			}
+		return res;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int quoletId) {
+		ModelAndView res;
+		final Quolet quolet;
+		Administrator principal;
+		quolet = this.quoletService.findOne(quoletId);
+		principal = this.administratorService.findByPrincipal();
+
+		if (quolet.getAdministrator().getId() != principal.getId())
+			res = new ModelAndView("security/hacking");
+		else
+			try {
+
+				res = new ModelAndView("quolet/edit");
+				res.addObject("quolet", quolet);
+
+			} catch (final Throwable oops) {
+
+				res = new ModelAndView("quolet/edit");
+				res.addObject("quolet", quolet);
+				res.addObject("message", "quolet.commit.error");
+			}
+		return res;
+	}
+
+	// Save edit
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save2(@Valid final Quolet quolet,
+			final BindingResult binding) {
+		ModelAndView res;
+
+		if (binding.hasErrors()) {
+			res = new ModelAndView("quolet/edit");
+			res.addObject("quolet", quolet);
+		} else
+			try {
+
+				this.quoletService.save(quolet);
+				res = new ModelAndView("redirect:list.do");
+
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(quolet,
+						"quolet.commit.error");
+			}
+		return res;
+	}
+
+	// Ancillary metods
+	protected ModelAndView createEditModelAndView(final Quolet q) {
+		ModelAndView result;
+		result = this.createEditModelAndView(q, null);
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Quolet q,
+			final String messageCode) {
+		ModelAndView result;
+
+		result = new ModelAndView("quolet/edit");
+		result.addObject("quolet", q);
+		result.addObject("message", messageCode);
+
+		return result;
+	}
 
 }
