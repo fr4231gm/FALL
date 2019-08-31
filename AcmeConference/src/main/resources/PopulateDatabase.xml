@@ -2635,5 +2635,49 @@
 			</list>
 		</property>
 	</bean>
+	
+<!-- Quolets-->
+	<bean id="quolet1" class="domain.Quolet">
+		<property name="ticker" value="AAA-123" /> 
+		<property name="body" value="This is the body" /> 
+		<property name="publicationMoment" value="03/01/2019" /> 
+		<property name="atributo1" value="atributo1" /> 
+		<property name="isDraft" value="true" /> 
+		<property name="administrator" ref="administrator1" /> 
+		<property name="conference" ref="conference1" /> 
+		<property name="title" value="TEST" /> 
+	</bean>
 
+	<bean id="quolet2" class="domain.Quolet">
+		<property name="ticker" value="AAA-124" /> 
+		<property name="body" value="This is the body" /> 
+		<property name="publicationMoment" value="03/02/2019" /> 
+		<property name="atributo1" value="atributo2" /> 
+		<property name="isDraft" value="false" /> 
+		<property name="administrator" ref="administrator1" /> 
+		<property name="conference" ref="conference1" /> 
+		<property name="title" value="TEST" /> 
+	</bean>
+
+	<bean id="quolet3" class="domain.Quolet">
+		<property name="ticker" value="AAA-125" /> 
+		<property name="body" value="This is the body" /> 
+		<property name="publicationMoment" value="03/03/2019" /> 
+		<property name="atributo1" value="atributo3" /> 
+		<property name="isDraft" value="true" /> 
+		<property name="administrator" ref="administrator2" /> 
+		<property name="conference" ref="conference2" /> 
+		<property name="title" value="TEST" /> 
+	</bean>
+
+	<bean id="quolet4" class="domain.Quolet">
+		<property name="ticker" value="AAA-126" /> 
+		<property name="body" value="This is the body" /> 
+		<property name="publicationMoment" value="03/04/2019" /> 
+		<property name="atributo1" value="atributo4" /> 
+		<property name="isDraft" value="false" /> 
+		<property name="administrator" ref="administrator2" /> 
+		<property name="conference" ref="conference2" /> 
+		<property name="title" value="TEST" /> 
+	</bean>
 </beans>

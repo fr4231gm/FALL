@@ -1,0 +1,4 @@
+package converters;
+import org.springframework.beans.factory.annotation.Autowired;import org.springframework.core.convert.converter.Converter;import org.springframework.stereotype.Component;import org.springframework.transaction.annotation.Transactional;import org.springframework.util.StringUtils;import repositories.QuoletRepository;import domain.Quolet;
+@Component @Transactional public class StringToQuoletConverter implements Converter<String, Quolet>{
+	@Autowired 	QuoletRepository quoletRepository; 	@Override 	public Quolet convert(String textIn) { 		Quolet res; 		int id; 		try {			if (StringUtils.isEmpty(textIn)){				res = null;			}else{				id = Integer.valueOf(textIn);				res = this.quoletRepository.findOne(id);			}		}catch(final Throwable oops){			throw new IllegalArgumentException(oops);		}		return res;	}}
