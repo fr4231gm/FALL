@@ -1579,6 +1579,15 @@
 			value="https://static3.upandscrap.com/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/0/0/0000856358.jpg" />
 		<property name="cameraReadyPaper" value="true" />
 	</bean>
+	
+	<bean id="paper13" class="domain.Paper">
+		<property name="title" value="Papel de cumple 2" />
+		<property name="summary"
+			value="Por que se llama pape de cumple si el cumple no es el papel, es lo que hay dentro" />
+		<property name="document"
+			value="https://static3.upandscrap.com/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/0/0/0000856358.jpg" />
+		<property name="cameraReadyPaper" value="true" />
+	</bean>
 
 
 	<!-- Presentation -->
@@ -2298,6 +2307,16 @@
 		<property name="notified" value="false" />
 		<property name="paper" ref="paper12" />
 		<property name="Conference" ref="conference11" />
+		<property name="Author" ref="author2" />
+	</bean>
+	
+	<bean id="submission13" class="domain.Submission">
+		<property name="ticker" value="JSL-7641" />
+		<property name="moment" value="04/10/2019" />
+		<property name="status" value="UNDER-REVIEW" />
+		<property name="notified" value="false" />
+		<property name="paper" ref="paper13" />
+		<property name="Conference" ref="conference7" />
 		<property name="Author" ref="author2" />
 	</bean>
 
