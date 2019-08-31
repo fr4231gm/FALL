@@ -4,7 +4,7 @@
 <jstl:choose>	<jstl:when test="${langcode eq 'en'}">		<fmt:formatDate			value="${quolet.publicationMoment}" 			pattern="MM-dd-yy" 			var="parsedPublicationmoment" 		/>	</jstl:when>	<jstl:otherwise>		<fmt:formatDate			value="${quolet.publicationMoment}" 			pattern="dd-MM-yy" 			var="parsedPublicationmoment" 		/>	</jstl:otherwise></jstl:choose>
 <form:label path="quolet.publicationMoment"> 	<spring:message code="quolet.publicationMoment"/></form:label><form:input code="quolet.publicationMoment" 	path="quolet.publicationMoment" 	value="${parsedPublicationmoment}" 	readonly="true" /> <br>
 <acme:input 	code="quolet.atributo1"	path="quolet.atributo1"	readonly="true" />
-<form:label path="quolet.isDraft"> 	<spring:message code="quolet.isDraft"/></form:label><jstl:choose>	<jstl:when test="${quolet.isDraft}">		<spring:message code="master.yes"/>	</jstl:when>	<jstl:otherwise>		<spring:message code="master.no"/>	</jstl:otherwise></jstl:choose>
+<form:label path="quolet.isDraft"> 	<spring:message code="quolet.isDraft"/></form:label><jstl:choose>	<jstl:when test="${quolet.isDraft}">		<spring:message code="master.yes"/>	</jstl:when>	<jstl:otherwise>		<spring:message code="master.no"/>	</jstl:otherwise></jstl:choose><br><br>
 <acme:link 	code="quolet.conference" 	link="conference/display.do?conferenceId=${conference.id}" />
-
+<br><br>
 <acme:back 	code="master.go.back" />
