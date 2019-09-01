@@ -23,12 +23,6 @@ import domain.Quolet;
 public class QuoletAdministratorController extends AbstractController {
 
 	@Autowired
-	private QuoletService			quoletService1;
-
-	@Autowired
-	private AdministratorService	adminService;
-
-	@Autowired
 	private QuoletService			quoletService;
 
 	@Autowired
@@ -39,7 +33,7 @@ public class QuoletAdministratorController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView res;
-		final Quolet quolet = this.quoletService1.create();
+		final Quolet quolet = this.quoletService.create();
 
 		res = this.createEditModelAndView(quolet);
 
@@ -50,12 +44,15 @@ public class QuoletAdministratorController extends AbstractController {
 	public ModelAndView save(@Valid final Quolet quolet, final BindingResult binding) {
 		ModelAndView res;
 
+		if (quolet.getIsDraft() == null)
+			quolet.setIsDraft(false);
+		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(quolet);
 			res.addObject("binding", binding);
 		} else
 			try {
-				this.quoletService1.save(quolet);
+				this.quoletService.save(quolet);
 				res = new ModelAndView("redirect:list.do");
 			}
 
@@ -70,14 +67,13 @@ public class QuoletAdministratorController extends AbstractController {
 		ModelAndView res;
 		final Quolet quolet;
 		Administrator principal;
-		quolet = this.quoletService1.findOne(quoletId);
+		quolet = this.quoletService.findOne(quoletId);
 		principal = this.administratorService.findByPrincipal();
 
 		if (quolet.getAdministrator().getId() != principal.getId())
 			res = new ModelAndView("security/hacking");
 		else
 			try {
-
 				res = new ModelAndView("quolet/edit");
 				res.addObject("quolet", quolet);
 
@@ -95,13 +91,16 @@ public class QuoletAdministratorController extends AbstractController {
 	public ModelAndView save2(@Valid final Quolet quolet, final BindingResult binding) {
 		ModelAndView res;
 
+		if (quolet.getIsDraft() == null)
+			quolet.setIsDraft(false);
+		
 		if (binding.hasErrors()) {
 			res = new ModelAndView("quolet/edit");
 			res.addObject("quolet", quolet);
 		} else
 			try {
 
-				this.quoletService1.save(quolet);
+				this.quoletService.save(quolet);
 				res = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
