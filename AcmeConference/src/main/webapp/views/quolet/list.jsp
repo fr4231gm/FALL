@@ -98,10 +98,11 @@
  	
  	<security:authorize access="hasRole('ADMINISTRATOR')">
  	<display:column titleKey="quolet.quolets">
+ 		<jstl:if test="${row.isDraft eq true}">
  		<acme:link
  			code="quolet.quolets"
  			link="quolet/administrator/edit.do?quoletId=${row.id}"
- 		/>
+ 		/></jstl:if>
  	</display:column>
 </security:authorize>
 	<display:column
