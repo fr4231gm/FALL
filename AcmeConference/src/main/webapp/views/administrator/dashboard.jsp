@@ -120,9 +120,22 @@
 		<td style="text-align: center; padding-top: 20px!important;"><jstl:out value="${CommentsPerActivity[2]}" /></td>
 		<td style="text-align: center; padding-top: 20px!important;"><jstl:out value="${CommentsPerActivity[3]}" /></td>
 	</tr>
+	
+		<!-- CONTROL CHECK -->
+	<tr>
+		<th style="font-size: 18px;  padding-top: 20px!important;"><spring:message code="administrator.dashboard.quolets.per.conference.stats" /></th>
+		<td style="text-align: center; padding-top: 20px!important;"></td>
+		<td style="text-align: center; padding-top: 20px!important;"></td>
+		<td style="text-align: center; padding-top: 20px!important;"><jstl:out value="${QuoletsPerConferenceStats[0]}" /></td>
+		<td style="text-align: center; padding-top: 20px!important;"><jstl:out value="${QuoletsPerConferenceStats[1]}" /></td>
+	</tr>
 </table>
 
-
-
-
+<br>
+<br>
+<h3><spring:message code="administrator.dashboard.quolets.per.administrator.ratio" />: 
+<jstl:out value="${QuoletsPerAdministratorRatio}" /></h3><br>
+<h3><spring:message code="administrator.dashboard.draft.quolets.ratio" />: 
+<jstl:out value="${DraftQuoletsRatio}" /></h3>
+<br>
 

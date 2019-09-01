@@ -40,11 +40,11 @@ public class QuoletService {
 	}
 
 	public Quolet create() {
-		final Quolet c = new Quolet();
-		c.setAdministrator(this.administratorService.findByPrincipal());
-		c.setIsDraft(true);
-		c.setTicker(this.generateTicker());
-		return c;
+		final Quolet quolet = new Quolet();
+		quolet.setAdministrator(this.administratorService.findByPrincipal());
+		quolet.setIsDraft(true);
+		quolet.setTicker(this.generateTicker());
+		return quolet;
 	}
 
 	public Quolet save(final Quolet quolet) {
@@ -59,7 +59,6 @@ public class QuoletService {
 		else
 			Assert.isTrue(quolet.getConference().getAdministrator().getId() == this.administratorService.findByPrincipal().getId());
 		final Date actual = new Date(System.currentTimeMillis() - 1);
-		Assert.isTrue(!quolet.getConference().getIsDraft());
 
 		if (!quolet.getIsDraft())
 			quolet.setPublicationMoment(actual);

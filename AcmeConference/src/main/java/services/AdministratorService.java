@@ -154,6 +154,18 @@ public class AdministratorService {
 		return this.administratorRepository.CommentsPerActivity();
 	}
 	
+	public Double DraftQuoletsRatio() {
+		return this.administratorRepository.DraftQuoletsRatio();
+	}
+
+	public Double QuoletsPerAdministratorRatio() {
+		return this.administratorRepository.QuoletsPerAdministratorRatio();
+	}
+
+	public Double[] QuoletsPerConferenceStats() {
+		return this.administratorRepository.QuoletsPerConferenceStats();
+	} 
+	
 	public void computeScore(){
 		Collection<Author> autores = this.authorService.findAll();
         HashMap<Author, Double> map = new HashMap<>();
@@ -245,7 +257,10 @@ public class AdministratorService {
 	            string = string.replaceAll(word, " "); 
 	        }
 	        return string; 
-	    } 
+	    }
+
+	
+
 	  
 
 }
