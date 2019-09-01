@@ -8,6 +8,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<link rel="stylesheet" href="styles/publicationMoment.css" type="text/css">
+
+
 <jstl:choose>
 	<jstl:when test="${langcode eq 'en'}">
 		<jstl:set
@@ -36,19 +39,55 @@
  		titleKey	= "quolet.ticker"
  		sortable	= "true"
  	/>
-
+ 	
+ 	<jstl:choose>
+<jstl:when test="${row.publicationMoment.time gt oneMonth.time}">
 	<display:column
  		property	= "publicationMoment"
  		titleKey	= "quolet.publicationMoment"
  		format		= "${format}"
  		sortable	= "true"
+ 			class 		= "lessOneMonthOld"
  	/>
+ </jstl:when>
+ 
+ <jstl:when test="${row.publicationMoment.time lt oneMonth.time and row.publicationMoment.time gt twoMonths.time}">
+	<display:column
+ 		property	= "publicationMoment"
+ 		titleKey	= "quolet.publicationMoment"
+ 		format		= "${format}"
+ 		sortable	= "true"
+ 			class 		= "betweenOneAndTwoMonthOld"
+ 	/>
+ </jstl:when>
+ 
+
+ 
+ <jstl:otherwise>
+ <display:column
+ 		property	= "publicationMoment"
+ 		titleKey	= "quolet.publicationMoment"
+ 		format		= "${format}"
+ 		sortable	= "true"
+ 			class 		= "moreTwoMonthOld"
+ 	/>
+ 
+ </jstl:otherwise>
+ 
+ 
+ 
+</jstl:choose>
+
 
 	<display:column
  		property	= "atributo1"
  		titleKey	= "quolet.atributo1"
  		sortable	= "true"
+ 	
  	/>
+ 
+ 	
+
 
 	<display:column titleKey="quolet.display">
  		<acme:link

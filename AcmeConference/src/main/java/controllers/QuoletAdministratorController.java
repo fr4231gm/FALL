@@ -1,7 +1,9 @@
 
 package controllers;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -116,8 +118,15 @@ public class QuoletAdministratorController extends AbstractController {
 		ModelAndView res;
 
 		final Collection<Quolet> quolets = this.quoletService.findByAdministrator(this.administratorService.findByPrincipal().getId());
+		final Calendar cal = Calendar.getInstance();
 
+		cal.add(Calendar.MONTH, -1);
+		final Date oneMonth = cal.getTime();
+		cal.add(Calendar.MONTH, -1);
+		final Date twoMonths = cal.getTime();
 		res = new ModelAndView("quolet/list");
+		res.addObject("oneMonth", oneMonth);
+		res.addObject("twoMonths", twoMonths);
 		res.addObject("quolets", quolets);
 		res.addObject("requestURI", "quolet/administrator/list.do");
 		return res;

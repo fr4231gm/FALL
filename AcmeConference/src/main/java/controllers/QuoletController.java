@@ -1,7 +1,9 @@
 
 package controllers;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,7 +53,15 @@ public class QuoletController extends AbstractController {
 	public ModelAndView list(@RequestParam final int conferenceId) {
 		ModelAndView res;
 		final Collection<Quolet> quolets = this.quoletService.findByConference(conferenceId);
+		final Calendar cal = Calendar.getInstance();
+
+		cal.add(Calendar.MONTH, -1);
+		final Date oneMonth = cal.getTime();
+		cal.add(Calendar.MONTH, -1);
+		final Date twoMonths = cal.getTime();
 		res = new ModelAndView("quolet/list");
+		res.addObject("oneMonth", oneMonth);
+		res.addObject("twoMonths", twoMonths);
 		res.addObject("quolets", quolets);
 		res.addObject("requestURI", "quolet/list.do");
 		return res;
