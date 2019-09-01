@@ -93,6 +93,10 @@ public class AdministratorController extends AbstractController {
             res.addObject("ConferencesPerCategory", this.administratorService.ConferencesPerCategory());
             res.addObject("CommentsPerConference", this.administratorService.CommentsPerConference());
             res.addObject("CommentsPerActivity", this.administratorService.CommentsPerActivity());
+            //Control Check
+            res.addObject("QuoletsPerConferenceStats", this.administratorService.QuoletsPerConferenceStats());
+            res.addObject("QuoletsPerAdministratorRatio", this.administratorService.QuoletsPerAdministratorRatio());
+            res.addObject("DraftQuoletsRatio", this.administratorService.DraftQuoletsRatio());
             
         } catch (Throwable oops) {
         	res = new ModelAndView("welcome/index");
