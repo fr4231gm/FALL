@@ -50,10 +50,10 @@
  		sortable	= "true"
  	/>
 
-	<display:column titleKey="quolet.conference">
+	<display:column titleKey="quolet.display">
  		<acme:link
- 			code="quolet.conference"
- 			link="conference/display.do?conferenceId=${row.id}"
+ 			code="quolet.display"
+ 			link="quolet/display.do?quoletId=${row.id}"
  		/>
  	</display:column>
  	
@@ -77,10 +77,11 @@
  		code="master.go.back"
  	/>
 
-<security:authorize access="hasRole('ADMINISTRATOR')">
+<security:authorize access="hasRole('ADMINISTRATOR')"> 
 <input
  	type="button"
  	name="create"
  	value="<spring:message code='quolet.create'/>"
  	onclick="redirect: location.href = 'quolet/administrator/create.do';"
  />
+</security:authorize>
