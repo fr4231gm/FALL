@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * security.xml * * Copyright (C) 2019 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
+	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+    ">
+
+	<!-- Security infrastructure -->
+
+	<bean id="loginService" class="security.LoginService" />
+
+	<bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+
+	<!-- Access control -->
+
+	<security:http auto-config="true" use-expressions="true">
+
+		<!-- ************************ PERMIT ALL ************************ -->
+
+		<security:intercept-url pattern="/" access="permitAll" />
+
+		<security:intercept-url pattern="/favicon.ico"
+			access="permitAll" />
+		<security:intercept-url pattern="/images/**"
+			access="permitAll" />
+		<security:intercept-url pattern="/scripts/**"
+			access="permitAll" />
+		<security:intercept-url pattern="/styles/**"
+			access="permitAll" />
+		<security:intercept-url pattern="/pdfs/**"
+			access="permitAll" />
+			
+		<security:intercept-url pattern="/file/**"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/views/misc/index.jsp"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/security/login.do"
+			access="permitAll" />
+		<security:intercept-url pattern="/security/loginFailure.do"
+			access="permitAll" />
+		<security:intercept-url pattern="/security/notfind.do" access="permitAll" /> 
+		<security:intercept-url pattern="/security/hacking.do" access="permitAll" />
+
+		<security:intercept-url pattern="/welcome/index.do"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/legal-terms/index.do"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/about-us/index.do"
+			access="permitAll" />
+		
+		
+
+		<!-- ************************ ADMINISTRATOR ********************** -->
+	
+		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMINISTRATOR')" /> 	
+		<security:intercept-url pattern="/actor/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/administrator/register.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />		
+		<security:intercept-url pattern="/dashboard/administrator/**" access="hasRole('ADMINISTRATOR')" />
+		
+		<!-- ************************ ANONYMOUS ********************** -->
+		<security:intercept-url pattern="/anonymous/**" access="isAuthenticated()" />
+		
+		<!-- ************************ APPLICATION ************************ -->
+		<security:intercept-url pattern="/application/customer/edit.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/application/customer/display.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/application/customer/list.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/application/customer/accept.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/application/customer/reject.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/application/company/create.do" access="hasRole('COMPANY')" />
+		<security:intercept-url pattern="/application/company/display.do" access="hasRole('COMPANY')" />
+		<security:intercept-url pattern="/application/company/list.do" access="hasRole('COMPANY')" />
+
+		<!-- ************************ BOX ******************************** -->
+		<security:intercept-url pattern="/box/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/box/create.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/box/remove.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/box/edit.do" access="isAuthenticated()" /> 
+
+		<!-- ************************ COMMENT **************************** -->
+		<security:intercept-url pattern="/comment/create.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/comment/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/comment/display.do" access="isAuthenticated()" />
+
+		<!-- ************************ COMPANY **************************** -->
+		<security:intercept-url pattern="/company/edit.do" access="hasRole('COMPANY')" />
+		<security:intercept-url pattern="/company/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/company/list.do" access="permitAll" />
+		<security:intercept-url pattern="/company/display.do" access="permitAll" />
+		
+		<!-- ************************ CREDITCARD ************************* -->
+		<security:intercept-url pattern="/creditcard/**" access="hasAnyRole('CUSTOMER','PROVIDER')" />
+
+		<!-- ************************ CUSTOMER *************************** -->
+		<security:intercept-url pattern="/customer/edit.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/customer/list.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/customer/display.do" access="hasRole('COMPANY')" />
+		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" />
+
+		<!-- ************************ DESIGNER *************************** -->
+		<security:intercept-url pattern="/designer/edit.do" access="hasRole('DESIGNER')" />
+		<security:intercept-url pattern="/designer/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/designer/display.do" access="permitAll" />
+		
+		<!-- ************************ EXPORT-DATA************************* -->
+		<security:intercept-url pattern="/actor/export-data/export**" access="isAuthenticated()" />
+		
+		<!-- ************************ FINDER ***************************** -->
+		<security:intercept-url pattern="/finder/company/**" access="hasRole('COMPANY')" />
+
+		<!-- ************************ GUIDE ****************************** -->
+
+		<!-- ************************ INVENTORY ************************** -->
+		<security:intercept-url pattern="/inventory/company/**" access="hasRole('COMPANY')" />
+
+		<!-- ************************ INVOICE **************************** -->
+		<security:intercept-url pattern="/invoice/customer/list.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/invoice/customer/display.do" access="hasRole('CUSTOMER')" />
+
+		<!-- ************************ MESSAGE **************************** -->
+		<security:intercept-url pattern="/message/display.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/message/create.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/message/delete.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/message/move.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/message/broadcast.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/message/notification.do" access="hasRole('ADMINISTRATOR')" />	
+
+		<!-- ************************ ORDER ****************************** -->
+		<security:intercept-url pattern="/order/company/list.do" access="hasRole('COMPANY')" />
+		<security:intercept-url pattern="/order/company/display.do" access="hasRole('COMPANY')" />
+		<security:intercept-url pattern="/order/customer/list.do" access="hasAnyRole('CUSTOMER', 'COMPANY')" />
+		<security:intercept-url pattern="/order/customer/display.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/order/customer/delete.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/order/customer/listByCustomer.do" access="hasRole('COMPANY')" />
+		<security:intercept-url pattern="/order/customer/edit.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/order/**" access="permitAll" />	
+		
+		
+		<!-- ************************ PHASE ****************************** -->
+		<security:intercept-url pattern="/phase/company/**" access="hasRole('COMPANY')" />
+		<!-- ************************ POST ******************************* -->
+		<security:intercept-url pattern="/post/designer/register.do" access="hasRole('DESIGNER')" />
+		<security:intercept-url pattern="/post/designer/edit.do" access="hasRole('DESIGNER')" />
+		<security:intercept-url pattern="/post/list**" access="permitAll" />
+		<security:intercept-url pattern="/post/display**" access="permitAll" />
+		<security:intercept-url pattern="/post/designer/list.do" access="permitAll" />
+
+		<!-- ************************ PRINTER **************************** -->
+		<security:intercept-url pattern="/printer/company/**" access="hasRole('COMPANY')" />
+		<security:intercept-url pattern="/printer/display.do" access="permitAll" />
+		<security:intercept-url pattern="/printer/list.do" access="permitAll" />
+
+		<!-- ************************ PRINTSPOOLER *********************** -->
+		<security:intercept-url pattern="/printSpooler/company/**" access="hasRole('COMPANY')" />
+		
+		<!-- ************************ PROVIDER *************************** -->
+		<security:intercept-url pattern="/provider/edit.do" access="hasRole('PROVIDER')" />
+		<security:intercept-url pattern="/provider/register.do" access="isAnonymous()" />
+		
+
+		<!-- ************************ REQUEST **************************** -->
+		<security:intercept-url pattern="/request/company/**" access="hasRole('COMPANY')" />
+
+		<!-- ************************ SECTION **************************** -->
+
+		<!-- ************************ SPARE PART ************************* -->
+		<security:intercept-url pattern="/sparePart/company/**" access="hasRole('COMPANY')" />
+
+		<!-- ************************ SPONSORSHIP ************************ -->
+		<security:intercept-url pattern="/sponsorship/provider/**" access="hasRole('PROVIDER')" />
+		<security:intercept-url pattern="/sponsorship/designer/**" access="hasRole('DESIGNER')" />
+		<security:intercept-url pattern="/sponsorship/list.do" access="hasRole('PROVIDER')" />
+		<!-- ************************ SPOOL ****************************** -->
+		<security:intercept-url pattern="/spool/company/**" access="hasRole('COMPANY')" />
+		
+
+		<!-- ************************ SOCIAL PROFILE ********************* -->
+		<security:intercept-url pattern="/social-profile/list.do" access="permitAll()" />
+		<security:intercept-url pattern="/social-profile/show.do" access="permitAll()" />
+		<security:intercept-url pattern="/social-profile/create.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/social-profile/edit.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/social-profile/remove.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/social-profile/listMySocialProfiles.do" access="isAuthenticated()" />
+
+		<!-- ************************ WORK PLAN ************************** -->
+	<security:intercept-url pattern="/workplan/company/**" access="hasRole('COMPANY')" />
+
+		<!-- ************************ OTHERS ***************************** -->
+
+		<security:intercept-url pattern="/**"
+			access="hasRole('NONE')" />
+
+		<security:form-login login-page="/security/login.do"
+			password-parameter="password" username-parameter="username"
+			authentication-failure-url="/security/loginFailure.do" />
+
+		<security:logout logout-success-url="/"
+			invalidate-session="true" />
+	</security:http>
+
+</beans>

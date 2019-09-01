@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+
+ * Copyright (C) 2017 Universidad de Sevilla
+ * Author (A) 2012 Rafael Corchuelo (corchu@us.es)
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+
+	<definition name="actor/listActor" extends="master.page">
+		<put-attribute name="title" value="Listar actores a banear" />
+		<put-attribute name = "body" value="/views/actor/listBanActor.jsp" />
+	</definition>
+	
+	<definition name="actor/erased" extends="master.page">
+		<put-attribute name="title" value="Adios" />
+		<put-attribute name = "body" value="/views/actor/erased.jsp" />
+	</definition>
+	
+	<definition name="actor/export" extends="master.page">
+		<put-attribute name="title" value="Exportación de datos" />
+		<put-attribute name = "body" value="/views/actor/export.jsp" />
+	</definition>
+	
+	<definition name="actor/display" extends="master.page">
+		<put-attribute name="title" value="Mostrar actor" />
+		<put-attribute name = "body" value="/views/actor/display.jsp" />
+	</definition>
+	
+	<definition name="actor/spammer" extends="master.page">
+		<put-attribute name="title" value="Lanzar Proceso Spam" />
+		<put-attribute name = "body" value="/views/actor/spammer.jsp" />
+	</definition>
+	
+</tiles-definitions>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * PopulateDatabase.xml * * Copyright (C) 2019 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+
+	<!-- initialise database -->
+	
+	<!-- User accounts -->
+	<bean id="userAccount0" class="security.UserAccount">
+		<property name="username" value="anonymous" />
+		<property name="password" value="294de3557d9d00b3d2d8a1e6aab028cf" />
+		<property name="enabled" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMINISTRATOR" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="COMPANY" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="DESIGNER" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="PROVIDER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="enabled" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMINISTRATOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- ANONYMOUS -->
+
+	<bean id="anonymousAdmin" class="domain.Administrator">
+		<property name="name" value="anonymous" />
+		<property name="middleName" value="anonymous" />
+		<property name="surname" value="anonymous" />
+		<property name="vatNumber" value="ES00000000A" />
+		<property name="photo" value="" />
+		<property name="email" value="anonymous@gmail.com" />
+		<property name="phoneNumber" value="612345678" />
+		<property name="address" value="C/Anonymous" />
+		<property name="isSpammer" value="false" />
+		<property name="userAccount" ref="userAccount0" />
+	</bean>
+
+	<bean id="anonymousCustomer" class="domain.Customer">
+		<property name="name" value="anonymous" />
+		<property name="middleName" value="anonymous" />
+		<property name="surname" value="anonymous" />
+		<property name="vatNumber" value="ES00000000B" />
+		<property name="photo" value="" />
+		<property name="email" value="anonymous@gmail.com" />
+		<property name="phoneNumber" value="612345678" />
+		<property name="address" value="C/Anonymous" />
+		<property name="isSpammer" value="false" />
+		<property name="userAccount" ref="userAccount0" />
+	</bean>
+
+	<bean id="anonymousCompany" class="domain.Company">
+		<property name="name" value="anonymous" />
+		<property name="middleName" value="anonymous" />
+		<property name="surname" value="anonymous" />
+		<property name="vatNumber" value="ES00000000C" />
+		<property name="photo" value="" />
+		<property name="email" value="anonymous@gmail.com" />
+		<property name="phoneNumber" value="612345678" />
+		<property name="address" value="C/Anonymous" />
+		<property name="isSpammer" value="false" />
+		<property name="commercialName" value="ANONYMOUS" />
+		<property name="userAccount" ref="userAccount0" />
+		<property name="finder">
+			<null></null>
+		</property>
+	</bean>
+
+	<bean id="anonymousDesigner" class="domain.Designer">
+		<property name="name" value="anonymous" />
+		<property name="middleName" value="anonymous" />
+		<property name="surname" value="anonymous" />
+		<property name="vatNumber" value="ES00000000D" />
+		<property name="photo" value="" />
+		<property name="email" value="anonymous@gmail.com" />
+		<property name="phoneNumber" value="612345678" />
+		<property name="address" value="C/Anonymous" />
+		<property name="isSpammer" value="false" />
+		<property name="userAccount" ref="userAccount0" />
+	</bean>
+
+	<bean id="anonymousProvider" class="domain.Provider">
+		<property name="make" value="anonymous" />
+		<property name="name" value="anonymous" />
+		<property name="middleName" value="anonymous" />
+		<property name="surname" value="anonymous" />
+		<property name="vatNumber" value="ES00000000P" />
+		<property name="photo" value="" />
+		<property name="email" value="anonymous@gmail.com" />
+		<property name="phoneNumber" value="612345678" />
+		<property name="address" value="C/Anonymous" />
+		<property name="isSpammer" value="false" />
+		<property name="userAccount" ref="userAccount0" />
+	</bean>
+
+	<!-- ADMIN -->
+
+	<bean id="administrator0" class="domain.Administrator">
+		<property name="name" value="Admin" />
+		<property name="middleName" value="Admin" />
+		<property name="surname" value="Admin" />
+		<property name="vatNumber" value="ES11345678R" />
+		<property name="photo" value="" />
+		<property name="email" value="admin@gmail.com" />
+		<property name="phoneNumber" value="612345678" />
+		<property name="address" value="C/Betis 23" />
+		<property name="isSpammer" value="false" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+
+	<!-- CONFIGURATION -->
+
+	<bean class="domain.Configuration" id="configuration1">
+		<property name="systemName" value="Acme Print" />
+		<property name="banner" value="images/logo.png" />
+		<property name="language" value="es" />
+		<property name="finderLifeSpan" value="1" />
+		<property name="maxFinder" value="20" />
+		<property name="countryCode" value="+34" />
+		<property name="makes" value="VISA, MCARD, AMEX, DINNERS, FLY" />
+		<property name="welcomeMessage"
+			value="¡Bienvenidos a Acme Print! La mejor comunidad de impresión 3D" />
+		<property name="spamWords"
+			value="viagra, cialis, Nigeria, sexo, un millon, has sido seleccionado" />
+		<property name="vat" value="0.21" />
+		<property name="fare" value="15" />
+		<property name="categories"
+			value="EDUCACIÓN, INVENTOS, CACHARRITOS, HERRAMIENTAS, JUEGOS, ARTE" />
+		<property name="phaseNames"
+			value="EN PROGRESO, EN COLA DE IMPRESIÓN, POST-PROCESADO, PREPARADO PARA SU RECOGIDA, RECOGIDO" />
+		<property name="materials" value="PLA, ABS, PETG, TPU, FLEX" />
+	</bean>
+
+	<bean class="domain.Configuration" id="configuration2">
+		<property name="systemName" value="Acme Print" />
+		<property name="banner" value="images/logo.png" />
+		<property name="language" value="en" />
+		<property name="finderLifeSpan" value="1" />
+		<property name="maxFinder" value="20" />
+		<property name="countryCode" value="+34" />
+		<property name="makes" value="VISA, MCARD, AMEX, DINNERS, FLY" />
+		<property name="welcomeMessage"
+			value="Welcome to Acme Print! The best 3D printing community " />
+		<property name="spamWords"
+			value="sex, viagra, Nigeria, cialis, one million, you've been selected" />
+		<property name="vat" value="0.21" />
+		<property name="fare" value="15" />
+		<property name="categories"
+			value="EDUCATION, INVENTIONS, GADGETS, TOOLS, GAMES, ART" />
+		<property name="phaseNames"
+			value="IN PROGRESS, ON PRINTER SPOOLER, POST-PROCESSED, READY TO PICK-UP, PICKED-UP" />
+		<property name="materials" value="PLA, ABS, PETG, TPU, FLEX" />
+	</bean>
+
+	<!-- Other domain beans come here -->
+
+</beans>

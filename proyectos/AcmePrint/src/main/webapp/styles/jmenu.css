@@ -1,0 +1,133 @@
+/* jmenu.css
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ * 
+ */
+
+.jMenu {
+	display: table;
+	margin: 30px 0;
+	padding: 0px;
+	width: 100%;
+	text-align: center;
+}
+
+/* First level */
+
+.jMenu li {
+	display: table-cell;
+	background-color: transparent;
+	margin: 0px;
+}
+
+.jMenu li a {
+	position: relative;
+    display: inline-block;
+    margin: 15px 25px;
+    outline: none;
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+    text-shadow: 0 0 1px rgba(255,255,255,0.3);
+    font-size: 16.5px;
+    cursor: pointer;
+}
+
+.jMenu li a:not(.parent)::before {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgb(175,233,255,0.6);
+    border-radius: 50%;
+    content: '';
+    opacity: 0;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    -webkit-transform: translateX(-50%) translateY(-50%) scale(0.2);
+    -moz-transform: translateX(-50%) translateY(-50%) scale(0.2);
+    transform: translateX(-50%) translateY(-50%) scale(0.2);
+}
+
+.jMenu li a:not(.parent):hover::before {
+	opacity: 1;
+    -webkit-transform: translateX(-50%) translateY(-50%) scale(1);
+    -moz-transform: translateX(-50%) translateY(-50%) scale(1);
+    transform: translateX(-50%) translateY(-50%) scale(1);
+}
+
+/* Lower levels */
+
+.jMenu li ul {
+	display: none;
+	position: absolute;
+	z-index: 9999;
+	padding: 0;
+	margin-top: 15px;
+	box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.1);
+}
+
+.jMenu li ul li {
+	background-color: #ffffff;
+	display: block;
+	padding: 0;
+}
+
+.jMenu li ul li a.child::before {
+	display: none;
+}
+
+.jMenu li ul li a {
+	font-size: 11px;
+	text-transform: none;
+	padding: 7px;
+	display: block;
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	text-decoration: none;
+	margin: 0;
+}
+
+.jMenu li ul li a.isParent {
+	background-color: #3a3a3a;
+	background-image: url('../images/arrow_right.png');
+	background-repeat: no-repeat;
+	background-position: right center;
+	text-decoration: none;
+}
+
+.jMenu li ul li a:hover {
+	background-color: #afe9ff;
+	text-decoration: none;
+}
+
+.fNiv {
+	position: relative;
+}
+
+.fNiv.parent {
+	padding-right: 30px;
+}
+
+.fNiv.parent {
+	padding-right: 30px;
+}
+
+.fNiv.parent::after{
+	position: absolute;
+	right: 0;
+	top: 4px;
+	display: block;
+	content: '';
+	background: url('../images/down-arrow.png');
+	width: 16px;
+	height: 16px;
+}

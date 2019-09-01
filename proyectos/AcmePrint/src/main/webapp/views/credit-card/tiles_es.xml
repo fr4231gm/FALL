@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="creditcard/edit" extends="master.page">	
+		<put-attribute name="title" value="Registrar una tarjeta de crédito" />
+		<put-attribute name="body" value="/views/credit-card/edit.jsp" />
+	</definition>
+	
+	<definition name="creditcard/notDisplay" extends="master.page">	
+		<put-attribute name="title" value="No existe una tarjeta de crédito" />
+		<put-attribute name="body" value="/views/credit-card/notDisplay.jsp" />
+	</definition>
+	
+	<definition name="creditcard/display" extends="master.page">	
+		<put-attribute name="title" value="Mostrar una tarjeta de crédito" />
+		<put-attribute name="body" value="/views/credit-card/display.jsp" />
+	</definition>
+	
+</tiles-definitions>	

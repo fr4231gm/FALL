@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * PopulateDatabase.xml * * Copyright (C) 2019 Universidad de Sevilla
+	* * The use of this project is hereby constrained to the conditions of the
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+                http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        ">
+
+	<!-- USERACCOUNT -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="enabled" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMINISTRATOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Other domain beans come here -->
+
+	<!-- CONFIGURATION -->
+	<bean class="domain.Configuration" id="configuration1">
+		<property name="systemName" value="Acme-Parade" />
+		<property name="banner" value="https://i.imgur.com/0X5mZ5J.png" />
+		<property name="language" value="es" />
+		<property name="finderLifeSpan" value="20" />
+		<property name="maxFinder" value="50" />
+		<property name="countryCode" value="+34" />
+		<property name="welcomeMessage"
+			value="¡Bienvenidos a Acme Marcha! Tu sitio para organizar marchas." />
+		<property name="spamWords"
+			value="viagra, cialis, Nigeria, sexo, un millon, has sido seleccionado" />
+		<property name="positiveWords"
+			value="bueno, fantastico, excelente, genial, increible, terrorifico, hermoso" />
+		<property name="negativeWords" value="no, mal, media, desastre" />
+		<property name="priorities" value="ALTA,  NEUTRA, BAJA" />
+		<property name="makes" value="VISA, MCARD, AMEX, DINNERS, FLY" />
+		<property name="vat" value="0.21" />
+		<property name="fare" value="15" />
+	</bean>
+
+	<bean class="domain.Configuration" id="configuration2">
+		<property name="systemName" value="Acme-Parade" />
+		<property name="banner" value="https://i.imgur.com/0X5mZ5J.png" />
+		<property name="language" value="en" />
+		<property name="finderLifeSpan" value="20" />
+		<property name="maxFinder" value="50" />
+		<property name="countryCode" value="+34" />
+		<property name="welcomeMessage"
+			value="Welcome to Acme Parade, the site to organise your parades" />
+		<property name="spamWords"
+			value="sex, viagra, cialis, one million, you've been selected" />
+		<property name="positiveWords"
+			value="good, fantastic, excellent, great, amazing, terrific, beautiful" />
+		<property name="negativeWords" value="not, bad, horrible, average, disaster" />
+		<property name="priorities" value="HIGH, NEUTRAL, LOW" />
+		<property name="makes" value="VISA, MCARD, AMEX, DINNERS, FLY" />
+		<property name="vat" value="0.21" />
+		<property name="fare" value="15" />
+	</bean>
+	<!-- Other domain beans come here -->
+
+	<!-- ADMINISTRATOR -->
+
+	<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="Jose" />
+		<property name="middleName" value="Luis" />
+		<property name="surname" value="Ramirez Paz" />
+		<property name="photo" value="" />
+		<property name="email" value="j.ramirez@gmail.com" />
+		<property name="phoneNumber" value="" />
+		<property name="address" value="C/Betis 23" />
+		<property name="userAccount" ref="userAccount1" />
+
+
+	</bean>
+
+	<!-- Box -->
+
+	<bean id="box1" class="domain.Box">
+		<property name="actor" ref="administrator1" />
+		<property name="name" value="InBox" />
+		<property name="isSystem" value="true" />
+		<property name="parentBox">
+			<null />
+		</property>
+		<property name="messages">
+			<list></list>
+		</property>
+	</bean>
+
+	<bean id="box2" class="domain.Box">
+		<property name="actor" ref="administrator1" />
+		<property name="name" value="OutBox" />
+		<property name="isSystem" value="true" />
+		<property name="parentBox">
+			<null />
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="box3" class="domain.Box">
+		<property name="actor" ref="administrator1" />
+		<property name="name" value="TrashBox" />
+		<property name="isSystem" value="true" />
+		<property name="parentBox">
+			<null />
+		</property>
+		<property name="messages">
+			<list></list>
+		</property>
+	</bean>
+
+	<bean id="box4" class="domain.Box">
+		<property name="actor" ref="administrator1" />
+		<property name="name" value="NotificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="parentBox">
+			<null />
+		</property>
+		<property name="messages">
+			<list></list>
+		</property>
+	</bean>
+
+	<bean id="box5" class="domain.Box">
+		<property name="actor" ref="administrator1" />
+		<property name="name" value="SpamBox" />
+		<property name="isSystem" value="true" />
+		<property name="parentBox">
+			<null />
+		</property>
+		<property name="messages">
+			<list></list>
+		</property>
+	</bean>
+
+	<!-- Position -->
+
+	<bean class="domain.Position" id="position1">
+		<property name="name">
+			<map>
+				<entry key="en">
+					<value>President</value>
+				</entry>
+				<entry key="es">
+					<value>Presidente</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="domain.Position" id="position2">
+		<property name="name">
+			<map>
+				<entry key="en">
+					<value>Vice President</value>
+				</entry>
+				<entry key="es">
+					<value>Vicepresidente</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="domain.Position" id="position3">
+		<property name="name">
+			<map>
+				<entry key="en">
+					<value>Secretary</value>
+				</entry>
+				<entry key="es">
+					<value>Secretario</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="domain.Position" id="position4">
+		<property name="name">
+			<map>
+				<entry key="en">
+					<value>Treasurer</value>
+				</entry>
+				<entry key="es">
+					<value>Tesorero</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="domain.Position" id="position5">
+		<property name="name">
+			<map>
+				<entry key="en">
+					<value>Historian</value>
+				</entry>
+				<entry key="es">
+					<value>Historiador</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="domain.Position" id="position6">
+		<property name="name">
+			<map>
+				<entry key="en">
+					<value>Fundraiser</value>
+				</entry>
+				<entry key="es">
+					<value>Promotor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="domain.Position" id="position7">
+		<property name="name">
+			<map>
+				<entry key="en">
+					<value>Officer</value>
+				</entry>
+				<entry key="es">
+					<value>Vocal</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="fixUpTask/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit fix-up task:" />
+		<put-attribute name="body" value="/views/fixuptask/edit.jsp" />
+	</definition>
+	
+	<definition name="fixUpTask/list" extends="master.page">	
+		<put-attribute name="title" value="Fix-up tasks" />
+		<put-attribute name="body" value="/views/fixuptask/list.jsp" />
+	</definition>
+	
+	<definition name="fixUpTask/show" extends="master.page">	
+		<put-attribute name="title" value="Fix-up task" />
+		<put-attribute name="body" value="/views/fixuptask/show.jsp" />
+	</definition>
+	
+	<definition name="fixUpTask/create" extends="master.page">	
+		<put-attribute name="title" value="Create fix-up task:" />
+		<put-attribute name="body" value="/views/fixuptask/edit.jsp" />
+	</definition>
+	
+	
+
+	
+</tiles-definitions>

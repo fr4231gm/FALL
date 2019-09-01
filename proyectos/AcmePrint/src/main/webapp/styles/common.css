@@ -1,0 +1,160 @@
+/* common.css
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ * 
+ */
+
+:root {
+  --mainColor: #afe9ff;
+}
+
+a {
+	cursor: pointer;
+}
+
+body {
+	margin: 30px 10% 0;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.error {
+	color: red;
+	font-weight: bolder;
+}
+
+.message {
+	color: red;
+	font-weight: bolder;
+}
+
+.form-group:not(:first-child) {
+	margin-top: 25px;
+}
+
+form label {
+	font-weight: bold;
+}
+
+.footer-menu {
+	float: right;
+}
+
+.footer {
+	padding-bottom: 20px;
+}
+
+img {
+	max-width: 900px;
+}
+
+.banner {
+	text-align: center;
+}
+
+.banner img {
+	width: 80%;
+}
+
+p.application-rejected {
+	color: orange;
+}
+
+p.application-accepted {
+	color: green;
+}
+
+p.application-pending {
+	color: gray;
+}
+
+tbody p {
+	margin: 0;
+}
+
+tbody td {
+	margin: 10px 0;
+}
+
+/** Styles of forms **/
+textarea, input:not(:type["checkbox"]), select {
+	display: block;
+	width: 30%;
+	margin-top: 7px;
+}
+
+.layout {
+	margin-bottom: 60px;
+}
+
+.layout a {
+	background: linear-gradient(to bottom, var(--mainColor) 0%, var(--mainColor) 100%);
+	background-position: 0 100%;
+	background-repeat: repeat-x;
+	background-size: 3px 3px;
+  	color: #000;
+  	text-decoration: none;
+}
+
+.layout a:hover {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23afe9ff' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+  background-position: 0 100%;
+  background-size: auto 6px;
+  background-repeat: repeat-x;
+  text-decoration: none;
+}
+
+input[readonly="readonly"]{
+	background: none;
+	border: 0;
+}
+
+textarea[readonly="readonly"]{
+	border: 0;
+	background: none;
+	resize: none;
+}
+
+.block-language {
+	float: right;
+}
+
+.block-language a {
+	text-decoration: none;
+	color: #000000;
+	text-transform: uppercase;
+}
+
+.block-language a:hover {
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.footer-menu a {
+	text-decoration: none;
+	color: #000000;
+}
+
+.footer-menu a:hover {
+	text-decoration: underline;
+}
+
+.banner img {
+	margin: 0 auto;
+	display: block;
+	width: 420px;
+}
+
+fieldset {
+	margin-bottom: 20px;
+}
+
+.introduction {
+	line-height: 30px;
+	margin-top: 50px;
+	padding: 20px;
+	border: 2px solid #afe9ff;
+}

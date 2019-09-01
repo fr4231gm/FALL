@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="customer" />
+		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="super" />
+		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="shout1" class="domain.Shout">
+		<property name="username" value="User" />
+		<property name="link" value="https://www.google.es" />
+		<property name="text" value="motor de búsqueda avanzado" />
+	</bean>
+	
+	<bean id="shout2" class="domain.Shout">
+		<property name="username" value="User" />
+		<property name="link" value="https://www.yahoo.es" />
+		<property name="text" value="Resuelven tus dudas en un instante"/>
+	</bean>
+	
+	<bean id="shout3" class="domain.Shout">
+		<property name="username" value="User" />
+		<property name="link" value="https://www.forocoches.es" />
+		<property name="text" value="Foro de gente muy agradable" />
+	</bean>
+	
+	<bean id="shout4" class="domain.Shout">
+		<property name="username" value="User" />
+		<property name="link" value="https://www.youtube.es" />
+		<property name="text" value="Videos de calidad" />
+	</bean>
+	
+	<bean id="shout5" class="domain.Shout">
+		<property name="username" value="Customer" />
+		<property name="link" value="https://www.softonic.com" />
+		<property name="text" value="Web para descargar programas muy buena" />
+	</bean>
+	
+	<bean id="shout6" class="domain.Shout">
+		<property name="username" value="Customer" />
+		<property name="link" value="https://www.ev.us.es" />
+		<property name="text" value="Enseñanza virtual" />
+	</bean>
+	
+	<bean id="shout7" class="domain.Shout">
+		<property name="username" value="Customer" />
+		<property name="link" value="https://www.ev5.us.es" />
+		<property name="text" value="Antigua enseñanza virtual" />
+	</bean>
+
+	<bean id="shout8" class="domain.Shout">
+		<property name="username" value="Customer" />
+		<property name="link" value="https://www.whatsapp.com" />
+		<property name="text" value="Chat muy conocido" />
+	</bean>
+
+	<bean id="shout9" class="domain.Shout">
+		<property name="username" value="Super" />
+		<property name="link" value="https://1984.lsi.us.es/wiki-egc/index.php/P%C3%A1gina_Principal" />
+		<property name="text" value="Wiki de EGC" />
+	</bean>
+	
+	<bean id="shout10" class="domain.Shout">
+		<property name="username" value="Super" />
+		<property name="link" value="https://www.kimovil.com/" />
+		<property name="text" value="Comparador de teléfonos muy competente" />
+	</bean>
+	
+	<bean id="shout11" class="domain.Shout">
+		<property name="username" value="Super" />
+		<property name="link" value="https://www.amazon.es/" />
+		<property name="text" value="Tienda online con muy buenos precios" />
+	</bean>
+
+	<bean id="shout12" class="domain.Shout">
+		<property name="username" value="Super" />
+		<property name="link" value="https://www.9gag.com" />
+		<property name="text" value="Web de memes muy recomendada" />
+	</bean>
+</beans>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="fixUpTask/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar chapuza:" />
+		<put-attribute name="body" value="/views/fixuptask/edit.jsp" />
+	</definition>
+	
+	<definition name="fixUpTask/list" extends="master.page">	
+		<put-attribute name="title" value="Chapuzas" />
+		<put-attribute name="body" value="/views/fixuptask/list.jsp" />
+	</definition>
+	
+	<definition name="fixUpTask/show" extends="master.page">	
+		<put-attribute name="title" value="Chapuza: ${fixUpTask.ticker}" />
+		<put-attribute name="body" value="/views/fixuptask/show.jsp" />
+	</definition>
+	
+	<definition name="fixUpTask/create" extends="master.page">	
+		<put-attribute name="title" value="Crear chapuza" />
+		<put-attribute name="body" value="/views/fixuptask/edit.jsp" />
+	</definition>
+	
+	
+</tiles-definitions>

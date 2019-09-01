@@ -1,0 +1,107 @@
+/* displaytag.css
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ * 
+ */
+ 
+ @font-face {
+font-family: alwaysforever;
+src: url(alwaysforever.ttf);
+}
+
+table.gridtable {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	color:#000000;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+	margin: 0 auto;
+	margin-top: 25px;
+	display : flex;
+   	justify-content: center;
+   	align-items: center;
+   	
+	
+}
+table.gridtable tr { 
+		background: #eee; 
+
+	}
+table.gridtable tr:nth-of-type(odd) { 
+		background: #ccc; 
+	}
+
+table.gridtable th {
+	border-width: 1px;
+	border: 5px solid #000;
+	font-size:25px;
+	padding: 16px;
+	border-style: solid;
+	border-color: #666666;
+	background: #333; 
+	color: white; 
+
+
+}
+table.gridtable td {
+	border-width: 1px;
+	font-size:20px;
+	padding: 16px;
+	border: 1px solid #ccc; 
+	
+}
+
+table.gridtable2 {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	color:#000000;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+	margin-top: 25px;
+   	
+}
+table.gridtable2 tr { 
+		background: #fff; 
+
+	}
+table.gridtable2 tr:nth-of-type(odd) { 
+		background: #ddd; 
+	}
+
+table.gridtable2 th {
+	border-width: 0px;
+	border: 0px solid #000;
+	font-size:25px;
+	padding: 16px;
+	border-style: solid;
+	border-color: #666666;
+	background: #333; 
+	color: white; 
+
+
+}
+table.gridtable2 td {
+	border-width: 0px;
+	font-size:20px;
+	padding: 16px;
+	border: 0px solid #ccc; 
+	
+}
+
+body{
+background: "url(https://stmed.net/sites/default/files/white-wallpapers-25354-2505529.jpg" no-repeat center center fixed;
+font-family: alwaysforever;
+text-align: center;
+font-size: 30px;
+}
+
+footer{
+font-family: "Arial", cursive, sans-serif;
+text-align: center;
+font-size: 14px;
+}
+

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="master.page" template="/views/master-page/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/views/master-page/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/views/master-page/footer.jsp" />
+	</definition>
+	
+	<definition name="tutorial/handyworker/show" extends="master.page">
+        <put-attribute name="title" value="Tutorial" />
+        <put-attribute name = "body" value="/views/tutorial/show.jsp" />
+    </definition>
+
+    <definition name="tutorial/handyworker/list" extends="master.page">
+        <put-attribute name="title" value="Tutoriales" />
+        <put-attribute name = "body" value="/views/tutorial/list.jsp" />
+    </definition>
+    
+    <definition name="tutorial/handyworker/list" extends="master.page">
+        <put-attribute name="title" value="Tus tutoriales" />
+        <put-attribute name = "body" value="/views/tutorial/list-hw.jsp" />
+    </definition>
+    
+        <definition name="tutorial/handyworker/edit" extends="master.page">
+        <put-attribute name="title" value="Editar Tutorial" />
+        <put-attribute name = "body" value="/views/tutorial/edit.jsp" />
+    </definition>
+    
+        <definition name="tutorial/handyworker/create" extends="master.page">
+        <put-attribute name="title" value="Crear Tutorial" />
+        <put-attribute name = "body" value="/views/tutorial/create.jsp" />
+    </definition>
+
+</tiles-definitions>

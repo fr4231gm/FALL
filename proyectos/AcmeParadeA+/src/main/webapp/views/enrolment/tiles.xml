@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="enrolment/brotherhood/list/unassigned" extends="master.page">	
+		<put-attribute name="title" value="Enrolments without position assigned" />
+		<put-attribute name="body" value="/views/enrolment/list.jsp" />
+	</definition>
+
+	<definition name="enrolment/brotherhood/list/assigned" extends="master.page">	
+		<put-attribute name="title" value="Enrolments with position assigned" />
+		<put-attribute name="body" value="/views/enrolment/list.jsp" />
+	</definition>
+	
+	<definition name="member/brotherhood/display" extends="master.page">	
+		<put-attribute name="title" value="Display member" />
+		<put-attribute name="body" value="/views/enrolment/display.jsp" />
+	</definition>
+	
+	<definition name="enrolment/member/list" extends="master.page">	
+		<put-attribute name="title" value="My Enrolments" />
+		<put-attribute name="body" value="/views/enrolment/list.jsp" />
+	</definition>
+	
+</tiles-definitions>

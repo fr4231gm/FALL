@@ -1,0 +1,15 @@
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+
+	<definition name="miscellaneousData/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit Miscellaneous Data" />
+		<put-attribute name="body" value="/views/miscellaneousData/edit.jsp" />
+	</definition>
+
+	
+</tiles-definitions>

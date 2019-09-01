@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd		
+	">
+
+	<util:list id="converters">
+		
+		<bean class="converters.ActorToStringConverter"/>
+		<bean class="converters.AdministratorToStringConverter"/>
+		<bean class="converters.ApplicationToStringConverter"/>
+		<bean class="converters.BoxToStringConverter"/>
+		<bean class="converters.CategoryToStringConverter"/>
+		<bean class="converters.ComplaintToStringConverter"/>
+		<bean class="converters.ConfigurationToStringConverter"/>
+		<bean class="converters.CreditCardToStringConverter"/>
+		<bean class="converters.CurriculumToStringConverter"/>
+		<bean class="converters.CustomerToStringConverter"/>
+		<bean class="converters.EducationRecordToStringConverter"/>
+		<bean class="converters.EndorsementToStringConverter"/>
+		<bean class="converters.FinderToStringConverter"/>
+		<bean class="converters.FixUpTaskToStringConverter"/>
+		<bean class="converters.HandyWorkerToStringConverter"/>
+		<bean class="converters.MessageToStringConverter"/>
+		<bean class="converters.MiscellaneousRecordToStringConverter"/>
+		<bean class="converters.SectionToStringConverter"/>
+		<bean class="converters.SocialProfileToStringConverter"/>
+		<bean class="converters.SponsorshipToStringConverter"/>
+		<bean class="converters.SponsorToStringConverter"/>
+		<bean class="converters.PhaseToStringConverter"/>
+		<bean class="converters.TutorialToStringConverter"/>
+		<bean class="converters.WarrantyToStringConverter"/>
+		
+		<bean class="converters.StringToActorConverter"/>
+		<bean class="converters.StringToAdministratorConverter"/>
+		<bean class="converters.StringToApplicationConverter"/>
+		<bean class="converters.StringToBoxConverter"/>
+		<bean class="converters.StringToCategoryConverter"/>
+		<bean class="converters.StringToComplaintConverter"/>
+		<bean class="converters.StringToConfigurationConverter"/>
+		<bean class="converters.StringToCategoryConverter"/>
+		<bean class="converters.StringToCreditCardConverter"/>
+		<bean class="converters.StringToCustomerConverter"/>
+		<bean class="converters.StringToEducationRecordConverter"/>
+		<bean class="converters.StringToEndorsementConverter"/>
+		<bean class="converters.StringToFinderConverter"/>
+		<bean class="converters.StringToFixUpTaskConverter"/>
+		<bean class="converters.StringToHandyWorkerConverter"/>
+		<bean class="converters.StringToMessageConverter"/>
+		<bean class="converters.StringToMiscellaneousRecordConverter"/>
+		<bean class="converters.StringToSectionConverter"/>
+		<bean class="converters.StringToSocialProfileConverter"/>
+		<bean class="converters.StringToSponsorConverter"/>
+		<bean class="converters.StringToSponsorshipConverter"/>
+		<bean class="converters.StringToPhaseConverter"/>
+		<bean class="converters.StringToTutorialConverter"/>
+		<bean class="converters.StringToWarrantyConverter"/>
+	</util:list>
+	
+</beans>
