@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
-import services.AuthorService;
 import services.ConferenceService;
 import services.ReviewerService;
 import services.SubmissionService;
@@ -42,9 +41,6 @@ public class SubmissionAdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	administratorService;
-
-	@Autowired
-	private AuthorService			authorService;
 
 
 	// Other Methods
