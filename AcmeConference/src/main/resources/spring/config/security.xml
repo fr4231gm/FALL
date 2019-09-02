@@ -89,6 +89,7 @@
 		<!-- ************************ ALL ************************ -->
 		
 		<security:intercept-url pattern="/author/display.do" access="permitAll" />
+		<security:intercept-url pattern="/quolet/list.do" access="permitAll" />
 		<security:intercept-url pattern="/" access="permitAll" /> 
 		<security:intercept-url pattern="/activity/**" access="permitAll" />
 		<security:intercept-url pattern="/conference/listRunningConferences.do" access="permitAll" /> 

@@ -1,4 +1,9 @@
+
 package controllers;
+
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +23,11 @@ import domain.Quolet;
 public class QuoletController extends AbstractController {
 
 	@Autowired
-	private QuoletService quoletService;
-	
+	private QuoletService			quoletService;
+
 	@Autowired
-	private AdministratorService administratorService;
+	private AdministratorService	administratorService;
+
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int quoletId) {
@@ -29,9 +35,9 @@ public class QuoletController extends AbstractController {
 		Quolet quolet;
 
 		quolet = this.quoletService.findOne(quoletId);
-		
-		if(quolet.getIsDraft().equals(false)){
-			Administrator principal = this.administratorService.findByPrincipal();
+
+		if (quolet.getIsDraft().equals(true)) {
+			final Administrator principal = this.administratorService.findByPrincipal();
 			Assert.notNull(principal);
 		}
 
@@ -39,6 +45,25 @@ public class QuoletController extends AbstractController {
 		res.addObject("quolet", quolet);
 		res.addObject("conference", quolet.getConference());
 
+		return res;
+	}
+
+	//List----------------------------------------------------------------
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam final int conferenceId) {
+		ModelAndView res;
+		final Collection<Quolet> quolets = this.quoletService.findByConference(conferenceId);
+		final Calendar cal = Calendar.getInstance();
+
+		cal.add(Calendar.MONTH, -1);
+		final Date oneMonth = cal.getTime();
+		cal.add(Calendar.MONTH, -1);
+		final Date twoMonths = cal.getTime();
+		res = new ModelAndView("quolet/list");
+		res.addObject("oneMonth", oneMonth);
+		res.addObject("twoMonths", twoMonths);
+		res.addObject("quolets", quolets);
+		res.addObject("requestURI", "quolet/list.do");
 		return res;
 	}
 }

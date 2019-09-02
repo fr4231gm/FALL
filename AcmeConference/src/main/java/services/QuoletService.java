@@ -21,13 +21,13 @@ import domain.Quolet;
 public class QuoletService {
 
 	@Autowired
-	private QuoletRepository	quoletRepository;
-	
-	@Autowired 
-	private AdministratorService administratorService;
-	
+	private QuoletRepository		quoletRepository;
+
 	@Autowired
-	private ActorService actorService;
+	private AdministratorService	administratorService;
+
+	@Autowired
+	private ActorService			actorService;
 
 
 	public Quolet findOne(final int id) {
@@ -40,38 +40,34 @@ public class QuoletService {
 	}
 
 	public Quolet create() {
-		final Quolet c = new Quolet();
-		c.setAdministrator(this.administratorService.findByPrincipal());
-		c.setIsDraft(true);
-		c.setTicker(this.generateTicker());
-		return c;
+		final Quolet quolet = new Quolet();
+		quolet.setAdministrator(this.administratorService.findByPrincipal());
+		quolet.setIsDraft(true);
+		quolet.setTicker(this.generateTicker());
+		return quolet;
 	}
-	
-	public Quolet save(final Quolet quolet){
+
+	public Quolet save(final Quolet quolet) {
 		Quolet result;
 		Actor principal;
-		
+
 		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
-		
-		if (principal instanceof Administrator) {
+
+		if (principal instanceof Administrator)
 			Assert.isTrue(quolet.getAdministrator().getId() == this.administratorService.findByPrincipal().getId());
-		}else{
+		else
 			Assert.isTrue(quolet.getConference().getAdministrator().getId() == this.administratorService.findByPrincipal().getId());
-		}
 		final Date actual = new Date(System.currentTimeMillis() - 1);
-		Assert.isTrue(!quolet.getConference().getIsDraft());
-		
-		if(!quolet.getIsDraft()){
-			
+
+		if (!quolet.getIsDraft())
 			quolet.setPublicationMoment(actual);
-		}
-		
+
 		result = this.quoletRepository.save(quolet);
-		
+
 		return result;
 	}
-	
+
 	private String generateTicker() {
 		String res = "";
 
@@ -91,5 +87,14 @@ public class QuoletService {
 		res = res + ":" + formattedDate;
 
 		return res;
+	}
+
+	public Collection<Quolet> findByAdministrator(final int id) {
+		final Collection<Quolet> q = this.quoletRepository.findQuoletsByAdministratorId(id);
+		return q;
+	}
+
+	public Collection<Quolet> findByConference(final int id) {
+		return this.quoletRepository.findQuoletsByConferenceId(id);
 	}
 }
