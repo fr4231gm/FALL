@@ -1,4 +1,3 @@
-
 package controllers;
 
 import java.util.Calendar;
@@ -25,11 +24,10 @@ import domain.Quolet;
 public class QuoletAdministratorController extends AbstractController {
 
 	@Autowired
-	private QuoletService			quoletService;
+	private QuoletService quoletService;
 
 	@Autowired
-	private AdministratorService	administratorService;
-
+	private AdministratorService administratorService;
 
 	// Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -43,12 +41,13 @@ public class QuoletAdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Quolet quolet, final BindingResult binding) {
+	public ModelAndView save(@Valid final Quolet quolet,
+			final BindingResult binding) {
 		ModelAndView res;
 
 		if (quolet.getIsDraft() == null)
 			quolet.setIsDraft(false);
-		
+
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(quolet);
 			res.addObject("binding", binding);
@@ -59,7 +58,8 @@ public class QuoletAdministratorController extends AbstractController {
 			}
 
 			catch (final Throwable oops) {
-				res = this.createEditModelAndView(quolet, "quolet.commit.error");
+				res = this
+						.createEditModelAndView(quolet, "quolet.commit.error");
 			}
 		return res;
 	}
@@ -90,12 +90,13 @@ public class QuoletAdministratorController extends AbstractController {
 
 	// Save edit
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save2(@Valid final Quolet quolet, final BindingResult binding) {
+	public ModelAndView save2(@Valid final Quolet quolet,
+			final BindingResult binding) {
 		ModelAndView res;
 
 		if (quolet.getIsDraft() == null)
 			quolet.setIsDraft(false);
-		
+
 		if (binding.hasErrors()) {
 			res = new ModelAndView("quolet/edit");
 			res.addObject("quolet", quolet);
@@ -106,17 +107,20 @@ public class QuoletAdministratorController extends AbstractController {
 				res = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(quolet, "quolet.commit.error");
+				res = this
+						.createEditModelAndView(quolet, "quolet.commit.error");
 			}
 		return res;
 	}
 
-	//List----------------------------------------------------------------
+	// List----------------------------------------------------------------
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView res;
 
-		final Collection<Quolet> quolets = this.quoletService.findByAdministrator(this.administratorService.findByPrincipal().getId());
+		final Collection<Quolet> quolets = this.quoletService
+				.findByAdministrator(this.administratorService
+						.findByPrincipal().getId());
 		final Calendar cal = Calendar.getInstance();
 
 		cal.add(Calendar.MONTH, -1);
@@ -131,6 +135,25 @@ public class QuoletAdministratorController extends AbstractController {
 		return res;
 	}
 
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int quoletId) {
+
+		ModelAndView result;
+		Quolet quolet;
+
+		quolet = this.quoletService.findOne(quoletId);
+
+		try {
+			this.quoletService.delete(quolet);
+			result = new ModelAndView("welcome/index");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("misc/error");
+		}
+
+		return result;
+
+	}
+
 	// Ancillary metods
 	protected ModelAndView createEditModelAndView(final Quolet q) {
 		ModelAndView result;
@@ -138,7 +161,8 @@ public class QuoletAdministratorController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Quolet q, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final Quolet q,
+			final String messageCode) {
 		ModelAndView result;
 
 		result = new ModelAndView("quolet/edit");

@@ -1,4 +1,3 @@
-
 package services;
 
 import java.text.DateFormat;
@@ -21,14 +20,13 @@ import domain.Quolet;
 public class QuoletService {
 
 	@Autowired
-	private QuoletRepository		quoletRepository;
+	private QuoletRepository quoletRepository;
 
 	@Autowired
-	private AdministratorService	administratorService;
+	private AdministratorService administratorService;
 
 	@Autowired
-	private ActorService			actorService;
-
+	private ActorService actorService;
 
 	public Quolet findOne(final int id) {
 		final Quolet q = this.quoletRepository.findOne(id);
@@ -55,9 +53,11 @@ public class QuoletService {
 		Assert.notNull(principal);
 
 		if (principal instanceof Administrator)
-			Assert.isTrue(quolet.getAdministrator().getId() == this.administratorService.findByPrincipal().getId());
+			Assert.isTrue(quolet.getAdministrator().getId() == this.administratorService
+					.findByPrincipal().getId());
 		else
-			Assert.isTrue(quolet.getConference().getAdministrator().getId() == this.administratorService.findByPrincipal().getId());
+			Assert.isTrue(quolet.getConference().getAdministrator().getId() == this.administratorService
+					.findByPrincipal().getId());
 		final Date actual = new Date(System.currentTimeMillis() - 1);
 
 		if (!quolet.getIsDraft())
@@ -66,6 +66,19 @@ public class QuoletService {
 		result = this.quoletRepository.save(quolet);
 
 		return result;
+	}
+
+	public void delete(Quolet quolet) {
+		Administrator principal;
+
+		principal = this.administratorService.findByPrincipal();
+
+		Assert.notNull(principal);
+		Assert.isTrue(this.findByAdministrator(principal.getId()).contains(
+				quolet));
+		Assert.isTrue(quolet.getIsDraft().equals(true));
+
+		this.quoletRepository.delete(quolet);
 	}
 
 	private String generateTicker() {
@@ -78,7 +91,8 @@ public class QuoletService {
 		final String alphanumeric = "0123456789";
 
 		for (int i = 0; i < 6; i++) {
-			final int randomNumber = (int) Math.floor(Math.random() * (alphanumeric.length() - 1));
+			final int randomNumber = (int) Math.floor(Math.random()
+					* (alphanumeric.length() - 1));
 			res += alphanumeric.charAt(randomNumber);
 			;
 		}
@@ -90,7 +104,8 @@ public class QuoletService {
 	}
 
 	public Collection<Quolet> findByAdministrator(final int id) {
-		final Collection<Quolet> q = this.quoletRepository.findQuoletsByAdministratorId(id);
+		final Collection<Quolet> q = this.quoletRepository
+				.findQuoletsByAdministratorId(id);
 		return q;
 	}
 
