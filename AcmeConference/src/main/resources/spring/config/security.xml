@@ -63,7 +63,7 @@
 		<security:intercept-url pattern="/conference/administrator/**" access="hasRole('ADMINISTRATOR')"/>
 		<security:intercept-url pattern="/section/**" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/report/administrator/**" access="hasRole('ADMINISTRATOR')" />
-		<security:intercept-url pattern="/quolet/administrator/**" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/porter/administrator/**" access="hasRole('ADMINISTRATOR')" />
 
 		<!-- AUTHOR -->
 		
@@ -89,7 +89,7 @@
 		<!-- ************************ ALL ************************ -->
 		
 		<security:intercept-url pattern="/author/display.do" access="permitAll" />
-		<security:intercept-url pattern="/quolet/list.do" access="permitAll" />
+		<security:intercept-url pattern="/porter/list.do" access="permitAll" />
 		<security:intercept-url pattern="/" access="permitAll" /> 
 		<security:intercept-url pattern="/activity/**" access="permitAll" />
 		<security:intercept-url pattern="/conference/listRunningConferences.do" access="permitAll" /> 
@@ -105,7 +105,7 @@
 		<security:intercept-url pattern="/presentation/display.do" access="permitAll" />
 		<security:intercept-url pattern="/tutorial/display.do" access="permitAll" />
 		
-		<security:intercept-url pattern="/quolet/display.do" access="permitAll" />
+		<security:intercept-url pattern="/porter/display.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
 		<security:intercept-url pattern="/images/**" access="permitAll" /> 

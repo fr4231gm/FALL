@@ -14,36 +14,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
-import services.QuoletService;
+import services.PorterService;
 import domain.Administrator;
-import domain.Quolet;
+import domain.Porter;
 
 @Controller
-@RequestMapping("/quolet")
-public class QuoletController extends AbstractController {
+@RequestMapping("/porter")
+public class PorterController extends AbstractController {
 
 	@Autowired
-	private QuoletService			quoletService;
+	private PorterService			porterService;
 
 	@Autowired
 	private AdministratorService	administratorService;
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int quoletId) {
+	public ModelAndView display(@RequestParam final int porterId) {
 		ModelAndView res;
-		Quolet quolet;
+		Porter porter;
 
-		quolet = this.quoletService.findOne(quoletId);
+		porter = this.porterService.findOne(porterId);
 
-		if (quolet.getIsDraft().equals(true)) {
+		if (porter.getIsDraft().equals(true)) {
 			final Administrator principal = this.administratorService.findByPrincipal();
 			Assert.notNull(principal);
 		}
 
-		res = new ModelAndView("quolet/display");
-		res.addObject("quolet", quolet);
-		res.addObject("conference", quolet.getConference());
+		res = new ModelAndView("porter/display");
+		res.addObject("porter", porter);
+		res.addObject("conference", porter.getConference());
 
 		return res;
 	}
@@ -52,18 +52,18 @@ public class QuoletController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int conferenceId) {
 		ModelAndView res;
-		final Collection<Quolet> quolets = this.quoletService.findByConference(conferenceId);
+		final Collection<Porter> porters = this.porterService.findByConference(conferenceId);
 		final Calendar cal = Calendar.getInstance();
-
+		
 		cal.add(Calendar.MONTH, -1);
 		final Date oneMonth = cal.getTime();
 		cal.add(Calendar.MONTH, -1);
 		final Date twoMonths = cal.getTime();
-		res = new ModelAndView("quolet/list");
+		res = new ModelAndView("porter/list");
 		res.addObject("oneMonth", oneMonth);
 		res.addObject("twoMonths", twoMonths);
-		res.addObject("quolets", quolets);
-		res.addObject("requestURI", "quolet/list.do");
+		res.addObject("porters", porters);
+		res.addObject("requestURI", "porter/list.do");
 		return res;
 	}
 }

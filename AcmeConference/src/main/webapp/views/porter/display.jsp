@@ -1,0 +1,10 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%> <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%> <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%> <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%> <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> <%@taglib prefix="display" uri="http://displaytag.sf.net"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<acme:input 	code="porter.ticker"	path="porter.ticker"	readonly="true" />  <acme:show 	code="porter.title"	path="porter.title" />
+<acme:textarea 	code="porter.body"	path="porter.body"	readonly="true" />
+<jstl:choose>	<jstl:when test="${langcode eq 'en'}">		<fmt:formatDate			value="${porter.publicationMoment}" 			pattern="MM-dd-yy HH:mm" 			var="parsedPublicationmoment" 		/>	</jstl:when>	<jstl:otherwise>		<fmt:formatDate			value="${porter.publicationMoment}" 			pattern="dd-MM-yy HH:mm" 			var="parsedPublicationmoment" 		/>	</jstl:otherwise></jstl:choose>
+<form:label path="porter.publicationMoment"> 	<spring:message code="porter.publicationMoment"/></form:label><form:input code="porter.publicationMoment" 	path="porter.publicationMoment" 	value="${parsedPublicationmoment}" 	readonly="true" /> <br>
+<acme:show 	code="porter.picture"	path="porter.picture" />
+<form:label path="porter.isDraft"> 	<spring:message code="porter.isDraft"/></form:label><jstl:choose>	<jstl:when test="${porter.isDraft}">		<spring:message code="master.yes"/>	</jstl:when>	<jstl:otherwise>		<spring:message code="master.no"/>	</jstl:otherwise></jstl:choose><br><br>
+<acme:link 	code="porter.conference" 	link="conference/display.do?conferenceId=${conference.id}" />
+<br><br>
+<acme:back 	code="master.go.back" />

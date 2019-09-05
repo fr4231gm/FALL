@@ -154,16 +154,16 @@ public class AdministratorService {
 		return this.administratorRepository.CommentsPerActivity();
 	}
 	
-	public Double DraftQuoletsRatio() {
-		return this.administratorRepository.DraftQuoletsRatio();
+	public Double PortersPublishedPerTotalPorters() {
+		return this.administratorRepository.PortersPublishedPerTotalPorters();
 	}
 
-	public Double QuoletsPerAdministratorRatio() {
-		return this.administratorRepository.QuoletsPerAdministratorRatio();
+	public Double PortersUnpublishedPerTotalPorters() {
+		return this.administratorRepository.PortersUnpublishedPerTotalPorters();
 	}
 
-	public Double[] QuoletsPerConferenceStats() {
-		return this.administratorRepository.QuoletsPerConferenceStats();
+	public Double[] PortersPerConferenceStats() {
+		return this.administratorRepository.PortersPublishedPerConferenceStats();
 	} 
 	
 	public void computeScore(){

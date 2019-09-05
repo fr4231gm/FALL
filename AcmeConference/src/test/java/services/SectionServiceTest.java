@@ -26,7 +26,7 @@ public class SectionServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 				// TEST POSITIVO:
-				{ super.getEntityId("tutorial1"), "admin", "Title", "Summary",
+				{ super.getEntityId("tutorial1"), "administrator1", "Title", "Summary",
 						"https://www.google.es", null },
 
 				// TEST NEGATIVO: Un actor que no es administrador intenta
@@ -81,7 +81,7 @@ public class SectionServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 				// TEST POSITIVO:
-				{ super.getEntityId("section1"), "admin", null },
+				{ super.getEntityId("section1"), "administrator1", null },
 
 				// TEST NEGATIVO: Un actor que no es administrador intenta
 				// borrarlo

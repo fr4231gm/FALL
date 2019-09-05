@@ -33,7 +33,7 @@ public class ConferenceServiceTest extends AbstractTest {
 
 			// TEST POSITIVO:
 			{
-				"admin", null
+				"administrator1", null
 			},
 
 			// TEST NEGATIVO: Crear una conferencia sin ser admin

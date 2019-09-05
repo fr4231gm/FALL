@@ -50,7 +50,7 @@ public class SubmissionServiceTest extends AbstractTest {
 			// TEST NEGATIVO: Un actor que no es autor intenta crear una
 			// submission
 			{
-				"admin", super.getEntityId("conference7"), IllegalArgumentException.class
+				"administrator1", super.getEntityId("conference7"), IllegalArgumentException.class
 			}
 		};
 
@@ -92,7 +92,7 @@ public class SubmissionServiceTest extends AbstractTest {
 
 			// TEST POSITIVO:
 			{
-				"admin", super.getEntityId("submission13"), super.getEntityId("reviewer1"), null
+				"administrator1", super.getEntityId("submission13"), super.getEntityId("reviewer1"), null
 			},
 
 			// TEST NEGATIVO: Un actor que no es autor intenta crear una

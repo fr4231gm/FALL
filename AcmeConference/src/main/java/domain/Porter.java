@@ -8,19 +8,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.URL;
 
 @Entity 
 @Access(AccessType.PROPERTY) 
-public class Quolet extends DomainEntity {
+public class Porter extends DomainEntity {
 
 	// Atributos
 	private String					ticker;
 	private String					body;
 	private Date					publicationMoment;
-	private String					atributo1;
+	private String					picture;
 	private Boolean					isDraft;
 	private Administrator			administrator;
 	private Conference				conference;
@@ -46,8 +48,9 @@ public class Quolet extends DomainEntity {
 	}
 
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
-	public String getAtributo1(){
-		return this.atributo1;
+	@URL
+	public String getPicture(){
+		return this.picture;
 	}
 
 	public Boolean getIsDraft(){
@@ -66,6 +69,7 @@ public class Quolet extends DomainEntity {
 
 	@NotBlank
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE) 
+	@Size(min = 1, max = 251)
 	public String getTitle(){
 		return this.title;
 	}
@@ -85,8 +89,8 @@ public class Quolet extends DomainEntity {
 		this.publicationMoment = publicationMoment; 
 	}
 
-	public void setAtributo1(final String atributo1){
-		this.atributo1 = atributo1; 
+	public void setPicture(final String picture){
+		this.picture = picture; 
 	}
 
 	public void setIsDraft(final Boolean isDraft){

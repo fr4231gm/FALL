@@ -38,7 +38,7 @@ public class CategoryServiceTest extends AbstractTest {
 	public void testSaveCategory() {
 		final Category category, saved, parent;
 		Collection<Category> categories;
-		super.authenticate("admin");
+		super.authenticate("administrator1");
 		categories = this.categoryService.findAll();
 		parent = categories.iterator().next();
 		category = this.categoryService.create();
@@ -58,7 +58,7 @@ public class CategoryServiceTest extends AbstractTest {
 		final Conference f;
 		f = this.conferenceService.findAll().iterator().next();
 		Collection<Category> categories;
-		super.authenticate("admin");
+		super.authenticate("administrator1");
 		categories = this.categoryService.findAll();
 		parent = categories.iterator().next();
 		category = this.categoryService.create();

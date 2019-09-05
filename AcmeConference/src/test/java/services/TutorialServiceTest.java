@@ -29,7 +29,7 @@ public class TutorialServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 				// TEST POSITIVO:
-				{ super.getEntityId("conference9"), "admin", "Title",
+				{ super.getEntityId("conference9"), "administrator1", "Title",
 						"Speakers", "01/01/2020 12:00", 20, "Room 1",
 						"Summary..", "https://www.google.es", null },
 
@@ -94,7 +94,7 @@ public class TutorialServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 				// TEST POSITIVO:
-				{ super.getEntityId("tutorial1"), "admin", null },
+				{ super.getEntityId("tutorial1"), "administrator1", null },
 
 				// TEST NEGATIVO: Un actor que no es administrador intenta
 				// borrarlo

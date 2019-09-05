@@ -57,12 +57,12 @@ public class MessageServiceTest extends AbstractTest {
 
 			//TEST POSITIVO: 
 			{
-				"admin", "Subject", "body", "topic", "reviewer1", null
+				"administrator1", "Subject", "body", "topic", "reviewer1", null
 			}, //Crear un mmessage
 
 			//TESTS NEGATIVOS:
 			{
-				"sponsor1", "", "body", "tag", "admin", ConstraintViolationException.class
+				"sponsor1", "", "body", "tag", "administrator1", ConstraintViolationException.class
 			}, //Intentar crear un message sin subject
 
 		};

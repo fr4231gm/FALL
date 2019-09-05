@@ -15,7 +15,6 @@
 			value="https://pbs.twimg.com/media/D7cVHntXkAUTcxN.jpg:large" />
 		<property name="email" value="admin@gmail.com" />
 		<property name="address" value="C/Animalista nº2" />
-
 		<property name="phoneNumber" value="662130568" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
@@ -2397,18 +2396,6 @@
 
 	<!-- UserAccount -->
 	<bean id="userAccount1" class="security.UserAccount">
-		<property name="username" value="admin" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property value="ADMINISTRATOR" name="authority" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="administrator1" />
 		<property name="password" value="d5cee333abe432891a0de57d0ee38713" />
 		<property name="authorities">
@@ -2420,7 +2407,7 @@
 		</property>
 	</bean>
 
-	<bean id="userAccount3" class="security.UserAccount">
+	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="administrator2" />
 		<property name="password" value="82954495ff7e2a735ed2192c35b2cd00" />
 		<property name="authorities">
@@ -2432,7 +2419,7 @@
 		</property>
 	</bean>
 
-	<bean id="userAccount4" class="security.UserAccount">
+	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="administrator3" />
 		<property name="password" value="d1849d15043d73506d6a7523a1661e2d" />
 		<property name="authorities">
@@ -2444,9 +2431,21 @@
 		</property>
 	</bean>
 
-	<bean id="userAccount5" class="security.UserAccount">
+	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="administrator4" />
 		<property name="password" value="3ce013337481d5af81e21bf6791a574e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property value="ADMINISTRATOR" name="authority" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="administrator5" />
+		<property name="password" value="f2ec5fdcc58bcb002270a11f6bb2a9b3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -2636,63 +2635,69 @@
 		</property>
 	</bean>
 
-	<!-- Quolets -->
-	<bean id="quolet1" class="domain.Quolet">
-		<property name="ticker" value="AAA-123" />
+	<!-- Porters -->
+	<bean id="porter1" class="domain.Porter">
+		<property name="ticker" value="A_34-030419" />
 		<property name="body" value="This is the body" />
 		<property name="publicationMoment">
 			<null></null>
 		</property>
-		<property name="atributo1" value="atributo1" />
+		<property name="picture">
+			<null></null>
+		</property>
 		<property name="isDraft" value="true" />
 		<property name="administrator" ref="administrator1" />
 		<property name="conference" ref="conference1" />
-		<property name="title" value="TEST Quolet 1" />
+		<property name="title" value="TEST Porter 1" />
 	</bean>
 
-	<bean id="quolet2" class="domain.Quolet">
-		<property name="ticker" value="AAA-124" />
+	<bean id="porter2" class="domain.Porter">
+		<property name="ticker" value="BR94-070519" />
 		<property name="body" value="This is the body" />
 		<property name="publicationMoment" value="07/25/2019" />
-		<property name="atributo1" value="atributo2" />
+		<property name="picture" value="https://www.url.com" />
 		<property name="isDraft" value="false" />
 		<property name="administrator" ref="administrator1" />
 		<property name="conference" ref="conference1" />
-		<property name="title" value="TEST Quolet 2" />
+		<property name="title" value="TEST Porter 2" />
 	</bean>
 
-	<bean id="quolet3" class="domain.Quolet">
-		<property name="ticker" value="AAA-125" />
+	<bean id="porter3" class="domain.Porter">
+		<property name="ticker" value="C514-030519" />
 		<property name="body" value="This is the body" />
 		<property name="publicationMoment">
 			<null></null>
 		</property>
-		<property name="atributo1" value="atributo3" />
+		<property name="picture" value="https://www.url.com" />
 		<property name="isDraft" value="true" />
 		<property name="administrator" ref="administrator2" />
 		<property name="conference" ref="conference2" />
-		<property name="title" value="TEST Quolet 3" />
+		<property name="title" value="TEST Porter 3" />
 	</bean>
 
-	<bean id="quolet4" class="domain.Quolet">
-		<property name="ticker" value="AAA-126" />
+	<bean id="porter4" class="domain.Porter">
+		<property name="ticker" value="A_24-030619" />
 		<property name="body" value="This is the body" />
 		<property name="publicationMoment" value="06/04/2019" />
-		<property name="atributo1" value="atributo4" />
+		<property name="picture">
+			<null></null>
+		</property>
 		<property name="isDraft" value="false" />
 		<property name="administrator" ref="administrator2" />
 		<property name="conference" ref="conference2" />
-		<property name="title" value="TEST Quolet 4" />
+		<property name="title" value="TEST Porter 4" />
 	</bean>
 	
-	<bean id="quolet5" class="domain.Quolet">
-		<property name="ticker" value="AAA-127" />
+	<bean id="porter5" class="domain.Porter">
+		<property name="ticker" value="OL69-080119" />
 		<property name="body" value="This is the body" />
 		<property name="publicationMoment" value="08/04/2019" />
-		<property name="atributo1" value="atributo5" />
+		<property name="picture">
+			<null></null>
+		</property>
 		<property name="isDraft" value="false" />
 		<property name="administrator" ref="administrator2" />
 		<property name="conference" ref="conference1" />
-		<property name="title" value="TEST Quolet 5" />
+		<property name="title" value="TEST Porter 5" />
 	</bean>
 </beans>

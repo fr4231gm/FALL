@@ -23,23 +23,26 @@
 	</jstl:otherwise>
 </jstl:choose>
 
-<display:table name="quolets" id="row" requestURI="${requestURI}"
+<display:table name="porters" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
-	<display:column property="ticker" titleKey="quolet.ticker"
+	<display:column property="ticker" titleKey="porter.ticker"
+		sortable="true" />
+
+	<display:column property="title" titleKey="porter.title"
 		sortable="true" />
 
 	<jstl:choose>
 		<jstl:when test="${row.publicationMoment.time gt oneMonth.time}">
 			<display:column property="publicationMoment"
-				titleKey="quolet.publicationMoment" format="${format}"
+				titleKey="porter.publicationMoment" format="${format}"
 				sortable="true" class="lessOneMonthOld" />
 		</jstl:when>
 
 		<jstl:when
 			test="${row.publicationMoment.time lt oneMonth.time and row.publicationMoment.time gt twoMonths.time}">
 			<display:column property="publicationMoment"
-				titleKey="quolet.publicationMoment" format="${format}"
+				titleKey="porter.publicationMoment" format="${format}"
 				sortable="true" class="betweenOneAndTwoMonthOld" />
 		</jstl:when>
 
@@ -47,7 +50,7 @@
 
 		<jstl:otherwise>
 			<display:column property="publicationMoment"
-				titleKey="quolet.publicationMoment" format="${format}"
+				titleKey="porter.publicationMoment" format="${format}"
 				sortable="true" class="moreTwoMonthOld" />
 
 		</jstl:otherwise>
@@ -57,36 +60,32 @@
 	</jstl:choose>
 
 
-	<display:column property="atributo1" titleKey="quolet.atributo1"
+	<display:column property="picture" titleKey="porter.picture"
 		sortable="true" />
 
-
-
-
-	<display:column titleKey="quolet.display">
-		<acme:link code="quolet.display"
-			link="quolet/display.do?quoletId=${row.id}" />
+	<display:column titleKey="porter.display">
+		<acme:link code="porter.display"
+			link="porter/display.do?porterId=${row.id}" />
 	</display:column>
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<display:column>
-			<jstl:if test="${row.isDraft eq true}">
-				<acme:link code="quolet.edit"
-					link="quolet/administrator/edit.do?quoletId=${row.id}" />
-				<acme:link code="quolet.delete"
-					link="quolet/administrator/delete.do?quoletId=${row.id}" />
+			<jstl:if test="${row.isDraft eq true and permiso eq true}">
+				<acme:link code="porter.edit"
+					link="porter/administrator/edit.do?porterId=${row.id}" />
+				<acme:link code="porter.delete"
+					link="porter/administrator/delete.do?porterId=${row.id}" />
 			</jstl:if>
 		</display:column>
 	</security:authorize>
-	<display:column property="title" titleKey="quolet.title"
-		sortable="true" />
 
 </display:table>
 
+<br/>
 <acme:back code="master.go.back" />
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<input type="button" name="create"
-		value="<spring:message code='quolet.create'/>"
-		onclick="redirect: location.href = 'quolet/administrator/create.do';" />
+		value="<spring:message code='porter.create'/>"
+		onclick="redirect: location.href = 'porter/administrator/create.do';" />
 </security:authorize>
