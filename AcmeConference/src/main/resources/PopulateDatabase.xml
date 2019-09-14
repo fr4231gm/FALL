@@ -2636,63 +2636,61 @@
 		</property>
 	</bean>
 
-	<!-- Quolets -->
-	<bean id="quolet1" class="domain.Quolet">
-		<property name="ticker" value="AAA-123" />
+	<!-- Qulps -->
+	<bean id="qulp1" class="domain.Qulp">
+		<property name="ticker" value="AAAAA-03/05/2018" />
 		<property name="body" value="This is the body" />
-		<property name="publicationMoment">
-			<null></null>
-		</property>
-		<property name="atributo1" value="atributo1" />
-		<property name="isDraft" value="true" />
-		<property name="administrator" ref="administrator1" />
-		<property name="conference" ref="conference1" />
-		<property name="title" value="TEST Quolet 1" />
-	</bean>
-
-	<bean id="quolet2" class="domain.Quolet">
-		<property name="ticker" value="AAA-124" />
-		<property name="body" value="This is the body" />
-		<property name="publicationMoment" value="07/25/2019" />
-		<property name="atributo1" value="atributo2" />
+		<property name="publicationMoment" value="09/02/2019" />
+		<property name="picture" value="https://www.muchodeporte.com/media/imagenes/crop.16_9/fekir_gol.1.jpg" />
 		<property name="isDraft" value="false" />
 		<property name="administrator" ref="administrator1" />
 		<property name="conference" ref="conference1" />
-		<property name="title" value="TEST Quolet 2" />
+		<property name="title" value="TEST qulp 1" />
 	</bean>
 
-	<bean id="quolet3" class="domain.Quolet">
-		<property name="ticker" value="AAA-125" />
+	<bean id="qulp2" class="domain.Qulp">
+		<property name="ticker" value="AAAAA-03/06/2018" />
+		<property name="body" value="This is the body" />
+		<property name="publicationMoment" value="07/30/2019" />
+		<property name="picture" value="" />
+		<property name="isDraft" value="false" />
+		<property name="administrator" ref="administrator1" />
+		<property name="conference" ref="conference1" />
+		<property name="title" value="TEST qulp 2" />
+	</bean>
+
+	<bean id="qulp3" class="domain.Qulp">
+		<property name="ticker" value="AAAAA-03/07/2018" />
 		<property name="body" value="This is the body" />
 		<property name="publicationMoment">
 			<null></null>
 		</property>
-		<property name="atributo1" value="atributo3" />
+		<property name="picture" value="" />
 		<property name="isDraft" value="true" />
 		<property name="administrator" ref="administrator2" />
-		<property name="conference" ref="conference2" />
-		<property name="title" value="TEST Quolet 3" />
+		<property name="conference" ref="conference1" />
+		<property name="title" value="TEST qulp 3" />
 	</bean>
 
-	<bean id="quolet4" class="domain.Quolet">
-		<property name="ticker" value="AAA-126" />
+	<bean id="qulp4" class="domain.Qulp">
+		<property name="ticker" value="AAAAA-03/08/2018" />
 		<property name="body" value="This is the body" />
 		<property name="publicationMoment" value="06/04/2019" />
-		<property name="atributo1" value="atributo4" />
+		<property name="picture" value="" />
 		<property name="isDraft" value="false" />
-		<property name="administrator" ref="administrator2" />
-		<property name="conference" ref="conference2" />
-		<property name="title" value="TEST Quolet 4" />
+		<property name="administrator" ref="administrator1" />
+		<property name="conference" ref="conference1" />
+		<property name="title" value="TEST qulp 4" />
 	</bean>
 	
-	<bean id="quolet5" class="domain.Quolet">
-		<property name="ticker" value="AAA-127" />
+	<bean id="qulp5" class="domain.Qulp">
+		<property name="ticker" value="AAAAA-03/09/2018" />
 		<property name="body" value="This is the body" />
-		<property name="publicationMoment" value="08/04/2019" />
-		<property name="atributo1" value="atributo5" />
+		<property name="publicationMoment" value="01/04/2019" />
+		<property name="picture" value="" />
 		<property name="isDraft" value="false" />
 		<property name="administrator" ref="administrator2" />
 		<property name="conference" ref="conference1" />
-		<property name="title" value="TEST Quolet 5" />
+		<property name="title" value="TEST qulp 5" />
 	</bean>
 </beans>

@@ -1,0 +1,10 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%> <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%> <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%> <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%> <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> <%@taglib prefix="display" uri="http://displaytag.sf.net"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<acme:input 	code="qulp.ticker"	path="qulp.ticker"	readonly="true" />  <acme:image src="${qulp.picture}"/> <acme:show 	code="qulp.title"	path="qulp.title" />
+<acme:textarea 	code="qulp.body"	path="qulp.body"	readonly="true" /> 
+<jstl:choose>	<jstl:when test="${langcode eq 'en'}">		<fmt:formatDate			value="${qulp.publicationMoment}" 			pattern="MM-dd-yy HH:mm" 			var="parsedPublicationmoment" 		/>	</jstl:when>	<jstl:otherwise>		<fmt:formatDate			value="${qulp.publicationMoment}" 			pattern="dd-MM-yy HH:mm" 			var="parsedPublicationmoment" 		/>	</jstl:otherwise></jstl:choose>
+<form:label path="qulp.publicationMoment"> 	<spring:message code="qulp.publicationMoment"/></form:label><form:input code="qulp.publicationMoment" 	path="qulp.publicationMoment" 	value="${parsedPublicationmoment}" 	readonly="true" /> <br>
+
+<form:label path="qulp.isDraft"> 	<spring:message code="qulp.isDraft"/></form:label><jstl:choose>	<jstl:when test="${qulp.isDraft}">		<spring:message code="master.yes"/>	</jstl:when>	<jstl:otherwise>		<spring:message code="master.no"/>	</jstl:otherwise></jstl:choose><br><br>
+<acme:link 	code="qulp.conference" 	link="conference/display.do?conferenceId=${conference.id}" />
+<br><br>
+<acme:back 	code="master.go.back" />

@@ -36,13 +36,13 @@ public class AbstractController {
 	public void getConfiguationObjects(final Model result) {
 		final Configuration configuration = this.configurationService.findConfiguration();
 		String ls;
-		try{
+		try {
 			final Locale locale = LocaleContextHolder.getLocale();
 			ls = locale.getLanguage();
-		} catch(Throwable oops){
+		} catch (final Throwable oops) {
 			ls = "en";
 		}
-		
+
 		result.addAttribute("banner", configuration.getBanner());
 		result.addAttribute("systemName", configuration.getsystemName());
 		result.addAttribute("welcomeMessage", configuration.getWelcomeMessage());
@@ -57,7 +57,7 @@ public class AbstractController {
 	public ModelAndView panic(final Throwable oops) {
 		ModelAndView result;
 
-		result = new ModelAndView("misc/error");
+		result = new ModelAndView("misc/panic");
 		result.addObject("name", ClassUtils.getShortName(oops.getClass()));
 		result.addObject("exception", oops.getMessage());
 		result.addObject("stackTrace", ExceptionUtils.getStackTrace(oops));

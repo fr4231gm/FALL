@@ -14,36 +14,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
-import services.QuoletService;
+import services.QulpService;
 import domain.Administrator;
-import domain.Quolet;
+import domain.Qulp;
 
 @Controller
-@RequestMapping("/quolet")
-public class QuoletController extends AbstractController {
+@RequestMapping("/qulp")
+public class QulpController extends AbstractController {
 
 	@Autowired
-	private QuoletService			quoletService;
+	private QulpService				qulpService;
 
 	@Autowired
 	private AdministratorService	administratorService;
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int quoletId) {
+	public ModelAndView display(@RequestParam final int qulpId) {
 		ModelAndView res;
-		Quolet quolet;
+		Qulp qulp;
 
-		quolet = this.quoletService.findOne(quoletId);
+		qulp = this.qulpService.findOne(qulpId);
 
-		if (quolet.getIsDraft().equals(true)) {
+		if (qulp.getIsDraft().equals(true)) {
 			final Administrator principal = this.administratorService.findByPrincipal();
 			Assert.notNull(principal);
 		}
 
-		res = new ModelAndView("quolet/display");
-		res.addObject("quolet", quolet);
-		res.addObject("conference", quolet.getConference());
+		res = new ModelAndView("qulp/display");
+		res.addObject("qulp", qulp);
+		res.addObject("conference", qulp.getConference());
 
 		return res;
 	}
@@ -52,18 +52,18 @@ public class QuoletController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int conferenceId) {
 		ModelAndView res;
-		final Collection<Quolet> quolets = this.quoletService.findByConference(conferenceId);
+		final Collection<Qulp> qulps = this.qulpService.findByConference(conferenceId);
 		final Calendar cal = Calendar.getInstance();
 
 		cal.add(Calendar.MONTH, -1);
 		final Date oneMonth = cal.getTime();
 		cal.add(Calendar.MONTH, -1);
 		final Date twoMonths = cal.getTime();
-		res = new ModelAndView("quolet/list");
+		res = new ModelAndView("qulp/list");
 		res.addObject("oneMonth", oneMonth);
 		res.addObject("twoMonths", twoMonths);
-		res.addObject("quolets", quolets);
-		res.addObject("requestURI", "quolet/list.do");
+		res.addObject("qulps", qulps);
+		res.addObject("requestURI", "qulp/list.do");
 		return res;
 	}
 }

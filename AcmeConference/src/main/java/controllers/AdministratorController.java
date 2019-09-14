@@ -31,126 +31,125 @@ import domain.Administrator;
 @RequestMapping("/administrator")
 public class AdministratorController extends AbstractController {
 
-    @Autowired
-    private AdministratorService administratorService;
-    
-    // Constructors -----------------------------------------------------------
-    public AdministratorController() {
-        super();
-    }
+	@Autowired
+	private AdministratorService	administratorService;
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit() {
-        ModelAndView res;
-        Administrator administrator;
 
-        administrator = this.administratorService.findByPrincipal();
-        Assert.notNull(administrator);
-        res = this.createEditModelAndView(administrator);
-        
-        return res;
-    }
+	// Constructors -----------------------------------------------------------
+	public AdministratorController() {
+		super();
+	}
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, params="save")
-    public ModelAndView save(@Valid Administrator administrator, BindingResult binding) {
-        ModelAndView res;
-        Administrator toSave;
-        
-        if(binding.hasErrors()){
-            res = this.createEditModelAndView(administrator);
-            for(ObjectError s: binding.getAllErrors()){
-            	System.out.println(s);
-            }
-            
-        } else {
-            try {
-                toSave = this.administratorService.save(administrator);
-                res = new ModelAndView("welcome/index");
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit() {
+		ModelAndView res;
+		Administrator administrator;
 
-                res.addObject("name", toSave.getName());
-                res.addObject("exitCode", "actor.edit.success");
-                res.addObject("moment", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
-            } catch (Throwable oops) {
-                res = this.createEditModelAndView(administrator, "administrator.commit.error");
-            }
-        }
+		administrator = this.administratorService.findByPrincipal();
+		Assert.notNull(administrator);
+		res = this.createEditModelAndView(administrator);
 
-        return res;
-    }
-    
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public ModelAndView dashboard() {
-        ModelAndView res;
+		return res;
+	}
 
-        try {
-            Assert.notNull(this.administratorService.findByPrincipal());
-            res = new ModelAndView("dashboard");
-            
-            res.addObject("SubmissionsPerConference", this.administratorService.SubmissionsPerConference());
-            res.addObject("RegistrationsPerConference", this.administratorService.RegistrationsPerConference());
-            res.addObject("ConferencesFeesStats", this.administratorService.ConferencesFeesStats());
-            res.addObject("ConferencesDaysStats", this.administratorService.ConferencesDaysStats());
-            res.addObject("ConferencesPerCategory", this.administratorService.ConferencesPerCategory());
-            res.addObject("CommentsPerConference", this.administratorService.CommentsPerConference());
-            res.addObject("CommentsPerActivity", this.administratorService.CommentsPerActivity());
-            //Control Check
-            res.addObject("QuoletsPerConferenceStats", this.administratorService.QuoletsPerConferenceStats());
-            res.addObject("QuoletsPerAdministratorRatio", this.administratorService.QuoletsPerAdministratorRatio());
-            res.addObject("DraftQuoletsRatio", this.administratorService.DraftQuoletsRatio());
-            
-        } catch (Throwable oops) {
-        	res = new ModelAndView("welcome/index");
-        }
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Administrator administrator, final BindingResult binding) {
+		ModelAndView res;
+		Administrator toSave;
 
-        return res;
-    }
-    
-    @RequestMapping(value = "/compute", method = RequestMethod.GET)
-    public ModelAndView computeScore() {
-        ModelAndView res;
+		if (binding.hasErrors()) {
+			res = this.createEditModelAndView(administrator);
+			for (final ObjectError s : binding.getAllErrors())
+				System.out.println(s);
 
-        try {
-            Assert.notNull(this.administratorService.findByPrincipal());
-        	res = new ModelAndView("welcome/index");
-            this.administratorService.computeScore();
-            res.addObject("message", "compute.success");
-            
-        } catch (Throwable oops) {
-        	res = new ModelAndView("welcome/index");
-        }
+		} else
+			try {
+				toSave = this.administratorService.save(administrator);
+				res = new ModelAndView("welcome/index");
 
-        return res;
-    }
-    
-    @RequestMapping(value = "/computebuzzwords", method = RequestMethod.GET)
-    public ModelAndView computeBuzzWords() {
-        ModelAndView res;
+				res.addObject("name", toSave.getName());
+				res.addObject("exitCode", "actor.edit.success");
+				res.addObject("moment", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(administrator, "administrator.commit.error");
+			}
 
-        try {
-            Assert.notNull(this.administratorService.findByPrincipal());
-        	res = new ModelAndView("welcome/index");
-            String buzzWords = this.administratorService.computeBuzzWords();
-            res.addObject("buzzwords", buzzWords);
-        } catch (Throwable oops) {
-        	res = new ModelAndView("welcome/index");
-        }
+		return res;
+	}
 
-        return res;
-    }
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public ModelAndView dashboard() {
+		ModelAndView res;
 
-    protected ModelAndView createEditModelAndView(final Administrator administrator) {
-        final ModelAndView result = this.createEditModelAndView(administrator, null);
-        return result;
-    }
+		try {
+			Assert.notNull(this.administratorService.findByPrincipal());
+			res = new ModelAndView("dashboard");
 
-    protected ModelAndView createEditModelAndView(final Administrator administrator, final String messagecode) {
-        final ModelAndView result;
+			res.addObject("SubmissionsPerConference", this.administratorService.SubmissionsPerConference());
+			res.addObject("RegistrationsPerConference", this.administratorService.RegistrationsPerConference());
+			res.addObject("ConferencesFeesStats", this.administratorService.ConferencesFeesStats());
+			res.addObject("ConferencesDaysStats", this.administratorService.ConferencesDaysStats());
+			res.addObject("ConferencesPerCategory", this.administratorService.ConferencesPerCategory());
+			res.addObject("CommentsPerConference", this.administratorService.CommentsPerConference());
+			res.addObject("CommentsPerActivity", this.administratorService.CommentsPerActivity());
+			//Control Check
+			res.addObject("QulpsPerConferenceStats", this.administratorService.qulpsPerConferenceStats());
+			res.addObject("QulpsPerAdministratorRatio", this.administratorService.qulpsPerAdministratorRatio());
+			res.addObject("DraftQulpsRatio", this.administratorService.DraftQulpsRatio());
 
-        result = new ModelAndView("administrator/edit");
+		} catch (final Throwable oops) {
+			res = new ModelAndView("welcome/index");
+		}
 
-        result.addObject("administrator", administrator);
-        result.addObject("message", messagecode);
+		return res;
+	}
 
-        return result;
-    }
+	@RequestMapping(value = "/compute", method = RequestMethod.GET)
+	public ModelAndView computeScore() {
+		ModelAndView res;
+
+		try {
+			Assert.notNull(this.administratorService.findByPrincipal());
+			res = new ModelAndView("welcome/index");
+			this.administratorService.computeScore();
+			res.addObject("message", "compute.success");
+
+		} catch (final Throwable oops) {
+			res = new ModelAndView("welcome/index");
+		}
+
+		return res;
+	}
+
+	@RequestMapping(value = "/computebuzzwords", method = RequestMethod.GET)
+	public ModelAndView computeBuzzWords() {
+		ModelAndView res;
+
+		try {
+			Assert.notNull(this.administratorService.findByPrincipal());
+			res = new ModelAndView("welcome/index");
+			final String buzzWords = this.administratorService.computeBuzzWords();
+			res.addObject("buzzwords", buzzWords);
+		} catch (final Throwable oops) {
+			res = new ModelAndView("welcome/index");
+		}
+
+		return res;
+	}
+
+	protected ModelAndView createEditModelAndView(final Administrator administrator) {
+		final ModelAndView result = this.createEditModelAndView(administrator, null);
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Administrator administrator, final String messagecode) {
+		final ModelAndView result;
+
+		result = new ModelAndView("administrator/edit");
+
+		result.addObject("administrator", administrator);
+		result.addObject("message", messagecode);
+
+		return result;
+	}
 }

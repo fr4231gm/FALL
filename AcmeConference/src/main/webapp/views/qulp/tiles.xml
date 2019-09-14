@@ -16,19 +16,19 @@
        
 <tiles-definitions>
 
-	<definition name="quolet/display" extends="master.page">	
-		<put-attribute name="title" value="Display quolet" />
-		<put-attribute name="body" value="/views/quolet/display.jsp" />
+	<definition name="qulp/display" extends="master.page">	
+		<put-attribute name="title" value="Display qulp" />
+		<put-attribute name="body" value="/views/qulp/display.jsp" />
 	</definition>
 	
-	<definition name="quolet/list" extends="master.page">	
-		<put-attribute name="title" value="List of quolets" />
-		<put-attribute name="body" value="/views/quolet/list.jsp" />
+	<definition name="qulp/list" extends="master.page">	
+		<put-attribute name="title" value="List of qulps" />
+		<put-attribute name="body" value="/views/qulp/list.jsp" />
 	</definition>
 	
-	<definition name="quolet/edit" extends="master.page">	
-		<put-attribute name="title" value="Edit quolet" />
-		<put-attribute name="body" value="/views/quolet/edit.jsp" />
+	<definition name="qulp/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit qulp" />
+		<put-attribute name="body" value="/views/qulp/edit.jsp" />
 	</definition>
 	
 </tiles-definitions>

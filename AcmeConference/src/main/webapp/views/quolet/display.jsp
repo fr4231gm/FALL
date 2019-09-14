@@ -1,10 +1,0 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%> <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%> <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%> <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%> <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> <%@taglib prefix="display" uri="http://displaytag.sf.net"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-<acme:input 	code="quolet.ticker"	path="quolet.ticker"	readonly="true" />  <acme:show 	code="quolet.title"	path="quolet.title" />
-<acme:textarea 	code="quolet.body"	path="quolet.body"	readonly="true" />
-<jstl:choose>	<jstl:when test="${langcode eq 'en'}">		<fmt:formatDate			value="${quolet.publicationMoment}" 			pattern="MM-dd-yy HH:mm" 			var="parsedPublicationmoment" 		/>	</jstl:when>	<jstl:otherwise>		<fmt:formatDate			value="${quolet.publicationMoment}" 			pattern="dd-MM-yy HH:mm" 			var="parsedPublicationmoment" 		/>	</jstl:otherwise></jstl:choose>
-<form:label path="quolet.publicationMoment"> 	<spring:message code="quolet.publicationMoment"/></form:label><form:input code="quolet.publicationMoment" 	path="quolet.publicationMoment" 	value="${parsedPublicationmoment}" 	readonly="true" /> <br>
-<acme:show 	code="quolet.atributo1"	path="quolet.atributo1" />
-<form:label path="quolet.isDraft"> 	<spring:message code="quolet.isDraft"/></form:label><jstl:choose>	<jstl:when test="${quolet.isDraft}">		<spring:message code="master.yes"/>	</jstl:when>	<jstl:otherwise>		<spring:message code="master.no"/>	</jstl:otherwise></jstl:choose><br><br>
-<acme:link 	code="quolet.conference" 	link="conference/display.do?conferenceId=${conference.id}" />
-<br><br>
-<acme:back 	code="master.go.back" />

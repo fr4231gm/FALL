@@ -9,13 +9,13 @@
  */
 
 .lessOneMonthOld {
-	color: Indigo;
+	color: DarkGrey;
 }
 
 .betweenOneAndTwoMonthOld {
-	color: DarkSlateGrey;
+	color: MediumPurple;
 }
 
 .moreTwoMonthOld {
-	color: green;
+	color: PapayaWhip;
 }

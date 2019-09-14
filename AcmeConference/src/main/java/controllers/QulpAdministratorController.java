@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.Calendar;
@@ -15,100 +16,97 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
-import services.QuoletService;
+import services.QulpService;
 import domain.Administrator;
-import domain.Quolet;
+import domain.Qulp;
 
 @Controller
-@RequestMapping("/quolet/administrator")
-public class QuoletAdministratorController extends AbstractController {
+@RequestMapping("/qulp/administrator")
+public class QulpAdministratorController extends AbstractController {
 
 	@Autowired
-	private QuoletService quoletService;
+	private QulpService				qulpService;
 
 	@Autowired
-	private AdministratorService administratorService;
+	private AdministratorService	administratorService;
+
 
 	// Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView res;
-		final Quolet quolet = this.quoletService.create();
+		final Qulp qulp = this.qulpService.create();
 
-		res = this.createEditModelAndView(quolet);
+		res = this.createEditModelAndView(qulp);
 
 		return res;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Quolet quolet,
-			final BindingResult binding) {
+	public ModelAndView save(@Valid final Qulp qulp, final BindingResult binding) {
 		ModelAndView res;
 
-		if (quolet.getIsDraft() == null)
-			quolet.setIsDraft(false);
+		if (qulp.getIsDraft() == null)
+			qulp.setIsDraft(false);
 
 		if (binding.hasErrors()) {
-			res = this.createEditModelAndView(quolet);
+			res = this.createEditModelAndView(qulp);
 			res.addObject("binding", binding);
 		} else
 			try {
-				this.quoletService.save(quolet);
+				this.qulpService.save(qulp);
 				res = new ModelAndView("redirect:list.do");
 			}
 
 			catch (final Throwable oops) {
-				res = this
-						.createEditModelAndView(quolet, "quolet.commit.error");
+				res = this.createEditModelAndView(qulp, "qulp.commit.error");
 			}
 		return res;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int quoletId) {
+	public ModelAndView edit(@RequestParam final int qulpId) {
 		ModelAndView res;
-		final Quolet quolet;
+		final Qulp qulp;
 		Administrator principal;
-		quolet = this.quoletService.findOne(quoletId);
+		qulp = this.qulpService.findOne(qulpId);
 		principal = this.administratorService.findByPrincipal();
 
-		if (quolet.getAdministrator().getId() != principal.getId())
+		if (qulp.getAdministrator().getId() != principal.getId())
 			res = new ModelAndView("security/hacking");
 		else
 			try {
-				res = new ModelAndView("quolet/edit");
-				res.addObject("quolet", quolet);
+				res = new ModelAndView("qulp/edit");
+				res.addObject("qulp", qulp);
 
 			} catch (final Throwable oops) {
 
-				res = new ModelAndView("quolet/edit");
-				res.addObject("quolet", quolet);
-				res.addObject("message", "quolet.commit.error");
+				res = new ModelAndView("qulp/edit");
+				res.addObject("qulp", qulp);
+				res.addObject("message", "qulp.commit.error");
 			}
 		return res;
 	}
 
 	// Save edit
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save2(@Valid final Quolet quolet,
-			final BindingResult binding) {
+	public ModelAndView save2(@Valid final Qulp qulp, final BindingResult binding) {
 		ModelAndView res;
 
-		if (quolet.getIsDraft() == null)
-			quolet.setIsDraft(false);
+		if (qulp.getIsDraft() == null)
+			qulp.setIsDraft(false);
 
 		if (binding.hasErrors()) {
-			res = new ModelAndView("quolet/edit");
-			res.addObject("quolet", quolet);
+			res = new ModelAndView("qulp/edit");
+			res.addObject("qulp", qulp);
 		} else
 			try {
 
-				this.quoletService.save(quolet);
+				this.qulpService.save(qulp);
 				res = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
-				res = this
-						.createEditModelAndView(quolet, "quolet.commit.error");
+				res = this.createEditModelAndView(qulp, "qulp.commit.error");
 			}
 		return res;
 	}
@@ -118,34 +116,32 @@ public class QuoletAdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView res;
 
-		final Collection<Quolet> quolets = this.quoletService
-				.findByAdministrator(this.administratorService
-						.findByPrincipal().getId());
+		final Collection<Qulp> qulps = this.qulpService.findByAdministrator(this.administratorService.findByPrincipal().getId());
 		final Calendar cal = Calendar.getInstance();
 
 		cal.add(Calendar.MONTH, -1);
 		final Date oneMonth = cal.getTime();
 		cal.add(Calendar.MONTH, -1);
 		final Date twoMonths = cal.getTime();
-		res = new ModelAndView("quolet/list");
+		res = new ModelAndView("qulp/list");
 		res.addObject("oneMonth", oneMonth);
 		res.addObject("twoMonths", twoMonths);
-		res.addObject("quolets", quolets);
-		res.addObject("requestURI", "quolet/administrator/list.do");
+		res.addObject("qulps", qulps);
+		res.addObject("requestURI", "qulp/administrator/list.do");
 		return res;
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam final int quoletId) {
+	public ModelAndView delete(@RequestParam final int qulpId) {
 
 		ModelAndView result;
-		Quolet quolet;
+		Qulp qulp;
 
-		quolet = this.quoletService.findOne(quoletId);
+		qulp = this.qulpService.findOne(qulpId);
 
 		try {
-			this.quoletService.delete(quolet);
-			result = new ModelAndView("welcome/index");
+			this.qulpService.delete(qulp);
+			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
 			result = new ModelAndView("misc/error");
 		}
@@ -155,18 +151,17 @@ public class QuoletAdministratorController extends AbstractController {
 	}
 
 	// Ancillary metods
-	protected ModelAndView createEditModelAndView(final Quolet q) {
+	protected ModelAndView createEditModelAndView(final Qulp q) {
 		ModelAndView result;
 		result = this.createEditModelAndView(q, null);
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Quolet q,
-			final String messageCode) {
+	protected ModelAndView createEditModelAndView(final Qulp q, final String messageCode) {
 		ModelAndView result;
 
-		result = new ModelAndView("quolet/edit");
-		result.addObject("quolet", q);
+		result = new ModelAndView("qulp/edit");
+		result.addObject("qulp", q);
 		result.addObject("message", messageCode);
 
 		return result;

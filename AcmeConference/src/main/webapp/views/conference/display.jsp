@@ -48,7 +48,7 @@
 </jstl:if>
 
 <acme:link code="conference.create.comment" link="comment/create.do?targetId=${conference.id}" /> <br><br>
-<acme:link code="conference.quolets" link="quolet/list.do?conferenceId=${conference.id}" /> <br><br>
+<acme:link code="conference.qulps" link="qulp/list.do?conferenceId=${conference.id}" /> <br><br>
 
 <jstl:if test="${not empty conference.comments}">
 	<display:table  requestURI="conference/display.do" name="conference.comments" id="row" pagesize="5" class="displaytag">

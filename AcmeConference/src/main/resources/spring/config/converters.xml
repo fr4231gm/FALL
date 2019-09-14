@@ -75,9 +75,9 @@
 		<bean class = "converters.PresentationToStringConverter" />
 		<bean class = "converters.StringToPresentationConverter" />
 		
-		<!-- QUOLET -->
-		<bean class = "converters.QuoletToStringConverter" />
-		<bean class = "converters.StringToQuoletConverter" />
+		<!-- QULP -->
+		<bean class = "converters.QulpToStringConverter" />
+		<bean class = "converters.StringToQulpConverter" />
 		
 		<!-- REGISTRATION -->
 		<bean class = "converters.RegistrationToStringConverter" />

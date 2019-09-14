@@ -39,7 +39,7 @@
 					<li><a class="child" href="administrator/compute.do"><spring:message code="master.page.compute" /></a></li>
 					<li><a class="child" href="administrator/computebuzzwords.do"><spring:message code="master.page.computebuzzwords" /></a></li>
 					<li><a class="child" href="submission/administrator/list.do"><spring:message code="master.page.author.submission" /></a></li>
-				<li><a class="child" href="quolet/administrator/list.do"><spring:message code="master.page.administrator.quolets" /></a></li>
+				<li><a class="child" href="qulp/administrator/list.do"><spring:message code="master.page.administrator.qulps" /></a></li>
 				
 				</ul>
 			</li>
