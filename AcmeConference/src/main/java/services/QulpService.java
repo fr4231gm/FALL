@@ -87,7 +87,7 @@ public class QulpService {
 		final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 		final String formattedDate = dateFormat.format(fecha);
 
-		final String alphanumeric = "0123456789ABCDEFGHIJKLMNOPQRSUVTXYZ";
+		final String alphanumeric = "0123456789ABCDEFGHIJKLMNOPQRSUVTXYZabcdefghijklmnopqrstuvxyz_";
 
 		for (int i = 0; i < 5; i++) {
 			final int randomNumber = (int) Math.floor(Math.random() * (alphanumeric.length() - 1));
