@@ -54,5 +54,8 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 
 	@Query("select s from Submission s where s.conference.id =?1 and s.status='ACCEPTED' and s.paper.cameraReadyPaper = true")
 	Collection<Submission> findSubmissionsPapersAcceptedByConferenceId(int conferenceId);
+
+	@Query("select c from Conference c where c.isDraft = 'false'")
+	Collection<Conference> findAllNoDraft();
 	
 }

@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
+import services.ConferenceService;
 import services.QulpService;
 import domain.Administrator;
+import domain.Conference;
 import domain.Qulp;
 
 @Controller
@@ -29,6 +31,9 @@ public class QulpAdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	administratorService;
+	
+	@Autowired
+	private ConferenceService		conferenceService;
 
 
 	// Create
@@ -85,6 +90,7 @@ public class QulpAdministratorController extends AbstractController {
 				res.addObject("qulp", qulp);
 				res.addObject("message", "qulp.commit.error");
 			}
+		res.addObject("conferences", this.conferenceService.findAllNoDraft());
 		return res;
 	}
 
@@ -161,6 +167,8 @@ public class QulpAdministratorController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("qulp/edit");
+		Collection<Conference> conferences = this.conferenceService.findAllNoDraft();
+		result.addObject("conferences", conferences);
 		result.addObject("qulp", q);
 		result.addObject("message", messageCode);
 
