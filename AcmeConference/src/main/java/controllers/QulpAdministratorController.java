@@ -77,7 +77,7 @@ public class QulpAdministratorController extends AbstractController {
 		qulp = this.qulpService.findOne(qulpId);
 		principal = this.administratorService.findByPrincipal();
 
-		if (qulp.getAdministrator().getId() != principal.getId())
+		if (qulp.getAdministrator().getId() != principal.getId() || !qulp.getIsDraft())
 			res = new ModelAndView("security/hacking");
 		else
 			try {

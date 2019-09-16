@@ -38,10 +38,17 @@ public class QulpController extends AbstractController {
 
 		if (qulp.getIsDraft().equals(true)) {
 			final Administrator principal = this.administratorService.findByPrincipal();
-			Assert.notNull(principal);
+			if(principal.getId() != qulp.getAdministrator().getId()) {
+				Assert.notNull(principal);
+				res = new ModelAndView("security/hacking");
+			}else {
+				res = new ModelAndView("qulp/display");
+			}
+		}else {
+			res = new ModelAndView("qulp/display");
 		}
 
-		res = new ModelAndView("qulp/display");
+		
 		res.addObject("qulp", qulp);
 		res.addObject("conference", qulp.getConference());
 
