@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.AdministratorService;
+import services.ConferenceService;
 import services.PorterService;
+import controllers.AbstractController;
 import domain.Administrator;
+import domain.Conference;
 import domain.Porter;
 
 @Controller
@@ -30,6 +31,9 @@ public class PorterAdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministratorService administratorService;
+
+	@Autowired
+	private ConferenceService conferenceService;
 
 	// Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -74,7 +78,9 @@ public class PorterAdministratorController extends AbstractController {
 		porter = this.porterService.findOne(porterId);
 		principal = this.administratorService.findByPrincipal();
 
-		if (porter.getAdministrator().getId() != principal.getId())
+		if (porter.getIsDraft().equals(false)){
+			res = new ModelAndView("security/hacking");
+		} else if (porter.getAdministrator().getId() != principal.getId())
 			res = new ModelAndView("security/hacking");
 		else
 			try {
@@ -87,6 +93,9 @@ public class PorterAdministratorController extends AbstractController {
 				res.addObject("porter", porter);
 				res.addObject("message", "porter.commit.error");
 			}
+
+		res.addObject("conferences", this.conferenceService.findAllNoDraft());
+
 		return res;
 	}
 
@@ -169,6 +178,8 @@ public class PorterAdministratorController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("porter/edit");
+		Collection<Conference> conferences = this.conferenceService.findAllNoDraft();
+		result.addObject("conferences", conferences);
 		result.addObject("porter", q);
 		result.addObject("message", messageCode);
 

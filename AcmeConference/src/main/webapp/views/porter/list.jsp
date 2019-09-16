@@ -82,7 +82,7 @@
 </display:table>
 
 <br/>
-<acme:back code="master.go.back" />
+<acme:cancel code="master.go.back" url="/"/>
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<input type="button" name="create"

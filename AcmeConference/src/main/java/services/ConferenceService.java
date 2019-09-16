@@ -230,5 +230,9 @@ public class ConferenceService {
 
 		return conferences;
 	}
+	
+	public Collection<Conference> findAllNoDraft() {
+		return this.conferenceRepository.findAllNoDraft();
+	}
 
 }
